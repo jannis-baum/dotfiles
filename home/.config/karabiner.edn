@@ -21,6 +21,7 @@
      :rules [
                  [:left_shift :left_shift nil {:alone [["layer_pri" 1]] :delayed {:invoked ["layer_pri" 0]} :params {:delay 500}}]
                  [:right_shift [["cap_held" 1] ["layer_pri" 1]] nil {:afterup [[:delay-set-var "layer_pri" 0] ["cap_held" 0]]}]
+                 ;         todo: only deactivate when not held
                  [:a [:!Sa ["layer_pri" 0]] ["layer_pri" 1]]
                  [:b [:!Sb ["layer_pri" 0]] ["layer_pri" 1]]
                  [:c [:!Sc ["layer_pri" 0]] ["layer_pri" 1]]
