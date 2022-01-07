@@ -1,0 +1,17 @@
+[user]
+	name = Jannis Baum
+	email = jannis.baum@gmail.com
+
+[core]
+	excludesfile = /Users/jannisbaum/.gitignore_global
+	editor = 'vim'
+
+[alias]
+    tree = log --oneline
+
+[pull]
+	rebase = true
+
+[init]
+	defaultBranch = main
+
