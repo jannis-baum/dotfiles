@@ -4,27 +4,24 @@ export PATH="${PATH}:${HOME}/data/_resources/bin:${HOME}/.flutter/bin:/Applicati
 # theme: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="minimal"
 
-# functions
+# generic aliases
+alias ej="eject /Volumes/LaCie"
+
+# generic functions
 ## make and change to directory
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
 }
-
 ## list newest (date changed) files
 function lsn() {
 	ls -t $2 | head -$1
 }
-
 ## lsn-do NEWEST_N PATH COMMAND
 function lsnp() {
     ls -t $2 | head -$1 | sed 's,^,'$2'\/,'
     # | sed 's/$/"/'
 }
-
-function ej() {
-	eject /Volumes/LaCie
-}
-
+## generate new password
 function pass-n() {
 	echo | pbcopy
 	while [[ $(pbpaste) =~ '^[^0-9]*$' || $(pbpaste) =~ '^[^a-z]*$' || $(pbpaste) =~ '^[^A-Z]*$' ]]; do
