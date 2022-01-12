@@ -28,6 +28,10 @@ function pass-n() {
         cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9-_\$,.!?/' | fold -w 32 | sed 1q | tr -d '\n' | pbcopy
 	done
 }
+## quick look
+function ql() {
+    qlmanage -p "$1" >& /dev/null
+}
 
 # git
 
