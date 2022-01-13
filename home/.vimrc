@@ -127,10 +127,10 @@ autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | edit
 
 " update karabiner to know if vim is in insert mode
 fu! KarabinerInsert()
-    silent! execute "!karabiner_cli --set-variables '{\"vvim_insert\":1,\"vim_mode\":1}'"
+    silent! execute "!/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"vvim_insert\":1,\"vim_mode\":1}'"
 endfunction
 fu! KarabinerNormal()
-    silent! execute "!karabiner_cli --set-variables '{\"vvim_insert\":0,\"vim_mode\":0}'"
+    silent! execute "!/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"vvim_insert\":0,\"vim_mode\":0}'"
 endfunction
 autocmd InsertEnter,CmdlineEnter,VimLeave * call KarabinerInsert()
 autocmd InsertLeave,CmdLineLeave,VimEnter * call KarabinerNormal()
