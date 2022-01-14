@@ -64,6 +64,7 @@ function gr() {
 function gc() {
     git commit -m "$*"
 }
+alias git-fup="find . -name .git -type d -print -exec git --git-dir={} --work-tree={}/.. cherry -v \;"
 
 
 # zsh
