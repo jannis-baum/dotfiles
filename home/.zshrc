@@ -5,8 +5,10 @@ export PATH="${PATH}:${HOME}/data/_resources/bin:${HOME}/.flutter/bin:/Applicati
 # theme: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="minimal"
 
+source $ZSH/oh-my-zsh.sh
 
 # generic aliases
+alias l="ls -dfG _* [^_]*"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 
@@ -62,6 +64,5 @@ function gc() {
 
 
 # zsh
-source $ZSH/oh-my-zsh.sh
 bindkey -v
 
