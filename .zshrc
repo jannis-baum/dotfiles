@@ -1,5 +1,5 @@
 export ZSH="${HOME}/.oh-my-zsh"
-export PATH="${PATH}:${HOME}/data/_resources/bin:${HOME}/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
+export PATH="${PATH}:${HOME}/_bin:${HOME}/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
 
 
 # theme: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -41,12 +41,12 @@ function ql() {
 
 
 # linking scripts
-alias mue="~/data/_resources/markup-export/main.py"
-alias cookie-cleaner="~/data/_resources/cookie-cleaner/.build/release/cookie-cleaner ~/data/_resources/cookie-cleaner/whitelist.txt"
-alias desknotes="~/data/_resources/desktop-notes/desknotes.py"
-alias pass="/Users/jannisbaum/data/_resources/keychains/main.py"
+alias mue="~/_lib/markup-export/main.py"
+alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt"
+alias desknotes="~/_lib/desktop-notes/desknotes.py"
+alias pass="~/_lib/keychains/main.py"
 function fbm() {
-    ~/data/_resources/file-bookmarks/fbm.py $@
+    ~/_lib/file-bookmarks/fbm.py $@
 }
 
 
