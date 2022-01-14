@@ -7,8 +7,20 @@ ZSH_THEME="minimal"
 
 source $ZSH/oh-my-zsh.sh
 
+
+# linking scripts
+alias mue="~/_lib/markup-export/main.py"
+alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt"
+alias desknotes="~/_lib/desktop-notes/desknotes.py"
+alias pass="~/_lib/keychains/main.py"
+function fbm() {
+    ~/_lib/file-bookmarks/fbm.py $@
+}
+
+
 # generic aliases
 alias l="ls -dfG _* [^_]*"
+alias kl="cookie-cleaner && quit-apps"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 
@@ -37,16 +49,6 @@ function pass-n() {
 ## quick look
 function ql() {
     qlmanage -p "$1" >& /dev/null
-}
-
-
-# linking scripts
-alias mue="~/_lib/markup-export/main.py"
-alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt"
-alias desknotes="~/_lib/desktop-notes/desknotes.py"
-alias pass="~/_lib/keychains/main.py"
-function fbm() {
-    ~/_lib/file-bookmarks/fbm.py $@
 }
 
 
