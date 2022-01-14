@@ -13,9 +13,7 @@ alias mue="~/_lib/markup-export/main.py"
 alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt"
 alias desknotes="~/_lib/desktop-notes/desknotes.py"
 alias pass="~/_lib/keychains/main.py"
-function fbm() {
-    ~/_lib/file-bookmarks/fbm.py $@
-}
+alias fbm="~/_lib/file-bookmarks/fbm.py"
 
 
 # generic aliases
@@ -64,7 +62,6 @@ function gr() {
 function gc() {
     git commit -m "$*"
 }
-alias git-fup="find . -name .git -type d -print -exec git --git-dir={} --work-tree={}/.. cherry -v \;"
 
 
 # zsh
