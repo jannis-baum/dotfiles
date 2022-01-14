@@ -21,6 +21,7 @@ function fbm() {
 # generic aliases
 alias l="ls -dfG _* [^_]*"
 alias kl="cookie-cleaner && quit-apps"
+alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 
