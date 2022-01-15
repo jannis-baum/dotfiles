@@ -273,7 +273,7 @@
     {:des "iterm: shell typing helpers",
      :rules [:vim-disabled
                  [:!Tperiod [:period :slash]]
-                 [:!Tcomma [:!Sgrave_accent_and_tilde :slash]]
+                 [:!Tcomma [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
             ]}
     ; safari
     {:des "safari VIM normal-mode: . > cmd+l + insert-mode, t > cmd+t + insert-mode",
