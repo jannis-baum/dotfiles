@@ -9,11 +9,11 @@ source $ZSH/oh-my-zsh.sh
 
 
 # linking scripts
-alias mue="~/_lib/markup-export/main.py"
+alias mue="~/_lib/markup-export/main"
 alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt"
-alias desknotes="~/_lib/desktop-notes/desknotes.py"
-alias pass="~/_lib/keychains/main.py"
-alias fbm="~/_lib/file-bookmarks/fbm.py"
+alias desknotes="~/_lib/desktop-notes/desknotes"
+alias pass="~/_lib/keychains/main"
+alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
 
 # generic aliases
@@ -22,6 +22,7 @@ alias kl="cookie-cleaner && quit-apps"
 alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
+alias convert-file="ffmpeg"
 
 
 # generic functions
