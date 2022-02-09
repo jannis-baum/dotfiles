@@ -11,7 +11,7 @@
   }
   :templates {:open "open -a \"%s.app\""
               :delay-set-var "sleep 0.1 && /Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"%s\": %d}'"}
-  :applications {:vim-disabled ["^com\\.googlecode\\.iterm2$", "^com\\.microsoft\\.VSCode$", "^com\\.apple\\.dt\\.Xcode$"]
+  :applications {:vim-disabled ["^com\\.googlecode\\.iterm2$", "^com\\.microsoft\\.VSCode$"]
                  :iterm ["^com\\.googlecode\\.iterm2$"]
                  :vscode ["^com\\.microsoft\\.VSCode$"]
                  :safari ["^com\\.apple\\.Safari$"]}
