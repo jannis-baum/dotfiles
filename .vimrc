@@ -134,20 +134,6 @@ fu! KarabinerNormal()
 endfunction
 autocmd InsertEnter,CmdlineEnter,VimLeave * call KarabinerInsert()
 autocmd InsertLeave,CmdLineLeave,VimEnter * call KarabinerNormal()
-" update karabiner on rfFtT
-fu! WrapKarabinerMode(cmd)
-    call KarabinerInsert()
-    redraw!
-    let char = nr2char(getchar())
-    call KarabinerNormal()
-    redraw!
-    return a:cmd.char
-endfunction
-nnoremap <expr> r WrapKarabinerMode('r')
-nnoremap <expr> f WrapKarabinerMode('f')
-nnoremap <expr> F WrapKarabinerMode('F')
-nnoremap <expr> t WrapKarabinerMode('t')
-nnoremap <expr> T WrapKarabinerMode('T')
 
 " shows syntax data below cursor
 " map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
