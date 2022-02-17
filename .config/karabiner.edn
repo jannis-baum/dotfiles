@@ -228,17 +228,13 @@
                  [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]
             ]}
     ; vim ext
-    {:des "VIM ext normal-mode: qsr > window switching, tab > spotlight",
+    {:des "VIM ext normal-mode: tab > synapse",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
-                 [:q [:!Tspacebar ["vim_mode" 1]]]
-                 [:s [:!Ctab :vk_none]]
-                 [:r :!Cgrave_accent_and_tilde]
-                 [:tab [:!Cspacebar ["vim_mode" 1]]]
+                 [:tab :f10]
             ]}
-    {:des "actual VIM ext normal-mode: qs > window switching, tab > spotlight",
+    {:des "actual VIM ext normal-mode: tab > synapse",
      :rules [[:condis ["karabiner_vim" 0] ["vvim_insert" 0]]
-                 [:q [:!Tspacebar ["vim_mode" 1] ["vvim_insert" 1]]]
-                 [:tab [:!Cspacebar ["vim_mode" 1] ["vvim_insert" 1]]]
+                 [:tab :f10]
             ]}
     {:des "VIM ext normal-mode: 987 > quit / close / hide",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
