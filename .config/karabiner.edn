@@ -232,16 +232,6 @@
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:tab :f10]
             ]}
-    {:des "actual VIM ext normal-mode: tab > synapse",
-     :rules [[:condis ["karabiner_vim" 0] ["vvim_insert" 0]]
-                 [:tab :f10]
-            ]}
-    {:des "VIM ext normal-mode: 987 > quit / close / hide",
-     :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
-                 [:9 :!Cq]
-                 [:8 :!Cw]
-                 [:7 :!Ch]
-            ]}
     {:des "VIM ext normal-mode: 1-6 > tab switching",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:1 :!C1]
@@ -256,18 +246,13 @@
                  [:open_bracket [:!TStab] ["vim_mode" 0]]
                  [:close_bracket [:!Ttab] ["vim_mode" 0]]
             ]}
-    {:des "actual VIM ext normal-mode: [] > navigate tabs",
-     :rules [[:condis ["karabiner_vim" 1]]
-                 [:open_bracket [:!TStab] ["vvim_insert" 0]]
-                 [:close_bracket [:!Ttab] ["vvim_insert" 0]]
-            ]}
     {:des "VIM ext normal-mode: t > new tab",
      :rules [[:condis ["karabiner_vim" 1] :!safari ["vim_mode" 0]]
                  [:t :!Ct]
             ]}
-    ; iterm
-    {:des "iterm: shell typing helpers",
-     :rules [[:condis ["karabiner_vim" 0]]
+    ; path typing helpers
+    {:des "path typing helpers",
+     :rules [
                  [:!Tperiod [:period :slash]]
                  [:!Tcomma [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
             ]}

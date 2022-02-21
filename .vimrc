@@ -125,16 +125,6 @@ autocmd VimLeave * call SaveSession()
 " source latest session if invoked without arguments
 autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | edit | endif
 
-" update karabiner to know if vim is in insert mode
-fu! KarabinerInsert()
-    silent! execute "!/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"vvim_insert\":1,\"vim_mode\":1}'"
-endfunction
-fu! KarabinerNormal()
-    silent! execute "!/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"vvim_insert\":0,\"vim_mode\":0}'"
-endfunction
-autocmd InsertEnter,CmdlineEnter,VimLeave * call KarabinerInsert()
-autocmd InsertLeave,CmdLineLeave,VimEnter * call KarabinerNormal()
-
 " shows syntax data below cursor
 " map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 " \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
