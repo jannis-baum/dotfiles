@@ -70,6 +70,10 @@
                  [:period [:!Speriod ["layer_pri" 0]] ["layer_pri" 1]]
                  [:slash [:!Sslash ["layer_pri" 0]] ["layer_pri" 1]]
             ]}
+    {:des "df > synapse panel"
+     :rules [
+                 [[:d :f] :f10]
+            ]}
     {:des "delete > iterm overlay, [] > delete",
      :rules [
                  [:delete_or_backspace :f9]
@@ -228,10 +232,6 @@
                  [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]
             ]}
     ; vim ext
-    {:des "VIM ext normal-mode: tab > synapse",
-     :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
-                 [:tab :f10]
-            ]}
     {:des "VIM ext normal-mode: 1-6 > tab switching",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:1 :!C1]
