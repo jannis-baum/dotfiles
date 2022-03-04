@@ -18,21 +18,31 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 " ui
 " ----------------------------------------------------------------------------------------------------------------
 set number rnu                        " line numbers
-:highlight LineNr ctermfg=8           " .
 set nuw=6                             " .
-:highlight NonText ctermfg=8          " .
 set splitbelow                        " splits
 set splitright                        " .
-hi StatusLine ctermbg=3 ctermfg=8     " .
-hi StatusLineNC ctermbg=7 ctermfg=8   " .
-hi VertSplit ctermbg=8 ctermfg=8
 syntax on                             " other
 set cmdheight=2                       " .
 set noshowmode                        " .
 set showcmd                           " .
 set signcolumn=yes                    " sign column (left)
-hi signcolumn ctermbg=None ctermfg=8  " .
 
+" colors / syntax
+hi Comment      term=NONE cterm=NONE ctermfg=246 ctermbg=NONE " gray
+hi Constant     term=NONE cterm=NONE ctermfg=211 ctermbg=NONE " light red
+hi Special      term=NONE cterm=NONE ctermfg=188 ctermbg=NONE " pale purple
+hi Identifier   term=bold cterm=NONE ctermfg=183 ctermbg=NONE " bright purple
+hi Statement    term=NONE cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
+hi PreProc      term=NONE cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
+hi Type          term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
+hi Underlined   term=underline cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
+hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
+" colors / ui
+hi SignColumn ctermbg=NONE ctermfg=243
+hi StatusLine ctermbg=16 ctermfg=243
+hi StatusLineNC ctermbg=16 ctermfg=243
+hi VertSplit ctermbg=16 ctermfg=243
+hi LineNr ctermbg=NONE ctermfg=8
 
 " ----------------------------------------------------------------------------------------------------------------
 " text
@@ -156,7 +166,6 @@ set directory=~/.vim/swap//
 if !isdirectory($HOME."/.vim/swap")
   call mkdir($HOME."/.vim/swap", "p")
 endif
-
 
 " ----------------------------------------------------------------------------------------------------------------
 " markdown
