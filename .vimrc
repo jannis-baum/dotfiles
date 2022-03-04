@@ -38,11 +38,11 @@ hi Type          term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
 hi Underlined   term=underline cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
 hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
 " colors / ui
-hi SignColumn ctermbg=NONE ctermfg=243
-hi StatusLine ctermbg=16 ctermfg=243
-hi StatusLineNC ctermbg=16 ctermfg=243
-hi VertSplit ctermbg=16 ctermfg=243
-hi LineNr ctermbg=NONE ctermfg=8
+hi SignColumn ctermbg=NONE ctermfg=240
+hi StatusLine ctermbg=16 ctermfg=240
+hi StatusLineNC ctermbg=16 ctermfg=240
+hi VertSplit ctermbg=16 ctermfg=240
+hi LineNr ctermbg=NONE ctermfg=240
 
 " ----------------------------------------------------------------------------------------------------------------
 " text
