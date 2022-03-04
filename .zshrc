@@ -1,12 +1,13 @@
 export ZSH="${HOME}/.oh-my-zsh"
 export PATH="${PATH}:${HOME}/_bin:${HOME}/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
 
-
 # theme: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="minimal"
 
 source $ZSH/oh-my-zsh.sh
 
+# prompt
+export PS1="%2~ »%b "
 
 # linking scripts
 alias mue="~/_lib/markup-export/main"
