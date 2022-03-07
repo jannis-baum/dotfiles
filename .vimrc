@@ -70,6 +70,10 @@ nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
+nnoremap gj j
+vnoremap gj j
+nnoremap gk k
+vnoremap gk k
 nnoremap x "_x
 vnoremap x "_x
 " normal
