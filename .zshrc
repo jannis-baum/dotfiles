@@ -19,7 +19,6 @@ alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
 # generic aliases
 alias cl="clear"
-alias l="unbuffer find . -maxdepth 1 ! -name '.DS_Store' ! -name '.' -exec ls -Cd --color=always {} + | sed 's,./,,g'"
 alias kl="cookie-cleaner && quit-apps"
 alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
@@ -28,6 +27,10 @@ alias convert-file="ffmpeg"
 
 
 # generic functions
+unalias l
+function l() {
+    (cd ${1:-.} && unbuffer find . -maxdepth 1 ! -name '.DS_Store' ! -name . -exec ls -Cd --color=always {} + | sed "s,./,,g")
+}
 ## make and change to directory
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
