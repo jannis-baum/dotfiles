@@ -19,7 +19,7 @@ alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
 # generic aliases
 alias cl="clear"
-alias l="ls -dfG _* [^_]*"
+alias l="ls -mA --color=always | sed -e 's/\\.DS_Store\\(, \\)\\{0,1\\}//' -e 's/, /\\t/g'"
 alias kl="cookie-cleaner && quit-apps"
 alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
