@@ -8,10 +8,16 @@
 
 [alias]
     tree = log --oneline
+    d = difftool
 
 [pull]
 	rebase = true
 
 [init]
 	defaultBranch = main
+
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
 
