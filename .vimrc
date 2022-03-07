@@ -40,9 +40,9 @@ hi Underlined   term=underline cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
 hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
 " colors / ui
 hi SignColumn   ctermbg=NONE ctermfg=240
-hi StatusLine   ctermbg=240  ctermfg=16
-hi StatusLineNC ctermbg=240  ctermfg=16
-hi VertSplit    ctermbg=240  ctermfg=16
+hi StatusLine   ctermbg=240  ctermfg=235
+hi StatusLineNC ctermbg=240  ctermfg=235
+hi VertSplit    ctermbg=240  ctermfg=235
 hi LineNr       ctermbg=NONE ctermfg=240
 " colors / diff
 hi DiffAdd      ctermbg=235
