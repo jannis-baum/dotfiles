@@ -18,15 +18,15 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 " ----------------------------------------------------------------------------------------------------------------
 " ui
 " ----------------------------------------------------------------------------------------------------------------
-set number rnu                        " line numbers
-set nuw=6                             " .
-set splitbelow                        " splits
-set splitright                        " .
-syntax on                             " other
-set cmdheight=2                       " .
-set noshowmode                        " .
-set showcmd                           " .
-set signcolumn=yes                    " sign column (left)
+set number rnu      " line numbers
+set nuw=6           " .
+set splitbelow      " splits
+set splitright      " .
+syntax on           " other
+set cmdheight=2     " .
+set noshowmode      " .
+set showcmd         " .
+set signcolumn=yes  " sign column (left)
 
 " colors / syntax
 hi Comment      term=NONE cterm=NONE ctermfg=246 ctermbg=NONE " gray
@@ -39,11 +39,16 @@ hi Type          term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
 hi Underlined   term=underline cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
 hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
 " colors / ui
-hi SignColumn ctermbg=NONE ctermfg=240
-hi StatusLine ctermbg=16 ctermfg=240
-hi StatusLineNC ctermbg=16 ctermfg=240
-hi VertSplit ctermbg=16 ctermfg=240
-hi LineNr ctermbg=NONE ctermfg=240
+hi SignColumn   ctermbg=NONE ctermfg=240
+hi StatusLine   ctermbg=240  ctermfg=16
+hi StatusLineNC ctermbg=240  ctermfg=16
+hi VertSplit    ctermbg=240  ctermfg=16
+hi LineNr       ctermbg=NONE ctermfg=240
+" colors / diff
+hi DiffAdd      ctermbg=235
+hi DiffChange   ctermbg=235
+hi DiffDelete   ctermbg=235
+hi DiffText     ctermbg=235
 
 " ----------------------------------------------------------------------------------------------------------------
 " text
