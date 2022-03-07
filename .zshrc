@@ -19,7 +19,7 @@ alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
 # generic aliases
 alias cl="clear"
-alias l="find {.*,*} -maxdepth 0 ! -name '.DS_Store' -exec ls -Cd --color=always {} +"
+alias l="unbuffer find . -maxdepth 1 ! -name '.DS_Store' ! -name '.' -exec ls -Cd --color=always {} + | sed 's,./,,g'"
 alias kl="cookie-cleaner && quit-apps"
 alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
