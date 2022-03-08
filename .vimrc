@@ -14,6 +14,14 @@ set ttimeoutlen=5     " key code delay
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 \| exe "normal! g'\"" | endif
 
+" save latest session on exit
+fu! SaveSession()
+    execute 'mksession! ~/.vim/latest-session.vim'
+endfunction
+autocmd VimLeave * call SaveSession()
+" source latest session if invoked without arguments
+autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | source ~/.vimrc | edit | endif
+
 
 " ----------------------------------------------------------------------------------------------------------------
 " ui
@@ -53,6 +61,7 @@ hi DiffChange   ctermbg=235
 hi DiffDelete   ctermbg=235
 hi DiffText     ctermbg=235
 
+
 " ----------------------------------------------------------------------------------------------------------------
 " text
 " ----------------------------------------------------------------------------------------------------------------
@@ -73,7 +82,6 @@ set linebreak                 " .
 " ----------------------------------------------------------------------------------------------------------------
 " keybindings
 " ----------------------------------------------------------------------------------------------------------------
-
 " normal and visual
 nnoremap j gj
 vnoremap j gj
@@ -140,18 +148,11 @@ autocmd BufNewFile,BufRead *.md nnoremap ci$ T$ct$
 " :WE to :w :e
 command! -nargs=1 -complete=file WE write | edit <args>
 
-" save latest session on exit
-fu! SaveSession()
-    execute 'mksession! ~/.vim/latest-session.vim'
-endfunction
-autocmd VimLeave * call SaveSession()
-" source latest session if invoked without arguments
-autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | source ~/.vimrc | edit | endif
-
 " shows syntax data below cursor
 " map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 " \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 " \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 
 " ----------------------------------------------------------------------------------------------------------------
 " backups
@@ -168,7 +169,6 @@ if !isdirectory($HOME."~/.vim/backup")
 endif
 
 
-
 " ----------------------------------------------------------------------------------------------------------------
 " swap
 " ----------------------------------------------------------------------------------------------------------------
@@ -179,6 +179,7 @@ set directory=~/.vim/swap//
 if !isdirectory($HOME."/.vim/swap")
   call mkdir($HOME."/.vim/swap", "p")
 endif
+
 
 " ----------------------------------------------------------------------------------------------------------------
 " markdown
@@ -207,34 +208,12 @@ let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/UltiSnips']
 " ----------------------------------------------------------------------------------------------------------------
 " let g:ycm_key_list_stop_completion = '<C-y>'
 " let g:ycm_key_invoke_completion = '<C-Space>'
-highlight YcmErrorSection ctermbg=None
+hi YcmErrorSection ctermbg=None
 
 
-
-" --- cterm-colors ---
-"
-"  0   black
-"  1   dark red
-"  2   dark green
-"  3   dark yellow
-"  4   dark blue
-"  5   dark magenta
-"  6   dark cyan
-"  7   light gray
-"  8   dark gray
-"  9   light red
-"  10  light green
-"  11  light yellow
-"  12  light blue
-"  13  light magenta
-"  14  light cyan
-"  15  light white
-
-
-" Put these lines at the very end of your vimrc file.
-" Load all plugins now.
-" Plugins need to be added to runtimepath before helptags can be generated.
+" ----------------------------------------------------------------------------------------------------------------
+" plugins
+" ----------------------------------------------------------------------------------------------------------------
 packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
 silent! helptags ALL
+
