@@ -36,6 +36,7 @@ set noshowmode      " .
 set showcmd         " .
 set signcolumn=yes  " sign column (left)
 
+" test colors: `:so $VIMRUNTIME/syntax/hitest.vim`
 " colors / syntax
 hi Comment      term=NONE cterm=italic ctermfg=246 ctermbg=NONE " gray
 hi Constant     term=NONE cterm=NONE ctermfg=211 ctermbg=NONE " light red
