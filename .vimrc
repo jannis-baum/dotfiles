@@ -36,8 +36,13 @@ set noshowmode      " .
 set showcmd         " .
 set signcolumn=yes  " sign column (left)
 
+
+" ----------------------------------------------------------------------------------------------------------------
+" colors
+" ----------------------------------------------------------------------------------------------------------------
 " test colors: `:so $VIMRUNTIME/syntax/hitest.vim`
-" colors / syntax
+" color picker: `https://michurin.github.io/xterm256-color-picker/`
+" syntax
 hi Comment      term=NONE cterm=italic ctermfg=246 ctermbg=NONE " gray
 hi Constant     term=NONE cterm=NONE ctermfg=211 ctermbg=NONE " light red
 hi Special      term=NONE cterm=NONE ctermfg=188 ctermbg=NONE " pale purple
@@ -47,7 +52,7 @@ hi PreProc      term=NONE cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
 hi Type         term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
 hi Underlined   term=NONE cterm=underline ctermfg=153 ctermbg=NONE " bright blue
 hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
-" colors / ui
+" ui
 hi SignColumn   ctermbg=NONE ctermfg=240
 hi StatusLine   ctermbg=240  ctermfg=235
 hi StatusLineNC ctermbg=240  ctermfg=235
@@ -56,7 +61,7 @@ hi Folded       cterm=italic ctermbg=NONE ctermfg=240
 hi VertSplit    ctermbg=240  ctermfg=235
 set fillchars=vert:\│
 hi LineNr       ctermbg=NONE ctermfg=240
-" colors / diff
+" diff
 hi DiffAdd      ctermbg=235
 hi DiffChange   ctermbg=235
 hi DiffDelete   ctermbg=235
