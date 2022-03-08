@@ -61,6 +61,7 @@ hi Folded       cterm=italic ctermbg=NONE ctermfg=240
 hi VertSplit    ctermbg=240  ctermfg=235
 set fillchars=vert:\│
 hi LineNr       ctermbg=NONE ctermfg=240
+hi EndOfBuffer  ctermfg=240
 " diff
 hi DiffAdd      ctermbg=235
 hi DiffChange   ctermbg=235
