@@ -7,7 +7,7 @@ ZSH_THEME="minimal"
 source $ZSH/oh-my-zsh.sh
 
 # prompt
-export PS1="%2~ »%b "
+export PS1="%F{183}%2~ » %f"
 
 # linking scripts
 alias mue="~/_lib/markup-export/main"
