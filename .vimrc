@@ -41,7 +41,6 @@ set signcolumn=yes  " sign column (left)
 " colors
 " ----------------------------------------------------------------------------------------------------------------
 " test colors: `:so $VIMRUNTIME/syntax/hitest.vim`
-" color picker: `https://michurin.github.io/xterm256-color-picker/`
 " syntax
 hi Comment      term=NONE cterm=italic ctermfg=246 ctermbg=NONE " gray
 hi Constant     term=NONE cterm=NONE ctermfg=211 ctermbg=NONE " light red
