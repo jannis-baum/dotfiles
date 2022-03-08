@@ -146,7 +146,7 @@ fu! SaveSession()
 endfunction
 autocmd VimLeave * call SaveSession()
 " source latest session if invoked without arguments
-autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | edit | endif
+autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | source ~/.vimrc | edit | endif
 
 " shows syntax data below cursor
 " map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
