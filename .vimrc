@@ -43,7 +43,7 @@ hi SignColumn   ctermbg=NONE ctermfg=240
 hi StatusLine   ctermbg=240  ctermfg=235
 hi StatusLineNC ctermbg=240  ctermfg=235
 hi FoldColumn   ctermbg=NONE ctermfg=NONE
-hi Folded       ctermbg=235  ctermfg=240
+hi Folded       cterm=italic ctermbg=NONE ctermfg=240
 hi VertSplit    ctermbg=240  ctermfg=235
 set fillchars=vert:\│
 hi LineNr       ctermbg=NONE ctermfg=240
