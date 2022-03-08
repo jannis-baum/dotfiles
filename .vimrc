@@ -29,7 +29,7 @@ set showcmd         " .
 set signcolumn=yes  " sign column (left)
 
 " colors / syntax
-hi Comment      term=NONE cterm=NONE ctermfg=246 ctermbg=NONE " gray
+hi Comment      term=NONE cterm=italic ctermfg=246 ctermbg=NONE " gray
 hi Constant     term=NONE cterm=NONE ctermfg=211 ctermbg=NONE " light red
 hi Special      term=NONE cterm=NONE ctermfg=188 ctermbg=NONE " pale purple
 hi Identifier   term=bold cterm=NONE ctermfg=183 ctermbg=NONE " bright purple
