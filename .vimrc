@@ -35,14 +35,17 @@ hi Special      term=NONE cterm=NONE ctermfg=188 ctermbg=NONE " pale purple
 hi Identifier   term=bold cterm=NONE ctermfg=183 ctermbg=NONE " bright purple
 hi Statement    term=NONE cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
 hi PreProc      term=NONE cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
-hi Type          term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
-hi Underlined   term=underline cterm=NONE ctermfg=153 ctermbg=NONE " bright blue
+hi Type         term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
+hi Underlined   term=NONE cterm=underline ctermfg=153 ctermbg=NONE " bright blue
 hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
 " colors / ui
 hi SignColumn   ctermbg=NONE ctermfg=240
 hi StatusLine   ctermbg=240  ctermfg=235
 hi StatusLineNC ctermbg=240  ctermfg=235
+hi FoldColumn   ctermbg=NONE ctermfg=NONE
+hi Folded       ctermbg=235  ctermfg=240
 hi VertSplit    ctermbg=240  ctermfg=235
+set fillchars=vert:\│
 hi LineNr       ctermbg=NONE ctermfg=240
 " colors / diff
 hi DiffAdd      ctermbg=235
