@@ -24,6 +24,10 @@ alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 alias convert-file="ffmpeg"
+# tree
+export TREE_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+alias ta="tree -C -a -L 1 --noreport --dirsfirst -I '.DS_Store' -I '.git/'"
+alias t="ta --gitignore"
 
 
 # generic functions
