@@ -9,6 +9,7 @@ set t_vb=             " .
 set scrolloff=8       " extra lines while scrolling
 set clipboard=unnamed
 set ttimeoutlen=5     " key code delay
+set viminfo+=n~/.vim/viminfo
 
 " open file at last pos
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
