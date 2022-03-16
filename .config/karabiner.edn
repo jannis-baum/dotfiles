@@ -74,22 +74,23 @@
      :rules [
                  [[:d :f] :f10]
             ]}
-    {:des "delete > iterm overlay, [] > delete",
-     :rules [
-                 [:delete_or_backspace :f9]
-                 [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
-                 [:!Fopen_bracket :open_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:!Fopen_bracket :open_bracket ["karabiner_vim" 0]]
-                 [:close_bracket :!Fdelete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:!Fclose_bracket :close_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
-            ]}
     {:des "caps > escape / control s (iterm), held control+option / control (iterm)",
      :rules [
                  [:caps_lock :!Oleft_control ["karabiner_vim" 1] {:alone [:escape]}]
                  [:caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]
                  [:!Ccaps_lock :!Cescape]
                  [[:j :k] :escape ["karabiner_vim" 0]]
+            ]}
+    {:des "delete > iterm overlay, [] > delete, caps + [] > []",
+     :rules [
+                 [:delete_or_backspace :f9]
+                 [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
+                 [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
+                 [:!TOopen_bracket :open_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
+                 [:!Topen_bracket :open_bracket ["karabiner_vim" 0]]
+                 [:close_bracket :!Fdelete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
+                 [:!TOclose_bracket :close_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
+                 [:!Tclose_bracket :close_bracket ["karabiner_vim" 0]]
             ]}
     {:des "shift+shift > caps",
      :rules [
