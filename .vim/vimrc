@@ -196,7 +196,7 @@ packadd you-complete-me
 hi YcmErrorSection ctermbg=None
 
 " markdown
-autocmd BufNewFile,BufRead *.md packadd markdown-preview.nvim
+autocmd BufReadPre *.md packadd markdown-preview.nvim
 autocmd BufNewFile,BufRead *.md packadd pandoc-syntax
 autocmd BufReadPost *.md call mkdp#util#install()
 let g:mkdp_browser = 'Safari'
