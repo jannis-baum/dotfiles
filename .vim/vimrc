@@ -208,8 +208,11 @@ endif
 " plugins
 " ----------------------------------------------------------------------------------------------------------------
 " you-complete-me
-packadd you-complete-me
-hi YcmErrorSection ctermbg=None
+" packadd you-complete-me
+" hi YcmErrorSection ctermbg=None
+
+" coc
+packadd coc
 
 " markdown
 autocmd BufReadPre *.md packadd markdown-preview.nvim
