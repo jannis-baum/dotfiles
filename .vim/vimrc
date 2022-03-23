@@ -38,20 +38,20 @@ set showcmd         " .
 set signcolumn=yes  " sign column (left)
 
 " cursor style
-let &t_SI = "\ePtmux;\e\e]50;CursorShape=1\x7\e\\"
-let &t_SR = "\ePtmux;\e\e]50;CursorShape=2\x7\e\\"
-let &t_EI = "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"
+let &t_SI = "\e[6 q"
+let &t_SR = "\e[4 q"
+let &t_EI = "\e[2 q"
 fu! SyncTermCursor()
     if mode() == 'i'
-        :silent exec "!printf '\\ePtmux;\\e\\e]50;CursorShape=1\x7\\e\\'"
+        :silent exec "!printf '\\e[6 q'"
     elseif mode() == 'R'
-        :silent exec "!printf '\\ePtmux;\\e\\e]50;CursorShape=2\x7\\e\\'"
+        :silent exec "!printf '\\e[4 q'"
     else
-        :silent exec "!printf '\\ePtmux;\\e\\e]50;CursorShape=0\x7\\e\\'"
+        :silent exec "!printf '\\e[2 q'"
     endif
 endfunction
 autocmd FocusGained * call SyncTermCursor()
-autocmd FocusLost * :silent exec "!printf '\\ePtmux;\\e\\e]50;CursorShape=0\x7\\e\\'"
+autocmd FocusLost * :silent exec "!printf '\\e[2 q'"
 
 
 " ----------------------------------------------------------------------------------------------------------------
