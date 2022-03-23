@@ -41,17 +41,6 @@ set signcolumn=yes  " sign column (left)
 let &t_SI = "\e[6 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
-fu! SyncTermCursor()
-    if mode() == 'i'
-        :silent exec "!printf '\\e[6 q'"
-    elseif mode() == 'R'
-        :silent exec "!printf '\\e[4 q'"
-    else
-        :silent exec "!printf '\\e[2 q'"
-    endif
-endfunction
-autocmd FocusGained * call SyncTermCursor()
-autocmd FocusLost * :silent exec "!printf '\\e[2 q'"
 
 
 " ----------------------------------------------------------------------------------------------------------------
