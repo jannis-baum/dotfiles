@@ -74,7 +74,9 @@ function gc() {
     git commit -m "$*"
 }
 
-
-# zsh
+# vi keybindings
 bindkey -v
+
+# fzf autocompletion
+[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
