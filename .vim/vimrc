@@ -58,7 +58,7 @@ hi Type         term=NONE cterm=NONE ctermfg=147 ctermbg=NONE " darker blue
 hi Underlined   term=NONE cterm=underline ctermfg=153 ctermbg=NONE " bright blue
 hi Ignore       term=NONE cterm=NONE ctermfg=248 ctermbg=NONE " gray
 " ui
-hi SignColumn   ctermbg=NONE ctermfg=240
+hi SignColumn   ctermbg=NONE ctermfg=252
 hi StatusLine   ctermbg=240  ctermfg=235
 hi StatusLineNC ctermbg=240  ctermfg=235
 hi FoldColumn   ctermbg=NONE ctermfg=NONE

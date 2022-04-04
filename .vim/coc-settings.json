@@ -1,0 +1,7 @@
+{
+    "git.addedSign.hlGroup": "SignColumn",
+    "git.changedSign.hlGroup": "SignColumn",
+    "git.removedSign.hlGroup": "SignColumn",
+    "git.topRemovedSign.hlGroup": "SignColumn",
+    "git.changeRemovedSign.hlGroup": "SignColumn"
+}
