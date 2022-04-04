@@ -1,3 +1,13 @@
+" EXTENSIONS ---
+let g:coc_global_extensions = [
+    \'coc-pyright',
+    \'coc-clangd', 'coc-cmake',
+    \'coc-eslint', 'coc-tsserver',
+    \'coc-html', 'coc-html-css-support', 'coc-css', 'coc-cssmodules', 'coc-json',
+    \'coc-git', 'coc-docker'
+\]
+
+" BINDINGS ---
 " use tab for completion
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
