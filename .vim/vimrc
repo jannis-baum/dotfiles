@@ -196,14 +196,22 @@ endif
 " ----------------------------------------------------------------------------------------------------------------
 " plugins
 " ----------------------------------------------------------------------------------------------------------------
-" you-complete-me
-" packadd you-complete-me
-" hi YcmErrorSection ctermbg=None
 
-" coc
+" COC ---
+" use tab for completion
 packadd coc
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" helper to check if preceding whitespace
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" markdown
+" MARKDOWN ---
 autocmd BufReadPre *.md packadd markdown-preview.nvim
 autocmd BufNewFile,BufRead *.md packadd pandoc-syntax
 autocmd BufReadPost *.md call mkdp#util#install()
@@ -215,7 +223,7 @@ augroup pandoc_syntax
 augroup END
 let g:pandoc#syntax#conceal#use = 0
 
-" ultisnips
+" ULTISNIPS ---
 autocmd BufNewFile,BufRead *.md packadd ultisnips
 let g:UltiSnipsExpandTrigger = '<C-s>'
 let g:UltiSnipsJumpForwardTrigger = '<C-s>'
