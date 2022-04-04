@@ -94,6 +94,8 @@ set linebreak                 " .
 " ----------------------------------------------------------------------------------------------------------------
 " keybindings
 " ----------------------------------------------------------------------------------------------------------------
+" leader
+map <space> <leader>
 " normal and visual
 nnoremap j gj
 vnoremap j gj
@@ -194,23 +196,48 @@ endif
 
 
 " ----------------------------------------------------------------------------------------------------------------
-" plugins
+" coc
 " ----------------------------------------------------------------------------------------------------------------
-
-" COC ---
-" use tab for completion
 packadd coc
+
+" use tab for completion
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" helper to check if preceding whitespace
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" gd / gr - go to definition of word / type under cursor
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+" gr - find references
+nmap <silent> gr <Plug>(coc-references)
+
+" gh - get hint on whatever's under the cursor
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" rename the current word in the cursor
+nmap <leader>cr  <Plug>(coc-rename)
+
+" view all errors
+nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
+
+
+" ----------------------------------------------------------------------------------------------------------------
+" other plugins
+" ----------------------------------------------------------------------------------------------------------------
 " MARKDOWN ---
 autocmd BufReadPre *.md packadd markdown-preview.nvim
 autocmd BufNewFile,BufRead *.md packadd pandoc-syntax
