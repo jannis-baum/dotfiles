@@ -1,9 +1,10 @@
 " EXTENSIONS ---
 let g:coc_global_extensions = [
+    \'coc-sh',
     \'coc-pyright',
     \'coc-clangd', 'coc-cmake',
-    \'coc-eslint', 'coc-tsserver',
-    \'coc-html', 'coc-html-css-support', 'coc-css', 'coc-cssmodules', 'coc-json',
+    \'coc-tsserver', 'coc-tslint-plugin', 'coc-eslint', 
+    \'coc-html', 'coc-css', 'coc-json',
     \'coc-git', 'coc-docker'
 \]
 
