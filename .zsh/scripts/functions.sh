@@ -1,8 +1,4 @@
 # generic functions
-unalias l
-function l() {
-    (cd ${1:-.} && unbuffer find . -maxdepth 1 ! -name '.DS_Store' ! -name '.git' ! -name . -exec ls -Cd --color=always {} + | sed "s,./,,g")
-}
 ## make and change to directory
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
