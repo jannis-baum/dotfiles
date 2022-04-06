@@ -3,83 +3,10 @@ ZSH_THEME="minimal"
 source $ZSH/oh-my-zsh.sh
 export PS1="%F{189}✻%f %2~ » "
 
-
-# linking scripts
-alias mue="~/_lib/markup-export/main"
-alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt"
-alias desknotes="~/_lib/desktop-notes/desknotes"
-alias pass="~/_lib/keychains/main"
-alias fbm="~/_lib/file-bookmarks/file-bookmarks"
-
-
-# generic aliases
-alias cl="clear"
-alias kl="cookie-cleaner && quit-apps"
-alias sdf="sync-dotfiles"
-alias ej="eject /Volumes/LaCie"
-alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
-alias convert-file="ffmpeg"
-# tree
-alias ta="tree -C -a -L 1 --noreport --dirsfirst -I '.DS_Store' -I '.git/'"
-alias t="ta --gitignore"
-
-
-# generic functions
-unalias l
-function l() {
-    (cd ${1:-.} && unbuffer find . -maxdepth 1 ! -name '.DS_Store' ! -name '.git' ! -name . -exec ls -Cd --color=always {} + | sed "s,./,,g")
-}
-## make and change to directory
-function mcd() {
-    test -d "$1" || mkdir "$1" && cd "$1"
-}
-## list newest (date changed) files
-function lsn() {
-	ls -t $2 | head -$1
-}
-## lsn-do NEWEST_N PATH COMMAND
-function lsnp() {
-    ls -t $2 | head -$1 | sed 's,^,'$2'\/,'
-    # | sed 's/$/"/'
-}
-## generate new password
-function pass-n() {
-	echo | pbcopy
-	while [[ $(pbpaste) =~ '^[^0-9]*$' || $(pbpaste) =~ '^[^a-z]*$' || $(pbpaste) =~ '^[^A-Z]*$' ]]; do
-        cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9-_\$,.!?/' | fold -w 32 | sed 1q | tr -d '\n' | pbcopy
-	done
-}
-## quick look
-function ql() {
-    qlmanage -p "$1" >& /dev/null
-}
-
-
-# git
-alias gs="git status -s"
-alias gca="git commit --amend --no-edit"
-function ga() {
-    git add $* && git status -s
-}
-function gr() {
-    git restore --staged $* && git status -s
-}
-function gc() {
-    git commit -m "$*"
-}
-
 # vi keybindings
 bindkey -v
 
-# FZF
-# use fd for fzf '**' shell completions.
-_fzf_compgen_path() {
-  command fd --hidden --follow --exclude .git --exclude node_modules . "$1"
-}
-# use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  command fd --type d --hidden --follow --exclude .git --exclude node_modules . "$1"
-}
-# fzf autocompletion
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+for script in $ZDOTDIR/scripts/*; do
+    source $script
+done
 
