@@ -12,6 +12,6 @@ alias sdf="sync-dotfiles"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 alias convert-file="ffmpeg"
-alias ta="tree -C -a -L 1 --noreport --dirsfirst -I '.DS_Store' -I '.git/'"
+alias ta="tree -C -a --noreport --dirsfirst -I '.DS_Store' -I '.git/' -I 'node_modules/'"
 alias t="ta --gitignore"
 
