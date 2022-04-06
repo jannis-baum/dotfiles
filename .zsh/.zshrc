@@ -1,13 +1,8 @@
-export ZSH="${HOME}/.oh-my-zsh"
-export PATH="${PATH}:${HOME}/_bin:${HOME}/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
-
 # theme: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="minimal"
-
 source $ZSH/oh-my-zsh.sh
-
-# prompt
 export PS1="%F{189}✻%f %2~ » "
+
 
 # linking scripts
 alias mue="~/_lib/markup-export/main"
@@ -25,7 +20,6 @@ alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 alias convert-file="ffmpeg"
 # tree
-export TREE_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 alias ta="tree -C -a -L 1 --noreport --dirsfirst -I '.DS_Store' -I '.git/'"
 alias t="ta --gitignore"
 
