@@ -9,3 +9,10 @@ _fzf_compgen_dir() {
 # fzf autocompletion
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
+fe() {
+    file=$(fzf)
+    if [ -n "$file" ]; then
+        ${EDITOR} "${file}";
+    fi
+}
+
