@@ -3,5 +3,6 @@
     "git.changedSign.hlGroup": "SignColumn",
     "git.removedSign.hlGroup": "SignColumn",
     "git.topRemovedSign.hlGroup": "SignColumn",
-    "git.changeRemovedSign.hlGroup": "SignColumn"
+    "git.changeRemovedSign.hlGroup": "SignColumn",
+    "python.pythonPath": "python3"
 }
