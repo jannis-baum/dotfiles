@@ -15,4 +15,5 @@ fe() {
         ${EDITOR} "${file}";
     fi
 }
+bindkey -s ^o 'fe\n'
 
