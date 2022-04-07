@@ -8,4 +8,22 @@
     "python.pythonPath": "python3",
 
     "eslint.autoFixOnSave": true,
+
+    // style
+    "suggest.floatConfig": {
+        "border": true,
+        "highlight": "Comment"
+    },
+    "diagnostic.floatConfig": {
+        "border": true,
+        "highlight": "Comment"
+    },
+    "signature.floatConfig": {
+        "border": true,
+        "highlight": "Comment"
+    },
+    "hover.floatConfig": {
+        "border": true,
+        "highlight": "Comment"
+    }
 }
