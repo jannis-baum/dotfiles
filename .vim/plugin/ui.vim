@@ -21,3 +21,12 @@ let &t_SI = "\e[6 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
 
+" status line
+function SLContent()
+    let left = @% . ' '
+    let spacer_width = winwidth(0) - len(left)
+    let spacer = repeat('―', spacer_width)
+    return left . spacer
+endfunction
+set statusline=%{SLContent()}
+
