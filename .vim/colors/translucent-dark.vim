@@ -1,36 +1,84 @@
 " test colors: `:so $VIMRUNTIME/syntax/hitest.vim`
 
+" BOILERPLATE (dark coloschemes) -----------------------------------------------
 highlight clear
 if exists("syntax_on")
   syntax reset
 endif
 set background=dark
 
+" DEFINITIONS ------------------------------------------------------------------
+" setter
+function! s:sethig(group, ...)
+    let histring = 'highlight ' . a:group . ' '
+    if strlen(a:1)
+        let histring .= 'ctermfg=' . a:1 . ' '
+    endif
+    if a:0 >= 2 && strlen(a:2)
+        let histring .= 'cterm=' . a:2 . ' '
+    else
+        let histring .= 'cterm=none '
+    endif
+    if a:0 >= 3 && strlen(a:3)
+        let histring .= 'ctermbg=' . a:3
+    else
+        let histring .= 'ctermbg=none'
+    endif
+    execute histring
+endfunction
+
+" colors: dark -> light
+
+" neutrals (gray)
+let s:neut1 = 235
+let s:neut2 = 238
+let s:neut3 = 240
+let s:neut4 = 246
+let s:neut5 = 248
+let s:neut6 = 252
+
 " syntax
-hi Comment      term=none cterm=italic ctermfg=246 ctermbg=none " gray
-hi Constant     term=none cterm=none ctermfg=211 ctermbg=none " light red
-hi Special      term=none cterm=none ctermfg=188 ctermbg=none " pale purple
-hi Identifier   term=bold cterm=none ctermfg=183 ctermbg=none " bright purple
-hi Statement    term=none cterm=none ctermfg=153 ctermbg=none " bright blue
-hi PreProc      term=none cterm=none ctermfg=153 ctermbg=none " bright blue
-hi Type         term=none cterm=none ctermfg=147 ctermbg=none " darker blue
-hi Underlined   term=none cterm=underline ctermfg=153 ctermbg=none " bright blue
-hi Ignore       term=none cterm=none ctermfg=248 ctermbg=none " gray
+" A (red)
+let s:synA1 = 211
+" B (purple)
+let s:synB1 = 183
+let s:synB2 = 188
+" C (blue)
+let s:synC1 = 147
+let s:synC2 = 153
+
+" main hightlight (yellow-orange)
+let s:main1 = 216
+let s:main2 = 223
+
+" COLORSCHEME ------------------------------------------------------------------
+" syntax
+call s:sethig('Comment',    s:neut4, 'italic')
+call s:sethig('Constant',   s:synA1)
+call s:sethig('Special',    s:synB2)
+call s:sethig('Identifier', s:synB1, 'bold')
+call s:sethig('Statement',  s:synC2)
+call s:sethig('PreProc',    s:synC2)
+call s:sethig('Type',       s:synC1)
+call s:sethig('Underlined', s:synC2, 'underline')
+call s:sethig('Ignore',     s:neut5)
+
 " ui
-hi SignColumn   ctermbg=none ctermfg=252
-hi StatusLine   ctermbg=240 ctermfg=235
-hi StatusLineNC ctermbg=240 ctermfg=235
-hi FoldColumn   ctermbg=none ctermfg=none
-hi Folded       cterm=italic ctermbg=none ctermfg=240
-hi VertSplit    cterm=bold ctermbg=none ctermfg=235
-hi LineNr       ctermbg=none ctermfg=240
-hi EndOfBuffer  ctermfg=240
-hi Pmenu        ctermbg=223  ctermfg=240
-hi PmenuSel     ctermbg=240  ctermfg=223
-hi PmenuSbar    ctermbg=223  ctermfg=240
-hi PmenuThumb   ctermbg=240  ctermfg=223
+call s:sethig('SignColumn',   s:neut6)
+call s:sethig('StatusLine',   s:neut3, 'bold')
+call s:sethig('StatusLineNC', s:neut2, 'none')
+call s:sethig('FoldColumn',   'none')
+call s:sethig('Folded',       s:neut3, 'italic')
+call s:sethig('VertSplit',    s:neut1, 'bold')
+call s:sethig('LineNr',       s:neut3)
+call s:sethig('EndOfBuffer',  s:neut3)
+call s:sethig('Pmenu',        s:neut3, 'none', s:main2)
+call s:sethig('PmenuSel',     s:main2, 'none', s:neut3)
+call s:sethig('PmenuSbar',    s:neut3, 'none', s:main2)
+call s:sethig('PmenuThumb',   s:main2, 'none', s:neut3)
 " diff
-hi DiffAdd      ctermbg=235
-hi DiffChange   ctermbg=235
-hi DiffDelete   ctermbg=235
-hi DiffText     ctermbg=235
+call s:sethig('DiffAdd',    '', '', s:neut1)
+call s:sethig('DiffChange', '', '', s:neut1)
+call s:sethig('DiffDelete', '', '', s:neut1)
+call s:sethig('DiffText',   '', '', s:neut1)
+
