@@ -38,18 +38,23 @@ let s:neut5 = 248
 let s:neut6 = 252
 
 " syntax
-" A (red)
-let s:synA1 = 211
+" A (pink)
+let s:synA1 = 175
 " B (purple)
 let s:synB1 = 183
 let s:synB2 = 188
 " C (blue)
 let s:synC1 = 147
 let s:synC2 = 153
+" error (serious red)
+let s:syner = 210
 
 " main hightlight (yellow-orange)
 let s:main1 = 216
 let s:main2 = 223
+
+" blues: 105, 111
+" cyan: 123
 
 " COLORSCHEME ------------------------------------------------------------------
 " syntax
@@ -58,10 +63,18 @@ call s:sethig('Constant',   s:synA1)
 call s:sethig('Special',    s:synB2)
 call s:sethig('Identifier', s:synB1, 'bold')
 call s:sethig('Statement',  s:synC2)
-call s:sethig('PreProc',    s:synC2)
+hi! link Preproc Statement
 call s:sethig('Type',       s:synC1)
 call s:sethig('Underlined', s:synC2, 'underline')
 call s:sethig('Ignore',     s:neut5)
+call s:sethig('Todo',       s:neut4, 'bold')
+
+" spell & errors
+call s:sethig('SpellBad', s:syner, 'underline')
+hi! link SpellCap SpellBad 
+hi! link SpellRare SpellBad
+hi! link SpellLocal SpellBad
+hi! link Error SpellBad 
 
 " ui
 call s:sethig('SignColumn',   s:neut6)
@@ -71,14 +84,17 @@ call s:sethig('FoldColumn',   'none')
 call s:sethig('Folded',       s:neut3, 'italic')
 call s:sethig('VertSplit',    s:neut1, 'bold')
 call s:sethig('LineNr',       s:neut3)
-call s:sethig('EndOfBuffer',  s:neut3)
+hi! link EndOfBuffer LineNr
+" menus
 call s:sethig('Pmenu',        s:neut3, 'none', s:main2)
+hi! link PmenuSbar Pmenu
+hi! link WildMenu Pmenu
 call s:sethig('PmenuSel',     s:main2, 'none', s:neut3)
-call s:sethig('PmenuSbar',    s:neut3, 'none', s:main2)
-call s:sethig('PmenuThumb',   s:main2, 'none', s:neut3)
+hi! link PmenuThumb PmenuSel
+
 " diff
 call s:sethig('DiffAdd',    '', '', s:neut1)
-call s:sethig('DiffChange', '', '', s:neut1)
-call s:sethig('DiffDelete', '', '', s:neut1)
-call s:sethig('DiffText',   '', '', s:neut1)
+hi! link DiffChange DiffAdd 
+hi! link DiffDelete DiffAdd 
+hi! link DiffText DiffAdd 
 
