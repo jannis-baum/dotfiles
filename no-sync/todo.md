@@ -2,7 +2,12 @@
 
 ## vim
 
-- fix some vim colors (e.g. spell check, errors, status line) & clean up color theme
+- fix / revise colors that have background:
+    - spell check
+    - errors
+    - pandoc conceil
+    - highlighted paranthesis
+    - search
 - find solution for merge conflicts, e.g. [this plugin](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
 - plugin to comment code
 - setup [jupyter notebooks in vim](https://github.com/jupyter-vim/jupyter-vim)
