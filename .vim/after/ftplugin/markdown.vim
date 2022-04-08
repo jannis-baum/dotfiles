@@ -5,6 +5,8 @@ let g:mkdp_browser = 'Safari'
 let g:mkdp_auto_close = 0
 let g:mkdp_markdown_css = expand('~/.vim/markdown-preview/markdown.css')
 
+let g:pandoc#syntax#conceal#use = 0
+
 " do stuff between $$
 nnoremap da$ F$df$
 nnoremap di$ T$dt$
