@@ -9,8 +9,7 @@ set number rnu                " line numbers
 set nuw=6                     " .
 set splitbelow                " splits
 set splitright                " .
-set cmdheight=2               " other
-set noshowmode                " .
+set noshowmode                " other
 set showcmd                   " .
 set signcolumn=yes            " sign column (left)
 let &fillchars ..= ',eob: '   " end of buffer filler character
