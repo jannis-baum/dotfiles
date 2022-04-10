@@ -19,6 +19,8 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+" return for confirmation (e.g. auto import)
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " gd / gr - go to definition of word / type under cursor
 nmap <silent> gd <Plug>(coc-definition)
