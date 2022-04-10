@@ -9,11 +9,15 @@ _fzf_compgen_dir() {
 # fzf autocompletion
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-fe() {
-    file=$(fzf)
+fzf_open_editor() {
+    local file
+    file=$(fzf-tmux -p </dev/tty)
     if [ -n "$file" ]; then
-        ${EDITOR} "${file}";
+        BUFFER="${EDITOR} ${(q-)file}"
+        zle accept-line
+        zle reset-prompt
     fi
 }
-bindkey -s ^o 'fe\n'
+zle -N fzf_open_editor 
+bindkey ^o fzf_open_editor
 
