@@ -2,15 +2,12 @@
 
 ## vim
 
+- find solution for merge conflicts, e.g. [this plugin](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
 - fix / revise colors that have background:
-    - spell check
-    - errors
-    - pandoc conceil
     - highlighted paranthesis
     - search
-- find solution for merge conflicts, e.g. [this plugin](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
+- setup [jupyter notebooks in vim](https://alpha2phi.medium.com/jupyter-notebook-vim-neovim-c2d67d56d563)
 - plugin to comment code
-- setup [jupyter notebooks in vim](https://github.com/jupyter-vim/jupyter-vim)
 - make vim save state per directory instead of globally
 
 ## shell
