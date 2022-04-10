@@ -8,7 +8,7 @@ fu! SaveSession()
 endfunction
 autocmd VimLeave * call SaveSession()
 " source latest session if invoked without arguments
-autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | source ~/.vim/vimrc | edit | endif
+autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | :colorscheme translucent-dark | edit | endif
 
 " backups
 set backup
