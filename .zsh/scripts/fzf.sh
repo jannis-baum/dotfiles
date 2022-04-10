@@ -10,14 +10,22 @@ _fzf_compgen_dir() {
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
 fzf_open_editor() {
-    local file
-    file=$(fzf-tmux -p </dev/tty)
-    if [ -n "$file" ]; then
-        BUFFER="${EDITOR} ${(q-)file}"
+    local f
+    f=$(fzf-tmux -p </dev/tty)
+    if [ -n "$f" ]; then
+        BUFFER="${EDITOR} ${(q-)f}"
         zle accept-line
         zle reset-prompt
     fi
 }
 zle -N fzf_open_editor 
 bindkey ^o fzf_open_editor
+
+fzf_pick_file() {
+    local f
+    f=$(fzf-tmux -p </dev/tty)
+    LBUFFER+=${(q-)f}
+}
+zle -N fzf_pick_file
+bindkey ^p fzf_pick_file
 
