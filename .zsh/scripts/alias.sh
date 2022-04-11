@@ -14,7 +14,7 @@ alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/
 alias convert-file="ffmpeg"
 ## list / exa
 alias s="COLUMNS=120 exa --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
-unalias la
-alias la="exa --long --all --git --no-permissions --no-user --ignore-glob='.DS_Store' --group-directories-first --time-style=iso"
+unalias l
+alias l="exa --long --all --git --no-permissions --no-user --ignore-glob='.DS_Store' --group-directories-first --time-style=iso"
 alias t="exa --long --no-user --no-permissions --no-filesize --no-time --git --tree --git-ignore --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
 
