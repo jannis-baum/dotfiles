@@ -15,3 +15,6 @@ let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/ultisnips']
 " FUGITIVE ---
 packadd fugitive
 
+" SLIME ---
+packadd slime
+

@@ -5,7 +5,6 @@
 - fix / revise colors that have background:
     - highlighted paranthesis
     - search
-- setup [jupyter notebooks in vim](https://alpha2phi.medium.com/jupyter-notebook-vim-neovim-c2d67d56d563)
 - plugin to comment code
 - make vim save state per directory instead of globally
 
