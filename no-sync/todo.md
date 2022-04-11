@@ -2,7 +2,6 @@
 
 ## vim
 
-- find solution for merge conflicts, e.g. [this plugin](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
 - fix / revise colors that have background:
     - highlighted paranthesis
     - search

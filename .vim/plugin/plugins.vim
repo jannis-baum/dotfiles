@@ -12,3 +12,6 @@ let g:UltiSnipsJumpForwardTrigger = '<C-n>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-m>'
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/ultisnips']
 
+" FUGITIVE ---
+packadd fugitive
+
