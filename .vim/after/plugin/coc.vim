@@ -5,7 +5,8 @@ let g:coc_global_extensions = [
     \'coc-clangd', 'coc-cmake',
     \'coc-tsserver', 'coc-tslint-plugin', 'coc-eslint', 
     \'coc-html', 'coc-css', 'coc-json',
-    \'coc-git', 'coc-docker'
+    \'coc-git', 'coc-docker',
+    \'coc-markdownlint'
 \]
 
 " BINDINGS ---

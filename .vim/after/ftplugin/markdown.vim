@@ -1,5 +1,10 @@
+" setup
 setlocal spell
+set textwidth=80
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 
+" plugins
 call mkdp#util#install()
 let g:mkdp_browser = 'Safari'
 let g:mkdp_auto_close = 0
