@@ -1,0 +1,11 @@
+--smart-case
+--hidden
+--follow
+
+--glob=!.git/*
+--glob=!node_modules/*
+
+--colors
+match:bg:yellow
+--colors
+match:fg:16
