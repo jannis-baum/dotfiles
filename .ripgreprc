@@ -9,3 +9,6 @@
 match:bg:yellow
 --colors
 match:fg:16
+
+--context-separator
+...

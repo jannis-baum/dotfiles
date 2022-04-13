@@ -29,3 +29,18 @@ fzf_pick_file() {
 zle -N fzf_pick_file
 bindkey ^p fzf_pick_file
 
+rgi() {
+    local rg_command="rg --column --line-number --no-heading "
+    selection=$(true | \
+        fzf -d ':' --with-nth=2 +m --bind "change:reload:$rg_command {q} | sed 's/^/{q}:/g' || true" --disabled \
+            --preview-window="right,70%,wrap" --preview "bat --style=numbers --color=always --line-range {3}: {2} 2> /dev/null\
+                | rg --color always --context 10 '{q}'")
+    if [[ -n "$selection" ]]; then
+        local query=$(echo $selection | awk -F: '{ print $1 }')  
+        local file=$(echo $selection | awk -F: '{ print $2 }')
+        local line=$(echo $selection | awk -F: '{ print $3 }')
+        local column=$(echo $selection | awk -F: '{ print $4 }')
+        vim "+call cursor($line, $column)" "+let @/='$query'" "+set hls" "$file"
+    fi
+}
+
