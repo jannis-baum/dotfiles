@@ -3,9 +3,6 @@
 ## vim
 
 - set up fzf+rg inside of vim
-- fix / revise colors that have background:
-  - highlighted paranthesis
-  - search
 - plugin to comment code
 - make vim save state per directory instead of globally
 

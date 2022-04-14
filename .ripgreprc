@@ -6,9 +6,9 @@
 --glob=!node_modules/*
 
 --colors
-match:bg:yellow
+match:bg:229
 --colors
-match:fg:16
+match:fg:235
 
 --context-separator
 ...

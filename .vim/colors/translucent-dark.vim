@@ -3,13 +3,13 @@
 " BOILERPLATE (dark coloschemes) -----------------------------------------------
 highlight clear
 if exists("syntax_on")
-  syntax reset
+    syntax reset
 endif
 set background=dark
 
 " DEFINITIONS ------------------------------------------------------------------
 " setter
-function! s:sethig(group, ...)
+function! s:HI(group, ...)
     let histring = 'highlight ' . a:group . ' '
     if strlen(a:1)
         let histring .= 'ctermfg=' . a:1 . ' '
@@ -50,51 +50,56 @@ let s:synC2 = 153
 let s:syner = 210
 
 " main hightlight (yellow-orange)
-let s:main1 = 216
-let s:main2 = 223
+let s:main1 = 229
+let s:main2 = 216
+let s:main3 = 223
 
 " blues: 105, 111
 " cyan: 123
 
 " COLORSCHEME ------------------------------------------------------------------
 " syntax
-call s:sethig('Comment',    s:neut4, 'italic')
-call s:sethig('Constant',   s:synA1)
-call s:sethig('Special',    s:synB2)
-call s:sethig('Identifier', s:synB1, 'bold')
-call s:sethig('Statement',  s:synC2)
+call s:HI('Comment',    s:neut4, 'italic')
+call s:HI('Constant',   s:synA1)
+call s:HI('Special',    s:synB2)
+call s:HI('Identifier', s:synB1, 'bold')
+call s:HI('Statement',  s:synC2)
 hi! link Preproc Statement
-call s:sethig('Type',       s:synC1)
-call s:sethig('Underlined', s:synC2, 'underline')
-call s:sethig('Ignore',     s:neut5)
-call s:sethig('Todo',       s:neut4, 'bold')
+call s:HI('Type',       s:synC1)
+call s:HI('Underlined', s:synC2, 'underline')
+call s:HI('Ignore',     s:neut5)
+call s:HI('Todo',       s:neut4, 'bold')
+call s:HI('MatchParen', s:neut1, 'none', s:main1)
 
 " spell & errors
-call s:sethig('SpellBad', s:syner, 'underline')
+call s:HI('SpellBad', s:syner, 'underline')
 hi! link SpellCap SpellBad 
 hi! link SpellRare SpellBad
 hi! link SpellLocal SpellBad
 hi! link Error SpellBad 
 
 " ui
-call s:sethig('SignColumn',   s:neut6)
-call s:sethig('StatusLine',   s:neut3, 'bold')
-call s:sethig('StatusLineNC', s:neut2, 'none')
-call s:sethig('FoldColumn',   'none')
-call s:sethig('Folded',       s:neut3, 'italic')
-call s:sethig('VertSplit',    s:neut1, 'bold')
-call s:sethig('LineNr',       s:neut3)
+call s:HI('SignColumn',   s:neut6)
+call s:HI('StatusLine',   s:neut3, 'bold')
+call s:HI('StatusLineNC', s:neut2, 'none')
+call s:HI('FoldColumn',   'none')
+call s:HI('Folded',       s:neut3, 'italic')
+call s:HI('VertSplit',    s:neut1, 'bold')
+call s:HI('LineNr',       s:neut3)
 hi! link EndOfBuffer LineNr
 " menus
-call s:sethig('Pmenu',        s:neut3, 'none', s:main2)
+call s:HI('Pmenu',        s:neut3, 'none', s:main3)
 hi! link PmenuSbar Pmenu
 hi! link WildMenu Pmenu
-call s:sethig('PmenuSel',     s:main2, 'none', s:neut3)
+call s:HI('PmenuSel',     s:main3, 'none', s:neut3)
 hi! link PmenuThumb PmenuSel
 
 " diff
-call s:sethig('DiffAdd',    '', '', s:neut1)
+call s:HI('DiffAdd',    '', '', s:neut1)
 hi! link DiffChange DiffAdd 
 hi! link DiffDelete DiffAdd 
 hi! link DiffText DiffAdd 
+
+" misc
+call s:HI('Search', s:neut1, 'none', s:main1)
 
