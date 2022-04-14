@@ -3,5 +3,5 @@ set clipboard=unnamed
 set ttimeoutlen=5             " key code delay
 set viminfo+=n~/.vim/viminfo
 set rtp+=/usr/local/opt/fzf   " install fzf
-silent! helptags ALL
+" silent! helptags ALL
 
