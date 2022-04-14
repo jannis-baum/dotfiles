@@ -16,7 +16,7 @@ let &fillchars ..= ',eob: '   " end of buffer filler character
 let &fillchars ..= ',vert:│'  " vertical separator
 
 " cursor style
-let &t_SI = "\e[6 q"
+let &t_SI = "\e[5 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
 
