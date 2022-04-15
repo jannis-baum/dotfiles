@@ -3,7 +3,6 @@
 ## vim
 
 - set up fzf+rg inside of vim
-- set up fzf new file binding in vim
 - plugin to comment code, e.g. [this
   one](https://github.com/tomtom/tcomment_vim)
 - make vim save state per directory instead of globally
