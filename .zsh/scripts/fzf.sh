@@ -1,3 +1,4 @@
+# basic setup ------------------------------------------------------------------
 # use fd for fzf '**' shell completions.
 _fzf_compgen_path() {
   command fd --hidden --follow --exclude .git --exclude node_modules . "$1"
@@ -9,26 +10,57 @@ _fzf_compgen_dir() {
 # fzf autocompletion
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-fzf_open_editor() {
-    local f
-    f=$(fzf-tmux -p </dev/tty)
+
+# key bindings -----------------------------------------------------------------
+
+# ctrl+o|u for file|directory picker
+#   - enter opens file in editor | cds to directory
+#   - ctrl+n for new file (path can have new directories)
+#   - ctrl+u for new directory/ies
+#   - ctrl+o to write pick to buffer
+
+_editor-p() {
+    mkdir -p $(dirname $1) && $EDITOR $1
+}
+
+fzf_file() {
+    local out key f dir
+    out=$(fzf-tmux -p -- --expect=ctrl-n,ctrl-u,ctrl-o </dev/tty)
+    key=`echo $out | head -1`
+    f=`echo $out | tail -n +2`
     if [ -n "$f" ]; then
-        BUFFER="${EDITOR} ${(q-)f}"
-        zle accept-line
-        zle reset-prompt
+        dir=`dirname ${(q-)f}`
+        if   [ "$key" = ctrl-n ]; then LBUFFER="_editor-p ${(q-)dir}/";
+        elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
+        elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)f};
+        else BUFFER="$EDITOR ${(q-)f}"; zle accept-line; zle reset-prompt;
+        fi
     fi
 }
-zle -N fzf_open_editor 
-bindkey ^o fzf_open_editor
+zle -N fzf_file
+bindkey ^o fzf_file
 
-fzf_pick_file() {
-    local f
-    f=$(fzf-tmux -p </dev/tty)
-    LBUFFER+=${(q-)f}
+fzf_dir() {
+    local out key dir
+    out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf-tmux -p -- --expect=ctrl-n,ctrl-u,ctrl-o)
+    key=`echo $out | head -1`
+    dir=`echo $out | tail -n +2`
+    if [ -n "$dir" ]; then
+        if   [ "$key" = ctrl-n ]; then LBUFFER="_editor-p ${(q-)dir}/";
+        elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
+        elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)dir};
+        else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
+        fi
+    fi
 }
-zle -N fzf_pick_file
-bindkey ^p fzf_pick_file
+zle -N fzf_dir
+bindkey ^u fzf_dir
 
+
+# other ------------------------------------------------------------------------
+
+# interactive ripgrep: live search & highlighted preview
+# enter opens selection in vim, goes to selected occurance and highlights search
 rgi() {
     local rg_command="rg --column --line-number --no-heading "
     selection=$(true | \
