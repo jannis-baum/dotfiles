@@ -22,10 +22,10 @@ let &t_EI = "\e[2 q"
 
 " status line
 function SLContent()
-    let left = @% . ' '
-    let spacer_width = winwidth(0) - len(left)
-    let spacer = repeat('―', spacer_width)
-    return left . spacer
+    let l:left = @% . ' '
+    let l:spacer_width = winwidth(0) - len(l:left)
+    let l:spacer = repeat('―', l:spacer_width)
+    return l:left . l:spacer
 endfunction
 set statusline=%{SLContent()}
 
