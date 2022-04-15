@@ -1,5 +1,6 @@
 alias gs="git status -s"
 alias gca="git commit --amend --no-edit"
+alias gal="git add -A && git status -s"
 function ga() {
     git add $* && git status -s
 }
