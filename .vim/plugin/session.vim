@@ -1,14 +1,20 @@
 " open file at last pos
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-\| exe "normal! g'\"" | endif
+augroup LastPos
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+        \| exe "normal! g'\"" | endif
+augroup END
 
-" save latest session on exit
-fu! SaveSession()
-    execute 'mksession! ~/.vim/latest-session.vim'
-endfunction
-autocmd VimLeave * call SaveSession()
-" source latest session if invoked without arguments
-autocmd VimEnter * if eval("@%") == "" | source ~/.vim/latest-session.vim | :colorscheme translucent-dark | edit | endif
+" save /restore latest session
+augroup Stdin
+    autocmd!
+    autocmd StdinReadPre * let g:read_stdin = 1
+augroup END
+augroup SaveSession
+    autocmd!
+    autocmd VimLeave * if !exists('g:read_stdin') | execute 'mksession!' '~/.vim/latest-session.vim' | endif
+    autocmd VimEnter * if eval("@%") == "" && !exists('g:read_stdin') | source ~/.vim/latest-session.vim | :colorscheme translucent-dark | edit | endif
+augroup END
 
 " backups
 set backup
