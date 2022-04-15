@@ -10,6 +10,9 @@
 ## shell
 
 - bat colors
+- fzf
+  - directory finder
+  - create new files and directories in popovers with keybindings
 
 ## other
 
