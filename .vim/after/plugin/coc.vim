@@ -46,3 +46,6 @@ nmap <leader>cr  <Plug>(coc-rename)
 " view all errors
 nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
 
+" select command
+nnoremap <silent> <leader>cc :<C-u>CocList commands<CR>
+
