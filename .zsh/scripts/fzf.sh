@@ -19,10 +19,6 @@ _fzf_compgen_dir() {
 #   - ctrl+u for new directory/ies
 #   - ctrl+o to write pick to buffer
 
-_editor-p() {
-    mkdir -p $(dirname $1) && $EDITOR $1
-}
-
 fzf_file() {
     local out key f dir
     out=$(fzf-tmux -p -- --expect=ctrl-n,ctrl-u,ctrl-o </dev/tty)
@@ -30,7 +26,7 @@ fzf_file() {
     f=`echo $out | tail -n +2`
     if [ -n "$f" ]; then
         dir=`dirname ${(q-)f}`
-        if   [ "$key" = ctrl-n ]; then LBUFFER="_editor-p ${(q-)dir}/";
+        if   [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
         elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
         elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)f};
         else BUFFER="$EDITOR ${(q-)f}"; zle accept-line; zle reset-prompt;
@@ -46,7 +42,7 @@ fzf_dir() {
     key=`echo $out | head -1`
     dir=`echo $out | tail -n +2`
     if [ -n "$dir" ]; then
-        if   [ "$key" = ctrl-n ]; then LBUFFER="_editor-p ${(q-)dir}/";
+        if   [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
         elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
         elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)dir};
         else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;

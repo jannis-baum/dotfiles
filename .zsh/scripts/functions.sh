@@ -1,4 +1,7 @@
 # generic functions
+function v() {
+    mkdir -p $(dirname $1) && $EDITOR $1
+}
 ## make and change to directory
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
