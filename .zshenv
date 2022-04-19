@@ -1,7 +1,7 @@
 # omz
-export ZSH="${HOME}/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=~/.zsh
-export PATH="${PATH}:${HOME}/_bin:${HOME}/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
+export PATH="$PATH:$HOME/_bin:$HOME/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
 
 export EDITOR=vim
 export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
