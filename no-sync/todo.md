@@ -15,3 +15,4 @@
 
 - [yabai window manager](https://github.com/koekeishiya/yabai)
 - [hotkey daemon](https://github.com/koekeishiya/skhd)
+- switch from iterm & tmux to [kitty]( & **no** tmux
