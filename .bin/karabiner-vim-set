@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/Library/Application\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables "{\"karabiner_vim\":$1}"
+

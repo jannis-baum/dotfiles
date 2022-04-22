@@ -1,0 +1,33 @@
+#!/usr/bin/env osascript
+
+# show menu bar
+tell application "System Events"
+	tell dock preferences to set autohide menu bar to false
+end tell
+
+# open control center
+tell application "System Events"
+	tell process "Control Center"
+		activate
+		tell menu bar item "control center" of menu bar 1
+			click
+		end tell
+	end tell
+end tell
+
+# wait to hide menu bar
+waitToHide()
+
+# keeps checking if control center is still open
+# hides menu bar when closed
+on waitToHide()
+	delay 0.3 
+	tell application "System Events"
+		if exists (window 1 of process "Control Center") then
+			my waitToHide()
+		else
+			tell dock preferences to set autohide menu bar to true
+		end if
+	end tell
+end waitToHide
+
