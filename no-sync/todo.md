@@ -3,12 +3,10 @@
 ## kitty
 
 - set up tmux replacement
-  - [keyboard
-    shortcuts](https://sw.kovidgoyal.net/kitty/conf/#keyboard-shortcuts), make
-    prefix (*multi-key shortcut*) like in tmux
-  - generic keybindings such as tabs/panes, reloading config, etc
+  - copy mode
   - [status line](https://github.com/kovidgoyal/kitty/discussions/4447)
   - popover & fzf-tmux alternative?
+- pane/window separator colors
 - use true colors
 - use curly underlines for vim
 
