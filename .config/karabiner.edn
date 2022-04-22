@@ -12,6 +12,7 @@
   :templates {:open "open -a \"%s.app\""
               :delay-set-var "sleep 0.1 && /Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"%s\": %d}'"}
   :applications {:native-vim ["^com\\.googlecode\\.iterm2$", "^com\\.microsoft\\.VSCode$", "^com\\.apple\\.dt\\.Xcode$", "^net\\.kovidgoyal\\.kitty$"]
+                 :kitty ["^net\\.kovidgoyal\\.kitty$"]
                  :iterm ["^com\\.googlecode\\.iterm2$"]
                  :vscode ["^com\\.microsoft\\.VSCode$"]
                  :safari ["^com\\.apple\\.Safari$"]}
@@ -83,6 +84,8 @@
             ]}
     {:des "delete > iterm overlay, [] > delete, caps + [] > []",
      :rules [
+                 ; [:delete_or_backspace "open -a kitty" [:!kitty]]
+                 ; [:delete_or_backspace "~/_lib/hide-kitty/.build/release/hide-kitty" [:kitty]]
                  [:delete_or_backspace :f9]
                  [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
                  [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]

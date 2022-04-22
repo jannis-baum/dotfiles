@@ -2,16 +2,7 @@
 
 ## kitty
 
-- setup lay-over window
-  - make swift program to hide kitty like this
-
-```swift
-import AppKit
-
-AXUIElementSetAttributeValue(AXUIElementCreateApplication(<kitty-pid>),
-kAXHiddenAttribute as CFString, kCFBooleanTrue)
-```
-
+- set up 16 colors
 - set up tmux replacement
   - [keyboard
     shortcuts](https://sw.kovidgoyal.net/kitty/conf/#keyboard-shortcuts), make
@@ -19,6 +10,8 @@ kAXHiddenAttribute as CFString, kCFBooleanTrue)
   - generic keybindings such as tabs/panes, reloading config, etc
   - status line
   - popover & fzf-tmux alternative?
+- use true colors
+- use curly underlines for vim
 
 ## vim
 
@@ -37,12 +30,15 @@ kAXHiddenAttribute as CFString, kCFBooleanTrue)
 
 - more sophisticated setting for what (not) to sync
 - find a way to have vim packs in dotfiles repo without too many copies
+- set up solution for little compiled swift stuff
 
 ### icloud-backup
 
-- copies given file(s) from `~/...` to parallel directory `~/Library/Mobile\ Documents/com\~apple\~CloudDocs/...`
+- copies given file(s) from `~/...` to parallel directory `~/Library/Mobile\
+  Documents/com\~apple\~CloudDocs/...`
 - created directory if not there yet
-- (gives info on how much space icloud files are using and how much i have left in plan?)
+- (gives info on how much space icloud files are using and how much i have left
+  in plan?)
 - (give option to zip)
 
 ## other
