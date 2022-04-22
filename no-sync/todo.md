@@ -2,8 +2,8 @@
 
 ## kitty
 
-- setup popover window
-  - try hiding with swift script
+- setup lay-over window
+  - make swift program to hide kitty like this
 
 ```swift
 import AppKit
