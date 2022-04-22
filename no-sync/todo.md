@@ -2,7 +2,6 @@
 
 ## kitty
 
-- set up 16 colors
 - set up tmux replacement
   - [keyboard
     shortcuts](https://sw.kovidgoyal.net/kitty/conf/#keyboard-shortcuts), make
@@ -45,4 +44,3 @@
 
 - [yabai window manager](https://github.com/koekeishiya/yabai)
 - [hotkey daemon](https://github.com/koekeishiya/skhd)
-
