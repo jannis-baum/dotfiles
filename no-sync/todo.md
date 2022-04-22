@@ -7,7 +7,7 @@
     shortcuts](https://sw.kovidgoyal.net/kitty/conf/#keyboard-shortcuts), make
     prefix (*multi-key shortcut*) like in tmux
   - generic keybindings such as tabs/panes, reloading config, etc
-  - status line
+  - [status line](https://github.com/kovidgoyal/kitty/discussions/4447)
   - popover & fzf-tmux alternative?
 - use true colors
 - use curly underlines for vim
