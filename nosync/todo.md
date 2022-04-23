@@ -25,7 +25,6 @@
 ### sync-dotfiles
 
 - find a way to have vim packs in dotfiles repo without too many copies
-- set up solution for little compiled swift stuff
 - ignore file & additional commands for syncs (e.g. `goku` for `karabiner.edn`)
 
 ### icloud-backup
