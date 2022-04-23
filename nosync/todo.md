@@ -4,7 +4,6 @@
 
 - set up tmux replacement
   - copy mode
-  - [status line](https://github.com/kovidgoyal/kitty/discussions/4447)
   - popover & fzf-tmux alternative?
 - pane/window separator colors
 - use true colors
