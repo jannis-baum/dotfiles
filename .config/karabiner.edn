@@ -84,9 +84,9 @@
             ]}
     {:des "delete > iterm overlay, [] > delete, caps + [] > []",
      :rules [
-                 ; [:delete_or_backspace "open -a kitty" [:!kitty]]
-                 ; [:delete_or_backspace "~/_lib/hide-kitty/.build/release/hide-kitty" [:kitty]]
-                 [:delete_or_backspace :f9]
+                 [:delete_or_backspace "open -a kitty" [:!kitty]]
+                 [:delete_or_backspace "~/_lib/hide-kitty/.build/release/hide-kitty" [:kitty]]
+                 ;[:delete_or_backspace :f9]
                  [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
                  [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
                  [:!TOopen_bracket :open_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
