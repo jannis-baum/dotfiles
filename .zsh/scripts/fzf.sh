@@ -21,7 +21,13 @@ _fzf_compgen_dir() {
 
 fzf_file() {
     local out key f dir
-    out=$(fzf-tmux -p -- --expect=ctrl-n,ctrl-u,ctrl-o </dev/tty)
+    local fzf_opts="--expect=ctrl-n,ctrl-u,ctrl-o"
+    if [ -n "$TMUX" ]; then
+        out=$(fzf-tmux -p -- $fzf_opts </dev/tty)
+    else
+        out=$(fzf $fzf_opts </dev/tty)
+        zle reset-prompt
+    fi
     key=`echo $out | head -1`
     f=`echo $out | tail -n +2`
     if [ -n "$f" ]; then
@@ -38,7 +44,13 @@ bindkey ^o fzf_file
 
 fzf_dir() {
     local out key dir
-    out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf-tmux -p -- --expect=ctrl-n,ctrl-u,ctrl-o)
+    local fzf_opts="--expect=ctrl-n,ctrl-u,ctrl-o"
+    if [ -n "$TMUX" ]; then
+        out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf-tmux -p -- $fzf_opts)
+    else
+        out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf $fzf_opts)
+        zle reset-prompt
+    fi
     key=`echo $out | head -1`
     dir=`echo $out | tail -n +2`
     if [ -n "$dir" ]; then
