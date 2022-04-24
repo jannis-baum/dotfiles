@@ -19,6 +19,9 @@ let &fillchars ..= ',vert:│'  " vertical separator
 let &t_SI = "\e[5 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
+" kitty undercurls
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 
 " status line
 function SLContent()

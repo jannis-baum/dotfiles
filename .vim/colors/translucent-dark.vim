@@ -20,9 +20,12 @@ function! s:HI(group, ...)
         let histring .= 'cterm=none '
     endif
     if a:0 >= 3 && strlen(a:3)
-        let histring .= 'ctermbg=' . a:3
+        let histring .= 'ctermbg=' . a:3 . ' '
     else
         let histring .= 'ctermbg=none'
+    endif
+    if a:0 >= 4 && strlen(a:4)
+        let histring .= 'ctermul=' .a:4
     endif
     execute histring
 endfunction
@@ -42,12 +45,13 @@ let s:neut6 = 252
 let s:synA1 = 175
 " B (purple)
 let s:synB1 = 183
-let s:synB2 = 188
+let s:synB2 = 182
 " C (blue)
 let s:synC1 = 147
 let s:synC2 = 153
-" error (serious red)
-let s:syner = 210
+" errors & warnings
+let s:syner = 203
+let s:swarn = 214
 
 " main hightlight (yellow-orange)
 let s:main1 = 229
@@ -72,11 +76,16 @@ call s:HI('Todo',       s:neut4, 'bold')
 call s:HI('MatchParen', s:neut1, 'none', s:main1)
 
 " spell & errors
-call s:HI('SpellBad', s:syner, 'underline')
-hi! link SpellCap SpellBad 
-hi! link SpellRare SpellBad
-hi! link SpellLocal SpellBad
-hi! link Error SpellBad 
+call s:HI('Error', 'none', 'undercurl', 'none', s:syner)
+hi! link SpellCap Error 
+hi! link SpellRare Error
+hi! link SpellLocal Error
+hi! link SpellBad Error 
+hi! link CocErrorHighlight Error
+call s:HI('CocWarningHighlight', 'none', 'undercurl', 'none', s:swarn)
+hi! link CocUnusedHighlight CocWarningHighlight
+call s:HI('CocInfoHighlight', 'none', 'undercurl', 'none', s:synC1)
+hi! link CocHintHightlight CocInfoHighlight
 
 " ui
 call s:HI('SignColumn',   s:neut6)

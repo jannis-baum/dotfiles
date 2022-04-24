@@ -5,7 +5,6 @@
 - set up tmux replacement
   - popover & fzf-tmux alternative?
 - use true colors
-- use curly underlines for vim
 
 ## vim
 
