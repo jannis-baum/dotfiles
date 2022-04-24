@@ -3,7 +3,6 @@
 ## kitty
 
 - set up tmux replacement
-  - copy mode
   - popover & fzf-tmux alternative?
 - pane/window separator colors
 - use true colors

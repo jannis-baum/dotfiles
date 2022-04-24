@@ -1,5 +1,7 @@
 " COC
-packadd coc
+if !exists('g:omit_coc')
+    packadd coc
+endif
 
 " MARKDOWN ---
 packadd markdown-preview.nvim
