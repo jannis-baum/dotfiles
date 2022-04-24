@@ -4,7 +4,6 @@
 
 - set up tmux replacement
   - popover & fzf-tmux alternative?
-- pane/window separator colors
 - use true colors
 - use curly underlines for vim
 
