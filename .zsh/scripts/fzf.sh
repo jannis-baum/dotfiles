@@ -33,7 +33,7 @@ fzf_file() {
     if [ -n "$f" ]; then
         dir=`dirname ${(q-)f}`
         if   [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
-        elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
+        elif [ "$key" = ctrl-u ]; then BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
         elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)f};
         else BUFFER="$EDITOR ${(q-)f}"; zle accept-line; zle reset-prompt;
         fi
