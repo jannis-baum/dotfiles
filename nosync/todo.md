@@ -16,6 +16,7 @@
 ## shell
 
 - bat colors
+- fzf hotkey to switch between git-ls and fd
 
 ## scripts
 
