@@ -5,9 +5,10 @@
 [core]
 	excludesfile = /Users/jannisbaum/.gitignore_global
 	editor = 'vim'
+	pager = $HOME/.bin/vim-ansi-pager
 
 [alias]
-    tree = log --oneline
+    tree = log --oneline --reverse
     d = difftool
 
 [pull]
