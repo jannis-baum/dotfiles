@@ -1,7 +1,7 @@
 #!/bin/sh
 
 dotfiles_dir="$HOME/_dotfiles"
-dotfiles=`find $dotfiles_dir -type f -not -path '*.git/*' -not -path '*nosync*' -not -name '.gitignore' -not -name '.DS_Store' -not -path '*.fbms/*'`
+dotfiles=`find $dotfiles_dir -type f -not -path '*.git/*' -not -path '*nosync*' -not -name '.gitignore' -not -name 'README.md' -not -name '.DS_Store' -not -path '*.fbms/*'`
 
 for f in $dotfiles; do
     inst=$(echo $f | sed "s,$dotfiles_dir,$HOME,")
