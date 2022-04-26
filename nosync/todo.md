@@ -12,11 +12,14 @@
 - plugin to comment code, e.g. [this
   one](https://github.com/tomtom/tcomment_vim)
 - make vim save state per directory instead of globally
+- lazy install markdown preview so markdown files load faster
 
 ## shell
 
 - bat colors
-- fzf hotkey to switch between git-ls and fd
+- fzf hotkeys:
+  - switch between git-ls and fd
+  - toggle bat preview (default disabled)
 
 ## scripts
 
