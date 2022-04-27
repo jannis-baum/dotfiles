@@ -5,10 +5,9 @@ set tabstop=2 softtabstop=2
 set shiftwidth=2
 
 " plugins
-call mkdp#util#install()
 let g:mkdp_browser = 'Safari'
 let g:mkdp_auto_close = 0
-let g:mkdp_markdown_css = expand('~/.vim/markdown-preview/markdown.css')
+let g:mkdp_markdown_css = expand($HOME . '/.vim/markdown-preview/markdown.css')
 
 let g:pandoc#syntax#conceal#use = 0
 

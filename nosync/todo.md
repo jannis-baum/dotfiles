@@ -12,7 +12,6 @@
 - plugin to comment code, e.g. [this
   one](https://github.com/tomtom/tcomment_vim)
 - make vim save state per directory instead of globally
-- lazy install markdown preview so markdown files load faster
 
 ## shell
 
