@@ -8,11 +8,9 @@ endif
 
 function! s:new_file(lines)
     let l:dirname = fnamemodify(a:lines[0], ':h') . '/'
-    call inputsave()
     let l:file = input('new file: ' . l:dirname)
-    call inputrestore()
     if len(l:file) > 0
-        silent! execute '!mkdir' '-p' fnamemodify(l:dirname . l:file, ':h')
+        call system('mkdir -p ' . fnamemodify(l:dirname . l:file, ':h'))
         execute 'edit' l:dirname . l:file
     endif
 endfunction

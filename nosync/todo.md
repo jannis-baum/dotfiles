@@ -10,7 +10,6 @@
 
 - fzf
   - setup rgi analogous to zsh
-  - fix new-file in split rendering bug
   - switch to open buffer
 - plugin to comment code, e.g. [this
   one](https://github.com/tomtom/tcomment_vim)
