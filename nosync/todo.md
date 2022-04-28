@@ -3,7 +3,8 @@
 ## kitty
 
 - set up tmux replacement
-  - popover & fzf-tmux alternative?
+  - popover & fzf-tmux alternative? -> [not possible right
+    now](https://github.com/kovidgoyal/kitty/discussions/4018)
 - use true colors
 
 ## vim
