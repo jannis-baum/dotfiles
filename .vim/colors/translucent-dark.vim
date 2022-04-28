@@ -86,6 +86,7 @@ call s:HI('CocWarningHighlight', 'none', 'undercurl', 'none', s:swarn)
 hi! link CocUnusedHighlight CocWarningHighlight
 call s:HI('CocInfoHighlight', 'none', 'undercurl', 'none', s:synC1)
 hi! link CocHintHightlight CocInfoHighlight
+call s:HI('ErrorMsg', s:syner)
 
 " ui
 call s:HI('SignColumn',   s:neut6)
