@@ -10,7 +10,6 @@
 ## vim
 
 - fzf
-  - setup rgi analogous to zsh
   - switch to open buffer
 - plugin to comment code, e.g. [this
   one](https://github.com/tomtom/tcomment_vim)
@@ -22,6 +21,7 @@
 - fzf hotkeys:
   - switch between git-ls and fd
   - toggle bat preview (default disabled)
+- fix regex in rgi
 
 ## scripts
 
