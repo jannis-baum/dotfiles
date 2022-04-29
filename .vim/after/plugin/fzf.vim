@@ -8,7 +8,7 @@ else
     let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5 } }
 endif
 
-function! s:new_file(lines)
+function! s:new_file(lines) abort
     let l:dirname = fnamemodify(a:lines[0], ':h') . '/'
     let l:file = input('new file: ' . l:dirname)
     if len(l:file) > 0
@@ -31,7 +31,7 @@ let g:fzf_action = {
 
 " dynamic ripgrep --------------------------------------------------------------
 
-function! s:rgi_select(lines)
+function! s:rgi_select(lines) abort
     let l:key = a:lines[0]
 
     let l:fields = split(a:lines[1], ':')
@@ -55,7 +55,7 @@ function! s:rgi_select(lines)
 endfunction
 
 let s:rg_command = 'rg --column --line-number --no-heading'
-function! s:rgi()
+function! s:rgi() abort
     call fzf#run(fzf#wrap({
         \'source': [],
         \'options': [
