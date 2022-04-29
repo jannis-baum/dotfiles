@@ -5,7 +5,9 @@
 - set up tmux replacement
   - popover & fzf-tmux alternative? -> [not possible right
     now](https://github.com/kovidgoyal/kitty/discussions/4018)
-- use true colors
+- proper color setup:
+  - define color env vars in kitty
+  - use them for kitty, vim, bat, etc
 
 ## vim
 
@@ -17,7 +19,8 @@
 
 ## shell
 
-- bat colors
+- get rid of omz and make the few features i actually use myself
+  - only need to check `.oh-my-zsh/lib/*`
 - fzf hotkeys:
   - switch between git-ls and fd
   - toggle bat preview (default disabled)
