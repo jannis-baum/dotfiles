@@ -21,7 +21,7 @@ _fzf_compgen_dir() {
 
 fzf_file() {
     local out key f dir
-    local fzf_opts="--expect=ctrl-n,ctrl-u,ctrl-o"
+    local fzf_opts="--expect=ctrl-o,ctrl-n,ctrl-u"
     if [ -n "$TMUX" ]; then
         out=$(fzf-tmux -p -- $fzf_opts </dev/tty)
     else
@@ -32,9 +32,9 @@ fzf_file() {
     f=`echo $out | tail -n +2`
     if [ -n "$f" ]; then
         dir=`dirname ${(q-)f}`
-        if   [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
+        if [ -n "$BUFFER" -o "$key" = ctrl-o ]; then LBUFFER+=${(q-)f};
+        elif [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
         elif [ "$key" = ctrl-u ]; then BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
-        elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)f};
         else BUFFER="$EDITOR ${(q-)f}"; zle accept-line; zle reset-prompt;
         fi
     fi
@@ -44,7 +44,7 @@ bindkey ^o fzf_file
 
 fzf_dir() {
     local out key dir
-    local fzf_opts="--expect=ctrl-n,ctrl-u,ctrl-o"
+    local fzf_opts="--expect=ctrl-o,ctrl-n,ctrl-u"
     if [ -n "$TMUX" ]; then
         out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf-tmux -p -- $fzf_opts)
     else
@@ -54,9 +54,9 @@ fzf_dir() {
     key=`echo $out | head -1`
     dir=`echo $out | tail -n +2`
     if [ -n "$dir" ]; then
-        if   [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
+        if [ -n "$BUFFER" -o "$key" = ctrl-o ]; then LBUFFER+=${(q-)dir};
+        elif [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
         elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
-        elif [ "$key" = ctrl-o ]; then LBUFFER+=${(q-)dir};
         else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
         fi
     fi
