@@ -24,10 +24,21 @@ function! s:new_file(lines) abort
     endif
 endfunction
 
+function! s:file_action(lines) abort
+    let l:cmd = input('{' . a:lines[0] . '}: ')
+    if len(l:cmd) > 0
+        let l:out = system(substitute(l:cmd, '{}', a:lines[0], ''))
+        echo substitute(l:out, '\n', '', '')
+    endif
+endfunction
+
 let g:fzf_action = {
-  \ 'ctrl-p': 'split',
-  \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-n': function('s:new_file') }
+    \'ctrl-p': 'split',
+    \'ctrl-v': 'vsplit',
+    \'ctrl-n': function('s:new_file'),
+    \'ctrl-o': function('s:file_action')
+\}
+
 
 " dynamic ripgrep --------------------------------------------------------------
 
@@ -73,4 +84,4 @@ function! s:rgi() abort
     \}))
 endfunction
 
-command RGI let @/ = '' | call s:rgi() | set hlsearch
+command! RGI let @/ = '' | call s:rgi() | set hlsearch
