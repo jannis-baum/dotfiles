@@ -2,19 +2,6 @@
 function v() {
     mkdir -p $(dirname $1) && $EDITOR $1
 }
-## make and change to directory
-function mcd() {
-    test -d "$1" || mkdir "$1" && cd "$1"
-}
-## list newest (date changed) files
-function lsn() {
-	ls -t $2 | head -$1
-}
-## lsn-do NEWEST_N PATH COMMAND
-function lsnp() {
-    ls -t $2 | head -$1 | sed 's,^,'$2'\/,'
-    # | sed 's/$/"/'
-}
 ## generate new password
 function pass-n() {
 	echo | pbcopy

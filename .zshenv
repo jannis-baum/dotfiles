@@ -1,5 +1,3 @@
-# omz
-export ZSH="$HOME/.oh-my-zsh"
 export ZDOTDIR=~/.zsh
 export PATH="$PATH:$HOME/.bin:$HOME/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
 
@@ -14,4 +12,3 @@ export FZF_DEFAULT_OPTS="--height 60% --reverse --no-info --cycle --bind 'tab:do
 export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-

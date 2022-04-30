@@ -19,8 +19,6 @@
 
 ## shell
 
-- get rid of omz and make the few features i actually use myself
-  - only need to check `.oh-my-zsh/lib/*`
 - fzf hotkeys:
   - switch between git-ls and fd
   - toggle bat preview (default disabled)
