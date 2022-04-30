@@ -22,6 +22,8 @@ function! s:check_back_space() abort
 endfunction
 " return for confirmation (e.g. auto import)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" ctrl-space to bring up completion
+inoremap <silent><expr> <c-@> coc#refresh()
 
 " gd / gr - go to definition of word / type under cursor
 nmap <silent> gd <Plug>(coc-definition)
