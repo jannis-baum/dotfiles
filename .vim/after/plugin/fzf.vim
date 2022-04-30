@@ -72,10 +72,10 @@ function! s:rgi() abort
         \'options': [
             \'--delimiter', ':',
             \'--with-nth', '2',
-            \'+m',
+            \'--no-multi',
             \'--bind', 'change:reload:' . s:rg_command . ' {q} | sed "s/^/{q}:/g" || true',
             \'--disabled',
-            \'--preview-window', 'right,70%,wrap',
+            \'--preview-window', 'right,70%,wrap,border-left',
             \'--preview', 'bat --style=numbers --color=always --line-range={3}: {2} 2>/dev/null ' .
                 \'| rg --color always --context 10 {q}',
             \'--expect', 'ctrl-p,ctrl-v'
@@ -85,3 +85,32 @@ function! s:rgi() abort
 endfunction
 
 command! RGI let @/ = '' | call s:rgi() | set hlsearch
+
+" buffers ----------------------------------------------------------------------
+
+function! s:buffers_list()
+    let l:cwd = getcwd() . '/'
+    return getbufinfo({ 'buflisted': 1 })
+        \->map({ _, buf -> buf['bufnr'] . ':' . buf['name']->substitute(l:cwd, '', '') })
+endfunction
+
+function! s:buffers_select(line)
+    let l:bufnr = a:line->substitute(':.*$', '', '')
+    execute 'buffer' l:bufnr
+endfunction
+
+function! s:fzf_buffers() abort
+    call fzf#run(fzf#wrap({
+        \'source': s:buffers_list(),
+        \'options': [
+            \'--delimiter', ':',
+            \'--with-nth', '2',
+            \'--no-multi',
+            \'--preview-window', 'right,70%,border-left',
+            \'--preview', 'bat --style=numbers --color=always {2} 2>/dev/null',
+        \],
+        \'sink': function('s:buffers_select')
+    \}))
+endfunction
+
+command! BUF call s:fzf_buffers()
