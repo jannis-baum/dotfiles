@@ -1,10 +1,5 @@
 # todo
 
-## shell
-
-- toggle bat preview window in fzf (default disabled)
-- fix regex in rgi
-
 ## scripts
 
 ### sync-dotfiles
