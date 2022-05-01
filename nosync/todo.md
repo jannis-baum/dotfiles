@@ -1,24 +1,8 @@
 # todo
 
-## kitty
-
-- set up tmux replacement
-  - popover & fzf-tmux alternative? -> [not possible right
-    now](https://github.com/kovidgoyal/kitty/discussions/4018)
-- proper color setup:
-  - define color env vars in kitty
-  - use them for kitty, vim, bat, etc
-
-## vim
-
-- plugin to comment code, e.g. [this
-  one](https://github.com/tomtom/tcomment_vim)
-- make vim save state per directory instead of globally
-
 ## shell
 
-- fzf hotkeys:
-  - toggle bat preview (default disabled)
+- toggle bat preview window in fzf (default disabled)
 - fix regex in rgi
 
 ## scripts
@@ -36,6 +20,17 @@
 - (gives info on how much space icloud files are using and how much i have left
   in plan?)
 - (give option to zip)
+
+## vim
+
+- plugin to comment code, e.g. [this
+  one](https://github.com/tomtom/tcomment_vim)?
+- make vim save state per directory instead of globally?
+
+## kitty
+
+- popover & fzf-tmux alternative? -> [not possible right
+  now](https://github.com/kovidgoyal/kitty/discussions/4018)
 
 ## other
 
