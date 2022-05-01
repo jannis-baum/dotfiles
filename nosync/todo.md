@@ -18,7 +18,6 @@
 ## shell
 
 - fzf hotkeys:
-  - switch between git-ls and fd
   - toggle bat preview (default disabled)
 - fix regex in rgi
 
