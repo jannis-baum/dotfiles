@@ -36,3 +36,4 @@
 
 - [yabai window manager](https://github.com/koekeishiya/yabai)
 - [hotkey daemon](https://github.com/koekeishiya/skhd)
+- brew.sh for initial installs
