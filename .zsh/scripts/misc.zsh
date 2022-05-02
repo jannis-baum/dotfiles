@@ -1,5 +1,4 @@
 # generic aliases
-alias sdf="sync-dotfiles"
 alias cl="clear"
 alias kl="cookie-cleaner && quit-apps"
 alias ej="eject /Volumes/LaCie"

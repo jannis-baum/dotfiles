@@ -4,7 +4,7 @@ if !exists('g:omit_coc')
 endif
 
 " MARKDOWN ---
-packadd markdown-preview.nvim
+packadd markdown-preview
 packadd pandoc-syntax
 
 " ULTISNIPS ---

@@ -2,10 +2,9 @@
 
 ## scripts
 
-### sync-dotfiles
+### sdf
 
-- find a way to have vim packs in dotfiles repo without too many copies
-- ignore file & additional commands for syncs (e.g. `goku` for `karabiner.edn`)
+- additional commands for syncs (e.g. `goku` for `karabiner.edn`)
 
 ### icloud-backup
 
