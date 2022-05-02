@@ -1,2 +1,8 @@
 dotfiles_dir=$HOME/_dotfiles
+
 ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*')
+
+# refresh zsh through kitty hehe
+dotfiles_actions=( \
+    ['karabiner\.edn$']='goku' \
+)

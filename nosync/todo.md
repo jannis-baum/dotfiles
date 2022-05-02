@@ -10,7 +10,6 @@
 
 ### sdf
 
-- additional commands for syncs (e.g. `goku` for `karabiner.edn`)
 - option to delete files that are only in `$HOME`
 - option to `y` everything
 - option to update `submodules`

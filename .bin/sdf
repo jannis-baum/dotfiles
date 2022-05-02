@@ -1,20 +1,25 @@
 #!/bin/zsh
 
+# load config, go to dotfiles_dir and setup ignore
+typeset -A dotfiles_actions
+[[ -n "$SDFRC_PATH" ]] && source "$SDFRC_PATH" || source ~/.sdfrc
+dotfiles_dir=$(realpath $dotfiles_dir)
+cd $dotfiles_dir
+ignore_patterns+=('.git/*' '.gitignore' '.gitmodules')
+
 # prompt to install of $1 to $2
 install_dotfile() {
     read -q "answer?install $1? (y/*) "
     if [[ $answer = 'y' ]]; then
         mkdir -p "$(dirname $2)"
         cp -r "$1" "$2"
+        printf '\n'
+        for rgx cmd in ${(kv)dotfiles_actions}; do
+            [[ "$1" =~ "$rgx" ]] && echo "  -> $cmd" && ${(z)cmd}
+        done
+    else printf '\n'
     fi
-    printf "\n"
 }
-
-# load config, go to dotfiles_dir and setup ignore
-[[ -n "$SDFRC_PATH" ]] && source "$SDFRC_PATH" || source ~/.sdfrc
-dotfiles_dir=$(realpath $dotfiles_dir)
-cd $dotfiles_dir
-ignore_patterns+=('.git/*' '.gitignore' '.gitmodules')
 
 # find submodules
 if [[ -f '.gitmodules' ]]; then
@@ -31,7 +36,7 @@ done
 
 # find dotfiles
 fd_opts=('--strip-cwd-prefix' '--type' 'f' '--type' 'l' '--hidden' '--no-ignore')
-fd_opts+=("${(z)$(printf "%s\n" ${ignore_patterns} | sed 's/^/--exclude /' | tr '\n' ' ')}")
+fd_opts+=("${(z)$(printf '%s\n' ${ignore_patterns} | sed 's/^/--exclude /' | tr '\n' ' ')}")
 dotfiles=("${(f)$(fd $fd_opts)}")
 
 # install files if different from file in $HOME
