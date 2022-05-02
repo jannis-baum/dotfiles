@@ -1,10 +1,19 @@
 # todo
 
+## documentation
+
+- add some notes on
+  - fzf in zsh/vim
+  - sdf
+
 ## scripts
 
 ### sdf
 
 - additional commands for syncs (e.g. `goku` for `karabiner.edn`)
+- option to delete files that are only in `$HOME`
+- option to `y` everything
+- option to update `submodules`
 
 ### icloud-backup
 
