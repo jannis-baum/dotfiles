@@ -11,7 +11,6 @@
 ### sdf
 
 - option to delete files that are only in `$HOME`
-- option to `y` everything
 - option to update `submodules`
 
 ### icloud-backup

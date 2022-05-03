@@ -6,10 +6,13 @@ sdf() {
     cd $dotfiles_dir
     ignore_patterns+=('.git/*' '.gitignore' '.gitmodules')
 
-    # prompt to install of $1 to $2
+    # make it possible for read to get answer from stdin (e.g. `yes`)
+    [[ -t 0 ]] && readq_flags=('-q') || readq_flags=('-q' '-u' '0' '-E')
+
+    # prompt to install of $1 to $2, i.a. run custom command
     install_dotfile() {
-        read -q "answer?install $1? (y/*) "
-        if [[ $answer = 'y' ]]; then
+        printf "install $1? (y/*) "
+        if read $readq_flags; then
             mkdir -p "$(dirname $2)"
             cp -r "$1" "$2"
             printf '\n'
