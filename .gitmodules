@@ -4,9 +4,9 @@
 [submodule ".vim/pack/plugins/opt/ultisnips"]
 	path = .vim/pack/plugins/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule ".vim/pack/plugins/opt/markdown-preview"]
-	path = .vim/pack/plugins/opt/markdown-preview
-	url = https://github.com/iamcco/markdown-preview.nvim.git
+[submodule ".vim/pack/plugins/opt/markdown-preview.nvim"]
+	path = .vim/pack/plugins/opt/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim
 [submodule ".vim/pack/plugins/opt/coc"]
 	path = .vim/pack/plugins/opt/coc
 	url = https://github.com/neoclide/coc.nvim.git
