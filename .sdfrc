@@ -5,4 +5,6 @@ ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*')
 # refresh zsh through kitty hehe
 dotfiles_actions=( \
     ['karabiner\.edn$']='goku' \
+    ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
+    ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
 )
