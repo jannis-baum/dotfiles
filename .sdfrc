@@ -2,7 +2,7 @@ dotfiles_dir=$HOME/_dotfiles
 
 ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*')
 
-# refresh zsh through kitty hehe
+# TODO: refresh kitty through remote control
 dotfiles_actions=( \
     ['karabiner\.edn$']='goku' \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
