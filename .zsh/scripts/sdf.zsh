@@ -4,6 +4,15 @@ sdf() {
     [[ -n "$SDFRC_PATH" ]] && source "$SDFRC_PATH" || source ~/.sdfrc
     dotfiles_dir=$(realpath $dotfiles_dir)
     cd $dotfiles_dir
+
+    if [[ "$1" == '-u' || "$1" == '--upgrade' ]]; then
+        echo "\e[1mupgrading repo\e[0m"
+        git pull
+        echo "\e[1mupgrading submodules\e[0m"
+        git submodule foreach git pull
+        return
+    fi
+
     ignore_patterns+=('.git/*' '.gitignore' '.gitmodules')
 
     # make it possible for read to get answer from stdin (e.g. `yes`)
@@ -17,7 +26,7 @@ sdf() {
             cp -r "$1" "$2"
             printf '\n'
             for rgx cmd in ${(kv)dotfiles_actions}; do
-                [[ "$1" =~ "$rgx" ]] && echo "  -> $cmd" && ${(z)cmd}
+                [[ "$1" =~ "$rgx" ]] && echo "  \e[2m\e[3m-> $cmd\e[0m" && ${(z)cmd}
             done
         else printf '\n'
         fi

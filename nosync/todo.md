@@ -8,11 +8,6 @@
 
 ## scripts
 
-### sdf
-
-- option to delete files that are only in `$HOME`
-- option to update `submodules`
-
 ### icloud-backup
 
 - copies given file(s) from `~/...` to parallel directory `~/Library/Mobile\
@@ -32,6 +27,10 @@
 
 - popover & fzf-tmux alternative? -> [not possible right
   now](https://github.com/kovidgoyal/kitty/discussions/4018)
+
+### sdf
+
+- option to delete files that are only in `$HOME`
 
 ## other
 
