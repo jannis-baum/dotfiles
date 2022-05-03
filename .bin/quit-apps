@@ -2,7 +2,7 @@
 
 import subprocess
 
-whitelist = ['Finder', 'iTerm2', 'Mail']
+whitelist = ['Finder', 'Mail']
 
 def running_apps():
     result = subprocess.run(['osascript', '-e',
@@ -18,5 +18,4 @@ def quit_apps(names):
     '''], capture_output=True)
 
 if __name__ == '__main__':
-    quit_apps(app for app in running_apps() if app not in whitelist)
-
+    quit_apps([app for app in running_apps() if app not in whitelist])
