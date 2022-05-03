@@ -9,7 +9,6 @@
 
 [alias]
     tree = log --oneline --reverse
-    d = difftool
 
 [pull]
 	rebase = true
@@ -19,7 +18,7 @@
 
 [diff]
 	tool = vimdiff
+
 [difftool]
 	prompt = false
     trustExitCode = true
-
