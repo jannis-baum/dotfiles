@@ -23,6 +23,7 @@ sdf() {
     install_dotfile() {
         printf "install $1? (y/*) "
         if read $readq_flags; then
+            [[ -d $2 ]] && rm -rf $2 # directories aren't overwritten -> delete first
             mkdir -p "$(dirname $2)"
             cp -r "$1" "$2"
             printf '\n'
