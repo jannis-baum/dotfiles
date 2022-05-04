@@ -21,7 +21,9 @@ function gc() {
 
 function gco() {
     local branch
-    branch=$(git branch -a | sed -e 's/^..//' -e '/->/d' -e 's,^remotes/origin/,,' | sort -u | fzf)
+    branch=$(git branch -a \
+        | sed -e 's/^..//' -e '/->/d' -e 's,^remotes/origin/,,' \
+        | sort -u | fzf)
     [[ -n $branch ]] && (git checkout $branch 2>/dev/null || git checkout -b $branch)
 }
 
@@ -32,7 +34,7 @@ function gl() {
     key=$(echo $out | head -1)
     hash=$(echo $out | tail -n +2 | sed 's/ .*$//')
     if [ -n "$hash" ]; then
-        if [ "$key" = ctrl-r ]; then git rebase -i $hash^;
+        if [[ "$key" == ctrl-r ]]; then git rebase -i $hash^;
         else printf $hash | pbcopy;
         fi
     fi

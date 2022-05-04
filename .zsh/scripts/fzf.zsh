@@ -22,7 +22,7 @@ _fzf_compgen_dir() {
 fzf_file() {
     local out key f dir
     local fzf_opts="--expect=ctrl-o,ctrl-n,ctrl-u"
-    if [ -n "$TMUX" ]; then
+    if [[ -n "$TMUX" ]]; then
         out=$(fzf-tmux -p -- $fzf_opts </dev/tty)
     else
         out=$(fzf $fzf_opts </dev/tty)
@@ -30,11 +30,11 @@ fzf_file() {
     fi
     key=`echo $out | head -1`
     f=`echo $out | tail -n +2`
-    if [ -n "$f" ]; then
+    if [[ -n "$f" ]]; then
         dir=`dirname ${(q-)f}`
-        if [ -n "$BUFFER" -o "$key" = ctrl-o ]; then LBUFFER+=${(q-)f};
-        elif [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
-        elif [ "$key" = ctrl-u ]; then BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
+        if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)f};
+        elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}/";
+        elif [[ "$key" == ctrl-u ]]; then BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
         else BUFFER="$EDITOR ${(q-)f}"; zle accept-line; zle reset-prompt;
         fi
     fi
@@ -45,7 +45,7 @@ bindkey ^o fzf_file
 fzf_dir() {
     local out key dir
     local fzf_opts="--expect=ctrl-o,ctrl-n,ctrl-u"
-    if [ -n "$TMUX" ]; then
+    if [[ -n "$TMUX" ]]; then
         out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf-tmux -p -- $fzf_opts)
     else
         out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf $fzf_opts)
@@ -53,10 +53,10 @@ fzf_dir() {
     fi
     key=`echo $out | head -1`
     dir=`echo $out | tail -n +2`
-    if [ -n "$dir" ]; then
-        if [ -n "$BUFFER" -o "$key" = ctrl-o ]; then LBUFFER+=${(q-)dir};
-        elif [ "$key" = ctrl-n ]; then LBUFFER="v ${(q-)dir}/";
-        elif [ "$key" = ctrl-u ]; then LBUFFER="mkdir -p ${(q-)dir}/";
+    if [[ -n "$dir" ]]; then
+        if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)dir};
+        elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}/";
+        elif [[ "$key" == ctrl-u ]]; then LBUFFER="mkdir -p ${(q-)dir}/";
         else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
         fi
     fi
