@@ -42,10 +42,11 @@ function gl() {
 
 function gd() {
     local file
-    file=$(git diff --stat=120 --color=always $1 \
-        | sed '$d' \
+    file=$(paste -d '\0' \
+        <(git diff --name-status $1 | sed -r 's/^([^[:blank:]]).*$/\1/') \
+        <(git diff --stat=118 --color=always $1 | sed '$d') \
         | fzf --ansi --exit-0 \
-        | sed -r 's/^ *([^[:blank:]]*) *\|.*$/\1/')
+        | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
     [[ -n "$file" ]] && git difftool $1 "$file"
 }
 function _MINE_git_branch_names() {
