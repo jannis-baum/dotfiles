@@ -61,15 +61,3 @@ function _MINE_git_branch_names() {
     compadd "${(@)${(f)$(git branch -a)}#??}"
 }
 compdef _MINE_git_branch_names gd
-
-# shows number of line changes for each commit, almost never useful
-# but want to keep it somewhere
-#function glc() {
-#    git log --reverse --oneline --decorate --shortstat --color=always \
-#    | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n / /g' \
-#    | sed -r -e 's/([0-9]+) files? changed/\x1b[34m\1: /g' \
-#        -e 's/, ([0-9]+) insertions?\(\+\)/\x1b[32m+\1 /g' \
-#        -e 's/, ([0-9]+) deletions?\(-\)/\x1b[31m-\1/g' \
-#        -e 's/$/\x1b[0m/' \
-#    | vim-ansi-pager
-#}
