@@ -30,7 +30,7 @@ function gco() {
 function _git_pretty_diff() {
     paste -d '\0' \
         <(git diff --name-status $1 $2 | sed -r 's/^([^[:blank:]]).*$/\1/') \
-        <(git diff --stat=118 --color=always $1 $2)
+        <(git diff --stat=120 --color=always $1 $2)
 }
 
 function gl() {
@@ -39,7 +39,7 @@ function gl() {
         | fzf --delimiter=' ' --with-nth='2..' --no-sort --exact --ansi --expect=ctrl-r,ctrl-o \
             --preview 'zsh -c "source $ZDOTDIR/scripts/git.zsh 2> /dev/null;
                 _git_pretty_diff $(git log --pretty=%P -n 1 {1}) {1} | less -R"' \
-            --preview-window='50%,nowrap,nohidden')
+            --preview-window='60%,nowrap,nohidden')
     key=$(echo $out | head -1)
     hash=$(echo $out | tail -n +2 | sed 's/ .*$//')
     if [ -n "$hash" ]; then
@@ -53,7 +53,9 @@ function gl() {
 function gd() {
     local file
     file=$(_git_pretty_diff $1 $2 | sed '$d' \
-        | fzf --ansi --exit-0 --preview=''\
+        | fzf --ansi --exit-0 --delimiter=' ' \
+            --preview="git diff --color=always $1 $2 -- $(git rev-parse --show-toplevel)/{2} | tail -n +5" \
+            --preview-window='60%,nowrap,nohidden' \
         | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
     [[ -n "$file" ]] && git difftool $1 $2 -- "$(git rev-parse --show-toplevel)/$file" && gd $1 $2
 }
