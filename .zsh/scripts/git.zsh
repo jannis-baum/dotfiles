@@ -55,7 +55,7 @@ function gd() {
     file=$(_git_pretty_diff $1 $2 | sed '$d' \
         | fzf --ansi --exit-0 --preview=''\
         | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
-    [[ -n "$file" ]] && git difftool $1 $2 "$(git rev-parse --show-toplevel)/$file" && gd $1 $2
+    [[ -n "$file" ]] && git difftool $1 $2 -- "$(git rev-parse --show-toplevel)/$file" && gd $1 $2
 }
 function _MINE_git_branch_names() {
     compadd "${(@)${(f)$(git branch -a)}#??}"
