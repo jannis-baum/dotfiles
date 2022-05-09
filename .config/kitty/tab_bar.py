@@ -14,7 +14,9 @@ def draw_git_info(draw_data: DrawData, screen: Screen):
     # TODO: do this with python instead of lazy bash
     try:
         git_branch = subprocess.check_output(['bash', '-c', f'git -C {cwd} symbolic-ref --short HEAD || git -C {cwd} rev-parse --short HEAD'])[:-1].decode('utf-8')
-        git_status = subprocess.check_output(['bash', '-c', f'[[ `git -C {cwd} status -s` == "" ]] && printf "  " || printf " ✻"']).decode('utf-8')
+        git_status = subprocess.check_output(['bash', '-c', f'[[ `git -C {cwd} status -s` == "" ]] && printf "  " || printf " ✻"'], timeout=0.07).decode('utf-8')
+    except subprocess.TimeoutExpired:
+        git_status = ' ×'
     except: return
     spaces = screen.columns - screen.cursor.x - len(git_status) - len(git_branch)
     screen.draw(' ' * spaces)
@@ -43,8 +45,8 @@ def draw_tab(
     screen.cursor.bold = screen.cursor.italic = False
     screen.cursor.fg = 0
     if is_last:
-         draw_git_info(draw_data, screen)
-         pass
+        draw_git_info(draw_data, screen)
+        pass
     if not is_last:
         screen.cursor.bg = as_rgb(color_as_int(draw_data.inactive_bg))
         screen.draw(draw_data.sep)
