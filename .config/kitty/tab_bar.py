@@ -1,22 +1,95 @@
+# pyright: reportMissingImports=false
+
 from kitty.fast_data_types import Screen, get_boss
 from kitty.tab_bar import DrawData, ExtraData, TabBarData, as_rgb, draw_title
 from kitty.utils import color_as_int
 
-import subprocess
+import subprocess, atexit, os
+
+# copied & modified from
+# https://github.com/kovidgoyal/watcher/blob/master/watcher/gitstatusd.py
+class GitStatusD:
+    def __init__(self):
+        self.process = subprocess.Popen([
+            '/usr/local/opt/gitstatus/usrbin/gitstatusd-darwin-x86_64',
+            '--num-threads=16' # should be 2 * number of virtual cpu
+        ], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        atexit.register(self.terminate)
+        self.request_id = 0
+
+    def terminate(self):
+        if self.process.returncode is None:
+            self.process.terminate()
+            if self.process.wait(0.1) is None:
+                self.process.kill()
+                self.process.wait()
+    __del__ = terminate
+
+    def get(self, path):
+        self.request_id += 1
+        rq = f'{self.request_id}\x1f{path}\x1e'
+        self.process.stdin.write(rq.encode('utf-8'))
+        self.process.stdin.flush()
+        resp = b''
+        while b'\x1e' not in resp:
+            resp += os.read(self.process.stdout.fileno(), 8192)
+        fields = resp.rstrip(b'\x1e').decode('utf-8', 'replace').split('\x1f')
+        if fields[0] != str(self.request_id):
+            raise ValueError(f'Got invalid response id: {fields[0]}')
+        if fields[1] == '0':
+            raise NotADirectoryError(f'{path} is not a git repository')
+        return {
+            'workdir': fields[2],
+            'HEAD': fields[3],
+            'branch_name': fields[4],
+            'upstream_branch_name': fields[5],
+            'remote_branch_name': fields[6],
+            'remote_url': fields[7],
+            'repo_state': fields[8],
+            'num_files_in_index': int(fields[9] or 0),
+            'num_staged_changes': int(fields[10] or 0),
+            'num_unstaged_changes': int(fields[11] or 0),
+            'num_conflicted_changes': int(fields[12] or 0),
+            'num_untracked_files': int(fields[13] or 0),
+            'num_commits_ahead_of_upstream': int(fields[14] or 0),
+            'num_commits_behind_upstream': int(fields[15] or 0),
+            'num_stashes': int(fields[16] or 0),
+            'last_tag_pointing_to_HEAD': fields[17],
+            'num_unstaged_deleted_files': int(fields[18] or 0),
+            'num_staged_new_files': int(fields[19] or 0),
+            'num_staged_deleted_files': int(fields[20] or 0),
+            'push_remote_name': fields[21],
+            'push_remote_url': fields[22],
+            'num_commits_ahead_of_push': int(fields[23] or 0),
+            'num_commits_behind_of_push': int(fields[24] or 0),
+            'num_files_with_skip_worktree_set': int(fields[25] or 0),
+            'num_files_with_assume_unchanged_set': int(fields[26] or 0),
+            'encoding_of_head': fields[27] or 'utf-8',
+            'head_first_para': fields[28],
+        }
 
 def draw_git_info(draw_data: DrawData, screen: Screen):
-    tm = get_boss().active_tab_manager
+    boss = get_boss()
+    # forgive the horrible hack
+    if not hasattr(boss, 'gitstatusd'):
+        boss.gitstatusd = GitStatusD()
+
+    tm = boss.active_tab_manager
     if tm is None: return
     w = tm.active_window
     if w is None: return
     cwd = w.cwd_of_child
 
-    # TODO: do this with python instead of lazy bash
     try:
-        git_branch = subprocess.check_output(['bash', '-c', f'git -C {cwd} symbolic-ref --short HEAD || git -C {cwd} rev-parse --short HEAD'])[:-1].decode('utf-8')
-        git_status = subprocess.check_output(['bash', '-c', f'[[ `git -C {cwd} status -s` == "" ]] && printf "  " || printf " ✻"'], timeout=0.07).decode('utf-8')
-    except subprocess.TimeoutExpired:
-        git_status = ' ×'
+        git_info = boss.gitstatusd.get(cwd)
+        git_branch = git_info['branch_name'] or git_info['HEAD'][:8]
+        dirty = git_info['num_staged_deleted_files'] + \
+            git_info['num_staged_new_files'] + \
+            git_info['num_staged_changes'] + \
+            git_info['num_unstaged_deleted_files'] + \
+            git_info['num_unstaged_changes'] + \
+            git_info['num_conflicted_changes']
+        git_status = f' ✻' if dirty > 0 else '  '
     except: return
     spaces = screen.columns - screen.cursor.x - len(git_status) - len(git_branch)
     screen.draw(' ' * spaces)
