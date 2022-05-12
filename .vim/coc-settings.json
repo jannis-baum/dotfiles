@@ -8,6 +8,7 @@
     "python.pythonPath": "python3",
 
     "eslint.autoFixOnSave": true,
+    "typescript.preferences.importModuleSpecifier": "relative",
 
     // style
     "suggest.floatConfig": {
