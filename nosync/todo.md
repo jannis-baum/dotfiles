@@ -1,5 +1,9 @@
 # todo
 
+## vim
+
+- fix coc-ultisnips conflict
+
 ## documentation
 
 - add some notes on
