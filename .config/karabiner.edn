@@ -17,76 +17,27 @@
                  :vscode ["^com\\.microsoft\\.VSCode$"]
                  :safari ["^com\\.apple\\.Safari$"]}
   :main [
-    ; caps layer
-    {:des "caps layer",
+    {:des "space > shift"
      :rules [
-                 [:left_shift :left_shift nil {:alone [["layer_pri" 1]] :delayed {:invoked ["layer_pri" 0]} :params {:delay 500}}]
-                 [:right_shift [["cap_held" 1] ["layer_pri" 1]] nil {:afterup [[:delay-set-var "layer_pri" 0] ["cap_held" 0]]}]
-                 ;         todo: only deactivate when not held
-                 [:a [:!Sa ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:b [:!Sb ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:c [:!Sc ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:d [:!Sd ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:e [:!Se ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:f [:!Sf ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:g [:!Sg ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:h [:!Sh ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:i [:!Si ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:j [:!Sj ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:k [:!Sk ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:l [:!Sl ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:m [:!Sm ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:n [:!Sn ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:o [:!So ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:p [:!Sp ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:q [:!Sq ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:r [:!Sr ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:s [:!Ss ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:t [:!St ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:u [:!Su ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:v [:!Sv ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:w [:!Sw ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:x [:!Sx ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:y [:!Sy ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:z [:!Sz ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:0 [:!S0 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:1 [:!S1 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:2 [:!S2 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:3 [:!S3 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:4 [:!S4 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:5 [:!S5 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:6 [:!S6 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:7 [:!S7 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:8 [:!S8 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:9 [:!S9 ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:grave_accent_and_tilde [:!Sgrave_accent_and_tilde ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:hyphen [:!Shyphen ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:equal_sign [:!Sequal_sign ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:open_bracket [:!Sopen_bracket ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:close_bracket [:!Sclose_bracket ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:backslash [:!Sbackslash ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:semicolon [:!Ssemicolon ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:quote [:!Squote ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:comma [:!Scomma ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:period [:!Speriod ["layer_pri" 0]] ["layer_pri" 1]]
-                 [:slash [:!Sslash ["layer_pri" 0]] ["layer_pri" 1]]
+                 [:spacebar :left_shift nil {:alone [:spacebar]}]
+                 [:left_shift :vk_none]
+                 [:right_shift :vk_none]
             ]}
     {:des "df > synapse panel"
      :rules [
                  [[:d :f] :f10]
             ]}
-    {:des "caps > escape / control s (iterm), held control+option / control (iterm)",
+    {:des "caps > escape / control s (native-vim), held control+option / control (native-vim)",
      :rules [
                  [:caps_lock :!Oleft_control ["karabiner_vim" 1] {:alone [:escape]}]
                  [:caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]
                  [:!Ccaps_lock :!Cescape]
                  [[:j :k] :escape ["karabiner_vim" 0]]
             ]}
-    {:des "delete > iterm overlay, [] > delete, caps + [] > []",
+    {:des "delete > kitty overlay, [] > delete, caps + [] > []",
      :rules [
                  [:delete_or_backspace "open -a kitty" [:!kitty]]
                  [:delete_or_backspace "~/.bin/hide-kitty" [:kitty]]
-                 ;[:delete_or_backspace :f9]
                  [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
                  [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
                  [:!TOopen_bracket :open_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
