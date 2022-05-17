@@ -15,7 +15,7 @@ export FZF_DEFAULT_OPTS="
     --prompt='» ' --pointer='→'
     --color 'fg+:255:underline,hl:189,hl+:183,bg+:-1,marker:183,pointer:183,spinner:183,prompt:189:regular,query:189:regular:italic'
     --bind 'tab:down'
-    --bind \"ctrl-h:reload(fd --type f --type l --no-ignore $FD_OPTIONS)\"
-    --bind 'ctrl-l:toggle-preview'"
+    --bind \"left:reload(fd --type f --type l --no-ignore $FD_OPTIONS)\"
+    --bind 'right:toggle-preview'"
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"

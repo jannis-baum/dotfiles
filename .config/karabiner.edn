@@ -17,11 +17,31 @@
                  :vscode ["^com\\.microsoft\\.VSCode$"]
                  :safari ["^com\\.apple\\.Safari$"]}
   :main [
-    {:des "space > shift"
+    {:des "lshift > kitty"
+     :rules [[:condis ["layer_prim" 0] ["layer_prim_1_held" 0]]
+                 [:left_shift "open -a kitty" [:!kitty]]
+                 [:left_shift "~/.bin/hide-kitty" [:kitty]]
+            ]}
+    {:des "primary layer: numchar",
+     :rules [
+                 [:right_command ["layer_prim_1_held" 1] nil {:afterup [["layer_prim_1_held" 0]] :alone [:spacebar]}]
+                 [:right_shift [["layer_prim_1_held" 1] ["layer_prim" 1]] nil {:afterup [["layer_prim_1_held" 0] [:delay-set-var "layer_prim" 0]]}]
+                 [:condis ["layer_prim_1_held" 1]]
+                     [:tab :tab] [:q :7] [:w :8] [:e :9] [:r :!S1] [:t :!S2] [:y :!S3] [:u :!S8] [:i :open_bracket] [:o :close_bracket] [:p :!Sequal_sign] [:open_bracket :delete_or_backspace]
+                     [:a :4] [:s :5] [:d :6] [:f :!Sbackslash] [:g :backslash] [:h :!S5] [:j :hyphen] [:k :!S9] [:l :!S0] [:semicolon :equal_sign] [:quote :grave_accent_and_tilde]
+                     [:left_shift :0] [:z :1] [:x :2] [:c :3] [:v :!S6] [:b :!S4] [:n :!S7] [:m :!Shyphen] [:comma :!Sopen_bracket] [:period :!Sclose_bracket] [:slash :!Sgrave_accent_and_tilde] [:return_or_enter :return_or_enter]
+                 [:condis ["layer_prim" 1]]
+                     [:tab [:tab ["layer_prim" 0]]] [:q [:7 ["layer_prim" 0]]] [:w [:8 ["layer_prim" 0]]] [:e [:9 ["layer_prim" 0]]] [:r [:!S1 ["layer_prim" 0]]] [:t [:!S2 ["layer_prim" 0]]] [:y [:!S3 ["layer_prim" 0]]] [:u [:!S8 ["layer_prim" 0]]] [:i [:open_bracket ["layer_prim" 0]]] [:o [:close_bracket ["layer_prim" 0]]] [:p [:!Sequal_sign ["layer_prim" 0]]] [:open_bracket [:delete_or_backspace ["layer_prim" 0]]]
+                     [:a [:4 ["layer_prim" 0]]] [:s [:5 ["layer_prim" 0]]] [:d [:6 ["layer_prim" 0]]] [:f [:!Sbackslash ["layer_prim" 0]]] [:g [:backslash ["layer_prim" 0]]] [:h [:!S5 ["layer_prim" 0]]] [:j [:hyphen ["layer_prim" 0]]] [:k [:!S9 ["layer_prim" 0]]] [:l [:!S0 ["layer_prim" 0]]] [:semicolon [:equal_sign ["layer_prim" 0]]] [:quote [:grave_accent_and_tilde ["layer_prim" 0]]]
+                     [:left_shift [:0 ["layer_prim" 0]]][:z [:1 ["layer_prim" 0]]] [:x [:2 ["layer_prim" 0]]] [:c [:3 ["layer_prim" 0]]] [:v [:!S6 ["layer_prim" 0]]] [:b [:!S4 ["layer_prim" 0]]] [:n [:!S7 ["layer_prim" 0]]] [:m [:!Shyphen ["layer_prim" 0]]] [:comma [:!Sopen_bracket ["layer_prim" 0]]] [:period [:!Sclose_bracket ["layer_prim" 0]]] [:slash [:!Sgrave_accent_and_tilde ["layer_prim" 0]]] [:return_or_enter [:return_or_enter ["layer_prim" 0]]]]}
+    {:des "space > space & shift, rcmd > space & numchar layer"
      :rules [
                  [:spacebar :left_shift nil {:alone [:spacebar]}]
-                 [:left_shift :vk_none]
-                 [:right_shift :vk_none]
+            ]}
+    {:des "[ > delete"
+     :rules [
+                 [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
+                 [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
             ]}
     {:des "df > synapse panel"
      :rules [
@@ -34,26 +54,22 @@
                  [:!Ccaps_lock :!Cescape]
                  [[:j :k] :escape ["karabiner_vim" 0]]
             ]}
-    {:des "delete > kitty overlay, [] > delete, caps + [] > []",
-     :rules [
-                 [:delete_or_backspace "open -a kitty" [:!kitty]]
-                 [:delete_or_backspace "~/.bin/hide-kitty" [:kitty]]
-                 [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
-                 [:!TOopen_bracket :open_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:!Topen_bracket :open_bracket ["karabiner_vim" 0]]
-                 [:close_bracket :!Fdelete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:!TOclose_bracket :close_bracket [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:!Tclose_bracket :close_bracket ["karabiner_vim" 0]]
+    {:des "caps + ui > tab switching",
+     :rules [[:condis ["karabiner_vim" 1]]
+                 [:!TOu [:!TStab]]
+                 [:!TOi [:!Ttab]]
             ]}
-    {:des "shift+shift > caps",
-     :rules [
-                 [{:sim [:left_shift :right_shift] :modi [:any]} :caps_lock]
-            ]}
-    {:des "escape > desktop, cmd+escape > mission control",
-     :rules [
-                 [:escape :!FTf11]
-                 [:!Cescape :!FTf10]
+    {:des "caps + hjkl > emergency arrow keys",
+     :rules [[:condis ["karabiner_vim" 1] :!safari]
+                 [:!TOh [:left_arrow]]
+                 [:!TOj [:down_arrow]]
+                 [:!TOk [:up_arrow]]
+                 [:!TOl [:right_arrow]]
+             [:condis ["karabiner_vim" 0]]
+                 [:!Th [:left_arrow]]
+                 [:!Tj [:down_arrow]]
+                 [:!Tk [:up_arrow]]
+                 [:!Tl [:right_arrow]]
             ]}
     ; vim
     ; normal: 0, insert: 1, visual: 2
@@ -186,25 +202,6 @@
                  [:!Sn :!SCg]
                  [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]
             ]}
-    ; vim ext
-    {:des "VIM ext normal-mode: 1-6 > tab switching",
-     :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
-                 [:1 :!C1]
-                 [:2 :!C2]
-                 [:3 :!C3]
-                 [:4 :!C4]
-                 [:5 :!C5]
-                 [:6 :!C6]
-            ]}
-    {:des "VIM ext normal-mode: [] > navigate tabs",
-     :rules [[:condis ["karabiner_vim" 1]]
-                 [:open_bracket [:!TStab] ["vim_mode" 0]]
-                 [:close_bracket [:!Ttab] ["vim_mode" 0]]
-            ]}
-    {:des "VIM ext normal-mode: t > new tab",
-     :rules [[:condis ["karabiner_vim" 1] :!safari ["vim_mode" 0]]
-                 [:t :!Ct]
-            ]}
     ; path typing helpers
     {:des "path typing helpers",
      :rules [
@@ -213,7 +210,10 @@
             ]}
     ; safari
     {:des "safari VIM normal-mode: . > cmd+l + insert-mode, t > cmd+t + insert-mode",
-     :rules [[:condis :safari ["vim_mode" 0]]
+     :rules [[:condis :safari]
+                 [:!TOh :!Copen_bracket]
+                 [:!TOl :!Cclose_bracket]
+             [:condis :safari ["vim_mode" 0]]
                  [:period [:!Cl ["vim_mode" 1]]]
                  [:t [:!Ct ["vim_mode" 1]]]
             ]}

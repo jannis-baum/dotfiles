@@ -3,8 +3,9 @@
 map <space> <leader>
 " fix vim randomly starting in R mode
 nnoremap <esc>^[ <esc>^[
-" close all with ZZ
-nnoremap <S-z><S-z> :wqa<CR>
+" close all with ZZ, one with ZX
+nnoremap <S-z><S-z> :xa<CR>
+nnoremap <S-z><S-x> :x<CR>
 " remove search highlight
 nnoremap <Esc> :noh<CR>
 
@@ -19,10 +20,10 @@ vnoremap gj j
 nnoremap gk k
 vnoremap gk k
 " splits
-nnoremap <C-j> <C-w><C-j>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
+nnoremap <Down> <C-w><C-j>
+nnoremap <Up> <C-w><C-k>
+nnoremap <Right> <C-w><C-l>
+nnoremap <Left> <C-w><C-h>
 
 " TEXT EDITING -----------------------------------------------------------------
 " x & s delete without copy
