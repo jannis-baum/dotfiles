@@ -10,11 +10,12 @@ endif
 
 function! s:new_file(lines) abort
     let l:dirname = fnamemodify(a:lines[0], ':h') . '/'
-    let l:file = input('new file: ' . l:dirname)
+    let l:inp = input('new file: ' . l:dirname)
+    let l:file = substitute(l:inp, ' .*$', '', '')
     if len(l:file) > 0
-        if l:file =~ ' s\(p\(lit\)\?\)\?$'
+        if l:inp =~ ' s\(p\(lit\)\?\)\?$'
             let l:cmd = 'split'
-        elseif l:file =~ ' v\(ert\(ical\)\?\)\?\( \?s\(p\(lit\)\?\)\?\)\?$'
+        elseif l:inp =~ ' v\(ert\(ical\)\?\)\?\( \?s\(p\(lit\)\?\)\?\)\?$'
             let l:cmd = 'vsplit'
         else
             let l:cmd = 'edit'
