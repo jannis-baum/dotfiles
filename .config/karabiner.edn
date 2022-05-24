@@ -3,74 +3,130 @@
 
 {
   :profiles {
-    :goku {:default true
-           :alone   300  ; hold for .. ms to register single tap
-           :held    50  ; not sure what it's for
-           :delay   0   ; time after which the key press is delayed
-           :sim     50} ; keys need to be pressed within this threshold to be considered simultaneous
-  }
-  :templates {:open "open -a \"%s.app\""
-              :delay-set-var "sleep 0.1 && /Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"%s\": %d}'"}
-  :applications {:native-vim ["^com\\.googlecode\\.iterm2$", "^com\\.microsoft\\.VSCode$", "^com\\.apple\\.dt\\.Xcode$", "^net\\.kovidgoyal\\.kitty$"]
-                 :kitty ["^net\\.kovidgoyal\\.kitty$"]
-                 :iterm ["^com\\.googlecode\\.iterm2$"]
-                 :vscode ["^com\\.microsoft\\.VSCode$"]
-                 :safari ["^com\\.apple\\.Safari$"]}
+    :goku {
+      :default true
+      :alone   300  ; hold for .. ms to register single tap
+      :held    50  ; not sure what it's for
+      :delay   0   ; time after which the key press is delayed
+      :sim     50}} ; keys need to be pressed within this threshold to be considered simultaneous
+
+  :templates {
+    :open "open -a \"%s.app\""
+    :delay-set-var "sleep 0.1 && /Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"%s\": %d}'"}
+
+  :applications {
+    :native-vim ["^com\\.googlecode\\.iterm2$", "^com\\.microsoft\\.VSCode$", "^com\\.apple\\.dt\\.Xcode$", "^net\\.kovidgoyal\\.kitty$"]
+    :kitty ["^net\\.kovidgoyal\\.kitty$"]
+    :iterm ["^com\\.googlecode\\.iterm2$"]
+    :vscode ["^com\\.microsoft\\.VSCode$"]
+    :safari ["^com\\.apple\\.Safari$"]}
+
+  :simlayers {
+    :char-l {:key :a} :char-r {:key :semicolon}
+    :ctrl-l {:key :q} :ctrl-r {:key :p}
+    :numbers {:key :z}}
+
   :main [
-    {:des "lshift > kitty"
-     :rules [[:condis ["layer_prim" 0] ["layer_prim_1_held" 0]]
-                 [:left_shift "open -a kitty" [:!kitty]]
-                 [:left_shift "~/.bin/hide-kitty" [:kitty]]
-            ]}
-    {:des "primary layer: numchar",
-     :rules [
-                 [:right_command ["layer_prim_1_held" 1] nil {:afterup [["layer_prim_1_held" 0]] :alone [:spacebar]}]
-                 [:right_shift [["layer_prim_1_held" 1] ["layer_prim" 1]] nil {:afterup [["layer_prim_1_held" 0] [:delay-set-var "layer_prim" 0]]}]
-                 [:condis ["layer_prim_1_held" 1]]
-                     [:tab :tab] [:q :7] [:w :8] [:e :9] [:r :!S1] [:t :!S2] [:y :!S3] [:u :!S8] [:i :open_bracket] [:o :close_bracket] [:p :!Sequal_sign] [:open_bracket :delete_or_backspace]
-                     [:a :4] [:s :5] [:d :6] [:f :!Sbackslash] [:g :backslash] [:h :!S5] [:j :hyphen] [:k :!S9] [:l :!S0] [:semicolon :equal_sign] [:quote :grave_accent_and_tilde]
-                     [:left_shift :0] [:z :1] [:x :2] [:c :3] [:v :!S6] [:b :!S4] [:n :!S7] [:m :!Shyphen] [:comma :!Sopen_bracket] [:period :!Sclose_bracket] [:slash :!Sgrave_accent_and_tilde] [:return_or_enter :return_or_enter]
-                 [:condis ["layer_prim" 1]]
-                     [:tab [:tab ["layer_prim" 0]]] [:q [:7 ["layer_prim" 0]]] [:w [:8 ["layer_prim" 0]]] [:e [:9 ["layer_prim" 0]]] [:r [:!S1 ["layer_prim" 0]]] [:t [:!S2 ["layer_prim" 0]]] [:y [:!S3 ["layer_prim" 0]]] [:u [:!S8 ["layer_prim" 0]]] [:i [:open_bracket ["layer_prim" 0]]] [:o [:close_bracket ["layer_prim" 0]]] [:p [:!Sequal_sign ["layer_prim" 0]]] [:open_bracket [:delete_or_backspace ["layer_prim" 0]]]
-                     [:a [:4 ["layer_prim" 0]]] [:s [:5 ["layer_prim" 0]]] [:d [:6 ["layer_prim" 0]]] [:f [:!Sbackslash ["layer_prim" 0]]] [:g [:backslash ["layer_prim" 0]]] [:h [:!S5 ["layer_prim" 0]]] [:j [:hyphen ["layer_prim" 0]]] [:k [:!S9 ["layer_prim" 0]]] [:l [:!S0 ["layer_prim" 0]]] [:semicolon [:equal_sign ["layer_prim" 0]]] [:quote [:grave_accent_and_tilde ["layer_prim" 0]]]
-                     [:left_shift [:0 ["layer_prim" 0]]][:z [:1 ["layer_prim" 0]]] [:x [:2 ["layer_prim" 0]]] [:c [:3 ["layer_prim" 0]]] [:v [:!S6 ["layer_prim" 0]]] [:b [:!S4 ["layer_prim" 0]]] [:n [:!S7 ["layer_prim" 0]]] [:m [:!Shyphen ["layer_prim" 0]]] [:comma [:!Sopen_bracket ["layer_prim" 0]]] [:period [:!Sclose_bracket ["layer_prim" 0]]] [:slash [:!Sgrave_accent_and_tilde ["layer_prim" 0]]] [:return_or_enter [:return_or_enter ["layer_prim" 0]]]]}
-    {:des "space > space & shift, rcmd > space & numchar layer"
-     :rules [
-                 [:spacebar :left_shift nil {:alone [:spacebar]}]
-            ]}
-    {:des "[ > delete"
-     :rules [
-                 [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]
-            ]}
-    {:des "df > synapse panel"
-     :rules [
-                 [[:d :f] :f10]
-            ]}
-    {:des "caps > escape / control s (native-vim), held control+option / control (native-vim)",
-     :rules [
-                 [:caps_lock :!Oleft_control ["karabiner_vim" 1] {:alone [:escape]}]
-                 [:caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]
-                 [:!Ccaps_lock :!Cescape]
-                 [[:j :k] :escape ["karabiner_vim" 0]]
-            ]}
-    {:des "caps + ui > tab switching",
-     :rules [[:condis ["karabiner_vim" 1]]
-                 [:!TOu [:!TStab]]
-                 [:!TOi [:!Ttab]]
-            ]}
-    {:des "caps + hjkl > emergency arrow keys",
-     :rules [[:condis ["karabiner_vim" 1] :!safari]
-                 [:!TOh [:left_arrow]]
-                 [:!TOj [:down_arrow]]
-                 [:!TOk [:up_arrow]]
-                 [:!TOl [:right_arrow]]
-             [:condis ["karabiner_vim" 0]]
-                 [:!Th [:left_arrow]]
-                 [:!Tj [:down_arrow]]
-                 [:!Tk [:up_arrow]]
-                 [:!Tl [:right_arrow]]
-            ]}
+    {:des "thumb keys" :rules [
+       ; used by mac and corne
+       [:spacebar :left_shift nil {:alone [:spacebar]}]
+       [:right_command :right_command nil {:alone :return_or_enter}]
+       [:left_option :left_option ["language" 0] {:alone [["language" 1]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
+       [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
+       ; used by mac only
+       [:left_command :left_command nil {:alone :delete_or_backspace}]
+       ; used by corne only
+       [:right_option :left_command nil {:alone [:tab]}]]}
+
+    {:des "character layer" :rules [
+       :char-l
+         ; upper row
+         [:q :vk_none] [:w :!Sgrave_accent_and_tilde] [:e :grave_accent_and_tilde] [:r :!S6] [:t :!S4]
+         [:y :!S3] [:u :!S8] [:i :open_bracket] [:o :close_bracket] [:p :vk_none]
+         ; home row
+         [:s :!Squote] [:d :quote] [:f :!Sbackslash] [:g :backslash]
+         [:h :!S5] [:j :hyphen] [:k :!S9] [:l :!S0]
+         ; bottom row
+         [:z :vk_none] [:x :!Sequal_sign] [:c :equal_sign] [:v :!S1] [:b :!S2]
+         [:n :!S7] [:m :!Shyphen] [:comma :!Sopen_bracket] [:period :!Sclose_bracket] [:slash :vk_none]
+       :char-r
+         ; upper row
+         [:q :vk_none] [:w :!Sgrave_accent_and_tilde] [:e :grave_accent_and_tilde] [:r :!S6] [:t :!S4]
+         [:y :!S3] [:u :!S8] [:i :open_bracket] [:o :close_bracket] [:p :vk_none]
+         ; home row
+         [:s :!Squote] [:d :quote] [:f :!Sbackslash] [:g :backslash]
+         [:h :!S5] [:j :hyphen] [:k :!S9] [:l :!S0]
+         ; bottom row
+         [:z :vk_none] [:x :!Sequal_sign] [:c :equal_sign] [:v :!S1] [:b :!S2]
+         [:n :!S7] [:m :!Shyphen] [:comma :!Sopen_bracket] [:period :!Sclose_bracket] [:slash :vk_none]]}
+
+    {:des "number layer" :rules [
+       :numbers
+         ; upper row
+         [:q :vk_none] [:w :vk_none] [:e :vk_none] [:r :vk_none] [:t :vk_none]
+         [:y :vk_none] [:u :7] [:i :8] [:o :9] [:p :vk_none]
+         ; home row
+         [:a :vk_none] [:s :vk_none] [:d :vk_none] [:f :vk_none] [:g :vk_none]
+         [:h :vk_none] [:j :4] [:k :5] [:l :6] [:semicolon :vk_none]
+         ; bottom row
+         [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]
+         [:n :0] [:m :1] [:comma :2] [:period :3] [:slash :vk_none]]}
+
+    {:des "extended control layer" :rules [
+       :ctrl-l
+         ; upper row
+         [:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
+         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To] [:p :!Tp]
+         ; home row
+         [:a :!Ta] [:s :!Ts] [:d :!Td] [:f :!Tf] [:g :!Tg]
+         [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
+         ; bottom row
+         [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
+         [:n :!Tn] [:m :return_or_enter] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
+       :ctrl-r
+         ; upper row
+         [:q :!Tq][:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
+         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To]
+         ; home row
+         [:a :!Ta] [:s :!Ts] [:d :!Td] [:f :!Tf] [:g :!Tg]
+         [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
+         ; bottom row
+         [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
+         [:n :!Tn] [:m :return_or_enter] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]]}
+
+    {:des "language character layers" :rules [
+      ; german (command)
+      [:condis ["language" 1]]
+        [:s [:!Os ["language" 0]]]
+        [:a [:!Ou :a ["language" 0]]]   [:!Sa [:!Ou :!Sa ["language" 0]]]
+        [:o [:!Ou :o ["language" 0]]]   [:!So [:!Ou :!So ["language" 0]]]
+        [:u [:!Ou :u ["language" 0]]]   [:!Su [:!Ou :!Su ["language" 0]]]
+      ; spanish
+      [:condis ["language" 2]]
+        [:n [:!On :n ["language" 0]]]   [:!Sn [:!On :!Sn ["language" 0]]]
+        [:a [:!Oe :a ["language" 0]]]   [:!Sa [:!Oe :!Sa ["language" 0]]]
+        [:e [:!Oe :e ["language" 0]]]   [:!Se [:!Oe :!Se ["language" 0]]]
+        [:i [:!Oe :i ["language" 0]]]   [:!Si [:!Oe :!Si ["language" 0]]]
+        [:o [:!Oe :o ["language" 0]]]   [:!So [:!Oe :!So ["language" 0]]]
+        [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]]}
+
+    {:des "df > synapse panel" :rules [
+       [[:d :f] :f10]]}
+
+    {:des "sd > kitty" :rules [
+       [[:s :d] "open -a kitty" [:!kitty]]
+       [[:s :d] "~/.bin/hide-kitty" [:kitty]]]}
+
+    {:des "caps > escape / control s (native-vim), held control+option / control (native-vim)" :rules [
+       [:caps_lock :!Oleft_control ["karabiner_vim" 1] {:alone [:escape]}]
+       [:caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]
+       [:!Ccaps_lock :!Cescape]
+       [[:j :k] :escape ["karabiner_vim" 0]]]}
+
+    {:des "[ > delete" :rules [
+       [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
+       [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]]}
+
     ; vim
     ; normal: 0, insert: 1, visual: 2
     {:des "jk / 2xreturn > normal mode",
@@ -202,12 +258,6 @@
                  [:!Sn :!SCg]
                  [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]
             ]}
-    ; path typing helpers
-    {:des "path typing helpers",
-     :rules [
-                 [:!Tperiod [:period :slash]]
-                 [:!Tcomma [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
-            ]}
     ; safari
     {:des "safari VIM normal-mode: . > cmd+l + insert-mode, t > cmd+t + insert-mode",
      :rules [[:condis :safari]
@@ -217,46 +267,5 @@
                  [:period [:!Cl ["vim_mode" 1]]]
                  [:t [:!Ct ["vim_mode" 1]]]
             ]}
-    ; vim normal mode disable keys
-    ; {:des "VIM: disable unused keys",
-    ;  :rules [["karabiner_vim" 1]
-    ;              [:##left_shift :left_shift] [:##right_shift :right_shift]
-    ;              [:##left_control :left_control] 
-    ;              [:##left_option :left_option] [:##right_option :right_option] 
-    ;              [:##left_command :left_command] [:##right_command :right_command] 
-    ;              [:##spacebar :spacebar]
-    ;              [:return_or_enter :return_or_enter]
-    ;              [{:any :key_code} :vk_none ["vim_mode" 0]]
-    ;              [{:any :key_code} :vk_none ["vim_mode" 2]]
-    ;         ]}
-    ; languages
-    {:des "spanish (alt) and german (cmd) special chars",
-     :rules [[:condis ["karabiner_vim" 1]]
-                 ; spanish (option)
-                 [:n [:!On :n ["spech_esp" 0]] ["spech_esp" 1]]    [:!Sn [:!On :!Sn ["spech_esp" 0]] ["spech_esp" 1]]    [:!Rn [:!On :!Rn ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:a [:!Oe :a ["spech_esp" 0]] ["spech_esp" 1]]    [:!Sa [:!Oe :!Sa ["spech_esp" 0]] ["spech_esp" 1]]    [:!Ra [:!Oe :!Ra ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:e [:!Oe :e ["spech_esp" 0]] ["spech_esp" 1]]    [:!Se [:!Oe :!Se ["spech_esp" 0]] ["spech_esp" 1]]    [:!Re [:!Oe :!Re ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:i [:!Oe :i ["spech_esp" 0]] ["spech_esp" 1]]    [:!Si [:!Oe :!Si ["spech_esp" 0]] ["spech_esp" 1]]    [:!Ri [:!Oe :!Ri ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:o [:!Oe :o ["spech_esp" 0]] ["spech_esp" 1]]    [:!So [:!Oe :!So ["spech_esp" 0]] ["spech_esp" 1]]    [:!Ro [:!Oe :!Ro ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:u [:!Oe :u ["spech_esp" 0]] ["spech_esp" 1]]    [:!Su [:!Oe :!Su ["spech_esp" 0]] ["spech_esp" 1]]    [:!Ru [:!Oe :!Ru ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:!S1 [:!O1 ["spech_esp" 0]] ["spech_esp" 1]]    [:!Sslash [:!OSslash ["spech_esp" 0]] ["spech_esp" 1]]
-                 [:left_option :left_option ["karabiner_vim" 1] {:alone [["spech_esp" 1]] :delayed {:invoked ["spech_esp" 0]} :params {:delay 500}}] 
-                 [:right_option :right_option ["karabiner_vim" 1] {:alone [["spech_esp" 1]] :delayed {:invoked ["spech_esp" 0]} :params {:delay 500}}] 
-                 ; german (command)
-                 [:s [:!Os ["spech_ger" 0]] ["spech_ger" 1]]
-                 [:a [:!Ou :a ["spech_ger" 0]] ["spech_ger" 1]]    [:!Sa [:!Ou :!Sa ["spech_ger" 0]] ["spech_ger" 1]]    [:!Ra [:!Ou :!Ra ["spech_ger" 0]] ["spech_ger" 1]]
-                 [:o [:!Ou :o ["spech_ger" 0]] ["spech_ger" 1]]    [:!So [:!Ou :!So ["spech_ger" 0]] ["spech_ger" 1]]    [:!Ro [:!Ou :!Ro ["spech_ger" 0]] ["spech_ger" 1]]
-                 [:u [:!Ou :u ["spech_ger" 0]] ["spech_ger" 1]]    [:!Su [:!Ou :!Su ["spech_ger" 0]] ["spech_ger" 1]]    [:!Ru [:!Ou :!Ru ["spech_ger" 0]] ["spech_ger" 1]]
-                 [:left_command :left_command ["karabiner_vim" 1] {:alone [["spech_ger" 1]] :delayed {:invoked ["spech_ger" 0]} :params {:delay 500}}] 
-                 [:right_command :right_command ["karabiner_vim" 1] {:alone [["spech_ger" 1]] :delayed {:invoked ["spech_ger" 0]} :params {:delay 500}}] 
-             [:condis ["karabiner_vim" 0]]
-                 ; spanish (option)
-                 [:left_option :left_option ["karabiner_vim" 0] {:alone [:f1]}]
-                 [:right_option :right_option ["karabiner_vim" 0] {:alone [:f1]}]
-                 ; german (command)
-                 [:left_command :left_command ["karabiner_vim" 0] {:alone [:f2]}]
-                 [:right_command :right_command ["karabiner_vim" 0] {:alone [:f2]}]
-            ]}
-  ]
+    ]
 }
-
