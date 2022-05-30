@@ -39,6 +39,15 @@
        ; used by corne only
        [:right_option :left_command nil {:alone [:tab]}]]}
 
+    {:des "sd > tab, df > backspace, jk > escape, kl > return" :rules [
+       [[:s :d] :tab]
+       [[:d :f] :delete_or_backspace]
+       [[:j :k] :escape ["karabiner_vim" 0]]
+       [[:j :k] :escape [["karabiner_vim" 1] ["vim_mode" 0]]]
+       [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 1]]]
+       [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 2]]]
+       [[:k :l] :return_or_enter]]}
+
     {:des "character layer" :rules [
        :char-l
          ; upper row
@@ -79,11 +88,11 @@
          [:q :!Cq] [:w :!Cw] [:e :vk_none] [:r :vk_none] [:t :vk_none]
          [:y :vk_none] [:u :vk_none] [:i :vk_none] [:o :vk_none] [:p :vk_none]
          ; home row
-         [:a :vk_none] [:s :vk_none] [:d :!Copen_bracket] [:f :!Cclose_bracket] [:g :vk_none]
+         [:a :vk_none] [:s :!Copen_bracket] [:d [:open "kitty"] :!kitty] [:d "~/.bin/hide-kitty" :kitty] [:f :f10] [:g :!Cclose_bracket]
          [:h :vk_none] [:j :vk_none] [:k :vk_none] [:l :vk_none] [:semicolon :vk_none]
          ; bottom row
          [:z :vk_none] [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]
-         [:n :vk_none] [:m :vk_none] [:comma :vk_none] [:period :vk_none] [:slash :vk_none]]}
+         [:n :vk_none] [:m :vk_none] [:comma :vk_none] [:period :vk_none]]}
 
     {:des "extended control layer" :rules [
        :ctrl-l
@@ -123,33 +132,13 @@
         [:o [:!Oe :o ["language" 0]]]   [:!So [:!Oe :!So ["language" 0]]]
         [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]]}
 
-    {:des "df > synapse panel" :rules [
-       [[:d :f] :f10]]}
-
-    {:des "sd > kitty" :rules [
-       [[:s :d] "open -a kitty" [:!kitty]]
-       [[:s :d] "~/.bin/hide-kitty" [:kitty]]]}
-
     {:des "caps > escape / control s (native-vim), held control+option / control (native-vim)" :rules [
        [:caps_lock :!Oleft_control ["karabiner_vim" 1] {:alone [:escape]}]
        [:caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]
-       [:!Ccaps_lock :!Cescape]
-       [[:j :k] :escape ["karabiner_vim" 0]]]}
-
-    {:des "[ > delete" :rules [
-       [:open_bracket :delete_or_backspace [["karabiner_vim" 1] ["vim_mode" 1]]]
-       [:open_bracket :delete_or_backspace ["karabiner_vim" 0]]]}
-
+       [:!Ccaps_lock :!Cescape]]}
+    
     ; vim
     ; normal: 0, insert: 1, visual: 2
-    {:des "jk / 2xreturn > normal mode",
-     :rules [
-                 [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 1]]]
-                 [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 2]]]
-                 [[:j :k] :vk_none [["karabiner_vim" 1] ["vim_mode" 0]]]
-                 [:return_or_enter [["vim_return_pressed" 0] ["vim_mode" 0]] ["vim_return_pressed" 1]]
-                 [:return_or_enter [:return_or_enter ["vim_return_pressed" 1]] ["vim_mode" 1] {:delayed {:invoked ["vim_return_pressed" 0] :canceled ["vim_return_pressed" 0]} :params {:delay 300}}]]}
-
     {:des "VIM normal-mode: iIaAoO",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:i ["vim_mode" 1]]

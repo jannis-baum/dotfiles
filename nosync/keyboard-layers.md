@@ -1,4 +1,4 @@
-# My keyboard layers
+# My keyboard layout
 
 ## Thumb keys
 
@@ -9,7 +9,18 @@ HOLD   | opt | sft | cmd |      |     | sft | cmd |
        +-----+-----+-----+      +-----+-----+-----+
 ```
 
-## Base
+## Home row combos
+
+```plain
+sd -> tab
+df -> backspace
+jk -> escape
+kl -> return
+```
+
+## Layers
+
+### Base
 
 ```plain
 +---+---+---+---+---+    +---+---+---+---+---+
@@ -21,7 +32,7 @@ HOLD   | opt | sft | cmd |      |     | sft | cmd |
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
 
-## (`a;`)Characters
+### (`a;`)Characters
 
 ```plain
 +---+---+---+---+---+    +---+---+---+---+---+
@@ -33,7 +44,7 @@ HOLD   | opt | sft | cmd |      |     | sft | cmd |
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
 
-## (`z`) Numbers & (`/`) GUI
+### (`z`) Numbers & (`/`) GUI
 
 ```plain
 +---+---+---+---+---+    +---+---+---+---+---+
@@ -45,7 +56,7 @@ HOLD   | opt | sft | cmd |      |     | sft | cmd |
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
 
-## (`qp`) Extended Control
+### (`qp`) Extended Control
 
 ```plain
 all empties are letter+control
