@@ -9,14 +9,6 @@ HOLD   | opt | sft | cmd |      |     | sft | cmd |
        +-----+-----+-----+      +-----+-----+-----+
 ```
 
-## Pinky column modifiers
-
-```plain
-qp upper -> extended control layer
-a; home  -> character layer
-z  lower -> number layer
-```
-
 ## Base
 
 ```plain
@@ -29,7 +21,7 @@ z  lower -> number layer
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
 
-## Characters
+## (`a;`)Characters
 
 ```plain
 +---+---+---+---+---+    +---+---+---+---+---+
@@ -41,19 +33,19 @@ z  lower -> number layer
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
 
-## Numbers
+## (`z`) Numbers & (`/`) GUI
 
 ```plain
 +---+---+---+---+---+    +---+---+---+---+---+
-|   |   |   |   |   |    |   | 7 | 8 | 9 |   |
+|qit|cls|   |   |   |    |   | 7 | 8 | 9 |   |
 +---+---+---+---+---+    +---+---+---+---+---+
-|   |   |   |   |   |    |   | 4 | 5 | 6 |   |
+|   |bck|kit|syn|fwd|    |   | 4 | 5 | 6 |   |
 +---+---+---+---+---+    +---+---+---+---+---+
 |   |   |   |   |   |    | 0 | 1 | 2 | 3 |   |
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
 
-## Extended Control
+## (`qp`) Extended Control
 
 ```plain
 all empties are letter+control

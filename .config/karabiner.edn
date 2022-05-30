@@ -24,7 +24,8 @@
   :simlayers {
     :char-l {:key :a} :char-r {:key :semicolon}
     :ctrl-l {:key :q} :ctrl-r {:key :p}
-    :numbers {:key :z}}
+    :numbers {:key :z}
+    :gui {:key :slash}}
 
   :main [
     {:des "thumb keys" :rules [
@@ -71,6 +72,18 @@
          ; bottom row
          [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]
          [:n :0] [:m :1] [:comma :2] [:period :3] [:slash :vk_none]]}
+
+    {:des "gui layer" :rules [
+       :gui
+         ; upper row
+         [:q :!Cq] [:w :!Cw] [:e :vk_none] [:r :vk_none] [:t :vk_none]
+         [:y :vk_none] [:u :vk_none] [:i :vk_none] [:o :vk_none] [:p :vk_none]
+         ; home row
+         [:a :vk_none] [:s :vk_none] [:d :!Copen_bracket] [:f :!Cclose_bracket] [:g :vk_none]
+         [:h :vk_none] [:j :vk_none] [:k :vk_none] [:l :vk_none] [:semicolon :vk_none]
+         ; bottom row
+         [:z :vk_none] [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]
+         [:n :vk_none] [:m :vk_none] [:comma :vk_none] [:period :vk_none] [:slash :vk_none]]}
 
     {:des "extended control layer" :rules [
        :ctrl-l
@@ -135,8 +148,8 @@
                  [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 2]]]
                  [[:j :k] :vk_none [["karabiner_vim" 1] ["vim_mode" 0]]]
                  [:return_or_enter [["vim_return_pressed" 0] ["vim_mode" 0]] ["vim_return_pressed" 1]]
-                 [:return_or_enter [:return_or_enter ["vim_return_pressed" 1]] ["vim_mode" 1] {:delayed {:invoked ["vim_return_pressed" 0] :canceled ["vim_return_pressed" 0]} :params {:delay 300}}] 
-            ]}
+                 [:return_or_enter [:return_or_enter ["vim_return_pressed" 1]] ["vim_mode" 1] {:delayed {:invoked ["vim_return_pressed" 0] :canceled ["vim_return_pressed" 0]} :params {:delay 300}}]]}
+
     {:des "VIM normal-mode: iIaAoO",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:i ["vim_mode" 1]]
@@ -144,8 +157,8 @@
                  [:a ["vim_mode" 1]]
                  [:!Sa [:!Cright_arrow ["vim_mode" 1]]] [:!Ra [:!Cright_arrow ["vim_mode" 1]]]
                  [:o [:!Cright_arrow :return_or_enter ["vim_mode" 1]]]
-                 [:!So [:!Cleft_arrow :return_or_enter :up_arrow ["vim_mode" 1]]]
-            ]}
+                 [:!So [:!Cleft_arrow :return_or_enter :up_arrow ["vim_mode" 1]]]]}
+
     {:des "VIM normal-mode: D dd de db d0 d^ d$ dgg dG d{ d}",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:!Sd [:!SCright_arrow :!Cx]] [:!Rd [:!SCright_arrow :!Cx]]
@@ -163,8 +176,8 @@
                  [:!Sg [:!SCdown_arrow :!Cx ["vim_d_pressed" 0]] ["vim_d_pressed" 1]] [:!Rg [:!SCdown_arrow :!Cx ["vim_d_pressed" 0]] ["vim_d_pressed" 1]]
                  [:!Sopen_bracket [:!STa :!Cx ["vim_d_pressed" 0]] ["vim_d_pressed" 1]] [:!Ropen_bracket [:!STa :!Cx ["vim_d_pressed" 0]] ["vim_d_pressed" 1]]
                  [:!Sclose_bracket [:!STe :!Cx ["vim_d_pressed" 0]] ["vim_d_pressed" 1]] [:!Rclose_bracket [:!STe :!Cx ["vim_d_pressed" 0]] ["vim_d_pressed" 1]]
-                 [:d [["vim_d_pressed" 1]] nil {:delayed {:invoked ["vim_d_pressed" 0] :canceled ["vim_d_pressed" 0]} :params {:delay 300}}] 
-            ]}
+                 [:d [["vim_d_pressed" 1]] nil {:delayed {:invoked ["vim_d_pressed" 0] :canceled ["vim_d_pressed" 0]} :params {:delay 300}}]]}
+
     {:des "VIM normal-mode: yy ye yb y0 y^ y$ ygg yG y{ y}",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:!Sy [:!SCright_arrow :!Cc]] [:!Ry [:!SCright_arrow :!Cc]]
@@ -182,8 +195,8 @@
                  [:!Sg [:!SCdown_arrow :!Cc ["vim_y_pressed" 0]] ["vim_y_pressed" 1]] [:!Rg [:!SCdown_arrow :!Cc ["vim_y_pressed" 0]] ["vim_y_pressed" 1]]
                  [:!Sopen_bracket [:!STa :!Cc ["vim_y_pressed" 0]] ["vim_y_pressed" 1]] [:!Ropen_bracket [:!STa :!Cc ["vim_y_pressed" 0]] ["vim_y_pressed" 1]]
                  [:!Sclose_bracket [:!STe :!Cc ["vim_y_pressed" 0]] ["vim_y_pressed" 1]] [:!Rclose_bracket [:!STe :!Cc ["vim_y_pressed" 0]] ["vim_y_pressed" 1]]
-                 [:y [["vim_y_pressed" 1]] nil {:delayed {:invoked ["vim_y_pressed" 0] :canceled ["vim_y_pressed" 0]} :params {:delay 300}}] 
-            ]}
+                 [:y [["vim_y_pressed" 1]] nil {:delayed {:invoked ["vim_y_pressed" 0] :canceled ["vim_y_pressed" 0]} :params {:delay 300}}]]}
+
     {:des "VIM normal-mode: cc ce cb c0 c^ c$ cgg cG c{ c}",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:!Sc [:!SCright_arrow :!Cx ["vim_mode" 1]]] [:!Rc [:!SCright_arrow :!Cx ["vim_mode" 1]]]
@@ -201,8 +214,8 @@
                  [:!Sg [:!SCdown_arrow :!Cx ["vim_mode" 1] ["vim_c_pressed" 0]] ["vim_c_extend" 1]] [:!Rg [:!SCdown_arrow :!Cx ["vim_mode" 1] ["vim_c_pressed" 0]] ["vim_c_pressed" 1]]
                  [:!Sopen_bracket [:!STa :!Cx ["vim_mode" 1] ["vim_c_pressed" 0]] ["vim_c_pressed" 1]] [:!Ropen_bracket [:!STa :!Cx ["vim_mode" 1] ["vim_c_pressed" 0]] ["vim_c_pressed" 1]]
                  [:!Sclose_bracket [:!STe :!Cx ["vim_mode" 1] ["vim_c_pressed" 0]] ["vim_c_pressed" 1]] [:!Rclose_bracket [:!STe :!Cx ["vim_mode" 1] ["vim_c_pressed" 0]] ["vim_c_pressed" 1]]
-                 [:c [["vim_c_pressed" 1]] nil {:delayed {:invoked ["vim_c_pressed" 0] :canceled ["vim_c_pressed" 0]} :params {:delay 300}}] 
-            ]}
+                 [:c [["vim_c_pressed" 1]] nil {:delayed {:invoked ["vim_c_pressed" 0] :canceled ["vim_c_pressed" 0]} :params {:delay 300}}]]}
+
     {:des "VIM normal-mode: hjkl eb 0^$ gg G { }",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:h :left_arrow]
@@ -218,8 +231,8 @@
                  [:g [["vim_g_pressed" 1]] nil {:delayed {:invoked ["vim_g_pressed" 0] :canceled ["vim_g_pressed" 0]} :params {:delay 300}}] 
                  [:!Sg :!Cdown_arrow] [:!Rg :!Cdown_arrow]
                  [:!Sopen_bracket :!Ta] [:!Ropen_bracket :!Ta]
-                 [:!Sclose_bracket :!Te] [:!Rclose_bracket :!Te]
-            ]}
+                 [:!Sclose_bracket :!Te] [:!Rclose_bracket :!Te]]}
+
     {:des "VIM normal-mode: v, visual-mode:  eb 0^$ gg G {} dycx",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:v ["vim_mode" 2]]
@@ -241,31 +254,27 @@
                  [:d [:!Cx ["vim_mode" 0]]]
                  [:y [:!Cc ["vim_mode" 0]]]
                  [:c [:!Cx ["vim_mode" 1]]]
-                 [:x [:delete_or_backspace ["vim_mode" 0]]]
-            ]}
+                 [:x [:delete_or_backspace ["vim_mode" 0]]]]}
+
     {:des "VIM normal-mode: xX p u C-r",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:x :delete_forward]
                  [:!Sx :delete_or_backspace] [:!Rx :delete_or_backspace]
                  [:p :!Cv]
                  [:u :!Cz]
-                 [:!TOr :!SCz]
-            ]}
+                 [:!TOr :!SCz]]}
+
     {:des "VIM normal-mode: /nN ?",
      :rules [[:condis ["karabiner_vim" 1] ["vim_mode" 0]]
                  [:slash [:!Cf ["vim_mode" 1]]]
                  [:n :!Cg]
                  [:!Sn :!SCg]
-                 [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]
-            ]}
+                 [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]]}
+
     ; safari
     {:des "safari VIM normal-mode: . > cmd+l + insert-mode, t > cmd+t + insert-mode",
-     :rules [[:condis :safari]
-                 [:!TOh :!Copen_bracket]
-                 [:!TOl :!Cclose_bracket]
-             [:condis :safari ["vim_mode" 0]]
+     :rules [[:condis :safari ["vim_mode" 0]]
                  [:period [:!Cl ["vim_mode" 1]]]
-                 [:t [:!Ct ["vim_mode" 1]]]
-            ]}
-    ]
+                 [:t [:!Ct ["vim_mode" 1]]]]}
+  ]
 }
