@@ -1,5 +1,6 @@
 alias gs="git status -s"
 alias gca="git commit --amend --no-edit"
+alias grc="git rebase --continue"
 
 function ga() {
     [[ $# -eq 0 ]] && git add --all || git add $*
