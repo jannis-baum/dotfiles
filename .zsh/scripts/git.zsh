@@ -1,5 +1,5 @@
 alias gs="git status -s"
-alias gca="git commit --amend --no-edit"
+alias gca="git commit --amend"
 alias grc="git rebase --continue"
 
 function ga() {
