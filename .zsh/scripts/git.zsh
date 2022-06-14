@@ -64,3 +64,13 @@ function _MINE_git_branch_names() {
     compadd "${(@)${(f)$(git branch -a)}#??}"
 }
 compdef _MINE_git_branch_names gd
+
+function gprune-branches() {
+    local flag="-d"
+    git fetch --prune
+    [[ "$1" == "-f" || "$1" == "--force" ]] && flag="-D"
+    git branch -vv \
+        | rg ': gone] ' | rg -v '^\*' \
+        | awk '{ print $1 }' \
+        | xargs -r git branch $flag
+}
