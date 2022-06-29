@@ -1,6 +1,8 @@
 alias gs="git status -s"
 alias gca="git commit --amend"
 alias grc="git rebase --continue"
+alias gp="git push"
+alias gpf="git push --force"
 
 function ga() {
     [[ $# -eq 0 ]] && git add --all || git add $*
