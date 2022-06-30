@@ -45,6 +45,7 @@
        [[:j :k] :escape ["karabiner_vim" 0]]
        [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 1]]]
        [[:j :k] ["vim_mode" 0] [["karabiner_vim" 1] ["vim_mode" 2]]]
+       [[:j :k] :vk_none [["karabiner_vim" 1] ["vim_mode" 0]]]
        [[:k :l] :return_or_enter]]}
 
     {:des "character layer" :rules [
