@@ -20,3 +20,10 @@ nnoremap yi$ T$yt$
 nnoremap ca$ F$cf$
 nnoremap ci$ T$ct$
 
+" folding
+function! GetMarkdownFold(lnum)
+    return getline(a:lnum) =~ '^#.*$' ? '0' : '1'
+endfunction
+setlocal foldmethod=expr
+setlocal foldexpr=GetMarkdownFold(v:lnum)
+setlocal foldlevel=1
