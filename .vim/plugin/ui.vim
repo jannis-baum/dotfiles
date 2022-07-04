@@ -24,11 +24,11 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 " status line
-function SLContent()
-    let l:left = @% . ' '
-    let l:spacer_width = winwidth(0) - len(l:left)
-    let l:spacer = repeat('―', l:spacer_width)
-    return l:left . l:spacer
+function! SLContent()
+    let l:right = ' ' . @% . ' '
+    let l:spacer_width = winwidth(0) - len(l:right)
+    let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
+    return l:spacer . l:right
 endfunction
 set statusline=%{SLContent()}
-
+set laststatus=2
