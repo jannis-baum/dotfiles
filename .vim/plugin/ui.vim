@@ -24,11 +24,27 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 " status line
+function! s:coc_statusline()
+    let l:info = get(b:, 'coc_diagnostic_info', {})
+    if empty(l:info) | return '' | endif
+
+    let l:msgs = []
+    if get(l:info, 'error', 0)
+      call add(l:msgs, '❌ ' . l:info['error'])
+    endif
+    if get(l:info, 'warning', 0)
+      call add(l:msgs, '⚠️  ' . l:info['warning'])
+    endif
+    if empty(l:msgs) | return '' | endif
+    return '| ' . join(l:msgs, ' | ') . ' '
+endfunction
+
 function! SLContent()
-    let l:right = ' ' . @% . ' '
-    let l:spacer_width = winwidth(0) - len(l:right)
+    let l:right = ' ' . @% . ' ' . s:coc_statusline()
+    let l:spacer_width = winwidth(0) - strwidth(l:right)
     let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
+
 set statusline=%{SLContent()}
 set laststatus=2
