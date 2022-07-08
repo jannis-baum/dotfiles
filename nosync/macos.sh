@@ -49,6 +49,9 @@ defaults write com.apple.dock autohide -bool true
 # Don’t show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
 
+# Disable shadow in window screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
 # safari
 
 # Privacy: don’t send search queries to Apple
@@ -76,4 +79,3 @@ defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
 # Update extensions automatically
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
-
