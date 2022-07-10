@@ -30,11 +30,33 @@ function gco() {
     [[ -n $branch ]] && (git checkout $branch 2>/dev/null || git checkout -b $branch)
 }
 
+function greset() {
+    if [[ $# -eq 0 ]]; then
+        git reset --hard
+        return
+    fi
+    git checkout HEAD -- $*
+}
+
 function _git_pretty_diff() {
     paste -d '\0' \
         <(git diff --name-status $1 $2 | sed -r 's/^([^[:blank:]]).*$/\1/') \
         <(git diff --stat=120 --color=always $1 $2)
 }
+
+function gd() {
+    local file
+    file=$(_git_pretty_diff $1 $2 | sed '$d' \
+        | fzf --ansi --exit-0 --delimiter=' ' \
+            --preview="git diff --color=always $1 $2 -- $(git rev-parse --show-toplevel)/{2} | tail -n +5" \
+            --preview-window='60%,nowrap,nohidden' \
+        | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
+    [[ -n "$file" ]] && git difftool $1 $2 -- "$(git rev-parse --show-toplevel)/$file" && gd $1 $2
+}
+function _MINE_git_branch_names() {
+    compadd "${(@)${(f)$(git branch -a)}#??}"
+}
+compdef _MINE_git_branch_names gd
 
 function gl() {
     local commit hash key
@@ -52,20 +74,6 @@ function gl() {
         fi
     fi
 }
-
-function gd() {
-    local file
-    file=$(_git_pretty_diff $1 $2 | sed '$d' \
-        | fzf --ansi --exit-0 --delimiter=' ' \
-            --preview="git diff --color=always $1 $2 -- $(git rev-parse --show-toplevel)/{2} | tail -n +5" \
-            --preview-window='60%,nowrap,nohidden' \
-        | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
-    [[ -n "$file" ]] && git difftool $1 $2 -- "$(git rev-parse --show-toplevel)/$file" && gd $1 $2
-}
-function _MINE_git_branch_names() {
-    compadd "${(@)${(f)$(git branch -a)}#??}"
-}
-compdef _MINE_git_branch_names gd
 
 function gprune-branches() {
     local flag="-d"
