@@ -6,7 +6,7 @@ alias gpf="git push --force"
 
 function ga() {
     [[ $# -eq 0 ]] && git add --all || git add $*
-    git status -s
+    gs
 }
 
 function gr() {
@@ -15,7 +15,7 @@ function gr() {
    else
        git restore --staged $*
     fi
-    git status -s
+    gs
 }
 
 function gc() {
