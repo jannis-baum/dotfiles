@@ -261,9 +261,11 @@
                  [:!Sslash [:!CSslash ["vim_mode" 1]]] [:!Rslash [:!CSslash ["vim_mode" 1]]]]}
 
     ; safari
-    {:des "safari VIM normal-mode: . > cmd+l + insert-mode, t > cmd+t + insert-mode",
-     :rules [[:condis :safari ["vim_mode" 0]]
+    {:des "safari VIM normal-mode: . > url + insert-mode, t > new tab + insert-mode, f > vimari",
+     :rules [[:condis :safari ["vim_mode" 0] ["karabiner_vim" 1]]
                  [:period [:!Cl ["vim_mode" 1]]]
-                 [:t [:!Ct ["vim_mode" 1]]]]}
+                 [:t [:!Ct ["vim_mode" 1]]]
+                 [:!Sf :!STf]
+                 [:f :!Tf]]}
   ]
 }
