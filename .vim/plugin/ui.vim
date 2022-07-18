@@ -36,11 +36,11 @@ function! s:coc_statusline()
       call add(l:msgs, '⚠️  ' . l:info['warning'])
     endif
     if empty(l:msgs) | return '' | endif
-    return '| ' . join(l:msgs, ' | ') . ' '
+    return join(l:msgs, ' | ') . ' | '
 endfunction
 
 function! SLContent()
-    let l:right = ' ' . @% . ' ' . s:coc_statusline()
+    let l:right = ' ' . s:coc_statusline() . @% . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
     let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
