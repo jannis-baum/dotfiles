@@ -72,14 +72,19 @@ bindkey ^u fzf_dir
 rgi() {
     local rg_command="rg --column --line-number --no-heading "
     selection=$(true | \
-        fzf -d ':' --with-nth=2 +m --bind "change:reload:$rg_command {q} | sed 's/^/{q}:/g' || true" --disabled \
-            --preview-window="right,70%,wrap,nohidden" --preview "bat --style=numbers --color=always --line-range {3}: {2} 2> /dev/null\
-                | rg --color always --context 10 '{q}'")
-    if [[ -n "$selection" ]]; then
-        local query=$(echo $selection | awk -F: '{ print $1 }')  
-        local file=$(echo $selection | awk -F: '{ print $2 }')
-        local line=$(echo $selection | awk -F: '{ print $3 }')
-        local column=$(echo $selection | awk -F: '{ print $4 }')
+        fzf -d ':' --with-nth=1 +m --disabled --print-query \
+            --bind "change:reload:$rg_command {q} || true" \
+            --preview-window="right,70%,wrap,nohidden" \
+            --preview "\
+                bat --style=numbers --color=always --line-range {2}: {1} 2> /dev/null\
+                    | rg --color always --context 10 {q}\
+                || bat --style=numbers --color=always --line-range {2}: {1} 2> /dev/null")
+    local query=$(echo $selection | head -n 1)
+    local details=$(echo $selection | tail -n 1)
+    if [[ -n "$details" ]]; then
+        local file=$(echo $details | awk -F: '{ print $1 }')
+        local line=$(echo $details | awk -F: '{ print $2 }')
+        local column=$(echo $details | awk -F: '{ print $3 }')
         vim "+call cursor($line, $column)" "+let @/='$query'" "+set hls" "$file"
     fi
 }
