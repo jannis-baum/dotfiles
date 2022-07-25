@@ -1,6 +1,6 @@
 {
   "excludedUrls": "",
-  "linkHintCharacters": "qwrf;zm,.",
+  "linkHintCharacters": "qwrf;zm,",
   "detectByCursorStyle": false,
   "scrollSize": 300,
   "openTabUrl": "about:blank",
