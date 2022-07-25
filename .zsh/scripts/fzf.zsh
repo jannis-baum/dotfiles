@@ -83,7 +83,7 @@ rgi() {
     local query=$(echo $selection | head -n 1)
     local details=$(echo $selection | tail -n 1)
 
-    if [[ -n "$details" ]]; then
+    if [[ "$details" != "$query" ]]; then
         local file=$(echo $details | awk -F: '{ print $1 }')
         local line=$(echo $details | awk -F: '{ print $2 }')
         local column=$(echo $details | awk -F: '{ print $3 }')
