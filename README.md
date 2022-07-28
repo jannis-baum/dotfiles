@@ -4,7 +4,7 @@ Here is where I try to keep all configuration of all the tools I use. This is
 not intended to be used by anyone else in its entirety, but might be nice to
 look at for reference.
 
-## Most important tools
+## Most important development tools
 
 - [kitty](https://sw.kovidgoyal.net/kitty/) terminal & as a `tmux`-replacement
   for working locally with much better performance. See
@@ -25,3 +25,8 @@ look at for reference.
 - [Karabiner Elements](https://karabiner-elements.pqrs.org) with
   [goku](https://github.com/yqrashawn/GokuRakuJoudo) to remap my keyboard. See
   **[karabiner.edn](.config/karabiner.edn)**.
+
+## Tools that help with macOS
+
+- [kindaVim](https://kindavim.app) for amazing vi-bindings **everywhere**
+- [Wooshy](https://wooshy.app) so I (almost) never need to use a mouse
