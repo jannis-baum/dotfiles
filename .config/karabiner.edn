@@ -21,6 +21,9 @@
     :vscode ["^com\\.microsoft\\.VSCode$"]
     :safari ["^com\\.apple\\.Safari$"]}
 
+  :modifiers {
+    :any {:optional [:fn :left_command :left_control :left_option :left_shift]}}
+
   :simlayers {
     :char-l {:key :a} :char-r {:key :semicolon}
     :ctrl-l {:key :q} :ctrl-r {:key :p}
@@ -29,7 +32,7 @@
 
   :main [
     {:des "thumb keys" :rules [
-       [:spacebar :left_shift nil {:alone [:spacebar]}]
+       [:##spacebar :left_shift nil {:alone [:spacebar]}]
 
        [:right_command :right_command :kitty {:alone "~/.bin/hide-kitty"}]
        [:right_command :right_command :!kitty {:alone [:open "kitty"]}]
@@ -40,11 +43,11 @@
        [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]]}
 
     {:des "sd > tab, df > backspace, jk > escape/normal, kl > return, ui > wooshy (f8)" :rules [
-       [[:s :d] :tab]
-       [[:d :f] :delete_or_backspace]
-       [[:j :k] :escape]
-       [[:u :i] :!Cf8]
-       [[:k :l] :return_or_enter]]}
+       [{:sim [:s :d] :modi :any} :tab]
+       [{:sim [:d :f] :modi :any} :delete_or_backspace]
+       [{:sim [:j :k] :modi :any} :escape]
+       [{:sim [:k :l] :modi :any} :return_or_enter]
+       [[:u :i] :!Cf8]]}
 
     {:des "character layer" :rules [
        :char-l
@@ -130,9 +133,8 @@
         [:o [:!Oe :o ["language" 0]]]   [:!So [:!Oe :!So ["language" 0]]]
         [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]]}
 
-    {:des "caps > escape / control s (native-vim), held control+option / control (native-vim)" :rules [
-       [:caps_lock :!Oleft_control ["karabiner_vim" 1] {:alone [:escape]}]
-       [:caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]
-       [:!Ccaps_lock :!Cescape]]}
+    {:des "caps > escape / control s (native-vim), held > control" :rules [
+       [:##caps_lock :left_control ["karabiner_vim" 1] {:alone [:escape]}]
+       [:##caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]]}
   ]
 }
