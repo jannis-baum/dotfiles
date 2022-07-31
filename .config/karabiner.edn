@@ -12,6 +12,7 @@
 
   :templates {
     :open "open -a \"%s.app\""
+    :dnc-post "~/.bin/dnc-post \"%s\""
     :delay-set-var "sleep 0.1 && /Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"%s\": %d}'"}
 
   :applications {
@@ -37,7 +38,7 @@
        [:right_command :right_command :kitty {:alone "~/.bin/hide-kitty"}]
        [:right_command :right_command :!kitty {:alone [:open "kitty"]}]
 
-       [:left_command :left_command nil {:alone :f10}]
+       [:left_command :left_command nil {:alone [:dnc-post "SYNAPSE_TOGGLE_PANEL"]}]
        
        [:left_option :left_option ["language" 0] {:alone [["language" 1]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
        [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]]}
