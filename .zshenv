@@ -1,9 +1,9 @@
 export ZDOTDIR=~/.zsh
-export PATH="$PATH:$HOME/.bin:$HOME/.flutter/bin:/Applications/Postgres.app/Contents/Versions/latest/bin/"
 
 export EDITOR=vim
 export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
 
+export PATH="$PATH:$HOME/.bin/"
 # fd
 export FD_OPTIONS=("--hidden" "--follow" "--strip-cwd-prefix")
 # fzf
@@ -19,3 +19,13 @@ export FZF_DEFAULT_OPTS="
     --bind 'right:toggle-preview'"
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# flutter
+export PATH="$PATH:$HOME/.flutter/bin/"
+
+# postgres
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/"
+
+# esp toolchain
+export IDF_PATH="$HOME/_/development/esp/ESP8266_RTOS_SDK"
+export PATH="$PATH:$HOME/_/development/esp/xtensa-lx106-elf/bin/"
