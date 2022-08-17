@@ -5,6 +5,14 @@
     "statusBar": {
         "right": [
             {
+                "updateFrequency": 50,
+                "path": "/bin/bash",
+                "args": [
+                    "-c",
+                    "pmset -g batt | grep 'discharging' || printf '⚡️ '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
+                ]
+            },
+            {
                 "updateFrequency": 10,
                 "path": "/bin/date",
                 "args": ["+%l:%M"]
