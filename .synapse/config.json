@@ -5,17 +5,32 @@
     "statusBar": {
         "right": [
             {
-                "updateFrequency": 50,
-                "path": "/bin/bash",
-                "args": [
-                    "-c",
-                    "pmset -g batt | grep 'discharging' || printf '⚡️ '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
-                ]
+                "updateFrequency": 5,
+                "main": {
+                    "path": "/bin/bash",
+                    "args": [
+                        "-c",
+                        "pmset -g batt | grep 'discharging' || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
+                    ]
+                },
+                "alt": {
+                    "path": "/bin/bash",
+                    "args": [
+                        "-c",
+                        "pmset -g batt | grep 'discharging' || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
+                    ]
+                }
             },
             {
-                "updateFrequency": 10,
-                "path": "/bin/date",
-                "args": ["+%l:%M"]
+                "updateFrequency": 1,
+                "main": {
+                    "path": "/bin/date",
+                    "args": ["+%l:%M"]
+                },
+                "alt": {
+                    "path": "/bin/date",
+                    "args": ["+%m/%e"]
+                }
             }
         ]
     }
