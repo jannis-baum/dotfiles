@@ -10,14 +10,14 @@
                     "path": "/bin/bash",
                     "args": [
                         "-c",
-                        "pmset -g batt | grep 'discharging' || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
+                        "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
                     ]
                 },
                 "alt": {
                     "path": "/bin/bash",
                     "args": [
                         "-c",
-                        "pmset -g batt | grep 'discharging' || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
+                        "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
                     ]
                 }
             },
