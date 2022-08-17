@@ -1,5 +1,14 @@
 {
     "panel": {
         "keepCentered": true
+    },
+    "statusBar": {
+        "right": [
+            {
+                "updateFrequency": 10,
+                "path": "/bin/date",
+                "args": ["+%l:%M"]
+            }
+        ]
     }
 }
