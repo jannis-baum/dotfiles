@@ -135,7 +135,12 @@
         [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]]}
 
     {:des "caps > escape / control s (native-vim), held > control" :rules [
-       [:##caps_lock :left_control ["karabiner_vim" 1] {:alone [:escape]}]
-       [:##caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]]}
+        [:##caps_lock :left_control ["karabiner_vim" 1] {:alone [:escape]}]
+        [:##caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]]}
+
+    {:des "safari normal mode" :rules [
+      [:condis :safari ["kVNormal" 1]]
+        [:q :!Ct]
+        [:period :!Cl]]}
   ]
 }
