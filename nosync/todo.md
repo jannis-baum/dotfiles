@@ -1,5 +1,9 @@
 # todo
 
+## hammerspoon
+
+- make bettertouchtool as obsolete as possible hehe
+
 ## vim
 
 - fix coc-ultisnips conflict
