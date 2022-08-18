@@ -2,9 +2,15 @@ dotfiles_dir=$HOME/_dotfiles
 
 ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*')
 
+function _restart_synapse() {
+    pkill Synapse
+    open -a Synapse
+}
+
 # TODO: refresh kitty through remote control
 dotfiles_actions=( \
     ['karabiner\.edn$']='goku' \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
     ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
+    ['^\.synapse/']="_restart_synapse" \
 )
