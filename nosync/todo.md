@@ -2,7 +2,9 @@
 
 ## hammerspoon
 
-- make bettertouchtool as obsolete as possible hehe
+- [zoom and scroll with
+  keyboard](http://www.hammerspoon.org/docs/hs.eventtap.event.html)
+  - use smart magnify?
 
 ## vim
 
