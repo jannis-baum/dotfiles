@@ -4,7 +4,7 @@ ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*')
 
 function _restart_synapse() {
     pkill Synapse
-    open -a Synapse
+    open -g -a Synapse
 }
 
 # TODO: refresh kitty through remote control

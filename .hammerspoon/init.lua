@@ -7,7 +7,7 @@ end)
 
 -- launch agent
 
-hs.application.launchOrFocus('Synapse')
+hs.execute('open -g -a Synapse')
 
 
 -- kindaVim notifications
