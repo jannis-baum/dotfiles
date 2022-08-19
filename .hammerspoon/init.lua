@@ -1,6 +1,14 @@
+-- reload config
+
+hs.urlevent.bind("reloadConfig", function(eventName, params)
+    hs.reload()
+end)
+
+
 -- launch agent
 
 hs.application.launchOrFocus('Synapse')
+
 
 -- kindaVim notifications
 
@@ -13,6 +21,7 @@ kVNormalExitWatcher = hs.distributednotifications.new(function(name, object, use
     hs.execute('/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables "{\\"kVNormal\\":0}"')
 end, 'kindaVimDidExitNormalMode')
 kVNormalExitWatcher:start()
+
 
 -- sleep events
 

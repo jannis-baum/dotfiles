@@ -13,4 +13,5 @@ dotfiles_actions=( \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
     ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
     ['^\.synapse/']="_restart_synapse" \
+    ['^\.hammerspoon/']="open -g hammerspoon://reloadConfig" \
 )
