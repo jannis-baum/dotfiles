@@ -1,4 +1,16 @@
-function gi() {
+function _gh_get_branch_issue() {
+    git branch --show-current \
+        | rg '^issue/' \
+        | sed -r 's:^issue/([[:digit:]]+)-.*:\1:'
+}
+
+function _gh_get_issue_title() {
+    gh issue view $1 \
+        | rg 'title:' \
+        | sed -r 's/^title:[[:blank:]]*//'
+}
+
+function ghi() {
     local out key issue
 
     out=$(GH_FORCE_TTY='45%' gh issue list \
@@ -14,9 +26,7 @@ function gi() {
             printf "#$issue" | pbcopy
         elif [[ "$key" == ctrl-b ]]; then
             local branch
-            branch="issue/$issue-$(gh issue view $issue \
-                | rg 'title:' \
-                | sed -r 's/^title:[[:blank:]]*//' \
+            branch="issue/$issue-$(_gh_get_issue_title $issue \
                 | tr ' ' '-' \
                 | tr -cd '[:alnum:]-' \
                 | tr '[:upper:]' '[:lower:]' \
@@ -27,4 +37,16 @@ function gi() {
             gh issue view --web $issue
         fi
     fi
+}
+
+function ghpr() {
+    local issue=$(_gh_get_branch_issue)
+    if [ -z "$issue" ]; then
+        echo "Branch doesn't follow issue naming convention. Exiting."
+        return
+    fi
+
+    local title=$(_gh_get_issue_title $issue)
+    gh pr create --title $title --body "Close #$issue" \
+        | tail -n 1 | xargs open
 }
