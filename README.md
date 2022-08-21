@@ -20,8 +20,8 @@ look at for reference.
   [bat](https://github.com/sharkdp/bat) for file management & fuzzy finding. See
   **[fzf.zsh](.zsh/scripts/fzf.zsh)** and
   **[fzf.vim](.vim/after/plugin/fzf.vim)**.
-- [git](https://git-scm.com) and GitHub for version control. See
-  **[git.zsh](.zsh/scripts/git.zsh)** and **[gh.zsh](.zsh/scripts/gh.zsh)**.
+- [git](https://git-scm.com) and GitHub for version control. See my
+  **[git zsh functions](.zsh/scripts/git)**.
 - [Karabiner Elements](https://karabiner-elements.pqrs.org) with
   [goku](https://github.com/yqrashawn/GokuRakuJoudo) to remap my keyboard. See
   **[karabiner.edn](.config/karabiner.edn)**.

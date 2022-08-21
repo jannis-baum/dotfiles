@@ -1,15 +1,3 @@
-function _gh_get_branch_issue() {
-    git branch --show-current \
-        | rg '^issue/' \
-        | sed -r 's:^issue/([[:digit:]]+)-.*:\1:'
-}
-
-function _gh_get_issue_title() {
-    gh issue view $1 \
-        | rg 'title:' \
-        | sed -r 's/^title:[[:blank:]]*//'
-}
-
 # list GitHub issues
 # ctrl-o copies #issue-number
 # ctrl-b creates/checks out branch by `issue/NUMBER-title` scheme

@@ -4,7 +4,7 @@ alias grc="git rebase --continue"
 alias gp="git push"
 alias gpf="git push --force"
 
-# stage
+# stage all or given files/dirs
 function ga() {
     [[ $# -eq 0 ]] && git add --all || git add $*
     gs
@@ -46,12 +46,6 @@ function greset() {
         return
     fi
     git checkout HEAD -- $*
-}
-
-function _git_pretty_diff() {
-    paste -d '\0' \
-        <(git diff --name-status $1 $2 | sed -r 's/^([^[:blank:]]).*$/\1/') \
-        <(git diff --stat=120 --color=always $1 $2)
 }
 
 # fzf to see diff to parent commit or between given commits
