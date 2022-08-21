@@ -1,3 +1,20 @@
+# Sync dotfiles
+#
+# uses a config file in $SDFRC_PATH or ~/.sdfrc. This file is sourced and may
+# provide the variables discussed below.
+#
+# sdf recursively copies all files from $dotfiles_dir to ~/ while preserving
+# their relative path. Install of each file is prompted (y/n). Git submodules
+# are treated as one file as a whole. Files matching $ignore_patterns are
+# ignored.
+#
+# $dotfiles_actions allows defining regexes along with a command to run. On
+# install of each file matching a given regex, the respective command is run.
+# This is useful to reload the config of tools, e.g. whenever I change
+# something in my ~/.zsh directory I want to source my .zshrc again.
+#
+# -u --upgrade pulls repo and updates submodules before install.
+
 sdf() {
     # load config, go to dotfiles_dir and setup ignore
     typeset -A dotfiles_actions

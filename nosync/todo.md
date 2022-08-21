@@ -14,7 +14,6 @@
 
 - add some notes on
   - fzf in zsh/vim
-  - sdf
 
 ## scripts
 

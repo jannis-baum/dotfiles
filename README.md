@@ -4,6 +4,13 @@ Here is where I try to keep all configuration of all the tools I use. This is
 not intended to be used by anyone else in its entirety, but might be nice to
 look at for reference.
 
+## Installing/syncing dotfiles
+
+[`sdf`](.zsh/scripts/sdf.zsh) is my script (zsh function) that I use to
+synchronize/install my dotfiles based on its own config file [.sdfrc](.sdfrc).
+See the comment in [sdf.zsh](.zsh/scripts/sdf.zsh) for more information on how
+to use it and what it does.
+
 ## Most important development tools
 
 - [kitty](https://sw.kovidgoyal.net/kitty/) terminal & as a `tmux`-replacement
@@ -11,8 +18,6 @@ look at for reference.
     **[.config/kitty/](.config/kitty)**.
 - [zsh](https://www.zsh.org) as a shell. See **[.zsh/](.zsh)** and
   **[.zshenv](.zshenv)**.
-- `sdf`, the script I use to synchronize/install my dotfiles. See
-  [sdf.zsh](.zsh/scripts/sdf.zsh)
 - [vim](https://www.vim.org) as an editor with
   [CoC](https://github.com/neoclide/coc.nvim) for powerful completion & language
   support. See **[.vim/](.vim)**.
