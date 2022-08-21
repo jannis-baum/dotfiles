@@ -11,6 +11,8 @@ look at for reference.
     **[.config/kitty/](.config/kitty)**.
 - [zsh](https://www.zsh.org) as a shell. See **[.zsh/](.zsh)** and
   **[.zshenv](.zshenv)**.
+- `sdf`, the script I use to synchronize/install my dotfiles. See
+  [sdf.zsh](.zsh/scripts/sdf.zsh)
 - [vim](https://www.vim.org) as an editor with
   [CoC](https://github.com/neoclide/coc.nvim) for powerful completion & language
   support. See **[.vim/](.vim)**.
