@@ -31,7 +31,10 @@ to use it and what it does.
   **[git zsh functions](.zsh/scripts/git)**.
 - [Karabiner Elements](https://karabiner-elements.pqrs.org) with
   [goku](https://github.com/yqrashawn/GokuRakuJoudo) to remap my keyboard. See
-  **[karabiner.edn](.config/karabiner.edn)**.
+  **[karabiner.edn](.config/karabiner.edn)** for the definitions and **[my
+  visualized keyboard layers](nosync/keyboard-layers.md)** to get a rough idea
+  of how I use my five column aka "tiny" [Corne
+  keyboard](https://github.com/foostan/crkbd).
 
 ## Tools that help with macOS
 
