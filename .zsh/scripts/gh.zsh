@@ -10,6 +10,10 @@ function _gh_get_issue_title() {
         | sed -r 's/^title:[[:blank:]]*//'
 }
 
+# list GitHub issues
+# ctrl-o copies #issue-number
+# ctrl-b creates/checks out branch by `issue/NUMBER-title` scheme
+# return opens issue in browser
 function ghi() {
     local out key issue
 
@@ -39,6 +43,10 @@ function ghi() {
     fi
 }
 
+# create GitHub PR for current branch that follows
+# `issue/NUMBER-title` scheme.
+# uses issue title as PR title and adds PR body to close issue
+# opens created PR in browser
 function ghpr() {
     local issue=$(_gh_get_branch_issue)
     if [ -z "$issue" ]; then
