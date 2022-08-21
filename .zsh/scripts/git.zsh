@@ -19,7 +19,13 @@ function gr() {
 }
 
 function gc() {
-    [[ $# -eq 0 ]] && git commit || git commit -m "$*"
+    local context
+    context=$(git branch --show-current \
+        | rg '^issue/' \
+        | sed -r 's:^issue/([[:digit:]]+)-.*:\1:')
+
+    [[ -n "$context" ]] && printf "(#$context): " | pbcopy
+    git commit
 }
 
 function gco() {
