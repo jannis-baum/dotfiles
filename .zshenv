@@ -25,7 +25,3 @@ export PATH="$PATH:$HOME/.flutter/bin/"
 
 # postgres
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/"
-
-# esp toolchain
-export IDF_PATH="$HOME/_/development/esp/ESP8266_RTOS_SDK"
-export PATH="$PATH:$HOME/_/development/esp/xtensa-lx106-elf/bin/"

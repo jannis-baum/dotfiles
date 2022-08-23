@@ -12,6 +12,9 @@ alias desknotes="~/_lib/desktop-notes/desknotes"
 alias pass="~/_lib/keychains/main"
 alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
+# esp-idf toolchain setup
+alias load-esp-idf="export MENUCONFIG_STYLE=monochrome && . ~/_/development/esp/esp-idf/export.sh"
+
 # generic functions
 ## make dirs to open editor
 function v() {
