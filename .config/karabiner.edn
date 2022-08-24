@@ -8,7 +8,7 @@
       :alone   300  ; hold for .. ms to register single tap
       :held    50  ; not sure what it's for
       :delay   0   ; time after which the key press is delayed
-      :sim     50}} ; keys need to be pressed within this threshold to be considered simultaneous
+      :sim     30}} ; keys need to be pressed within this threshold to be considered simultaneous
 
   :templates {
     :open "open -a \"%s.app\""
@@ -49,7 +49,8 @@
        [{:sim [:d :f] :modi :any} :delete_or_backspace]
        [{:sim [:j :k] :modi :any} :escape]
        [{:sim [:k :l] :modi :any} :return_or_enter]
-       [[:u :i] :!Cf8]]}
+       [[:u :i] :!Cf8]
+       [[:i :o] [:uri "hammerspoon://smartMagnify"]]]}
 
     {:des "character layer" :rules [
        :char-l
