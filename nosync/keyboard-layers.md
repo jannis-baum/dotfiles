@@ -11,13 +11,11 @@ HOLD   | opt | sft | cmd |      | cmd | sft | ctr |
        +-----+-----+-----+      +-----+-----+-----+
 ```
 
-## Home row combos
+## Combos
 
 ```plain
-sd -> tab
-df -> backspace
-jk -> escape
-kl -> return
+                              |   ui -> Wooshy   io -> Smart magnify
+sd -> tab   df -> backspace   |   jk -> escape   kl -> return
 ```
 
 ## Layers
@@ -64,14 +62,14 @@ kl -> return
 ### (`qp`) Extended Control
 
 ```plain
-▣ tab
+▣ window-tab
 all empties are letter+control
 
 +---+---+---+---+---+    +---+---+---+---+---+
-|   |   |   |   |   |    |   |   |tab|   |   |
+|   |   |   |   |   |    |   |   |   |   |   |
 +---+---+---+---+---+    +---+---+---+---+---+
 |   |   |   |   |   |    | ← | ↓ | ↑ | → |   |
 +---+---+---+---+---+    +---+---+---+---+---+
-|   |   |   |   |   |    |   |ret|←▣ | ▣→|~/_|
+|   |   |   |   |   |    |   |   |←▣ | ▣→|~/_|
 +---+---+---+---+---+    +---+---+---+---+---+
 ```
