@@ -2,9 +2,7 @@
 
 ## hammerspoon
 
-- [zoom and scroll with
-  keyboard](http://www.hammerspoon.org/docs/hs.eventtap.event.html)
-  - use smart magnify?
+- [scroll with keyboard](http://www.hammerspoon.org/docs/hs.eventtap.event.html)
 
 ## vim
 
