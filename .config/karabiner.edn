@@ -1,26 +1,20 @@
-; todo
-; - fix dG yG cG by disabling cancel
-
 {
   :profiles {
     :goku {
       :default true
       :alone   300  ; hold for .. ms to register single tap
-      :held    50  ; not sure what it's for
-      :delay   0   ; time after which the key press is delayed
+      :held    50   ; not sure what it's for
+      :delay   0    ; time after which the key press is delayed
       :sim     30}} ; keys need to be pressed within this threshold to be considered simultaneous
 
   :templates {
     :open "open -a \"%s.app\""
     :uri "open -g \"%s\""
-    :dncp "~/.bin/dnc-post \"%s\""
-    :delay-set-var "sleep 0.1 && /Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --set-variables '{\"%s\": %d}'"}
+    :dncp "~/.bin/dnc-post \"%s\""}
 
   :applications {
-    :native-vim ["^com\\.googlecode\\.iterm2$", "^com\\.microsoft\\.VSCode$", "^com\\.apple\\.dt\\.Xcode$", "^net\\.kovidgoyal\\.kitty$"]
+    :xcode ["^com\\.apple\\.dt\\.Xcode$"]
     :kitty ["^net\\.kovidgoyal\\.kitty$"]
-    :iterm ["^com\\.googlecode\\.iterm2$"]
-    :vscode ["^com\\.microsoft\\.VSCode$"]
     :safari ["^com\\.apple\\.Safari$"]}
 
   :modifiers {
@@ -137,9 +131,9 @@
         [:o [:!Oe :o ["language" 0]]]   [:!So [:!Oe :!So ["language" 0]]]
         [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]]}
 
-    {:des "caps > escape / control s (native-vim), held > control" :rules [
-        [:##caps_lock :left_control ["karabiner_vim" 1] {:alone [:escape]}]
-        [:##caps_lock :left_control ["karabiner_vim" 0] {:alone [:!Ts]}]]}
+    {:des "caps > escape / control s (kitty), held > control" :rules [
+        [:##caps_lock :left_control :!kitty {:alone [:escape]}]
+        [:##caps_lock :left_control :kitty {:alone [:!Ts]}]]}
 
     {:des "safari normal mode" :rules [
       [:condis :safari ["kVNormal" 1]]
