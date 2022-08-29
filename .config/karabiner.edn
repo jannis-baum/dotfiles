@@ -97,7 +97,7 @@
        :ctrl-l
          ; upper row
          [:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
-         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To] [:p :!Tp]
+         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To :!xcode] [:p :!Tp]
          ; home row
          [:a :!Ta] [:s :!Ts] [:d :!Td] [:f :!Tf] [:g :!Tg]
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
@@ -107,7 +107,7 @@
        :ctrl-r
          ; upper row
          [:q :!Tq][:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
-         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To]
+         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To :!xcode]
          ; home row
          [:a :!Ta] [:s :!Ts] [:d :!Td] [:f :!Tf] [:g :!Tg]
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
@@ -139,5 +139,11 @@
       [:condis :safari ["kVNormal" 1]]
         [:q :!Ct]
         [:period :!Cl]]}
+
+    {:des "xcode normal mode" :rules [
+      [:condis :xcode ["kVNormal" 1] :ctrl-l]
+        [:o :!CSo]
+      [:condis :xcode ["kVNormal" 1] :ctrl-r]
+        [:o :!CSo]]}
   ]
 }
