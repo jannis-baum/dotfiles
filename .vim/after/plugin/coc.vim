@@ -3,6 +3,7 @@ let g:coc_global_extensions = [
     \'coc-sh',
     \'coc-pyright',
     \'coc-clangd', 'coc-cmake',
+    \'coc-sourcekit',
     \'coc-tsserver', 'coc-tslint-plugin', 'coc-eslint', 
     \'coc-html', 'coc-css', '@yaegassy/coc-tailwindcss3', 'coc-json',
     \'coc-git', 'coc-docker',
