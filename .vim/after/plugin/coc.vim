@@ -27,8 +27,12 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <c-@> coc#refresh()
 
 " gd / gr - go to definition of word / type under cursor
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gdd <Plug>(coc-definition)
+nmap <silent> gdv :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> gdp :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gyy <Plug>(coc-type-definition)
+nmap <silent> gyv :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
+nmap <silent> gyv :call CocAction('jumpTypeDefinition', 'split')<CR>
 
 " gr - find references
 nmap <silent> gr <Plug>(coc-references)
