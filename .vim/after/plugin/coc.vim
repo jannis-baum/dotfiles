@@ -1,3 +1,6 @@
+" highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " EXTENSIONS ---
 let g:coc_global_extensions = [
     \'coc-sh',

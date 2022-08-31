@@ -17,17 +17,11 @@ augroup SaveSession
 augroup END
 
 " backups
-set backup
-set writebackup
-set backupdir=$HOME/.vim/backup//
-set backupcopy=yes
-set backupskip=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,/var/folders
-" create backup dir if it doesn't exist
-if !isdirectory($HOME."~/.vim/backup")
-  call mkdir($HOME."/.vim/backup", "p")
-endif
+set nobackup
+set nowritebackup
 
 " swap
+set updatetime=300            " swap write & coc hover
 set directory=~/.vim/swap//
 " create swap dir if it doesn't exist
 if !isdirectory($HOME."/.vim/swap")
