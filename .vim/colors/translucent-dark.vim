@@ -8,7 +8,7 @@ endif
 set background=dark
 
 " DEFINITIONS ------------------------------------------------------------------
-" setter
+" setter: group, foreground, deco, background, underline color
 function! s:HI(group, ...)
     let histring = 'highlight ' . a:group . ' '
     if strlen(a:1)
@@ -112,4 +112,4 @@ hi! link DiffText DiffAdd
 
 " misc
 call s:HI('Search', s:neut1, 'none', s:main1)
-
+call s:HI('CocHighlightText', 'none', 'underdouble', 'none', s:main2)
