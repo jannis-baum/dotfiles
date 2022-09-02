@@ -33,5 +33,15 @@
                 }
             }
         ]
+    },
+    "modules": {
+        "custom": [
+            {
+                "name": "Character picker",
+                "trigger": "u (.*)",
+                "source": "/Users/jannisbaum/_lib/synapse-modules/unicode/source",
+                "sink": "Users/jannisbaum/_lib/synapse-modules/unicode/sink"
+            }
+        ]
     }
 }
