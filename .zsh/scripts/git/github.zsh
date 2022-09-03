@@ -31,6 +31,16 @@ function ghi() {
     fi
 }
 
+# open branch issue
+function ghio() {
+    local issue=$(_gh_get_branch_issue)
+    if [ -z "$issue" ]; then
+        echo "Branch doesn't follow issue naming convention. Exiting."
+        return
+    fi
+    gh issue view --web $issue
+}
+
 # create GitHub PR for current branch that follows
 # `issue/NUMBER-title` scheme.
 # uses issue title as PR title and adds PR body to close issue
