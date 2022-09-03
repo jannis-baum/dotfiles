@@ -73,7 +73,7 @@ function gl() {
     local commit hash key
     out=$(git log --oneline --decorate --color=always \
         | fzf --delimiter=' ' --with-nth='2..' --no-sort --exact --ansi --expect=ctrl-r,ctrl-o \
-            --preview 'zsh -c "source $ZDOTDIR/scripts/git.zsh 2> /dev/null;
+            --preview 'zsh -c "source $ZDOTDIR/scripts/git/_helpers.zsh 2> /dev/null;
                 _git_pretty_diff $(git log --pretty=%P -n 1 {1}) {1} | less -R"' \
             --preview-window='60%,nowrap,nohidden')
     key=$(echo $out | head -1)
