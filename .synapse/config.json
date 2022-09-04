@@ -29,7 +29,7 @@
                 },
                 "alt": {
                     "path": "/bin/date",
-                    "args": ["+%m/%e"]
+                    "args": ["+%m/%d"]
                 }
             }
         ]
