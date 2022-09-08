@@ -45,7 +45,7 @@
        [{:sim [:k :l] :modi :any} :return_or_enter]
        [[:u :i] :!Cf8]
        [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
-       [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 0]]]}
+       [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
 
     {:des "character layer" :rules [
        :char-l
