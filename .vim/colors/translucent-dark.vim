@@ -112,4 +112,4 @@ hi! link DiffText DiffAdd
 
 " misc
 call s:HI('Search', s:neut1, 'none', s:main1)
-call s:HI('CocHighlightText', 'none', 'underdouble', 'none', s:main2)
+call s:HI('CocHighlightText', 'none', 'underdouble', 'none', s:neut6)
