@@ -84,7 +84,7 @@
     {:des "gui layer" :rules [
        :gui
          ; upper row
-         [:q :!Cq] [:w :!Cw] [:e :!TOe] [:r :!TOr] [:t :!TOt]
+         [:q :vk_none] [:w :vk_none] [:e :!TOe] [:r :!TOr] [:t :!TOt]
          [:y :vk_none] [:u :vk_none] [:i :vk_none] [:o :vk_none] [:p :vk_none]
          ; home row
          [:a :!Copen_bracket] [:s :!Cclose_bracket] [:d :!TOd] [:f :!TOf :!kitty] [:f :!STf10 :kitty] [:g :!TOg]
@@ -97,23 +97,23 @@
        :ctrl-l
          ; upper row
          [:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
-         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To :!xcode] [:p :!Tp]
+         [:y :!Ty] [:u :!Tu] [:i :!Ti] [:o :!To :!xcode] [:p :!Tp]
          ; home row
-         [:a :!Ta] [:s :!Ts] [:d :!Td] [:f :!Tf] [:g :!Tg]
+         [:a :!Ta] [:s :!Ts] [:d :!Td :kitty] [:d :!Cw :!kitty] [:f :!Tf] [:g :!Tg]
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
          ; bottom row
          [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
-         [:n :!Tn] [:m :return_or_enter] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
+         [:n :!Tn] [:m :!Tm] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
        :ctrl-r
          ; upper row
-         [:q :!Tq][:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
-         [:y :!Ty] [:u :!Tu] [:i :tab] [:o :!To :!xcode]
+         [:q :!Tq] [:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
+         [:y :!Ty] [:u :!Tu] [:i :!Ti] [:o :!To :!xcode]
          ; home row
-         [:a :!Ta] [:s :!Ts] [:d :!Td] [:f :!Tf] [:g :!Tg]
+         [:a :!Ta] [:s :!Ts] [:d :!Td :kitty] [:d :!Cw :!kitty] [:f :!Tf] [:g :!Tg]
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
          ; bottom row
          [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
-         [:n :!Tn] [:m :return_or_enter] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]]}
+         [:n :!Tn] [:m :!Tm] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]]}
 
     {:des "language character layers" :rules [
       ; german (command)
