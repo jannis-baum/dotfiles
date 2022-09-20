@@ -40,7 +40,15 @@
                 "name": "Character picker",
                 "trigger": "^u (.*)",
                 "source": "/Users/jannisbaum/_lib/synapse-modules/unicode/source",
-                "sink": "Users/jannisbaum/_lib/synapse-modules/unicode/sink"
+                "sink": "/Users/jannisbaum/_lib/synapse-modules/unicode/sink"
+            },
+            {
+                "name": "CAS",
+                "trigger": "^m (.*)",
+                "source": "/Users/jannisbaum/_lib/synapse-modules/cas/source",
+                "sink": "/Users/jannisbaum/_lib/synapse-modules/cas/sink",
+                "reloadsOnChange": true,
+                "isSearchDisabled": true
             }
         ]
     }
