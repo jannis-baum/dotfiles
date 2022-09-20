@@ -3,6 +3,7 @@ alias gca="git commit --amend"
 alias grc="git rebase --continue"
 alias gp="git push"
 alias gpf="git push --force"
+alias gpp="git pull && gprune-branches"
 
 # stage all or given files/dirs
 function ga() {
