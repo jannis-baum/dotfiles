@@ -15,7 +15,7 @@ COPIES = $(shell ls $(srcdir) | sed 's|^|$(COPYDIR)/|g')
 .DEFAULT_GOAL = copy
 
 .PHONY: copy
-copy:
+copy: compile
 	@touch $(COPYIGNOREFILE)
 	@for p in $(PROGRAMS); do \
 		if [[ -z $$(cat $(COPYIGNOREFILE) | grep $$p) ]]; then \
