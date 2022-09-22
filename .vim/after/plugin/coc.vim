@@ -8,6 +8,7 @@ let g:coc_global_extensions = [
     \'coc-clangd', 'coc-cmake',
     \'coc-sourcekit',
     \'coc-tsserver', 'coc-tslint-plugin', 'coc-eslint', 
+    \'coc-flutter',
     \'coc-html', 'coc-css', '@yaegassy/coc-tailwindcss3', 'coc-json',
     \'coc-git', 'coc-docker',
     \'coc-markdownlint'
