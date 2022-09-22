@@ -19,7 +19,7 @@ copy:
 	@touch $(COPYIGNOREFILE)
 	@for p in $(PROGRAMS); do \
 		if [[ -z $$(cat $(COPYIGNOREFILE) | grep $$p) ]]; then \
-			echo $$p >> $(COPYIGNOREFILE); \
+			echo "/$$p" >> $(COPYIGNOREFILE); \
 		fi; done
 	@cp $(BUILDS) $(COPYDIR)
 
