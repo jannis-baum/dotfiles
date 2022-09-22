@@ -30,7 +30,7 @@ compile: $(SOURCES)
 		--disable-sandbox \
 		--build-path "$(BUILDDIR)" \
 		-Xswiftc "-target" \
-		-Xswiftc "x86_64-apple-macosx10.11"
+		-Xswiftc "x86_64-apple-macosx10.15.4"
 
 .PHONY: clean
 clean:
