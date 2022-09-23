@@ -34,6 +34,12 @@
             }
         ]
     },
+    "search": {
+        "program": {
+            "path": "/usr/local/bin/fzf",
+            "args": ["-f"]
+        }
+    },
     "modules": {
         "custom": [
             {
