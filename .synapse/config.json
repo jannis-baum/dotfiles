@@ -49,6 +49,12 @@
                 "sink": { "path": "/bin/bash", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
             },
             {
+                "name": "Control Center",
+                "trigger": "^x (.*)",
+                "source": "/Users/jannisbaum/.synapse/modules/control-center/source.json",
+                "sink": { "path": "/usr/bin/open", "args": ["-g", "hammerspoon://systemKey?key={userInfo}"] }
+            },
+            {
                 "name": "CAS",
                 "trigger": "^m (.*)",
                 "source": "/Users/jannisbaum/.synapse/modules/cas/source.py",

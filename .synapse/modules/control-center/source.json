@@ -1,0 +1,23 @@
+[
+    {
+        "symbol": "􀆭",
+        "title": "Brightness Up",
+        "userInfo": "BRIGHTNESS_UP"
+    }, {
+        "symbol": "􀆫",
+        "title": "Brightness Down",
+        "userInfo": "BRIGHTNESS_DOWN"
+    }, {
+        "symbol": "􀊨",
+        "title": "Volume Up",
+        "userInfo": "SOUND_UP"
+    }, {
+        "symbol": "􀊤",
+        "title": "Volume Down",
+        "userInfo": "SOUND_DOWN"
+    }, {
+        "symbol": "􀊢",
+        "title": "Mute",
+        "userInfo": "MUTE"
+    }
+]
