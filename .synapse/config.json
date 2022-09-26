@@ -41,6 +41,11 @@
         }
     },
     "modules": {
+        "native": {
+            "clipboard": {
+                "triggerPrefix": "p"
+            }
+        },
         "custom": [
             {
                 "name": "Character picker",
@@ -50,7 +55,7 @@
             },
             {
                 "name": "Control Center",
-                "trigger": "^x (.*)",
+                "trigger": "^c (.*)",
                 "source": "/Users/jannisbaum/.synapse/modules/control-center/source.json",
                 "sink": { "path": "/usr/bin/open", "args": ["-g", "hammerspoon://systemKey?key={userInfo}"] }
             },
