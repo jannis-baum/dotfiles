@@ -45,14 +45,14 @@
             {
                 "name": "Character picker",
                 "trigger": "^u (.*)",
-                "source": "/Users/jannisbaum/_lib/synapse-modules/unicode/source",
-                "sink": "/Users/jannisbaum/_lib/synapse-modules/unicode/sink"
+                "source": "/Users/jannisbaum/.synapse/modules/unicode/source.json",
+                "sink": { "path": "/bin/bash", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
             },
             {
                 "name": "CAS",
                 "trigger": "^m (.*)",
-                "source": "/Users/jannisbaum/_lib/synapse-modules/cas/source",
-                "sink": "/Users/jannisbaum/_lib/synapse-modules/cas/sink",
+                "source": "/Users/jannisbaum/.synapse/modules/cas/source.py",
+                "sink": { "path": "/Users/jannisbaum/.synapse/modules/cas/sink.py", "args": ["{title}"] },
                 "reloadsOnChange": true,
                 "isSearchDisabled": true
             }
