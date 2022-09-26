@@ -1,6 +1,3 @@
--- launch
-hs.execute('open -g -a Synapse')
-
 -- reload config
 hs.urlevent.bind("reloadConfig", function(eventName, params)
     hs.reload()
