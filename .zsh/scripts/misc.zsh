@@ -4,6 +4,7 @@ alias kl="cookie-cleaner && quit-apps"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 alias convert-file="ffmpeg"
+alias w='printf "%s" "$(vipe)" | pbcopy'
 
 # linking scripts
 alias mue="~/_lib/markup-export/main"
