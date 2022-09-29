@@ -2,37 +2,38 @@
     "panel": {
         "keepCentered": true
     },
-    "statusBar": {
-        "right": [
-            {
-                "updateFrequency": 5,
-                "main": {
-                    "path": "/bin/bash",
-                    "args": [
-                        "-c",
-                        "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
-                    ]
-                },
-                "alt": {
-                    "path": "/bin/bash",
-                    "args": [
-                        "-c",
-                        "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
-                    ]
+    "statusInfo": {
+        "bar": {
+            "right": [
+                {
+                    "updateFrequency": 5,
+                    "main": {
+                        "path": "/bin/bash",
+                        "args": [
+                            "-c",
+                            "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
+                        ]
+                    },
+                    "alt": {
+                        "path": "/bin/bash",
+                        "args": [
+                            "-c",
+                            "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
+                        ]
+                    }
                 }
-            },
-            {
-                "updateFrequency": 1,
-                "main": {
-                    "path": "/bin/date",
-                    "args": ["+%l:%M"]
-                },
-                "alt": {
-                    "path": "/bin/date",
-                    "args": ["+%m/%d"]
+            ]
+        },
+        "placeholder": {
+            "font": "Poiret One",
+            "elements": [
+                {
+                    "updateFrequency": 1,
+                    "main": { "path": "/bin/date", "args": ["+%l:%M"] },
+                    "alt": { "path": "/bin/date", "args": ["+%m/%d"] }
                 }
-            }
-        ]
+            ]
+        }
     },
     "search": {
         "program": {
