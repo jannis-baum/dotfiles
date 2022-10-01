@@ -1,7 +1,12 @@
 #!/bin/sh
 
+# TODO: setpos doesn't work because it is called before cat is done, which
+# continuously moves the cursor to the bottom
+[ "$#" -eq 0 ] && set -- '+call setpos(".", [0, 1, 1, 0])'
+
 vim - \
     --not-a-term \
     --cmd 'let g:omit_coc=1' \
-    -c 'silent! w! /tmp/vim_ansi' \
-    -c 'silent! term ++curwin cat /tmp/vim_ansi'
+    '+silent! w! /tmp/vim_ansi' \
+    '+silent! term ++curwin cat /tmp/vim_ansi' \
+    "$@"
