@@ -1,5 +1,10 @@
 " highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+if !exists('g:omit_coc')
+    augroup Coc
+        autocmd!
+        autocmd CursorHold * silent call CocActionAsync('highlight')
+    augroup END
+endif
 
 " EXTENSIONS ---
 let g:coc_global_extensions = [
