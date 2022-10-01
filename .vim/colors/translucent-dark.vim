@@ -91,7 +91,9 @@ call s:HI('ErrorMsg', s:syner)
 " ui
 call s:HI('SignColumn',   s:neut6)
 call s:HI('StatusLine',   s:neut3, 'bold')
+hi! link StatusLineTerm StatusLine
 call s:HI('StatusLineNC', s:neut2, 'none')
+hi! link StatusLineTermNC  StatusLineNC
 call s:HI('FoldColumn',   'none')
 call s:HI('Folded',       s:neut3, 'italic')
 call s:HI('VertSplit',    s:neut1, 'bold')
