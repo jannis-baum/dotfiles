@@ -51,20 +51,20 @@
             {
                 "name": "Character picker",
                 "trigger": "^u (.*)",
-                "source": "/Users/jannisbaum/.synapse/modules/unicode/source.json",
+                "source": "~/.synapse/modules/unicode/source.json",
                 "sink": { "path": "/bin/bash", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
             },
             {
                 "name": "Control Center",
                 "trigger": "^c (.*)",
-                "source": "/Users/jannisbaum/.synapse/modules/control-center/source.json",
+                "source": "~/.synapse/modules/control-center/source.json",
                 "sink": { "path": "/usr/bin/open", "args": ["-g", "hammerspoon://systemKey?key={userInfo}"] }
             },
             {
                 "name": "CAS",
                 "trigger": "^m (.*)",
-                "source": "/Users/jannisbaum/.synapse/modules/cas/source.py",
-                "sink": { "path": "/Users/jannisbaum/.synapse/modules/cas/sink.py", "args": ["{title}"] },
+                "source": "~/.synapse/modules/cas/source.py",
+                "sink": { "path": "~/.synapse/modules/cas/sink.py", "args": ["{title}"] },
                 "reloadsOnChange": true,
                 "isSearchDisabled": true
             }
