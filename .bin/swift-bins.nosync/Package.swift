@@ -7,7 +7,7 @@ let package = Package(
     name: "swift-bins",
     targets: [
         .executableTarget(
-            name: "hide-kitty",
+            name: "set-kitty",
             dependencies: []),
         .executableTarget(
             name: "dnc-post",

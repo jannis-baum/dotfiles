@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo $KITTY_PID > ~/.config/kitty/writer/.pid
+
+F=$(mktemp)
+
+/usr/local/bin/vim $F \
+    --cmd 'let g:omit_coc = 1' \
+    '+set laststatus=1' \
+    '+startinsert' \
+    '+echo ""'
+
+printf "%s" "$(cat $F)" | pbcopy
+
+rm $F
+~/.bin/set-kitty matching $KITTY_PID hidden

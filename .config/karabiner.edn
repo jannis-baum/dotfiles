@@ -30,8 +30,8 @@
     {:des "thumb keys" :rules [
        [:##spacebar :left_shift nil {:alone [:spacebar]}]
 
-       [:right_command :right_command :kitty {:alone "~/.bin/hide-kitty"}]
-       [:right_command :right_command :!kitty {:alone [:open "kitty"]}]
+       [:right_command :right_command :kitty {:alone "~/.config/kitty/set-terminal hidden"}]
+       [:right_command :right_command :!kitty {:alone "~/.config/kitty/set-terminal active"}]
 
        [:left_command :left_command nil {:alone [:dncp "SYNAPSE_TOGGLE_PANEL"]}]
        
@@ -45,6 +45,7 @@
        [{:sim [:k :l] :modi :any} :return_or_enter]]}
 
     {:des "upper row combos: ui > wooshy (f8), io > smart magnify" :rules [
+       [[:e :r] "~/.config/kitty/vriter/start" :!kitty]
        [[:u :i] :!Cf8]
        [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
        [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
