@@ -68,7 +68,7 @@ class GitStatusD:
             'head_first_para': fields[28],
         }
 
-def draw_git_info(draw_data: DrawData, screen: Screen):
+def get_git_info():
     boss = get_boss()
     # forgive the horrible hack
     if not hasattr(boss, 'gitstatusd'):
@@ -91,6 +91,9 @@ def draw_git_info(draw_data: DrawData, screen: Screen):
             git_info['num_conflicted_changes']
         git_status = f' ✻' if dirty > 0 else '  '
     except: return
+    return (git_branch, git_status)
+
+def draw_git_info(git_branch, git_status, draw_data: DrawData, screen: Screen):
     spaces = screen.columns - screen.cursor.x - len(git_status) - len(git_branch)
     screen.draw(' ' * spaces)
     screen.draw(git_branch)
@@ -103,25 +106,30 @@ def draw_tab(
     before: int, max_title_length: int, index: int, is_last: bool,
     extra_data: ExtraData
 ) -> int:
-    if draw_data.leading_spaces:
-        screen.draw(' ' * draw_data.leading_spaces)
-    draw_title(draw_data, screen, tab, index)
-    trailing_spaces = min(max_title_length - 1, draw_data.trailing_spaces)
-    max_title_length -= trailing_spaces
-    extra = screen.cursor.x - before - max_title_length
-    if extra > 0:
-        screen.cursor.x -= extra + 1
-        screen.draw('…')
-    if trailing_spaces:
-        screen.draw(' ' * trailing_spaces)
-    end = screen.cursor.x
+    if index != 1 or not is_last:
+        if draw_data.leading_spaces:
+            screen.draw(' ' * draw_data.leading_spaces)
+        draw_title(draw_data, screen, tab, index)
+        trailing_spaces = min(max_title_length - 1, draw_data.trailing_spaces)
+        max_title_length -= trailing_spaces
+        extra = screen.cursor.x - before - max_title_length
+        if extra > 0:
+            screen.cursor.x -= extra + 1
+            screen.draw('…')
+        if trailing_spaces:
+            screen.draw(' ' * trailing_spaces)
+
     screen.cursor.bold = screen.cursor.italic = False
     screen.cursor.fg = 0
+    end = screen.cursor.x
+
     if is_last:
-        draw_git_info(draw_data, screen)
-        pass
-    if not is_last:
+        git_info = get_git_info()
+        if git_info:
+            draw_git_info(git_info[0], git_info[1], draw_data, screen)
+    else:
         screen.cursor.bg = as_rgb(color_as_int(draw_data.inactive_bg))
         screen.draw(draw_data.sep)
+
     screen.cursor.bg = 0
     return end
