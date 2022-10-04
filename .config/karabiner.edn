@@ -38,11 +38,13 @@
        [:left_option :left_option ["language" 0] {:alone [["language" 1]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
        [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]]}
 
-    {:des "sd > tab, df > backspace, jk > escape/normal, kl > return, ui > wooshy (f8)" :rules [
+    {:des "home row combos: sd > tab, df > backspace, jk > escape/normal, kl > return, ui > wooshy (f8)" :rules [
        [{:sim [:s :d] :modi :any} :tab]
        [{:sim [:d :f] :modi :any} :delete_or_backspace]
        [{:sim [:j :k] :modi :any} :escape]
-       [{:sim [:k :l] :modi :any} :return_or_enter]
+       [{:sim [:k :l] :modi :any} :return_or_enter]]}
+
+    {:des "upper row combos: ui > wooshy (f8), io > smart magnify" :rules [
        [[:u :i] :!Cf8]
        [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
        [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
