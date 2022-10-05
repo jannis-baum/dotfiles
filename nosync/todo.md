@@ -1,17 +1,15 @@
 # todo
 
-## hammerspoon
-
-- [scroll with keyboard](http://www.hammerspoon.org/docs/hs.eventtap.event.html)
-
 ## vim
 
 - fix coc-ultisnips conflict
 
 ## documentation
 
-- add some notes on
+- add some notes on / make posts for
   - fzf in zsh/vim
+  - git(hub) commands
+  - togglable kitty overlay & vriter
 
 ## scripts
 
@@ -24,23 +22,10 @@
   in plan?)
 - (give option to zip)
 
-## vim
-
-- plugin to comment code, e.g. [this
-  one](https://github.com/tomtom/tcomment_vim)?
-- make vim save state per directory instead of globally?
-
-## kitty
-
-- popover & fzf-tmux alternative? -> [not possible right
-  now](https://github.com/kovidgoyal/kitty/discussions/4018)
-
 ### sdf
 
 - option to delete files that are only in `$HOME`
 
 ## other
 
-- [yabai window manager](https://github.com/koekeishiya/yabai)
-- [hotkey daemon](https://github.com/koekeishiya/skhd)
 - brew.sh for initial installs
