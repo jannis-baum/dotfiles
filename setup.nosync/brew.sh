@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 function hl_print() {
     printf "🔬🧪 \\033[1m$1\\033[0m\n"

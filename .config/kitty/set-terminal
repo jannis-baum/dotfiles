@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 WRITER_PID="$(test -f ~/.config/kitty/writer/.pid \
     && cat ~/.config/kitty/writer/.pid \

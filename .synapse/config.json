@@ -8,14 +8,14 @@
                 {
                     "updateFrequency": 5,
                     "main": {
-                        "path": "/bin/bash",
+                        "path": "/bin/zsh",
                         "args": [
                             "-c",
                             "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
                         ]
                     },
                     "alt": {
-                        "path": "/bin/bash",
+                        "path": "/bin/zsh",
                         "args": [
                             "-c",
                             "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
@@ -52,7 +52,7 @@
                 "name": "Character picker",
                 "trigger": "^u (.*)",
                 "source": "~/.synapse/modules/unicode/source.json",
-                "sink": { "path": "/bin/bash", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
+                "sink": { "path": "/bin/zsh", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
             },
             {
                 "name": "Control Center",

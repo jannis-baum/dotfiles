@@ -1,4 +1,4 @@
-SHELL = /bin/bash
+SHELL = /bin/zsh
 
 srcdir = Sources
 
