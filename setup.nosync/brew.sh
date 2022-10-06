@@ -20,7 +20,7 @@ fi
 dir=$(dirname $(realpath $0))
 
 hl_print "checking installed packages"
-installed=$(brew leaves)
+installed=$(brew leaves && brew list --cask)
 packages=()
 while IFS= read -r line; do
     # trim whitespace & ignore comments
