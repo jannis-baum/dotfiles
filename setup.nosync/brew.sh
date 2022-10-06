@@ -37,3 +37,6 @@ for (( i=0; i<$count; i++ )); do
     hl_print "installing new package $((i+1))/$count: $package"
     brew_ install $package
 done
+
+hl_print "running brew cleanup"
+brew_ cleanup
