@@ -1,81 +1,82 @@
 #!/bin/sh
 
-# ~/.macos — https://mths.be/macos
+# see https://mths.be/macos
 
-# Close any open System Preferences panes, to prevent them from overriding
+# close any open system preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-# Ask for the administrator password upfront
+# ask for the administrator password upfront
 sudo -v
-
-# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+# keep-alive: update existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# ui
+# UI -----------------------------------------------------------------------
 
-# Disable the sound effects on boot
+# disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# Set highlight color to bright yellow
-defaults write NSGlobalDomain AppleHighlightColor -string "0.960784 0.862745 0.541176"
+# set highlight color to pink
+defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.749020 0.823529"
 
-# Expand save panel by default
+# expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-
-# Expand print panel by default
+# expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# dock, finder, dashboard
+# DOCK, FINDER, DASHBOARD, MENUBAR -----------------------------------------
 
-# Avoid creating .DS_Store files on network or USB volumes
+# avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-# Disable Dashboard
+# disable dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
 
-# Don’t show Dashboard as a Space
+# don't show dashboard as a space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-# Remove the auto-hiding Dock delay
+# remove the auto-hiding dock delay
 defaults write com.apple.dock autohide-delay -float 0
-# Remove the animation when hiding/showing the Dock
+# remove the animation when hiding/showing the dock
 defaults write com.apple.dock autohide-time-modifier -float 0
-# Automatically hide and show the Dock
+# automatically hide and show the dock
 defaults write com.apple.dock autohide -bool true
-# Don’t show recent applications in Dock
+# don’t show recent applications in dock
 defaults write com.apple.dock show-recents -bool false
 
-# Disable shadow in window screenshots
+# automatically hide and show the menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
+# disable shadow in window screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# safari
+# SAFARI -------------------------------------------------------------------
 
-# Privacy: don’t send search queries to Apple
+# privacy: don’t send search queries to apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
-# Warn about fraudulent websites
+# warn about fraudulent websites
 defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
 
-# Disable plug-ins
+# disable plug-ins
 defaults write com.apple.Safari WebKitPluginsEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
 
-# Disable Java
+# disable java
 defaults write com.apple.Safari WebKitJavaEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
-# Block pop-up windows
+# block pop-up windows
 defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
 
-# Enable “Do Not Track”
+# enable "do not track"
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
-# Update extensions automatically
+# update extensions automatically
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
