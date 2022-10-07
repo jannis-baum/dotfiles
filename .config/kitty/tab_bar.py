@@ -88,7 +88,8 @@ def get_git_info():
             git_info['num_staged_changes'] + \
             git_info['num_unstaged_deleted_files'] + \
             git_info['num_unstaged_changes'] + \
-            git_info['num_conflicted_changes']
+            git_info['num_conflicted_changes'] + \
+            git_info['num_untracked_files']
         git_status = f' ✻' if dirty > 0 else '  '
     except: return
     return (git_branch, git_status)
