@@ -1,3 +1,13 @@
+function _git_pretty_status() {
+    paste -d '\0' \
+        <(COLOR=always git --config-env=color.status=COLOR status -s) \
+        <(git diff --stat=120 --color=always HEAD \
+            | sed '$d' \
+            | rev \
+            | sed -r 's/^(.*\|[[:blank:]]*)[^[:blank:]].*$/\1/' \
+            | rev)
+}
+
 function _git_pretty_diff() {
     paste -d '\0' \
         <(git diff --name-status $1 $2 | sed -r 's/^([^[:blank:]]).*$/\1/') \
