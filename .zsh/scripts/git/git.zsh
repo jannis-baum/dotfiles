@@ -21,6 +21,32 @@ function gr() {
     gs
 }
 
+# interactive staging
+# - left arrow: toggle staging with left arrow
+# - ctrl+v: open diff view
+# - ctrl+o: commit
+# - ctrl+b: amend commit
+# - return: open file
+function gsi() {
+    local out key file
+    out=$(_git_interactive_status_helper \
+        | fzf --ansi --exit-0 --delimiter ':' --with-nth 2 --expect=ctrl-v,left,ctrl-o,ctrl-b \
+            --preview="git diff --color=always HEAD -- $(git rev-parse --show-toplevel)/{1} | tail -n +5" \
+            --preview-window='60%,nowrap,nohidden')
+
+    key=$(echo $out | head -1)
+    file=$(echo $out | tail -n +2 | sed -r 's/^([^:]*):.*$/\1/')
+
+    [[ -z "$file" ]] && return
+    file="$(git rev-parse --show-toplevel)/$file"
+
+    if [[ "$key" == left ]]; then; _git_toggle_staging $file && gsi
+    elif [[ "$key" == ctrl-v ]]; then; git difftool HEAD -- "$file" && gsi
+    elif [[ "$key" == ctrl-o ]]; then; gc
+    elif [[ "$key" == ctrl-b ]]; then; gca
+    else $EDITOR $file; fi
+}
+
 # commit
 # if branch follows `issue/NUMBER-title` scheme will copy issue ref
 # as conventional commit context

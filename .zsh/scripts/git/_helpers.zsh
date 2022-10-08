@@ -1,11 +1,21 @@
-function _git_pretty_status() {
+function _git_interactive_status_helper() {
     paste -d '\0' \
-        <(COLOR=always git --config-env=color.status=COLOR status -s) \
+        <(git status --short \
+            | sed -e 's/^...//' -e 's/$/:/') \
+        <(COLOR=always git --config-env=color.status=COLOR status --short) \
         <(git diff --stat=120 --color=always HEAD \
             | sed '$d' \
             | rev \
             | sed -r 's/^(.*\|[[:blank:]]*)[^[:blank:]].*$/\1/' \
             | rev)
+}
+
+function _git_toggle_staging() {
+    if [[ -n $(git diff -- $1) ]]; then
+        git add $1
+    else
+        git restore --staged $1
+    fi
 }
 
 function _git_pretty_diff() {
