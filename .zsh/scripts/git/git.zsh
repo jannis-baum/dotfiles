@@ -53,13 +53,22 @@ function greset() {
 # shows preview and opens difftool on return
 # offers zsh completion
 function gd() {
-    local file
-    file=$(_git_pretty_diff $1 $2 | sed '$d' \
-        | fzf --ansi --exit-0 --delimiter=' ' \
+    local out key file
+    out=$(_git_pretty_diff $1 $2 | sed '$d' \
+        | fzf --ansi --exit-0 --delimiter=' ' --expect=ctrl-o \
             --preview="git diff --color=always $1 $2 -- $(git rev-parse --show-toplevel)/{2} | tail -n +5" \
             --preview-window='60%,nowrap,nohidden' \
         | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
-    [[ -n "$file" ]] && git difftool $1 $2 -- "$(git rev-parse --show-toplevel)/$file" && gd $1 $2
+
+    key=$(echo $out | head -1)
+    file=$(echo $out | tail -n +2)
+
+    [[ -z "$file" ]] && return
+    file="$(git rev-parse --show-toplevel)/$file"
+
+    if [[ "$key" == ctrl-o ]]; then $EDITOR $file;
+    else git difftool $1 $2 -- "$file" && gd $1 $2;
+    fi
 }
 function _MINE_git_branch_names() {
     compadd "${(@)${(f)$(git branch -a)}#??}"
