@@ -3,30 +3,21 @@
         "keepCentered": true
     },
     "statusInfo": {
-        "bar": {
-            "right": [
-                {
-                    "updateFrequency": 5,
-                    "main": {
-                        "path": "/bin/zsh",
-                        "args": [
-                            "-c",
-                            "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; (pmset -g batt | grep -o '\\d\\+:\\d\\+' || echo '⋯') | sed 's/0:00/∞/'"
-                        ]
-                    },
-                    "alt": {
-                        "path": "/bin/zsh",
-                        "args": [
-                            "-c",
-                            "pmset -g batt | grep 'discharging' &>/dev/null || printf '􀋥 '; pmset -g batt | grep -o '\\d\\+%'"
-                        ]
-                    }
-                }
-            ]
-        },
         "placeholder": {
             "font": "Poiret One",
             "elements": [
+                {
+                    "updateFrequency": 5,
+                    "main": {
+                        "path": "~/.synapse/status/battery.zsh",
+                        "args": []
+
+                    },
+                    "alt": {
+                        "path": "~/.synapse/status/battery.zsh",
+                        "args": ["--percentage"]
+                    }
+                },
                 {
                     "updateFrequency": 1,
                     "main": { "path": "/bin/date", "args": ["+%l:%M"] },
