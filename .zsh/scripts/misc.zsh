@@ -1,8 +1,6 @@
 # generic aliases
 alias c="printf '\n%.0s' {1..$LINES} && clear"
-alias kl="cookie-cleaner && quit-apps"
 alias ej="eject /Volumes/LaCie"
-alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
 alias convert-file="ffmpeg"
 alias w='printf "%s" "$(vipe)" | pbcopy'
 
@@ -12,9 +10,6 @@ alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib
 alias desknotes="~/_lib/desktop-notes/desknotes"
 alias pass="~/_lib/keychains/main"
 alias fbm="~/_lib/file-bookmarks/file-bookmarks"
-
-# esp-idf toolchain setup
-alias load-esp-idf="export MENUCONFIG_STYLE=monochrome && . ~/_/development/esp/esp-idf/export.sh"
 
 # generic functions
 ## make dirs to open editor
