@@ -3,6 +3,7 @@
 ## vim
 
 - fix coc-ultisnips conflict
+- check out [tabout](https://github.com/abecodes/tabout.nvim)
 
 ## documentation
 
@@ -25,7 +26,3 @@
 ### sdf
 
 - option to delete files that are only in `$HOME`
-
-## other
-
-- brew.sh for initial installs
