@@ -1,5 +1,5 @@
 # generic aliases
-alias cl="clear"
+alias c="printf '\n%.0s' {1..$LINES} && clear"
 alias kl="cookie-cleaner && quit-apps"
 alias ej="eject /Volumes/LaCie"
 alias karabiner-cli="/Library/Application\\ Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli"
