@@ -27,6 +27,9 @@
     :gui {:key :slash}}
 
   :main [
+    ; --------------------------------------------------------------------------
+    ; thumb keys ---------------------------------------------------------------
+
     {:des "thumb keys" :rules [
        [:##spacebar :left_shift nil {:alone [:spacebar]}]
 
@@ -37,6 +40,9 @@
        
        [:left_option :left_option ["language" 0] {:alone [["language" 1]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
        [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]]}
+
+    ; --------------------------------------------------------------------------
+    ; combo keys ---------------------------------------------------------------
 
     {:des "home row combos: sd > tab, df > backspace, jk > escape/normal, kl > return, ui > wooshy (f8)" :rules [
        [{:sim [:s :d] :modi :any} :tab]
@@ -49,6 +55,9 @@
        [[:u :i] :!Cf8]
        [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
        [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
+
+    ; --------------------------------------------------------------------------
+    ; layers -------------------------------------------------------------------
 
     {:des "character layer" :rules [
        :char-l
@@ -118,6 +127,9 @@
          [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
          [:n :!Tn] [:m :!Tm] [:comma :!TStab] [:period :!Ttab] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]]}
 
+    ; --------------------------------------------------------------------------
+    ; languages ----------------------------------------------------------------
+
     {:des "language character layers" :rules [
       ; german (command)
       [:condis ["language" 1]]
@@ -137,6 +149,9 @@
     {:des "caps > escape / control s (kitty), held > control" :rules [
         [:##caps_lock :left_control :!kitty {:alone [:escape]}]
         [:##caps_lock :left_control :kitty {:alone [:!Ts]}]]}
+
+    ; --------------------------------------------------------------------------
+    ; kV mods ------------------------------------------------------------------
 
     {:des "safari normal mode" :rules [
       [:condis :safari ["kVNormal" 1]]
