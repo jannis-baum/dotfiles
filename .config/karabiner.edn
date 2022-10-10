@@ -152,6 +152,9 @@
 
     ; --------------------------------------------------------------------------
     ; kV mods ------------------------------------------------------------------
+    {:des "normal mode Y > y$" :rules [
+      [:condis ["kVNormal" 1]]
+        [:!Sy [:y :!S4]]]}
 
     {:des "safari normal mode" :rules [
       [:condis :safari ["kVNormal" 1]]
