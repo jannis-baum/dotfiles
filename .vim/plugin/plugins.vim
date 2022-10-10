@@ -20,3 +20,5 @@ packadd fugitive
 " SLIME ---
 packadd slime
 
+" DART ---
+packadd dart-vim-plugin
