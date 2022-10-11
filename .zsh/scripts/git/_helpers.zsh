@@ -14,7 +14,7 @@ function _git_toggle_staging() {
     if [[ -n $(git diff -- $1) ]]; then
         git add $1
     else
-        git restore --staged $1
+        git restore --staged $1 2> /dev/null || git add $1
     fi
 }
 
