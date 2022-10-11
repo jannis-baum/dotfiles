@@ -1,7 +1,8 @@
 function _git_interactive_status_helper() {
+    local work_dir=$(pwd)
     paste -d '\0' \
         <(git status --short \
-            | sed -e 's/^...//' -e 's/$/:/') \
+            | sed -e 's/^...//' -e 's/$/:/' -e "s|^|$work_dir/|") \
         <(COLOR=always git --config-env=color.status=COLOR status --short) \
         <(git diff --stat=120 --color=always HEAD \
             | sed '$d' \

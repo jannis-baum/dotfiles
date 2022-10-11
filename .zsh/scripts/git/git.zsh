@@ -31,14 +31,13 @@ function gsi() {
     local out key file
     out=$(_git_interactive_status_helper \
         | fzf --ansi --exit-0 --delimiter ':' --with-nth 2 --expect=ctrl-v,left,ctrl-o,ctrl-b \
-            --preview="git diff --color=always HEAD -- $(git rev-parse --show-toplevel)/{1} | tail -n +5" \
+            --preview="git diff --color=always HEAD -- {1} | tail -n +5" \
             --preview-window='60%,nowrap,nohidden')
 
     key=$(echo $out | head -1)
     file=$(echo $out | tail -n +2 | sed -r 's/^([^:]*):.*$/\1/')
 
     [[ -z "$file" ]] && return
-    file="$(git rev-parse --show-toplevel)/$file"
 
     if [[ "$key" == left ]]; then; _git_toggle_staging $file && gsi
     elif [[ "$key" == ctrl-v ]]; then; git difftool HEAD -- "$file" && gsi
