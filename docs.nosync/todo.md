@@ -2,7 +2,6 @@
 
 ## vim
 
-- fix coc-ultisnips conflict
 - check out [tabout](https://github.com/abecodes/tabout.nvim)
 
 ## documentation

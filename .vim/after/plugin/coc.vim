@@ -20,16 +20,7 @@ let g:coc_global_extensions = [
 \]
 
 " BINDINGS ---
-" use tab for completion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" also see tab-binding.vim
 " return for confirmation (e.g. auto import)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " ctrl-space to bring up completion
@@ -64,4 +55,3 @@ nnoremap <silent> <leader>cl  :<C-u>CocList diagnostics<CR>
 
 " select command
 nnoremap <silent> <leader>cc :<C-u>CocList commands<CR>
-
