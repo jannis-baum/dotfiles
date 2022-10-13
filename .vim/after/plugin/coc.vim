@@ -1,8 +1,11 @@
-" highlight the symbol and its references when holding the cursor
+" AUTOCMDS ---
 if !exists('g:omit_coc')
     augroup Coc
         autocmd!
+        " highlight the symbol and its references when holding the cursor
         autocmd CursorHold * silent call CocActionAsync('highlight')
+        " format on save in dart files
+        autocmd BufWritePost *.dart silent call CocAction('format')
     augroup END
 endif
 
