@@ -19,5 +19,9 @@
         "symbol": "􀊢",
         "title": "Mute",
         "userInfo": "systemKey:MUTE"
+    }, {
+        "symbol": "􀵪",
+        "title": "Take screenshot",
+        "userInfo": "key:SC4, closePanel"
     }
 ]

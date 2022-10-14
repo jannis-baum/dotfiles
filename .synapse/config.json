@@ -49,7 +49,10 @@
                 "name": "Control Center",
                 "trigger": "^c (.*)",
                 "source": "~/.synapse/modules/control-center/source.json",
-                "sink": { "path": "/usr/bin/open", "args": ["-g", "hammerspoon://controlCenter?info={userInfo}"] }
+                "sink": {
+                    "path": "/bin/zsh",
+                    "args": ["-c", "[[ \"{userInfo}\" == *closePanel* ]] && printf closePanel; open -g 'hammerspoon://controlCenter?info={userInfo}'"]
+                }
             },
             {
                 "name": "CAS",
