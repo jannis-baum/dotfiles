@@ -71,7 +71,7 @@ bindkey ^u fzf_dir
 # enter opens selection in vim, goes to selected occurance and highlights search
 rgi() {
     local rg_command=("rg" "--column" "--line-number" "--no-heading")
-    selection=$($rg_command "$1" | \
+    local selection=$($rg_command "$1" | \
         fzf -d ':' --with-nth=1 +m --disabled --print-query --query "$1" \
             --bind "change:reload:$rg_command {q} || true" \
             --preview-window="right,70%,wrap,nohidden" \
