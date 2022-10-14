@@ -28,8 +28,8 @@ fzf_file() {
         out=$(fzf $fzf_opts </dev/tty)
         zle reset-prompt
     fi
-    key=`echo $out | head -1`
-    f=`echo $out | tail -n +2`
+    key=$(head -1 <<< $out)
+    f=$(tail -n +2 <<< $out)
     if [[ -n "$f" ]]; then
         dir=`dirname ${(q-)f}`
         if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)f};
@@ -51,8 +51,8 @@ fzf_dir() {
         out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf $fzf_opts)
         zle reset-prompt
     fi
-    key=`echo $out | head -1`
-    dir=`echo $out | tail -n +2`
+    key=$(head -1 <<< $out)
+    dir=$(tail -n +2 <<< $out)
     if [[ -n "$dir" ]]; then
         if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)dir};
         elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}/";
@@ -80,13 +80,13 @@ rgi() {
                     | rg --color always --context 10 {q}\
                 || bat --style=numbers --color=always --line-range {2}: {1} 2> /dev/null")
 
-    local query=$(echo $selection | head -n 1)
-    local details=$(echo $selection | tail -n 1)
+    local query=$(head -n 1 <<< $selection)
+    local details=$(tail -n 1 <<< $selection)
 
     if [[ "$details" != "$query" ]]; then
-        local file=$(echo $details | awk -F: '{ print $1 }')
-        local line=$(echo $details | awk -F: '{ print $2 }')
-        local column=$(echo $details | awk -F: '{ print $3 }')
+        local file=$(awk -F: '{ print $1 }' <<< $details)
+        local line=$(awk -F: '{ print $2 }' <<< $details)
+        local column=$(awk -F: '{ print $3 }' <<< $details)
         vim "+call cursor($line, $column)" "+let @/='$query'" "+set hls" "$file" \
             && rgi "$query"
     fi
