@@ -10,8 +10,8 @@ function ghi() {
             --preview-window='50%,nowrap,nohidden' \
             --preview 'GH_FORCE_TTY=$FZF_PREVIEW_COLUMNS gh issue view {1}')
 
-    key=$(echo $out | head -1)
-    issue=$(echo $out | tail -n +2 | sed -r 's/^#([[:digit:]]+) .*/\1/')
+    key=$(head -1 <<< $out)
+    issue=$(tail -n +2 <<< $out | sed -r 's/^#([[:digit:]]+) .*/\1/')
 
     if [ -n "$issue" ]; then
         if [[ "$key" == ctrl-o ]]; then
