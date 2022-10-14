@@ -2,22 +2,22 @@
     {
         "symbol": "􀆭",
         "title": "Brightness Up",
-        "userInfo": "BRIGHTNESS_UP"
+        "userInfo": "systemKey:BRIGHTNESS_UP"
     }, {
         "symbol": "􀆫",
         "title": "Brightness Down",
-        "userInfo": "BRIGHTNESS_DOWN"
+        "userInfo": "systemKey:BRIGHTNESS_DOWN"
     }, {
         "symbol": "􀊨",
         "title": "Volume Up",
-        "userInfo": "SOUND_UP"
+        "userInfo": "systemKey:SOUND_UP"
     }, {
         "symbol": "􀊤",
         "title": "Volume Down",
-        "userInfo": "SOUND_DOWN"
+        "userInfo": "systemKey:SOUND_DOWN"
     }, {
         "symbol": "􀊢",
         "title": "Mute",
-        "userInfo": "MUTE"
+        "userInfo": "systemKey:MUTE"
     }
 ]
