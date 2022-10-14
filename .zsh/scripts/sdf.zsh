@@ -17,6 +17,7 @@
 
 sdf() {
     # load config, go to dotfiles_dir and setup ignore
+    local dotfiles_actions dotfiles_dir ignore_patterns
     typeset -A dotfiles_actions
     [[ -n "$SDFRC_PATH" ]] && source "$SDFRC_PATH" || source ~/.sdfrc
     dotfiles_dir=$(realpath $dotfiles_dir)
@@ -29,7 +30,7 @@ sdf() {
         return
     fi
 
-    prev_dir=$(pwd)
+    local prev_dir=$(pwd)
     cd $dotfiles_dir
     ignore_patterns+=('.git/*' '.gitignore' '.gitmodules')
 
@@ -53,7 +54,7 @@ sdf() {
 
     # find submodules
     if [[ -f '.gitmodules' ]]; then
-        submodules=("${(f)$(rg --no-line-number --replace '' '^\s*path ?= ?' '.gitmodules')}")
+        local submodules=("${(f)$(rg --no-line-number --replace '' '^\s*path ?= ?' '.gitmodules')}")
         ignore_patterns+=("${(@)submodules}")
     fi
 
@@ -65,9 +66,9 @@ sdf() {
     done
 
     # find dotfiles
-    fd_opts=('--strip-cwd-prefix' '--type' 'f' '--type' 'l' '--hidden' '--no-ignore')
+    local fd_opts=('--strip-cwd-prefix' '--type' 'f' '--type' 'l' '--hidden' '--no-ignore')
     fd_opts+=("${(z)$(printf '%s\n' ${ignore_patterns} | sed 's/^/--exclude /' | tr '\n' ' ')}")
-    dotfiles=("${(f)$(fd $fd_opts)}")
+    local dotfiles=("${(f)$(fd $fd_opts)}")
 
     # install files if different from file in $HOME
     for df in $dotfiles; do
