@@ -34,8 +34,8 @@ function gsi() {
             --preview="git diff --color=always HEAD -- {1} | tail -n +5" \
             --preview-window='60%,nowrap,nohidden')
 
-    key=$(echo $out | head -1)
-    file=$(echo $out | tail -n +2 | sed -r 's/^([^:]*):.*$/\1/')
+    key=$(head -1 <<< $out)
+    file=$(tail -n +2 <<< $out | sed -r 's/^([^:]*):.*$/\1/')
 
     [[ -z "$file" ]] && return
 
@@ -85,8 +85,8 @@ function gd() {
             --preview-window='60%,nowrap,nohidden' \
         | sed -r 's/^. *([^[:blank:]]*) *\|.*$/\1/')
 
-    key=$(echo $out | head -1)
-    file=$(echo $out | tail -n +2)
+    key=$(head -1 <<< $out)
+    file=$(tail -n +2 <<< $out)
 
     [[ -z "$file" ]] && return
     file="$(git rev-parse --show-toplevel)/$file"
@@ -111,8 +111,8 @@ function gl() {
             --preview 'zsh -c "source $ZDOTDIR/scripts/git/_helpers.zsh 2> /dev/null;
                 _git_pretty_diff $(git log --pretty=%P -n 1 {1}) {1} | less -R"' \
             --preview-window='60%,nowrap,nohidden')
-    key=$(echo $out | head -1)
-    hash=$(echo $out | tail -n +2 | sed 's/ .*$//')
+    key=$(head -1 <<< $out)
+    hash=$(tail -n +2 <<< $out | sed 's/ .*$//')
     if [ -n "$hash" ]; then
         if [[ "$key" == ctrl-r ]]; then git rebase -i $hash^;
         elif [[ "$key" == ctrl-o ]]; then printf $hash | pbcopy;
