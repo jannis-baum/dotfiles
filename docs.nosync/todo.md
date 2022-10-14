@@ -9,19 +9,15 @@
 - add some notes on / make posts for
   - fzf in zsh/vim
   - git(hub) commands
+  - sdf
   - togglable kitty overlay & vriter
 
 ## scripts
 
-### icloud-backup
-
-- copies given file(s) from `~/...` to parallel directory `~/Library/Mobile\
-  Documents/com\~apple\~CloudDocs/...`
-- created directory if not there yet
-- (gives info on how much space icloud files are using and how much i have left
-  in plan?)
-- (give option to zip)
-
 ### sdf
 
 - option to delete files that are only in `$HOME`
+
+### ibkp
+
+- give option to zip
