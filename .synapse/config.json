@@ -22,36 +22,32 @@
     "search": {
         "program": { "path": "/usr/local/bin/fzf", "args": ["-f"] }
     },
-    "modules": {
-        "native": {
-            "clipboard": {
-                "triggerPrefix": "p"
+    "modules": [
+        { "clipboard": {
+            "trigger": "^p (.*)"
+        } },
+        { "custom": {
+            "name": "Character picker",
+            "trigger": "^u (.*)",
+            "source": "~/.synapse/modules/unicode/source.json",
+            "sink": { "path": "/bin/zsh", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
+        } },
+        { "custom": {
+            "name": "Control Center",
+            "trigger": "^c (.*)",
+            "source": "~/.synapse/modules/control-center/source.json",
+            "sink": {
+                "path": "/bin/zsh",
+                "args": ["-c", "[[ \"{userInfo}\" == *closePanel* ]] && printf closePanel; open -g 'hammerspoon://controlCenter?info={userInfo}'"]
             }
-        },
-        "custom": [
-            {
-                "name": "Character picker",
-                "trigger": "^u (.*)",
-                "source": "~/.synapse/modules/unicode/source.json",
-                "sink": { "path": "/bin/zsh", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
-            },
-            {
-                "name": "Control Center",
-                "trigger": "^c (.*)",
-                "source": "~/.synapse/modules/control-center/source.json",
-                "sink": {
-                    "path": "/bin/zsh",
-                    "args": ["-c", "[[ \"{userInfo}\" == *closePanel* ]] && printf closePanel; open -g 'hammerspoon://controlCenter?info={userInfo}'"]
-                }
-            },
-            {
-                "name": "CAS",
-                "trigger": "^m (.*)",
-                "source": "~/.synapse/modules/cas/source.py",
-                "sink": { "path": "~/.synapse/modules/cas/sink.py", "args": ["{title}"] },
-                "reloadsOnChange": true,
-                "isSearchDisabled": true
-            }
-        ]
-    }
+        } },
+        { "custom": {
+            "name": "CAS",
+            "trigger": "^m (.*)",
+            "source": "~/.synapse/modules/cas/source.py",
+            "sink": { "path": "~/.synapse/modules/cas/sink.py", "args": ["{title}"] },
+            "reloadsOnChange": true,
+            "isSearchDisabled": true
+        } }
+    ]
 }
