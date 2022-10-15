@@ -8,15 +8,8 @@
             "elements": [
                 {
                     "updateFrequency": 5,
-                    "main": {
-                        "path": "~/.synapse/status/battery.zsh",
-                        "args": []
-
-                    },
-                    "alt": {
-                        "path": "~/.synapse/status/battery.zsh",
-                        "args": ["--percentage"]
-                    }
+                    "main": { "path": "~/.synapse/status/battery.zsh" },
+                    "alt": { "path": "~/.synapse/status/battery.zsh", "args": ["--percentage"] }
                 },
                 {
                     "updateFrequency": 1,
@@ -27,10 +20,7 @@
         }
     },
     "search": {
-        "program": {
-            "path": "/usr/local/bin/fzf",
-            "args": ["-f"]
-        }
+        "program": { "path": "/usr/local/bin/fzf", "args": ["-f"] }
     },
     "modules": {
         "native": {
