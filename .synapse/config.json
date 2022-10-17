@@ -23,6 +23,12 @@
         "program": { "path": "/usr/local/bin/fzf", "args": ["-f"] }
     },
     "modules": [
+        { "switcher": {
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m ).*)"
+        } },
+        { "apps": {
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m ).+)"
+        } },
         { "clipboard": {
             "trigger": "^p (.*)"
         } },
