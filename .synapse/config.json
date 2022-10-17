@@ -20,7 +20,7 @@
         }
     },
     "search": {
-        "program": { "path": "/usr/local/bin/fzf", "args": ["-f"] }
+        "program": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] }
     },
     "modules": [
         { "switcher": {
