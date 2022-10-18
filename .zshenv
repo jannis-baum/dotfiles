@@ -3,7 +3,7 @@ export ZDOTDIR=~/.zsh
 export EDITOR=vim
 export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
 
-export PATH="$PATH:$HOME/.bin/"
+export PATH="$PATH:$HOME/.bin/:/Library/TeX/texbin/"
 # fd
 export FD_OPTIONS=("--hidden" "--follow" "--strip-cwd-prefix")
 # fzf
