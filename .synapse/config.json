@@ -24,10 +24,12 @@
     },
     "modules": [
         { "switcher": {
+            "name": "",
             "trigger": "(^(?!p )(?!u )(?!c )(?!m ).*)"
         } },
         { "apps": {
-            "trigger": "(^(?!p )(?!u )(?!c )(?!m ).+)"
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m ).+)",
+            "maxResults": 3
         } },
         { "clipboard": {
             "trigger": "^p (.*)"
