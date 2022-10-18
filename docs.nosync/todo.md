@@ -21,7 +21,3 @@
 ### ibkp
 
 - give option to zip
-
-### setup
-
-- make it curlable & automate cloning repo and initializing submodules
