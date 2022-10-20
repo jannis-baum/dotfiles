@@ -31,10 +31,10 @@ while IFS= read -r line; do
         && packages+=("$package")
 done < $dir/brew-packages.conf
 
-count=${#packages[@]}
-for (( i=0; i<$count; i++ )); do
-    package=${packages[$i]}
-    hl_print "installing new package $((i+1))/$count: $package"
+count=$#packages
+for (( i = 1; i <= $count; i++ )); do
+    package=$packages[i]
+    hl_print "installing new package $i/$count: $package"
     brew_ install $package
 done
 
