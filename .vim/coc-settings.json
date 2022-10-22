@@ -1,4 +1,6 @@
 {
+    "suggest.noselect": true,
+
     "git.addedSign.hlGroup": "SignColumn",
     "git.changedSign.hlGroup": "SignColumn",
     "git.removedSign.hlGroup": "SignColumn",

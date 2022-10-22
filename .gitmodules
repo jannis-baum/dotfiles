@@ -11,6 +11,9 @@
 [submodule ".vim/pack/plugins/opt/fugitive"]
 	path = .vim/pack/plugins/opt/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/pack/plugins/opt/ultisnips"]
+	path = .vim/pack/plugins/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
 [submodule ".vim/pack/plugins/opt/slime"]
 	path = .vim/pack/plugins/opt/slime
 	url = https://github.com/jpalardy/vim-slime.git

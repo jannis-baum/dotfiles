@@ -19,25 +19,15 @@ let g:coc_global_extensions = [
     \'coc-flutter',
     \'coc-html', 'coc-css', '@yaegassy/coc-tailwindcss3', 'coc-json',
     \'coc-git', 'coc-docker',
-    \'coc-markdownlint',
-    \'coc-snippets'
+    \'coc-markdownlint'
 \]
 
 " BINDINGS ---
-" tab
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackSpace() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! CheckBackSpace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" check tab-binding
 let g:coc_snippet_next = '<tab>'
 " return for confirmation (e.g. auto import)
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " ctrl-space to bring up completion
 inoremap <silent><expr> <c-@> coc#refresh()
 
