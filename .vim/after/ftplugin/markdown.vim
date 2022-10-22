@@ -14,11 +14,22 @@ let g:pandoc#syntax#conceal#use = 0
 
 " do stuff between $$
 nnoremap da$ F$df$
+nnoremap dam F$df$
+
 nnoremap di$ T$dt$
+nnoremap dim T$dt$
+
 nnoremap ya$ F$yf$
+nnoremap yam F$yf$
+
 nnoremap yi$ T$yt$
+nnoremap yim T$yt$
+
 nnoremap ca$ F$cf$
+nnoremap cam F$cf$
+
 nnoremap ci$ T$ct$
+nnoremap cim T$ct$
 
 " folding
 function! GetMarkdownFold(lnum)
