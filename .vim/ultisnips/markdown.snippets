@@ -21,7 +21,7 @@ endglobal
 context "not math()"
 snippet mk "Math" wA
 $$1$`!p
-snip.rv = '' if t[2] and t[2][0] in [',', '.', '?', '-', ' ', '\\'] else ' '
+snip.rv = '' if t[2] and t[2][0] in [',', '.', '?', '-', ' ', '\\', '\n'] else ' '
 `$2
 endsnippet
 
@@ -164,44 +164,59 @@ snippet not "negation overline" i
 endsnippet
 
 # --------------------------------
-# number spaces
+# typefaces
 
 context "math()"
-snippet NN "natural numbers" A
-\mathbb{N}
+snippet NN "natural numbers" iA
+\mathbb\{N\}
 endsnippet
 
 context "math()"
-snippet ZZ "whole numbers" A
-\mathbb{Z}
+snippet ZZ "whole numbers" iA
+\mathbb\{Z\}
 endsnippet
 
 context "math()"
-snippet QQ "rational numbers" A
-\mathbb{Q}
+snippet QQ "rational numbers" iA
+\mathbb\{Q\}
 endsnippet
 
 context "math()"
-snippet RR "real numbers" A
-\mathbb{R}
+snippet RR "real numbers" iA
+\mathbb\{R\}
 endsnippet
 
 context "math()"
-snippet NP "non deterministic polynomial" A
-\textsf{NP}
+snippet NP "non deterministic polynomial" iA
+\textsf\{NP\}
+endsnippet
+
+context "math()"
+snippet FF "event system" iA
+\mathfrak\{F\}
 endsnippet
 
 # --------------------------------
 # epsilon, delta, quantors 
 
 context "math()"
-snippet EPS "epsilon" A
+snippet EPS "epsilon" iA
 \epsilon
 endsnippet
 
 context "math()"
-snippet DELT "delta" A
+snippet DELT "delta" iA
 \delta
+endsnippet
+
+context "math()"
+snippet OMG "Omega" iA
+\Omega
+endsnippet
+
+context "math()"
+snippet omg "omega" iA
+\omega
 endsnippet
 
 context "math()"
