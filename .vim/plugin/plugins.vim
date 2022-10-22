@@ -7,10 +7,6 @@ endif
 packadd markdown-preview.nvim
 packadd pandoc-syntax
 
-" ULTISNIPS ---
-packadd ultisnips
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/ultisnips']
-
 " FUGITIVE ---
 packadd fugitive
 
