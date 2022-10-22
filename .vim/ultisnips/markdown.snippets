@@ -35,9 +35,9 @@ endsnippet
 context "not math()"
 snippet ml "multiline math block" A
 $$
-\begin{aligned}
+\\begin{aligned}
 	$1
-\end{aligned}
+\\end{aligned}
 $$
 endsnippet
   
@@ -46,17 +46,17 @@ endsnippet
   
 context "not math()"
 snippet eop "end of proof"
-\hfill $\blacksquare$
+\\hfill $\\blacksquare$
 endsnippet
 
 context "not math()"
 snippet -> "arrow" A
-$\to$
+$\\to$
 endsnippet
 
 context "not math()"
 snippet <- "arrow" A
-$\leftarrow$
+$\\leftarrow$
 endsnippet
 
 
@@ -69,12 +69,12 @@ endsnippet
 
 context "math()"
 snippet () "left right ()" iA
-\left( ${VISUAL}$1 \right) 
+\\left( ${VISUAL}$1 \\right) 
 endsnippet
 
 context "math()"
 snippet lr "left right general" iA
-\left$1 ${VISUAL}$2 \right`!p
+\\left$1 ${VISUAL}$2 \\right`!p
 specials = {
 	"("   : ")",
 	"\\{" : "\\}",
@@ -89,7 +89,7 @@ endsnippet
 
 context "math()"
 snippet tx "text" wA
-\textrm{$1}
+\\textrm{$1}
 endsnippet
 
 context "math()"
@@ -145,22 +145,22 @@ endsnippet
 
 context "math()"
 snippet ceil "ceil" iA
-\left\lceil $1 \right\rceil
+\\left\\lceil $1 \\right\\rceil
 endsnippet
 
 context "math()"
 snippet floor "floor" iA
-\left\lfloor $1 \right\rfloor
+\\left\\lfloor $1 \\right\\rfloor
 endsnippet
 
 context "math()"
 snippet abs "absolute value" iA
-\left\\lvert $1 \\right\\rvert
+\\left\\lvert $1 \\right\\rvert
 endsnippet
 
 context "math()"
 snippet not "negation overline" i
-\overline{$1}
+\\overline{$1}
 endsnippet
 
 # --------------------------------
@@ -168,32 +168,32 @@ endsnippet
 
 context "math()"
 snippet NN "natural numbers" iA
-\mathbb\{N\}
+\\mathbb\{N\}
 endsnippet
 
 context "math()"
 snippet ZZ "whole numbers" iA
-\mathbb\{Z\}
+\\mathbb\{Z\}
 endsnippet
 
 context "math()"
 snippet QQ "rational numbers" iA
-\mathbb\{Q\}
+\\mathbb\{Q\}
 endsnippet
 
 context "math()"
 snippet RR "real numbers" iA
-\mathbb\{R\}
+\\mathbb\{R\}
 endsnippet
 
 context "math()"
 snippet NP "non deterministic polynomial" iA
-\textsf\{NP\}
+\\textsf\{NP\}
 endsnippet
 
 context "math()"
 snippet FF "event system" iA
-\mathfrak\{F\}
+\\mathfrak\{F\}
 endsnippet
 
 # --------------------------------
@@ -201,32 +201,32 @@ endsnippet
 
 context "math()"
 snippet EPS "epsilon" iA
-\epsilon
+\\epsilon
 endsnippet
 
 context "math()"
 snippet DELT "delta" iA
-\delta
+\\delta
 endsnippet
 
 context "math()"
 snippet OMG "Omega" iA
-\Omega
+\\Omega
 endsnippet
 
 context "math()"
 snippet omg "omega" iA
-\omega
+\\omega
 endsnippet
 
 context "math()"
 snippet qa  "quantor all" A
-\forall $1 \\in $2: 
+\\forall $1 \\in $2: 
 endsnippet
 
 context "math()"
 snippet qe "quantor exists" A
-\exists $1 \\in $2: 
+\\exists $1 \\in $2: 
 endsnippet
 
 # --------------------------------
