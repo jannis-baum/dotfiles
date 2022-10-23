@@ -23,5 +23,17 @@
         "symbol": "􀵪",
         "title": "Take screenshot",
         "userInfo": "key:SC4, closePanel"
+    }, {
+        "symbol": "􀜚",
+        "title": "Sleep",
+        "userInfo": "sleep:null, closePanel"
+    }, {
+        "symbol": "􀆨",
+        "title": "Shut down",
+        "userInfo": "shutdown:null, closePanel"
+    }, {
+        "symbol": "􀥣",
+        "title": "Reboot",
+        "userInfo": "reboot:null, closePanel"
     }
 ]

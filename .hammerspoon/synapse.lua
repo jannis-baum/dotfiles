@@ -26,7 +26,10 @@ local fnLookup = {
             hs.eventtap.event.newKeyEvent(mods, k, true):post()
             hs.eventtap.event.newKeyEvent(mods, k, false):post()
         end
-    end
+    end,
+    ['sleep'] = function(a) hs.caffeinate.systemSleep() end,
+    ['reboot'] = function(a) hs.caffeinate.restartSystem() end,
+    ['shutdown'] = function(a) hs.caffeinate.shutdownSystem() end
 }
 hs.urlevent.bind('controlCenter', function(eventName, params)
     local info = params['info']
