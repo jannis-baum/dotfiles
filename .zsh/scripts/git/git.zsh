@@ -22,7 +22,8 @@ function gr() {
 }
 
 # interactive staging
-# - left arrow: toggle staging with left arrow
+# - left arrow: toggle staging
+# - ctrl+r: prompt to reset changes
 # - ctrl+v: open diff view
 # - ctrl+o: commit
 # - ctrl+b: amend commit
@@ -30,7 +31,7 @@ function gr() {
 function gsi() {
     local out key file
     out=$(_git_interactive_status_helper \
-        | fzf --ansi --exit-0 --delimiter ':' --with-nth 2 --expect=ctrl-v,left,ctrl-o,ctrl-b \
+        | fzf --ansi --exit-0 --delimiter ':' --with-nth 2 --expect=left,ctrl-r,ctrl-v,ctrl-o,ctrl-b \
             --preview="git diff --color=always HEAD -- {1} | tail -n +5" \
             --preview-window='60%,nowrap,nohidden')
 
@@ -40,6 +41,7 @@ function gsi() {
     [[ -z "$file" ]] && return
 
     if [[ "$key" == left ]]; then; _git_toggle_staging $file && gsi
+    elif [[ "$key" == ctrl-r ]]; then; greset "$file" && gsi
     elif [[ "$key" == ctrl-v ]]; then; git difftool HEAD -- "$file" && gsi
     elif [[ "$key" == ctrl-o ]]; then; gc
     elif [[ "$key" == ctrl-b ]]; then; gca
