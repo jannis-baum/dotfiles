@@ -67,6 +67,11 @@ function gco() {
 
 # reset changes of all or given files
 function greset() {
+    local changes
+    [[ $# -eq 0 ]] && changes="all changes" || changes="$*"
+    printf "reset $changes? (y/*) "
+    read -q && printf "\n" || {printf "\n" && return}
+
     if [[ $# -eq 0 ]]; then
         git reset --hard
         return
