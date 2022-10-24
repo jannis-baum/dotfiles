@@ -93,6 +93,11 @@ snippet tx "text" wA
 endsnippet
 
 context "math()"
+snippet \.\.\. "dots" wA
+\\dots
+endsnippet
+
+context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript (1 digit)" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
@@ -163,8 +168,28 @@ snippet not "negation overline" i
 \\overline{$1}
 endsnippet
 
+context "math()"
+snippet CAP "cap" iA
+\\cap
+endsnippet
+
+context "math()"
+snippet CUP "cup" iA
+\\cap
+endsnippet
+
+context "math()"
+snippet EMP "empty set" iA
+\\emptyset
+endsnippet
+
 # --------------------------------
 # typefaces
+
+context "math()"
+snippet CAL "mathcal" iA
+\\mathcal\{$1\}
+endsnippet
 
 context "math()"
 snippet NN "natural numbers" iA
