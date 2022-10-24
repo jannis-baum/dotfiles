@@ -21,7 +21,7 @@ endglobal
 context "not math()"
 snippet mk "Math" wA
 $$1$`!p
-snip.rv = '' if t[2] and t[2][0] in [',', '.', '?', '-', ' ', '\\', '\n'] else ' '
+snip.rv = '' if not t[2] or t[2][0] in [',', '.', '?', '-', ' ', '\\', '\n'] else ' '
 `$2
 endsnippet
 
