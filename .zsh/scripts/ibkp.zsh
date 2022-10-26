@@ -8,6 +8,7 @@ ibkp() {
             "-t" | "--tree-size") local should_tree=1; continue;;
             "-s" | "--size") local should_size=1; continue;;
             "-d" | "--cd") local should_cd=1; continue;;
+            "-h" | "--help") local should_help=1; continue;;
         esac
 
         local dir_name=$(dirname $arg)
@@ -35,4 +36,17 @@ ibkp() {
             $backup_dir
     [[ -n "$should_size" ]] && du -sh $backup_dir | sed -r "s|$backup_dir/?|total backups size|"
     [[ -n "$should_cd" ]] && cd $backup_dir
+    [[ -n "$should_help" ]] && cat <<EOF
+usage: ibkp [-h] [-p] [-t] [-s] [-d] paths [paths ...]
+
+positional arguments:
+  paths               file(s) and/or directory/ies to back up
+
+options:
+  -h, --help            show this help message and exit
+  -p, --print-directory show the backup directory
+  -t, --tree-size       show the backup directory's file tree with file sizes
+  -s, --size            show the backup directory's total size
+  -d, --cd              change the cwd to the backup directory
+EOF
 }
