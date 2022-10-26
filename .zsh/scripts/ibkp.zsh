@@ -24,7 +24,7 @@ ibkp() {
         local dest_dir=$(sed "s|$HOME|$backup_dir|" <<< "$source_dir")
         local file_name=$(sed "s|$dir_name||" <<< "$arg")
         mkdir -p "$dest_dir"
-        cp -r "$arg" "$dest_dir$file_name"
+        cp -r "$arg" "$dest_dir/$file_name"
     done
 
     [[ -n "$should_print" ]] && echo $backup_dir
