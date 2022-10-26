@@ -1,4 +1,5 @@
 ibkp() {
+    local should_help
     local backup_dir="$HOME/Library/Mobile Documents/com~apple~CloudDocs/ibkp"
     mkdir -p $backup_dir
 
@@ -8,8 +9,14 @@ ibkp() {
             "-t" | "--tree-size") local should_tree=1; continue;;
             "-s" | "--size") local should_size=1; continue;;
             "-d" | "--cd") local should_cd=1; continue;;
-            "-h" | "--help") local should_help=1; continue;;
+            "-h" | "--help") should_help=1; continue;;
         esac
+
+        if [[ "$arg" == "-"* ]]; then
+            echo "illegal option: $arg"
+            should_help=1
+            continue
+        fi
 
         local dir_name=$(dirname $arg)
         local source_dir=$(realpath $dir_name)
