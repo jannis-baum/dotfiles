@@ -35,9 +35,9 @@ endsnippet
 context "not math()"
 snippet ml "multiline math block" A
 $$
-\\begin{aligned}
+\\begin\{aligned\}
 	$1
-\\end{aligned}
+\\end\{aligned\}
 $$
 endsnippet
   
@@ -78,7 +78,7 @@ endsnippet
 
 context "math()"
 snippet tx "text" wA
-\\textrm{$1}
+\\textrm\{$1\}
 endsnippet
 
 context "math()"
@@ -93,12 +93,12 @@ endsnippet
 
 context "math()"
 snippet '(\S+)_([-a-zA-Z0-9]{2})' "auto subscript (general)" wrA
-`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`$1}
+`!p snip.rv = match.group(1)`_\{`!p snip.rv = match.group(2)`$1\}
 endsnippet
 
 context "math()"
 snippet '(\S+)\^([-a-zA-Z0-9]{2})' "auto superscript (general)" wrA
-`!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`$1}
+`!p snip.rv = match.group(1)`^\{`!p snip.rv = match.group(2)`$1\}
 endsnippet
 
 # --------------------------------
@@ -106,12 +106,12 @@ endsnippet
 
 context "math()"
 snippet / "visual frac" i
-\\frac{${VISUAL}}{$1}$0
+\\frac\{${VISUAL}\}\{$1\}$0
 endsnippet
 
 context "math()"
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+\\frac\{`!p snip.rv = match.group(1)`\}{$1\}$0
 endsnippet
 
 context "math()"
@@ -126,7 +126,7 @@ while True:
 	if depth == 0: break;
 	i-=1
 snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
-`{$1}$0
+`\{$1\}$0
 endsnippet
 
 # --------------------------------
@@ -149,12 +149,12 @@ endsnippet
 
 context "math()"
 snippet NOT "negation overline" iA
-\\overline{$1}
+\\overline\{$1\}
 endsnippet
 
 context "math()"
 snippet HAT "hat" iA
-\\hat{$1}
+\\hat\{$1\}
 endsnippet
 
 context "math()"
