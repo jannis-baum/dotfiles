@@ -49,17 +49,6 @@ snippet eop "end of proof"
 \\hfill $\\blacksquare$
 endsnippet
 
-context "not math()"
-snippet -> "arrow" A
-$\\to$
-endsnippet
-
-context "not math()"
-snippet <- "arrow" A
-$\\leftarrow$
-endsnippet
-
-
 # --------------------------------
 # SNIPPETS (math) 
 # --------------------------------
@@ -103,17 +92,12 @@ snippet '([A-Za-z])(\d)' "auto subscript (1 digit)" wrA
 endsnippet
 
 context "math()"
-snippet '([A-Za-z])_(\d\d)' "auto subscript (2 digits)" wrA
-`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
-endsnippet
-
-context "math()"
-snippet '(\S+)_([a-zA-Z0-9]{2})' "auto subscript (general)" wrA
+snippet '(\S+)_([-a-zA-Z0-9]{2})' "auto subscript (general)" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`$1}
 endsnippet
 
 context "math()"
-snippet '(\S+)\^([a-zA-Z0-9]{2})' "auto superscript (general)" wrA
+snippet '(\S+)\^([-a-zA-Z0-9]{2})' "auto superscript (general)" wrA
 `!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`$1}
 endsnippet
 
@@ -146,26 +130,31 @@ snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 endsnippet
 
 # --------------------------------
-# floor, ceil, abs, negation
+# common operations
 
 context "math()"
-snippet ceil "ceil" iA
+snippet CEIL "ceil" iA
 \\left\\lceil $1 \\right\\rceil
 endsnippet
 
 context "math()"
-snippet floor "floor" iA
+snippet FLOOR "floor" iA
 \\left\\lfloor $1 \\right\\rfloor
 endsnippet
 
 context "math()"
-snippet abs "absolute value" iA
+snippet ABS "absolute value" iA
 \\left\\lvert $1 \\right\\rvert
 endsnippet
 
 context "math()"
-snippet not "negation overline" i
+snippet NOT "negation overline" iA
 \\overline{$1}
+endsnippet
+
+context "math()"
+snippet HAT "hat" iA
+\\hat{$1}
 endsnippet
 
 context "math()"
@@ -175,12 +164,22 @@ endsnippet
 
 context "math()"
 snippet CUP "cup" iA
-\\cap
+\\cup
 endsnippet
 
 context "math()"
 snippet EMP "empty set" iA
 \\emptyset
+endsnippet
+
+context "math()"
+snippet QA  "quantor all" iA
+\\forall $1 \\in $2: 
+endsnippet
+
+context "math()"
+snippet QE "quantor exists" A
+\\exists $1 \\in $2: 
 endsnippet
 
 # --------------------------------
@@ -189,6 +188,29 @@ endsnippet
 context "math()"
 snippet CAL "mathcal" iA
 \\mathcal\{$1\}
+endsnippet
+
+# --------------------------------
+# symbols
+
+context "math()"
+snippet EPS "epsilon" iA
+\\epsilon
+endsnippet
+
+context "math()"
+snippet DELT "delta" iA
+\\delta
+endsnippet
+
+context "math()"
+snippet OMG "Omega" iA
+\\Omega
+endsnippet
+
+context "math()"
+snippet omg "omega" iA
+\\omega
 endsnippet
 
 context "math()"
@@ -222,44 +244,11 @@ snippet FF "event system" iA
 endsnippet
 
 # --------------------------------
-# epsilon, delta, quantors 
-
-context "math()"
-snippet EPS "epsilon" iA
-\\epsilon
-endsnippet
-
-context "math()"
-snippet DELT "delta" iA
-\\delta
-endsnippet
-
-context "math()"
-snippet OMG "Omega" iA
-\\Omega
-endsnippet
-
-context "math()"
-snippet omg "omega" iA
-\\omega
-endsnippet
-
-context "math()"
-snippet qa  "quantor all" iA
-\\forall $1 \\in $2: 
-endsnippet
-
-context "math()"
-snippet qe "quantor exists" A
-\\exists $1 \\in $2: 
-endsnippet
-
-# --------------------------------
 # equations
 
 context "math()"
-snippet EQL "equation line" A
-$1 &= $2
+snippet AGL "aligned line" A
+$1 &$2
 	&&|~ $3 \\\\
 endsnippet
 
@@ -281,4 +270,3 @@ init_printing()
 snip.rv = eval('latex(' + match.group(1).replace('\\', '').replace('^', '**').replace('{', '(').replace('}', ')') + ')')
 `
 endsnippet
-
