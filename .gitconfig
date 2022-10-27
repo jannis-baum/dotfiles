@@ -25,3 +25,5 @@
 [difftool]
 	prompt = false
     trustExitCode = true
+[commit]
+	gpgsign = true
