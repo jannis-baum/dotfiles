@@ -27,8 +27,11 @@
             "name": "",
             "trigger": "(^(?!p )(?!u )(?!c )(?!m ).*)"
         } },
-        { "apps": {
+        { "custom": {
+            "name": "Apps",
             "trigger": "(^(?!p )(?!u )(?!c )(?!m ).+)",
+            "source": "~/.synapse/modules/app-search/source.json",
+            "sink": { "path": "/bin/zsh", "args": ["-c", "printf closePanel && open '{userInfo}'"] },
             "maxResults": 3
         } },
         { "clipboard": {
