@@ -23,13 +23,16 @@
         "program": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] }
     },
     "modules": [
+        { "synapseController": {
+            "trigger": "^C (.*)"
+        } },
         { "switcher": {
             "name": "",
-            "trigger": "(^(?!p )(?!u )(?!c )(?!m ).*)"
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!C ).*)"
         } },
         { "custom": {
             "name": "Apps",
-            "trigger": "(^(?!p )(?!u )(?!c )(?!m ).+)",
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!C ).+)",
             "source": "~/.synapse/modules/app-search/source.json",
             "sink": { "path": "/bin/zsh", "args": ["-c", "printf closePanel && open '{userInfo}'"] },
             "maxResults": 3
