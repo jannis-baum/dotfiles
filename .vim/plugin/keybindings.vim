@@ -27,6 +27,17 @@ noremap x "_x
 noremap s "_s
 " Y consitent with C & D
 noremap <S-y> y$
+" in & around aliases
+function! s:oviamap(from, to)
+    exec 'onoremap i' . a:from . ' i' . a:to
+    exec 'onoremap a' . a:from . ' a' . a:to
+    exec 'vnoremap i' . a:from . ' i' . a:to
+    exec 'vnoremap a' . a:from . ' a' . a:to
+endfunction
+call s:oviamap('q', "'")
+call s:oviamap('Q', '"')
+call s:oviamap('r', '{')
+call s:oviamap('t', '[')
 
 " SPECIAL CHARACTERS -----------------------------------------------------------
 "   spanish tildes
