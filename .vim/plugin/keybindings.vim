@@ -36,29 +36,29 @@ nnoremap <S-y> y$
 
 " SPECIAL CHARACTERS -----------------------------------------------------------
 "   spanish tildes
-inoremap <F1> <Nop>
-inoremap <F1>n ñ
-inoremap <F1><S-n> Ñ
-inoremap <F1><S-a> <C-k><S-a>'
-inoremap <F1>a <C-k>a'
-inoremap <F1><S-a> <C-k><S-a>'
-inoremap <F1>e <C-k>e'
-inoremap <F1><S-e> <C-k><S-e>'
-inoremap <F1>i <C-k>i'
-inoremap <F1><S-i> <C-k><S-i>'
-inoremap <F1>u <C-k>u'
-inoremap <F1><S-u> <C-k><S-u>'
-inoremap <F1>o <C-k>o'
-inoremap <F1><S-o> <C-k><S-o>'
+lnoremap <F1> <Nop>
+lnoremap <F1>n ñ
+lnoremap <F1><S-n> Ñ
+lnoremap <F1><S-a> <C-k><S-a>'
+lnoremap <F1>a <C-k>a'
+lnoremap <F1><S-a> <C-k><S-a>'
+lnoremap <F1>e <C-k>e'
+lnoremap <F1><S-e> <C-k><S-e>'
+lnoremap <F1>i <C-k>i'
+lnoremap <F1><S-i> <C-k><S-i>'
+lnoremap <F1>u <C-k>u'
+lnoremap <F1><S-u> <C-k><S-u>'
+lnoremap <F1>o <C-k>o'
+lnoremap <F1><S-o> <C-k><S-o>'
 "   german umlauts
-inoremap <F2> <Nop>
-inoremap <F2>s <C-k>ss
-inoremap <F2>a <C-k>a<S-:>
-inoremap <F2><S-a> <C-k><S-a><S-:>
-inoremap <F2>u <C-k>u<S-:>
-inoremap <F2><S-u> <C-k><S-u><S-:>
-inoremap <F2>o <C-k>o<S-:>
-inoremap <F2><S-o> <C-k><S-o><S-:>
+lnoremap <F2> <Nop>
+lnoremap <F2>s <C-k>ss
+lnoremap <F2>a <C-k>a<S-:>
+lnoremap <F2><S-a> <C-k><S-a><S-:>
+lnoremap <F2>u <C-k>u<S-:>
+lnoremap <F2><S-u> <C-k><S-u><S-:>
+lnoremap <F2>o <C-k>o<S-:>
+lnoremap <F2><S-o> <C-k><S-o><S-:>
 
 " MISC -------------------------------------------------------------------------
 " shows syntax data below cursor
