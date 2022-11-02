@@ -11,14 +11,10 @@ nnoremap <Esc> :noh<CR>
 
 " MOVEMENT ---------------------------------------------------------------------
 " line up/down
-nnoremap j gj
-vnoremap j gj
-nnoremap k gk
-vnoremap k gk
-nnoremap gj j
-vnoremap gj j
-nnoremap gk k
-vnoremap gk k
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
 " splits
 nnoremap <Down> <C-w><C-j>
 nnoremap <Up> <C-w><C-k>
@@ -27,12 +23,10 @@ nnoremap <Left> <C-w><C-h>
 
 " TEXT EDITING -----------------------------------------------------------------
 " x & s delete without copy
-nnoremap x "_x
-nnoremap s "_s
-vnoremap x "_x
-vnoremap s "_s
+noremap x "_x
+noremap s "_s
 " Y consitent with C & D
-nnoremap <S-y> y$
+noremap <S-y> y$
 
 " SPECIAL CHARACTERS -----------------------------------------------------------
 "   spanish tildes
