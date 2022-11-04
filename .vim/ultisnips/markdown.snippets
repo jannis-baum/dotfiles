@@ -57,16 +57,13 @@ endsnippet
 # paranthesis and left/rights 
 
 context "math()"
-snippet () "left right ()" iA
-\\left( ${VISUAL}$1 \\right) 
-endsnippet
-
-context "math()"
 snippet lr "left right general" iA
-\\left$1 ${VISUAL}$2 \\right`!p
+\\left`!p
+snip.rv = "\\" if t[1] == "{" else ""
+`$1 ${VISUAL}$2 \\right`!p
 specials = {
 	"("   : ")",
-	"\\{" : "\\}",
+	"{" : "\\}",
 	"["   : "]",
 	"<"   : ">"
 }
