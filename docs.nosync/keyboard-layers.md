@@ -14,8 +14,16 @@ HOLD   | opt | sft | cmd |      | cmd | sft | ctr |
 ## Combos
 
 ```plain
-                              |   ui -> Wooshy   io -> Smart magnify
-sd -> tab   df -> backspace   |   jk -> escape   kl -> return
++--------+--------+    +--------+--------+
+|   we   |   er   |    |   ui   |   io   |
+|   up   | right  |    | wooshy | magnify|
++--------+--------+    +--------+--------+
+|   sd   |   df   |    |   jk   |   kl   |
+|  tab   |  bksp  |    |   esc  |   ret  |
++--------+--------+    +--------+--------+
+|   xc   |   cv   |    |   m,   |   ,.   |
+|  left  |  down  |    |        |        |
++--------+--------+    +--------+--------+
 ```
 
 ## Layers

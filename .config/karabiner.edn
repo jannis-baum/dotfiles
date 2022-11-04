@@ -44,17 +44,22 @@
     ; --------------------------------------------------------------------------
     ; combo keys ---------------------------------------------------------------
 
-    {:des "home row combos: sd > tab, df > backspace, jk > escape/normal, kl > return, ui > wooshy (f8)" :rules [
+    {:des "home row combos: sd > tab, df > backspace, jk > escape/normal, kl > return" :rules [
        [{:sim [:s :d] :modi :any} :tab]
        [{:sim [:d :f] :modi :any} :delete_or_backspace]
        [{:sim [:j :k] :modi :any} :escape]
        [{:sim [:k :l] :modi :any} :return_or_enter]]}
 
-    {:des "upper row combos: ui > wooshy (f8), io > smart magnify" :rules [
-       [[:e :r] "~/.config/kitty/vriter/start" :!kitty]
+    {:des "upper row combos: we > up, er > right, ui > wooshy (f8), io > smart magnify" :rules [
+       [[:w :e] :up_arrow]
+       [[:e :r] :right_arrow]
        [[:u :i] :!Cf8]
        [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
        [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
+
+    {:des "lower row combos: xc > left, cv > down" :rules [
+       [[:x :c] :left_arrow]
+       [[:c :v] :down_arrow]]}
 
     ; --------------------------------------------------------------------------
     ; layers -------------------------------------------------------------------
