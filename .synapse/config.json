@@ -24,15 +24,15 @@
     },
     "modules": [
         { "synapseController": {
-            "trigger": "^C (.*)"
+            "trigger": "^sc (.*)"
         } },
         { "switcher": {
             "name": "",
-            "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!C ).*)"
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!sc ).*)"
         } },
         { "custom": {
             "name": "Apps",
-            "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!C ).+)",
+            "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!sc ).+)",
             "source": "~/.synapse/modules/app-search/source.json",
             "sink": { "path": "/bin/zsh", "args": ["-c", "printf closePanel && open '{userInfo}'"] },
             "maxResults": 3
