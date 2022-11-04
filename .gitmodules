@@ -20,3 +20,6 @@
 [submodule ".vim/pack/plugins/opt/dart-vim-plugin"]
 	path = .vim/pack/plugins/opt/dart-vim-plugin
 	url = https://github.com/dart-lang/dart-vim-plugin.git
+[submodule ".vim/pack/plugins/opt/auto-pairs"]
+	path = .vim/pack/plugins/opt/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs

@@ -1,21 +1,15 @@
-" COC
 if !exists('g:omit_coc')
     packadd coc
 endif
 
-" MARKDOWN ---
 packadd markdown-preview.nvim
 packadd pandoc-syntax
 
-" ULTISNIPS ---
 packadd ultisnips
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/ultisnips']
 
-" FUGITIVE ---
 packadd fugitive
+packadd auto-pairs
 
-" SLIME ---
 packadd slime
-
-" DART ---
 packadd dart-vim-plugin
