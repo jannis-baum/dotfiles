@@ -12,6 +12,15 @@ body { background-color: #000; }
     border: none;
 }
 
+span.katex-display {
+    text-align: left !important;
+    padding-left: 4em;
+}
+span.katex-display > span.katex {
+    text-align: left !important;
+}
+
+
 /*
  * github like style
  * https://github.com/iamcco/markdown.css/blob/master/dest/github/markdown.css
@@ -30,7 +39,7 @@ body { background-color: #000; }
     margin-bottom: 0;
 }
 .markdown-body {
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: "Avenir", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 16px;
     color: #ccc;
     line-height: 1.6;
