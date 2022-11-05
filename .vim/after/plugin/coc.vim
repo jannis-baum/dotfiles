@@ -23,8 +23,14 @@ let g:coc_global_extensions = [
 \]
 
 " BINDINGS ---
-" check tab-binding
+" completion scrolling
+iunmap <down>
+inoremap <expr><down> coc#pum#visible() ? coc#pum#next(1) : coc#refresh()
+iunmap <up>
+inoremap <expr><Up> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" snippets
 let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<s-tab>'
 " return for confirmation (e.g. auto import)
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
     \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
