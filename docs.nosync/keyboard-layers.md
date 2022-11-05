@@ -22,7 +22,7 @@ HOLD   | opt | sft | cmd |      | cmd | sft | ctr |
 |  tab   |  bksp  |    |   esc  |   ret  |
 +--------+--------+    +--------+--------+
 |   xc   |   cv   |    |   m,   |   ,.   |
-|  left  |  down  |    |        |        |
+|  left  |  down  |    |tab left|tabright|
 +--------+--------+    +--------+--------+
 ```
 

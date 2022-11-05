@@ -57,9 +57,11 @@
        [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
        [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
 
-    {:des "lower row combos: xc > left, cv > down" :rules [
+    {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [[:x :c] :left_arrow]
-       [[:c :v] :down_arrow]]}
+       [[:c :v] :down_arrow]
+       [[:m :comma] :!TStab]
+       [[:comma :period] :!Ttab]]}
 
     ; --------------------------------------------------------------------------
     ; layers -------------------------------------------------------------------
