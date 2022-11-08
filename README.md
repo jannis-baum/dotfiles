@@ -4,15 +4,6 @@ Here is where I try to keep all configuration of all the tools I use. This is
 not intended to be used by anyone else in its entirety, but might be nice to
 look at for reference.
 
-## Full setup
-
-To set up everything (set MacOS preferences, install brew packages &
-dotfiles/config), make sure you have `git`, `zsh` and `brew` installed and run
-
-```zsh
-zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/setup.nosync/full-setup.sh)
-```
-
 ## Installing/syncing dotfiles
 
 [`sdf`](.zsh/scripts/sdf.zsh) is my script (zsh function) that I use to
@@ -49,3 +40,14 @@ to use it and what it does.
 
 - [kindaVim](https://kindavim.app) for amazing vi-bindings **everywhere**
 - [Wooshy](https://wooshy.app) so I (almost) never need to use a mouse
+
+## Full setup
+
+**Disclaimer** If you are not me, you should probably never do this!
+
+To set up everything (set MacOS preferences, install Homebrew, brew packages &
+dotfiles/config), make sure you have `git`, `zsh` and `bash` installed and run
+
+```zsh
+zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/setup.nosync/full-setup.sh)
+```
