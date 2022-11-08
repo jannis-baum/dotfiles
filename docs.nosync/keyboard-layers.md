@@ -16,7 +16,7 @@ HOLD   | opt | sft | cmd |      | cmd | sft | ctr |
 ```plain
 +--------+--------+    +--------+--------+
 |   we   |   er   |    |   ui   |   io   |
-|   up   | right  |    | wooshy | magnify|
+|   up   | right  |    | wooshy |    *   |
 +--------+--------+    +--------+--------+
 |   sd   |   df   |    |   jk   |   kl   |
 |  tab   |  bksp  |    |   esc  |   ret  |
@@ -24,6 +24,10 @@ HOLD   | opt | sft | cmd |      | cmd | sft | ctr |
 |   xc   |   cv   |    |   m,   |   ,.   |
 |  left  |  down  |    |tab left|tabright|
 +--------+--------+    +--------+--------+
+
+* terminal: ctrl+o
+  wooshy: smart magnify on selection
+  else: smart magnify
 ```
 
 ## Layers
