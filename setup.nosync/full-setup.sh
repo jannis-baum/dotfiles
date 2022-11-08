@@ -4,6 +4,11 @@ function hl_print() {
     printf "\\033[1m$1\\033[0m\n"
 }
 
+if ! which brew &> /dev/null; then
+    hl_print "INSTALLING HOMEBREW"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
 dotfiles_dir=$HOME/_dotfiles
 
 hl_print "CLONING REPO & INITIALIZING SUBMODULES"
