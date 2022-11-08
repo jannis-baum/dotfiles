@@ -46,7 +46,8 @@ to use it and what it does.
 **Disclaimer** If you are not me, you should probably never do this!
 
 To set up everything (set MacOS preferences, install Homebrew, brew packages &
-dotfiles/config), make sure you have `git`, `zsh` and `bash` installed and run
+dotfiles/config), make sure you have `git`, `zsh`, `bash`, `make` and `swift`
+installed and run
 
 ```zsh
 zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/setup.nosync/full-setup.sh)

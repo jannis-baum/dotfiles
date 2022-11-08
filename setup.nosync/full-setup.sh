@@ -21,6 +21,9 @@ fi
 hl_print "INSTALLING BREW PACKAGES"
 $DOTFILES_DIR/setup/brew.sh --upgrade
 
+hl_print "BUILDING SWIFT BINS"
+make -C $DOTFILES_DIR/.bins/swift-bins.nosync
+
 hl_print "INSTALLING CONFIG"
 source $DOTFILES_DIR/../.zsh/scripts/sdf.zsh
 jot -s '' -b y 0 | sdf
