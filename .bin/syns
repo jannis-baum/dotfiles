@@ -1,9 +1,0 @@
-#!/usr/bin/env python3
-
-import sys
-from nltk.corpus import wordnet
-
-print('    '.join(set([
-    lemm.name().replace('_', ' ') for syn in wordnet.synsets(sys.argv[1]) for lemm in syn.lemmas()
-])))
-
