@@ -56,7 +56,7 @@ fzf_dir() {
     if [[ -n "$dir" ]]; then
         if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)dir};
         elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}/";
-        elif [[ "$key" == ctrl-u ]]; then LBUFFER="mkdir -p ${(q-)dir}/";
+        elif [[ "$key" == ctrl-u ]]; then LBUFFER="mkdir -p ${(q-)dir}";
         else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
         fi
     fi
