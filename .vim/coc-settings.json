@@ -11,6 +11,7 @@
 
     "eslint.autoFixOnSave": true,
     "typescript.preferences.importModuleSpecifier": "relative",
+    "snippets.autoTrigger": false,
 
     // style
     "suggest.floatConfig": {

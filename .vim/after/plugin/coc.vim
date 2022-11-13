@@ -11,6 +11,7 @@ endif
 
 " EXTENSIONS ---
 let g:coc_global_extensions = [
+    \'coc-snippets',
     \'coc-sh',
     \'coc-pyright',
     \'coc-clangd', 'coc-cmake',
