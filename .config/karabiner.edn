@@ -36,7 +36,8 @@
        [:right_command :right_command :kitty {:alone "~/.config/kitty/set-terminal hidden"}]
        [:right_command :right_command :!kitty {:alone "~/.config/kitty/set-terminal active"}]
 
-       [:left_command :left_command nil {:alone [:dncp "SYNAPSE_TOGGLE_PANEL"]}]
+       [:left_command :left_command ["kVNormal" 0] {:alone [:dncp "SYNAPSE_TOGGLE_PANEL"]}]
+       [:left_command :left_command ["kVNormal" 1] {:alone [:a [:dncp "SYNAPSE_TOGGLE_PANEL"]]}]
        
        [:left_option :left_option ["language" 0] {:alone [["language" 1]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
        [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]]}
@@ -64,8 +65,10 @@
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [[:x :c] :left_arrow]
        [[:c :v] :down_arrow]
-       [[:m :comma] :!TStab]
-       [[:comma :period] :!Ttab]]}
+       [[:m :comma] :!TStab ["kVNormal" 0]]
+       [[:m :comma] [:a :!TStab :escape] ["kVNormal" 1]]
+       [[:comma :period] :!Ttab ["kVNormal" 0]]
+       [[:comma :period] [:a :!Ttab :escape] ["kVNormal" 1]]]}
 
     ; --------------------------------------------------------------------------
     ; layers -------------------------------------------------------------------
