@@ -52,23 +52,23 @@
        [{:sim [:k :l] :modi :any} :return_or_enter]]}
 
     {:des "upper row combos: we > up, er > right, ui > wooshy (f8) / ctrl+u, io > smart magnify / ctrl+o" :rules [
-       [[:w :e] :up_arrow]
-       [[:e :r] :right_arrow]
+       [{:sim [:w :e] :modi :any} :up_arrow]
+       [{:sim [:e :r] :modi :any} :right_arrow]
        :kitty
-       [[:u :i] :!Tu]
-       [[:i :o] :!To]
+       [{:sim [:u :i] :modi :any} :!Tu]
+       [{:sim [:i :o] :modi :any} :!To]
        :!kitty
-       [[:u :i] :!Cf8]
-       [[:i :o] [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
-       [[:i :o] [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
+       [{:sim [:u :i] :modi :any} :!Cf8]
+       [{:sim [:i :o] :modi :any} [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
+       [{:sim [:i :o] :modi :any} [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
-       [[:x :c] :left_arrow]
-       [[:c :v] :down_arrow]
-       [[:m :comma] :!TStab ["kVNormal" 0]]
-       [[:m :comma] [:a :!TStab :escape] ["kVNormal" 1]]
-       [[:comma :period] :!Ttab ["kVNormal" 0]]
-       [[:comma :period] [:a :!Ttab :escape] ["kVNormal" 1]]]}
+       [{:sim [:x :c] :modi :any} :left_arrow]
+       [{:sim [:c :v] :modi :any} :down_arrow]
+       [{:sim [:m :comma] :modi :any} :!TStab ["kVNormal" 0]]
+       [{:sim [:m :comma] :modi :any} [:a :!TStab :escape] ["kVNormal" 1]]
+       [{:sim [:comma :period] :modi :any} :!Ttab ["kVNormal" 0]]
+       [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape] ["kVNormal" 1]]]}
 
     ; --------------------------------------------------------------------------
     ; layers -------------------------------------------------------------------
