@@ -1,7 +1,3 @@
--- launch
-hs.execute('open -g -a Synapse')
-
--- control center sink
 local modifierLookup = {
     ['S'] = 'shift',
     ['C'] = 'command',
@@ -10,6 +6,7 @@ local modifierLookup = {
     ['T'] = 'control',
     ['F'] = 'fn'
 }
+
 local fnLookup = {
     ['systemKey'] = function(key)
         hs.eventtap.event.newSystemKeyEvent(key, true):post()
@@ -31,6 +28,7 @@ local fnLookup = {
     ['reboot'] = function(a) hs.caffeinate.restartSystem() end,
     ['shutdown'] = function(a) hs.caffeinate.shutdownSystem() end
 }
+
 hs.urlevent.bind('controlCenter', function(eventName, params)
     local info = params['info']
     if info == nil then
