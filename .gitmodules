@@ -23,3 +23,6 @@
 [submodule ".vim/pack/plugins/opt/auto-pairs"]
 	path = .vim/pack/plugins/opt/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
+[submodule ".synapse/modules/unicode"]
+	path = .synapse/modules/unicode
+	url = https://github.com/jannis-baum/synapse-unicode.git
