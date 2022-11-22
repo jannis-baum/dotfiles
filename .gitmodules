@@ -29,3 +29,6 @@
 [submodule ".synapse/modules/cas"]
 	path = .synapse/modules/cas
 	url = https://github.com/jannis-baum/synapse-cas.git
+[submodule ".synapse/modules/control-center"]
+	path = .synapse/modules/control-center
+	url = https://github.com/jannis-baum/synapse-control-center.git
