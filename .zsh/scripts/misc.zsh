@@ -3,6 +3,7 @@ alias c="printf '\n%.0s' {1..$LINES} && clear"
 alias ej="eject /Volumes/LaCie"
 alias convert-file="ffmpeg"
 alias w='printf "%s" "$(vipe)" | pbcopy'
+alias ssh='kitty +kitten ssh'
 
 # linking scripts
 alias mue="~/_lib/markup-export/main"
