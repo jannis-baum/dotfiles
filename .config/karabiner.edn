@@ -51,7 +51,7 @@
        [{:sim [:j :k] :modi :any} :escape]
        [{:sim [:k :l] :modi :any} :return_or_enter]]}
 
-    {:des "upper row combos: we > up, er > right, ui > wooshy (f8) / ctrl+u, io > smart magnify / ctrl+o" :rules [
+    {:des "upper row combos: we > up, er > right, ui > wooshy (f8) / ctrl+u, io > smart magnify / scolla / ctrl+o" :rules [
        [{:sim [:w :e] :modi :any} :up_arrow]
        [{:sim [:e :r] :modi :any} :right_arrow]
        :kitty
@@ -60,7 +60,7 @@
        :!kitty
        [{:sim [:u :i] :modi :any} :!Cf8]
        [{:sim [:i :o] :modi :any} [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
-       [{:sim [:i :o] :modi :any} [:uri "hammerspoon://smartMagnify"] ["inWooshy" 0]]]}
+       [{:sim [:i :o] :modi :any} :!Cf9 ["inWooshy" 0]]]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [{:sim [:x :c] :modi :any} :left_arrow]
