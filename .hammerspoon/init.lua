@@ -1,5 +1,4 @@
 require"events"
-require"kvim"
-require"wooshy"
+require"karabiner"
 require"smart-magnify"
 dofile"/Users/jannisbaum/.synapse/modules/control-center/hammerspoon.lua"
