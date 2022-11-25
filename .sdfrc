@@ -12,6 +12,7 @@ dotfiles_actions=( \
     ['karabiner\.edn$']='goku' \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
     ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
-    ['^\.synapse/config.json$']="_restart_synapse" \
+    ['^\.synapse']="_restart_synapse" \
+    ['^\.synapse/modules/control-center$']="open -g hammerspoon://reloadConfig" \
     ['^\.hammerspoon/']="open -g hammerspoon://reloadConfig" \
 )
