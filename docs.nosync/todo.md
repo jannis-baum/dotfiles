@@ -1,9 +1,5 @@
 # todo
 
-## vim
-
-- check out [tabout](https://github.com/abecodes/tabout.nvim)
-
 ## documentation
 
 - add some notes on / make posts for
