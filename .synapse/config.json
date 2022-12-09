@@ -23,45 +23,18 @@
         "program": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] }
     },
     "modules": [
-        { "synapseController": {
-            "trigger": "^sc (.*)"
-        } },
-        { "switcher": {
+        {  "/native/controller": { "trigger": "^sc (.*)" } },
+        { "/native/switcher": {
             "name": "",
             "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!sc ).*)"
         } },
-        { "custom": {
-            "name": "Apps",
+        { "app-search": {
             "trigger": "(^(?!p )(?!u )(?!c )(?!m )(?!sc ).+)",
-            "source": "~/.synapse/modules/app-search/source.json",
-            "sink": { "path": "/bin/zsh", "args": ["-c", "printf closePanel && open '{userInfo}'"] },
             "maxResults": 3
         } },
-        { "clipboard": {
-            "trigger": "^p (.*)"
-        } },
-        { "custom": {
-            "name": "Character picker",
-            "trigger": "^u (.*)",
-            "source": "~/.synapse/modules/unicode/source.json",
-            "sink": { "path": "/bin/zsh", "args": ["-c", "export LANG=en_US.UTF-8; printf '{symbol}' | pbcopy && printf closePanel"] }
-        } },
-        { "custom": {
-            "name": "Control Center",
-            "trigger": "^c (.*)",
-            "source": "~/.synapse/modules/control-center/source.json",
-            "sink": {
-                "path": "/bin/zsh",
-                "args": ["-c", "[[ \"{userInfo}\" == *closePanel* ]] && printf closePanel; open -g 'hammerspoon://controlCenter?info={userInfo}'"]
-            }
-        } },
-        { "custom": {
-            "name": "CAS",
-            "trigger": "^m (.*)",
-            "source": "~/.synapse/modules/cas/source.py",
-            "sink": { "path": "~/.synapse/modules/cas/sink.py", "args": ["{title}"] },
-            "reloadsOnChange": true,
-            "isSearchDisabled": true
-        } }
+        { "/native/clipboard": { "trigger": "^p (.*)" } },
+        "unicode",
+        "control-center",
+        "cas"
     ]
 }
