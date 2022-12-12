@@ -35,3 +35,6 @@
 [submodule ".synapse/modules/app-search"]
 	path = .synapse/modules/app-search
 	url = https://github.com/jannis-baum/synapse-app-search.git
+[submodule ".synapse/modules/keychain"]
+	path = .synapse/modules/keychain
+	url = https://github.com/jannis-baum/synapse-keychain.git
