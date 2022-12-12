@@ -46,13 +46,14 @@ function ghio() {
 # uses issue title as PR title and adds PR body to close issue
 # opens created PR in browser
 function ghpr() {
+    local title=$(git branch --show-current)
     local issue=$(_gh_get_branch_issue)
-    if [ -z "$issue" ]; then
-        echo "Branch doesn't follow issue naming convention. Exiting."
-        return
+    local body=""
+    if [ -n "$issue" ]; then
+        title=$(_gh_get_issue_title $issue)
+        body="Close #$issue"
     fi
 
-    local title=$(_gh_get_issue_title $issue)
-    gh pr create --title $title --body "Close #$issue" \
+    gh pr create --title $title --body "$body" \
         | tail -n 1 | xargs open
 }
