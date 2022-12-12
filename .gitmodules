@@ -38,3 +38,6 @@
 [submodule ".synapse/modules/keychain"]
 	path = .synapse/modules/keychain
 	url = https://github.com/jannis-baum/synapse-keychain.git
+[submodule ".synapse/modules/pkill"]
+	path = .synapse/modules/pkill
+	url = https://github.com/jannis-baum/synapse-pkill.git
