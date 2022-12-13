@@ -17,14 +17,7 @@ function ghi() {
         if [[ "$key" == ctrl-o ]]; then
             printf "#$issue" | pbcopy
         elif [[ "$key" == ctrl-b ]]; then
-            local branch
-            branch="issue/$issue-$(_gh_get_issue_title $issue \
-                | tr ' ' '-' \
-                | tr -cd '[:alnum:]-' \
-                | tr '[:upper:]' '[:lower:]' \
-                | sed -r 's/--+/-/g')"
-            git checkout -b $branch 2>/dev/null \
-                || git checkout $branch
+            _gh_checkout_issue_branch $issue
         else
             gh issue view --web $issue
         fi
@@ -36,9 +29,22 @@ function ghio() {
     local issue=$(_gh_get_branch_issue)
     if [ -z "$issue" ]; then
         echo "Branch doesn't follow issue naming convention. Exiting."
-        return
+        return 1
     fi
     gh issue view --web $issue
+}
+
+# create issue & go to branch
+# useful when doing something we don't have an issue for
+function ghin() {
+    if [ -z "$1" ]; then
+        echo "Please specify an issue name."
+        return 1
+    fi
+    issue=$(gh issue create --title "$*" --body "" \
+        | tail -1 \
+        | sed -r 's|^.*/([[:digit:]]+)$|\1|')
+    [ -n "$issue" ] && _gh_checkout_issue_branch $issue
 }
 
 # create GitHub PR for current branch that follows
