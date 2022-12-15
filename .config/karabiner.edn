@@ -10,6 +10,7 @@
   :templates {
     :open "open -a \"%s.app\""
     :uri "open -g \"%s\""
+    :set-win "open -g rectangle://execute-action?name=%s"
     :dncp "~/.bin/dnc-post \"%s\""}
 
   :applications {
@@ -97,26 +98,29 @@
 
     {:des "number layer" :rules [
        :numbers
-         ; upper row
-         [:q :vk_none] [:w :vk_none] [:e :vk_none] [:r :vk_none] [:t :vk_none]
+         ; right half
          [:y :vk_none] [:u :7] [:i :8] [:o :9] [:p :vk_none]
-         ; home row
-         [:a :vk_none] [:s :vk_none] [:d :vk_none] [:f :vk_none] [:g :vk_none]
          [:h :vk_none] [:j :4] [:k :5] [:l :6] [:semicolon :vk_none]
-         ; bottom row
-         [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]
-         [:n :0] [:m :1] [:comma :2] [:period :3] [:slash :vk_none]]}
+         [:n :0] [:m :1] [:comma :2] [:period :3] [:slash :vk_none]
+         ; left half disabled
+         [:q :vk_none] [:w :vk_none] [:e :vk_none] [:r :vk_none] [:t :vk_none]
+         [:a :vk_none] [:s :vk_none] [:d :vk_none] [:f :vk_none] [:g :vk_none]
+         [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]]}
 
     {:des "gui layer" :rules [
        :gui
-         ; upper row
-         [:q :vk_none] [:w :vk_none] [:e :!TOe] [:r :!TOr] [:t :!TOt]
+         ; left half window sizing
+         [:e [:set-win "top-left"]]    [:r [:set-win "next-display"]]     [:t [:set-win "top-right"]]
+         [:d [:set-win "left-half"]]   [:f [:set-win "maximize"] :!kitty] [:g [:set-win "right-half"]]
+         [:c [:set-win "bottom-left"]] [:v [:set-win "previous-display"]] [:b [:set-win "bottom-right"]]
+         [:f :!STf10 :kitty]
+         ; left half others
+         [:q :vk_none] [:w :vk_none]
+         [:a :!Copen_bracket] [:s :!Cclose_bracket]
+         [:z :!Cequal_sign] [:x :!Chyphen]
+         ; right half disabled
          [:y :vk_none] [:u :vk_none] [:i :vk_none] [:o :vk_none] [:p :vk_none]
-         ; home row
-         [:a :!Copen_bracket] [:s :!Cclose_bracket] [:d :!TOd] [:f :!TOf :!kitty] [:f :!STf10 :kitty] [:g :!TOg]
          [:h :vk_none] [:j :vk_none] [:k :vk_none] [:l :vk_none] [:semicolon :vk_none]
-         ; bottom row
-         [:z :!Cequal_sign] [:x :!Chyphen] [:c :!TOc] [:v :!TOv] [:b :!TOb]
          [:n :vk_none] [:m :vk_none] [:comma :vk_none] [:period :vk_none]]}
 
     {:des "extended control layer" :rules [
