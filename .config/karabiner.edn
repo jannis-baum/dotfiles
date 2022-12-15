@@ -115,9 +115,9 @@
          [:c [:set-win "bottom-left"]] [:v [:set-win "previous-display"]] [:b [:set-win "bottom-right"]]
          [:f :!STf10 :kitty]
          ; left half others
-         [:q :vk_none] [:w :vk_none]
-         [:a :!Copen_bracket] [:s :!Cclose_bracket]
-         [:z :!Cequal_sign] [:x :!Chyphen]
+         [:q :vk_none] [:w :!C0]
+         [:a :!Cequal_sign] [:s :!Chyphen]
+         [:z :!Copen_bracket] [:x :!Cclose_bracket]
          ; right half disabled
          [:y :vk_none] [:u :vk_none] [:i :vk_none] [:o :vk_none] [:p :vk_none]
          [:h :vk_none] [:j :vk_none] [:k :vk_none] [:l :vk_none] [:semicolon :vk_none]
