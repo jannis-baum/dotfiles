@@ -5,7 +5,7 @@ set t_vb=                     " .
 set scrolloff=8               " extra lines while scrolling
 syntax on                     " colors
 colorscheme translucent-dark  " .
-set number rnu                " line numbers
+" set number rnu                " line numbers
 set nuw=6                     " .
 set splitbelow                " splits
 set splitright                " .
