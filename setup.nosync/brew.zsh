@@ -20,7 +20,7 @@ fi
 dir=$(dirname $(realpath $0))
 
 hl_print "checking installed packages"
-installed=$(brew leaves && brew list --cask)
+installed=$(brew leaves && brew list --cask | sed 's/^/--cask /')
 packages=()
 while IFS= read -r line; do
     # trim whitespace & ignore comments
@@ -35,7 +35,7 @@ count=$#packages
 for (( i = 1; i <= $count; i++ )); do
     package=$packages[i]
     hl_print "installing new package $i/$count: $package"
-    brew_ install $package
+    brew_ install ${=package}
 done
 
 hl_print "running brew cleanup"
