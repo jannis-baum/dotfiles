@@ -9,7 +9,7 @@ nnoremap <S-z><S-x> :x<CR>
 " remove search highlight
 nnoremap <Esc> :noh<CR>
 " paste over selection without copying
-vnoremap p "0p
+vnoremap p "_dP
 
 " MOVEMENT ---------------------------------------------------------------------
 " line up/down
