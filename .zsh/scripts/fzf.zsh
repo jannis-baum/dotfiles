@@ -20,18 +20,13 @@ _fzf_compgen_dir() {
 #   - ctrl+o to write pick to buffer
 
 fzf_file() {
-    local out key f dir
-    local fzf_opts="--expect=ctrl-o,ctrl-n,ctrl-u"
-    if [[ -n "$TMUX" ]]; then
-        out=$(fzf-tmux -p -- $fzf_opts </dev/tty)
-    else
-        out=$(fzf $fzf_opts </dev/tty)
-        zle reset-prompt
-    fi
-    key=$(head -1 <<< $out)
-    f=$(tail -n +2 <<< $out)
+    local out=$(fzf --expect=ctrl-o,ctrl-n,ctrl-u </dev/tty)
+    zle reset-prompt
+
+    local key=$(head -1 <<< $out)
+    local f=$(tail -n +2 <<< $out)
     if [[ -n "$f" ]]; then
-        dir=`dirname ${(q-)f}`
+        local dir=$(dirname ${(q-)f})
         if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)f};
         elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}/";
         elif [[ "$key" == ctrl-u ]]; then BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
@@ -43,16 +38,12 @@ zle -N fzf_file
 bindkey ^o fzf_file
 
 fzf_dir() {
-    local out key dir
-    local fzf_opts="--expect=ctrl-o,ctrl-n,ctrl-u"
-    if [[ -n "$TMUX" ]]; then
-        out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf-tmux -p -- $fzf_opts)
-    else
-        out=$(fd --type d $FD_OPTIONS 2> /dev/null | fzf $fzf_opts)
-        zle reset-prompt
-    fi
-    key=$(head -1 <<< $out)
-    dir=$(tail -n +2 <<< $out)
+    local out=$(fd --type d $FD_OPTIONS 2> /dev/null \
+        | fzf --expect=ctrl-o,ctrl-n,ctrl-u)
+    zle reset-prompt
+
+    local key=$(head -1 <<< $out)
+    local dir=$(tail -n +2 <<< $out)
     if [[ -n "$dir" ]]; then
         if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)dir};
         elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}";
