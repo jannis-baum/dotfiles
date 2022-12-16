@@ -16,7 +16,7 @@ _fzf_compgen_dir() {
 # ctrl+o|u for file|directory picker
 #   - enter opens file in editor | cds to directory
 #   - ctrl+n for new file (path can have new directories)
-#   - ctrl+u for new directory/ies
+#   - ctrl+u to cd / create new directory/ies
 #   - ctrl+o to write pick to buffer
 
 fzf_file() {
