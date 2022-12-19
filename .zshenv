@@ -3,8 +3,6 @@ export ZDOTDIR=~/.zsh
 export EDITOR=vim
 export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
 
-export PATH="$PATH:$HOME/.bin/:/Library/TeX/texbin/"
-
 # fd
 export FD_OPTIONS=("--hidden" "--follow" "--strip-cwd-prefix")
 export LS_COLORS="fi=1;38;5;252:di=3;38;5;248:ex=4;38;5;175"
@@ -22,8 +20,9 @@ export FZF_DEFAULT_OPTS="
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
-# flutter
-export PATH="$PATH:$HOME/.flutter/bin/"
-
-# postgres
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/"
+# PATH
+export PATH="$PATH\
+    :$HOME/.bin/\
+    :/Library/TeX/texbin/\
+    :/Applications/Postgres.app/Contents/Versions/latest/bin/\
+    :$HOME/.flutter/bin/"
