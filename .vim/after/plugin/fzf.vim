@@ -2,7 +2,11 @@
 
 noremap <C-o> :FZF<CR>
 
-let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5 } }
+let g:fzf_layout = { 'window': {
+\    'width': 0.8, 'height': 0.6,
+\    'yoffset': 0,
+\    'border': 'sharp',
+\} }
 
 function! s:new_file(lines) abort
     let l:dirname = fnamemodify(a:lines[0], ':h') . '/'
