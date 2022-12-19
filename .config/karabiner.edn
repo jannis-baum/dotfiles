@@ -111,9 +111,8 @@
        :gui
          ; left half window sizing
          [:e [:set-win "top-left"]]    [:r [:set-win "next-display"]]     [:t [:set-win "top-right"]]
-         [:d [:set-win "left-half"]]   [:f [:set-win "maximize"] :!kitty] [:g [:set-win "right-half"]]
+         [:d [:set-win "left-half"]]   [:f [:set-win "maximize"]]         [:g [:set-win "right-half"]]
          [:c [:set-win "bottom-left"]] [:v [:set-win "previous-display"]] [:b [:set-win "bottom-right"]]
-         [:f :!STf10 :kitty]
          ; left half others
          [:q :vk_none] [:w :!C0]
          [:a :!Cequal_sign] [:s :!Chyphen]
