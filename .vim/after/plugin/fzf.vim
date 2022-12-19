@@ -1,12 +1,40 @@
 " find files -------------------------------------------------------------------
 
-noremap <C-o> :FZF<CR>
-
 let g:fzf_layout = { 'window': {
 \    'width': 0.8, 'height': 0.6,
 \    'yoffset': 0,
 \    'border': 'sharp',
 \} }
+
+function! s:finder_select(lines)
+    let s:key = a:lines[0]
+    let s:pick = a:lines[1]
+endfunction
+
+let s:finder_ls = substitute(
+    \ system('source $ZDOTDIR/scripts/directories.zsh'
+        \ . " && which l | sed 's/^l: aliased to //'"),
+    \ '\n', '', '')
+let s:finder_fd_cmd = "fd --color=always --hidden --follow --strip-cwd-prefix"
+function! s:fzf_finder() abort
+    call fzf#run(fzf#wrap({
+        \'source': split(system(s:finder_fd_cmd), '\n'),
+        \'options': [
+            \'--ansi',
+            \'--expect=ctrl-v,ctrl-p,ctrl-n,ctrl-o',
+            \'--no-multi',
+            \'--preview-window=right,60%,border-left,nohidden',
+            \'--preview', 'test -d {} ' .
+                \'&& source $HOME/.zshenv && ' . s:finder_ls . ' {} ' .
+                \'|| bat --style=numbers --color=always {}',
+            \'--bind=left:reload(' . s:finder_fd_cmd . ' --no-ignore)'
+        \],
+        \'sink*': function('s:finder_select')
+    \}))
+endfunction
+
+command! FZFIND call s:fzf_finder()
+noremap <silent><C-o> :FZFIND<CR>
 
 function! s:new_file(lines) abort
     let l:dirname = fnamemodify(a:lines[0], ':h') . '/'
