@@ -4,8 +4,10 @@ export EDITOR=vim
 export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
 
 export PATH="$PATH:$HOME/.bin/:/Library/TeX/texbin/"
+
 # fd
 export FD_OPTIONS=("--hidden" "--follow" "--strip-cwd-prefix")
+export LS_COLORS="fi=1;38;5;252:di=3;38;5;248:ex=4;38;5;175"
 # fzf
 export FZF_DEFAULT_COMMAND="fd --type f --type l $FD_OPTIONS"
 export FZF_DEFAULT_OPTS="
