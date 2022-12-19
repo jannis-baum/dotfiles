@@ -91,15 +91,11 @@ function! s:rgi_select(lines) abort
     let l:line = l:fields[2]
     let l:column = l:fields[3]
 
-    if key == 'ctrl-p'
-        let l:cmd = 'split'
-    elseif key == 'ctrl-v'
-        let l:cmd = 'vsplit'
-    else
-        let l:cmd = 'edit'
+    if !has_key(s:sink_by_key, l:key)
+        return
     endif
 
-    execute l:cmd l:file
+    execute s:sink_by_key[l:key] l:file
     call cursor(l:line, l:column)
     normal zz
     let @/ = l:query
