@@ -16,7 +16,7 @@ _fzf_compgen_dir() {
 # ctrl+o|u for file|directory picker
 #   - enter opens file in editor | cds to directory
 #   - ctrl+n for new file (path can have new directories)
-#   - ctrl+u to cd / create new directory/ies
+#   - ctrl+u to cd to directory | pick dir in selected dir
 #   - ctrl+o to write pick to buffer
 
 fzf_file() {
@@ -38,8 +38,14 @@ zle -N fzf_file
 bindkey ^o fzf_file
 
 fzf_dir() {
-    local out=$(fd --type d $FD_OPTIONS 2> /dev/null \
-        | fzf --expect=ctrl-o,ctrl-n,ctrl-u)
+    [[ -z "$1" ]] && local target="." || local target=$1
+    local out=$(fd --type d $FD_OPTIONS --full-path $1 2> /dev/null \
+        | fzf \
+            --expect=ctrl-o,ctrl-n,ctrl-u \
+            --preview='source $ZDOTDIR/scripts/directories.zsh \
+                && __list=$(which l | sed "s/^l: aliased to //") \
+                && eval $__list {}' \
+            --preview-window="nohidden")
     zle reset-prompt
 
     local key=$(head -1 <<< $out)
@@ -47,9 +53,11 @@ fzf_dir() {
     if [[ -n "$dir" ]]; then
         if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)dir};
         elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}";
-        elif [[ "$key" == ctrl-u ]]; then LBUFFER="mkdir -p ${(q-)dir}";
+        elif [[ "$key" == ctrl-u ]]; then fzf_dir ${(q-)dir} || fzf_dir $target;
         else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
         fi
+    else
+        [[ "$key" ==  ctrl-u ]] && cd $target
     fi
 }
 zle -N fzf_dir
