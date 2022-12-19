@@ -13,56 +13,49 @@ _fzf_compgen_dir() {
 
 # key bindings -----------------------------------------------------------------
 
-# ctrl+o|u for file|directory picker
-#   - enter opens file in editor | cds to directory
+# ctrl+o for finder
+#   - enter opens file in editor / cds to directory
 #   - ctrl+n for new file (path can have new directories)
-#   - ctrl+u to cd to directory | pick dir in selected dir
-#   - ctrl+o to write pick to buffer
+#   - ctrl+u start finder in selected directory (/ directory of selected file)
+#   - ctrl+o to write pick to buffer (also happens when buffer not empty)
 
-fzf_file() {
-    local out=$(fzf --expect=ctrl-o,ctrl-n,ctrl-u </dev/tty)
-    zle reset-prompt
+_fzf_finder() {
+    [[ -z "$1" ]] && local target_dir="." || local target_dir=$1
 
-    local key=$(head -1 <<< $out)
-    local f=$(tail -n +2 <<< $out)
-    if [[ -n "$f" ]]; then
-        local dir=$(dirname ${(q-)f})
-        if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)f};
-        elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}/";
-        elif [[ "$key" == ctrl-u ]]; then BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
-        else BUFFER="$EDITOR ${(q-)f}"; zle accept-line; zle reset-prompt;
-        fi
-    fi
-}
-zle -N fzf_file
-bindkey ^o fzf_file
-
-fzf_dir() {
-    [[ -z "$1" ]] && local target="." || local target=$1
-    local out=$(fd --type d $FD_OPTIONS --full-path $1 2> /dev/null \
-        | fzf \
+    local list_dirs=$(which l | sed 's/^l: aliased to //')
+    local out=$(fd --color=always --hidden --follow --strip-cwd-prefix --full-path $1 \
+        | fzf --ansi \
             --expect=ctrl-o,ctrl-n,ctrl-u \
-            --preview='source $ZDOTDIR/scripts/directories.zsh \
-                && __list=$(which l | sed "s/^l: aliased to //") \
-                && eval $__list {}' \
+            --preview="test -d {} \
+                && $list_dirs {} \
+                || bat --style=numbers --color=always {}" \
             --preview-window="nohidden")
     zle reset-prompt
 
     local key=$(head -1 <<< $out)
-    local dir=$(tail -n +2 <<< $out)
-    if [[ -n "$dir" ]]; then
-        if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then LBUFFER+=${(q-)dir};
-        elif [[ "$key" == ctrl-n ]]; then LBUFFER="v ${(q-)dir}";
-        elif [[ "$key" == ctrl-u ]]; then fzf_dir ${(q-)dir} || fzf_dir $target;
-        else BUFFER="cd ${(q-)dir}"; zle accept-line; zle reset-prompt;
-        fi
+    local pick=$(tail -n +2 <<< $out)
+    [[ -z "$pick" ]] && return
+
+    pick=${(q-)pick}
+    test -d $pick \
+        && local dir="$pick" \
+        || local dir=${(q-)$(dirname $pick)}
+
+    if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then
+        LBUFFER+="$pick"
+    elif [[ "$key" == ctrl-n ]]; then
+        LBUFFER="v $dir/"
+    elif [[ "$key" == ctrl-u ]]; then
+        _fzf_finder "$dir" || _fzf_finder "$target"
     else
-        [[ "$key" ==  ctrl-u ]] && cd $target
+        test -d $pick \
+            && BUFFER="cd $pick" \
+            || BUFFER="$EDITOR $pick"
+        zle accept-line; zle reset-prompt
     fi
 }
-zle -N fzf_dir
-bindkey ^u fzf_dir
-
+zle -N _fzf_finder
+bindkey ^o _fzf_finder
 
 # other ------------------------------------------------------------------------
 
