@@ -2,11 +2,7 @@
 
 noremap <C-o> :FZF<CR>
 
-if exists('$TMUX')
-    let g:fzf_layout = { 'tmux': '-p50%,50%' }
-else
-    let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5 } }
-endif
+let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5 } }
 
 function! s:new_file(lines) abort
     let l:dirname = fnamemodify(a:lines[0], ':h') . '/'
