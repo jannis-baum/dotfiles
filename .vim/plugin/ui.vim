@@ -12,7 +12,7 @@ set splitright                " .
 set noshowmode                " other
 set showcmd                   " .
 set signcolumn=yes            " sign column (left)
-let &fillchars ..= ',eob: '   " end of buffer filler character
+let &fillchars ..= ',eob:·'   " end of buffer filler character
 let &fillchars ..= ',vert:│'  " vertical separator
 
 " cursor style
