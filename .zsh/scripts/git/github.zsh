@@ -47,11 +47,14 @@ function ghin() {
     [ -n "$issue" ] && _gh_checkout_issue_branch $issue
 }
 
-# create GitHub PR for current branch that follows
-# `issue/NUMBER-title` scheme.
-# uses issue title as PR title and adds PR body to close issue
-# opens created PR in browser
+# if PR exists for branch, open PR. if not:
+# create PR for current branch that follows `issue/NUMBER-title` scheme.  uses
+# issue title as PR title and adds PR body to close issue. if branch doesn't
+# follow scheme, uses branch name as title and empty body. opens created PR in
+# browser.
 function ghpr() {
+    gh pr view --web 2>/dev/null && return
+
     local title=$(git branch --show-current)
     local issue=$(_gh_get_branch_issue)
     local body=""
