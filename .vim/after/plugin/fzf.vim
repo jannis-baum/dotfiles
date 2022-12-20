@@ -5,8 +5,8 @@ let g:fzf_layout = { 'window': {
 \} }
 
 let s:sink_by_key = {
-    \'ctrl-v': 'vsplit',
-    \'ctrl-p': 'split',
+    \'ctrl-o': 'vsplit',
+    \'ctrl-u': 'split',
     \'': 'edit'
 \}
 
@@ -25,7 +25,7 @@ function! s:fzf_finder() abort
         \'source': split(system(s:finder_fd_cmd), '\n'),
         \'options': [
             \'--ansi',
-            \'--expect=ctrl-v,ctrl-p,ctrl-n,ctrl-o',
+            \'--expect=ctrl-o,ctrl-u,ctrl-n,ctrl-v',
             \'--no-multi',
             \'--preview-window=right,60%,border-left,nohidden',
             \'--preview', 'test -d {} ' .
@@ -49,7 +49,7 @@ function! s:finder_select(lines)
 
     if l:key == 'ctrl-n'
         call s:finder_new_file(l:dir)
-    elseif l:key == 'ctrl-o'
+    elseif l:key == 'ctrl-v'
         call s:finder_action(l:pick)
     elseif !isdirectory(l:pick) && has_key(s:sink_by_key, l:key)
         execute s:sink_by_key[l:key] l:pick
@@ -114,7 +114,7 @@ function! s:rgi() abort
             \'--preview-window', 'right,70%,wrap,border-left',
             \'--preview', 'bat --style=numbers --color=always --line-range={3}: {2} 2>/dev/null ' .
                 \'| rg --color always --context 10 {q}',
-            \'--expect', 'ctrl-p,ctrl-v'
+            \'--expect', 'ctrl-o,ctrl-u'
         \],
         \'sink*': function('s:rgi_select')
     \}))
