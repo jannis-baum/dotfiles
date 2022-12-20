@@ -40,6 +40,10 @@ call s:oviamap('q', "'")
 call s:oviamap('Q', '"')
 call s:oviamap('r', '{')
 call s:oviamap('t', '[')
+" add undo step for ctrl-u (delete text typed in current line) & ctrl-w
+" (delete word before cursor)
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
 
 " SPECIAL CHARACTERS -----------------------------------------------------------
 "   spanish tildes
