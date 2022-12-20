@@ -4,6 +4,7 @@ alias grc="git rebase --continue"
 alias gp="git push"
 alias gpf="git push --force"
 alias gpp="git pull && gprune-branches"
+alias gx="git config --get remote.origin.url | xargs open"
 
 # stage all or given files/dirs
 function ga() {
