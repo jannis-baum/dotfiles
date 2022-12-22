@@ -51,3 +51,9 @@ endfunction
 
 set statusline=%{SLContent()}
 set laststatus=2
+
+" clear message area / command text
+augroup ClearMessageArea
+    autocmd!
+    autocmd CursorHold * echo ''
+augroup END
