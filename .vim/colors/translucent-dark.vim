@@ -53,10 +53,8 @@ let s:synC2 = 153
 let s:syner = 203
 let s:swarn = 214
 
-" main hightlight (yellow-orange)
+" main hightlight (pale yellow)
 let s:main1 = 229
-let s:main2 = 216
-let s:main3 = 223
 
 " blues: 105, 111
 " cyan: 123
@@ -99,12 +97,6 @@ call s:HI('Folded',       s:neut3, 'italic')
 call s:HI('VertSplit',    s:neut1, 'bold')
 call s:HI('LineNr',       s:neut3)
 hi! link EndOfBuffer LineNr
-" menus
-call s:HI('Pmenu',        s:neut3, 'none', s:main3)
-hi! link PmenuSbar Pmenu
-hi! link WildMenu Pmenu
-call s:HI('PmenuSel',     s:main3, 'none', s:neut3)
-hi! link PmenuThumb PmenuSel
 
 " diff
 call s:HI('DiffAdd',    '', '', s:neut1)
