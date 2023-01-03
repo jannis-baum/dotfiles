@@ -9,8 +9,10 @@ export FZF_DEFAULT_OPTS="
     --preview-window='right,60%,wrap,hidden,border-sharp'
     --preview 'bat --style=numbers --color=always {}'
     --prompt=' ╰➤ ' --pointer='→'
-    --color 'fg+:255:underline,hl:189,hl+:183,bg+:-1,marker:183,pointer:183,spinner:183,prompt:183:bold,query:regular:italic'
-    --color 'info:189'
+    --color 'fg+:255:underline,bg+:-1'
+    --color 'hl:189,hl+:183'
+    --color 'prompt:183:bold,query:regular:italic'
+    --color 'marker:183,pointer:183,spinner:183,info:189'
     --bind 'tab:down'
     --bind 'right:toggle-preview'"
 # rg
