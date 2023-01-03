@@ -8,8 +8,8 @@ export FZF_DEFAULT_OPTS="
     --height 60% --reverse --no-info --cycle
     --preview-window='right,60%,wrap,hidden,border-sharp'
     --preview 'bat --style=numbers --color=always {}'
-    --prompt='» ' --pointer='→'
-    --color 'fg+:255:underline,hl:189,hl+:183,bg+:-1,marker:183,pointer:183,spinner:183,prompt:189:regular,query:189:regular:italic'
+    --prompt=' ╰➤ ' --pointer='→'
+    --color 'fg+:255:underline,hl:189,hl+:183,bg+:-1,marker:183,pointer:183,spinner:183,prompt:183:bold,query:regular:italic'
     --bind 'tab:down'
     --bind 'right:toggle-preview'"
 # rg
