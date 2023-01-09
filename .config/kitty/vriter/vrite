@@ -5,7 +5,6 @@ echo $KITTY_PID > ~/.config/kitty/writer/.pid
 F=$(mktemp).md
 
 /usr/local/bin/vim $F \
-    --cmd 'let g:omit_coc = 1' \
     '+set laststatus=1' \
     '+startinsert' \
     '+echo ""'

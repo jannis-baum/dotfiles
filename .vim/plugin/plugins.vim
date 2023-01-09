@@ -1,6 +1,4 @@
-if !exists('g:omit_coc')
-    packadd coc
-endif
+packadd coc
 
 packadd markdown-preview.nvim
 packadd pandoc-syntax

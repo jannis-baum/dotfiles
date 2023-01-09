@@ -6,7 +6,6 @@
 
 vim - \
     --not-a-term \
-    --cmd 'let g:omit_coc=1' \
     '+silent! w! /tmp/vim_ansi' \
     '+silent! term ++curwin cat /tmp/vim_ansi' \
     "$@"
