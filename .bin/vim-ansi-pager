@@ -6,4 +6,4 @@ vim - \
     --not-a-term \
     '+silent! w! /tmp/vim_ansi' \
     '+silent! term ++hidden ++open cat /tmp/vim_ansi' \
-    "+autocmd BufEnter * only | call setpos('.', [0, $CURPOS, 0])"
+    "+augroup ansipager | exe \"autocmd BufEnter * only | call setpos('.', [0, $CURPOS, 0]) | autocmd! ansipager\" | augroup END"
