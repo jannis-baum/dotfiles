@@ -3,7 +3,6 @@
 [[ -n "$1" ]] && CURPOS=$1 || CURPOS="0, 0"
 
 vim - \
-    -u NONE \
     --not-a-term \
     '+silent! w! /tmp/vim_ansi' \
     '+silent! term ++hidden ++open cat /tmp/vim_ansi' \
