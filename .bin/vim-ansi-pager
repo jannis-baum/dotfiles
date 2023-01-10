@@ -1,11 +1,10 @@
 #!/bin/sh
 
-# TODO: setpos doesn't work because it is called before cat is done, which
-# continuously moves the cursor to the bottom
-[ "$#" -eq 0 ] && set -- '+call setpos(".", [0, 1, 1, 0])'
+[[ -n "$1" ]] && CURPOS=$1 || CURPOS="0, 0"
 
 vim - \
+    -u NONE \
     --not-a-term \
     '+silent! w! /tmp/vim_ansi' \
-    '+silent! term ++curwin cat /tmp/vim_ansi' \
-    "$@"
+    '+silent! term ++hidden ++open cat /tmp/vim_ansi' \
+    "+autocmd BufEnter * only | call setpos('.', [0, $CURPOS, 0])"
