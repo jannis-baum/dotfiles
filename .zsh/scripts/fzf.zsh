@@ -20,16 +20,16 @@ _fzf_compgen_dir() {
 #   - ctrl+o to write pick to buffer (also happens when buffer not empty)
 #   - left  reloads without ignoring anything (e.g. .git/*)
 
+_fzf_ls_cmd=$(which l | sed 's/^l: aliased to //')
 _fzf_finder() {
     [[ -z "$1" ]] && local target_dir="." || local target_dir=$1
 
-    local list_dirs=$(which l | sed 's/^l: aliased to //')
     local fzf_opts=("--color=always" "--hidden" "--follow" "--strip-cwd-prefix")
     local out=$(fd $fzf_opts --full-path $1 \
         | fzf --ansi \
             --expect=ctrl-o,ctrl-n,ctrl-u \
             --preview="test -d {} \
-                && $list_dirs {} \
+                && $_fzf_ls_cmd {} \
                 || bat --style=numbers --color=always {}" \
             --preview-window="nohidden" \
             --bind "left:reload(fd --no-ignore $fzf_opts)")
@@ -87,3 +87,13 @@ rgi() {
     fi
 }
 
+# dirstack picker
+# enter goes to directory
+function df() {
+    local target=$(dirs -p | tail -n+2 \
+        | fzf --preview-window="nohidden" \
+            --preview="$_fzf_ls_cmd "'$(sed "s|~|$HOME|" <<<{})')
+    if [[ -n "$target" ]]; then
+        cd ${(q-)$(sed "s|~|$HOME|" <<<$target)}
+    fi
+}
