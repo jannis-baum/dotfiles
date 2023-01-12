@@ -43,12 +43,12 @@ _fzf_finder() {
     pick=${(q-)pick}
     test -d $pick \
         && local dir="$pick" \
-        || local dir=${(q-)$(dirname $pick)}
+        || local dir="${(q-)$(dirname $pick)}/"
 
     if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then
         LBUFFER+="$pick"
     elif [[ "$key" == ctrl-n ]]; then
-        LBUFFER="v $dir/"
+        LBUFFER="v $dir"
     elif [[ "$key" == ctrl-u ]]; then
         _fzf_finder "$dir" || _fzf_finder "$target"
     else
