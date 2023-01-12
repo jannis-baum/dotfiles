@@ -10,22 +10,23 @@ _fzf_compgen_dir() {
 # fzf autocompletion
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
+# command to list directory contents in preview window
+_fzf_ls_cmd=$(which l | sed 's/^l: aliased to //')
 
 # key bindings -----------------------------------------------------------------
 
 # ctrl+o for finder
-#   - enter opens file in editor / cds to directory
-#   - ctrl+n for new file (path can have new directories)
-#   - ctrl+u start finder in selected directory (/ directory of selected file)
-#   - ctrl+o to write pick to buffer (also happens when buffer not empty)
-#   - left  reloads without ignoring anything (e.g. .git/*)
+#   - enter    open file in editor / cds to directory
+#   - ctrl+n   create new file (path can have new directories)
+#   - ctrl+u   start finder in selected directory (/ directory of selected file)
+#   - ctrl+o   write pick to buffer (also happens when buffer not empty)
+#   - left     reload without ignoring anything (e.g. .git/*)
 
-_fzf_ls_cmd=$(which l | sed 's/^l: aliased to //')
 _fzf_finder() {
     [[ -z "$1" ]] && local target_dir="." || local target_dir=$1
 
-    local fzf_opts=("--color=always" "--hidden" "--follow" "--strip-cwd-prefix")
-    local out=$(fd $fzf_opts --full-path $1 \
+    local fd_opts=("--color=always" "--hidden" "--follow" "--strip-cwd-prefix")
+    local out=$(fd $fd_opts --full-path $1 \
         | fzf --ansi \
             --expect=ctrl-o,ctrl-n,ctrl-u \
             --preview="test -d {} \
@@ -60,10 +61,11 @@ _fzf_finder() {
 zle -N _fzf_finder
 bindkey ^o _fzf_finder
 
-# other ------------------------------------------------------------------------
+# commands ---------------------------------------------------------------------
 
 # interactive ripgrep: live search & highlighted preview
-# enter opens selection in vim, goes to selected occurance and highlights search
+#   - enter    open selection in vim, go to selected occurance and highlight
+#              search 
 rgi() {
     local rg_command=("rg" "--column" "--line-number" "--no-heading")
     local selection=$($rg_command "$1" | \
@@ -88,7 +90,7 @@ rgi() {
 }
 
 # dirstack picker
-# enter goes to directory
+#   - enter    go to directory
 function df() {
     local target=$(dirs -p | tail -n+2 \
         | fzf --preview-window="nohidden" \
