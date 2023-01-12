@@ -9,7 +9,7 @@ end)
 -- sleep
 sleepWatcher = hs.caffeinate.watcher.new(function(event)
     if event == hs.caffeinate.watcher.systemWillSleep then
-        hs.execute('~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/_lib/cookie-cleaner/whitelist.txt')
+        hs.execute('~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/.safari/cookie-whitelist.txt')
     end
 end)
 sleepWatcher:start()

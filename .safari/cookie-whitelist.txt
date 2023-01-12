@@ -1,0 +1,8 @@
+github\.com
+hpi\.de
+netflix\.com
+notion
+figma\.com
+stackoverflow\.com
+apple\.com
+telegram\.org
