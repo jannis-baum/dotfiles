@@ -5,13 +5,6 @@ set textwidth=80
 set tabstop=2 softtabstop=2
 set shiftwidth=2
 
-" plugins
-let g:mkdp_browser = 'Safari'
-let g:mkdp_auto_close = 0
-let g:mkdp_markdown_css = expand($HOME . '/.vim/markdown-preview/markdown.css')
-
-let g:pandoc#syntax#conceal#use = 0
-
 " do stuff between $$
 nnoremap da$ F$df$
 nnoremap dam F$df$
