@@ -1,0 +1,4 @@
+#container__video_stream {
+    top: 50%;
+    transform: translateY(-50%);
+}
