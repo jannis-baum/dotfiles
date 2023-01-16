@@ -1,9 +1,6 @@
 [submodule ".vim/pack/plugins/opt/pandoc-syntax"]
 	path = .vim/pack/plugins/opt/pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
-[submodule ".vim/pack/plugins/opt/markdown-preview.nvim"]
-	path = .vim/pack/plugins/opt/markdown-preview.nvim
-	url = https://github.com/iamcco/markdown-preview.nvim
 [submodule ".vim/pack/plugins/opt/coc"]
 	path = .vim/pack/plugins/opt/coc
 	url = https://github.com/neoclide/coc.nvim.git
@@ -41,3 +38,6 @@
 [submodule ".synapse/modules/pkill"]
 	path = .synapse/modules/pkill
 	url = https://github.com/jannis-baum/synapse-pkill.git
+[submodule ".vim/pack/plugins/opt/markdown-preview.nvim"]
+	path = .vim/pack/plugins/opt/markdown-preview.nvim
+	url = https://github.com/jannis-baum/markdown-preview.nvim.git
