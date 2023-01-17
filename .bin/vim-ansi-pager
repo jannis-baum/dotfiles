@@ -2,8 +2,10 @@
 
 [[ -n "$1" ]] && CURPOS=$1 || CURPOS="0, 0"
 
+temp_file=$(mktemp)
+
 vim - \
     --not-a-term \
-    '+silent! w! /tmp/vim_ansi' \
-    '+silent! term ++hidden ++open cat /tmp/vim_ansi' \
+    "+silent! w! $temp_file" \
+    "+silent! term ++hidden ++open cat $temp_file" \
     "+augroup ansipager | exe \"autocmd BufEnter * only | call setpos('.', [0, $CURPOS, 0]) | autocmd! ansipager\" | augroup END"
