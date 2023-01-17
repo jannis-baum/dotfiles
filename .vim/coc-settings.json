@@ -1,4 +1,5 @@
 {
+    "inlayHint.enable": false,
     "suggest.noselect": true,
 
     "git.addedSign.hlGroup": "SignColumn",
