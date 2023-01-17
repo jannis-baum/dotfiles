@@ -12,14 +12,14 @@ ibkp() {
             "-h" | "--help") should_help=1; continue;;
         esac
 
+        [[ -z "$arg" ]] && continue
         if [[ "$arg" == "-"* ]]; then
             echo "illegal option: $arg"
             should_help=1
             continue
         fi
 
-        local dir_name=$(dirname $arg)
-        local source_dir=$(realpath $dir_name)
+        local source_dir="$(realpath $(dirname $arg))"
         if [[ "$source_dir" != "$HOME"* ]]; then
             echo "\e[2m\e[3m$arg not in home directory, skipping\e[0m"
             continue
@@ -29,10 +29,12 @@ ibkp() {
             du -sh $arg
         fi
 
-        local dest_dir=$(sed "s|$HOME|$backup_dir|" <<< "$source_dir")
-        local file_name=$(sed "s|$dir_name||" <<< "$arg")
+        local dest_dir="$(sed "s|$HOME|$backup_dir|" <<< "$source_dir")"
+        local file_name="$(sed "s|$source_dir||" <<< "$arg")"
+        local dest_path="$dest_dir/$file_name"
+        rm -rf "$dest_path"
         mkdir -p "$dest_dir"
-        cp -r "$arg" "$dest_dir/$file_name"
+        cp -r "$arg" "$dest_path"
     done
 
     [[ -n "$should_print" ]] && echo $backup_dir
