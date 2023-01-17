@@ -4,6 +4,7 @@ alias ej="eject /Volumes/LaCie"
 alias convert-file="ffmpeg"
 alias w='printf "%s" "$(vipe)" | pbcopy'
 alias ssh='kitty +kitten ssh'
+alias trm='trash -F'
 
 # linking scripts
 alias mue="~/_lib/markup-export/main"
