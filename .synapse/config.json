@@ -32,6 +32,7 @@
         "cas",
         "keychain",
         "pkill",
-        "/native/indexer"
+        "/native/indexer",
+        "safari-histmarks"
     ]
 }
