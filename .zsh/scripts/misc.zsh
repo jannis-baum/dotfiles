@@ -1,5 +1,5 @@
 # generic aliases
-alias c="printf '\n%.0s' {1..$LINES} && clear"
+alias c="printf '\n%.0s' {2..$LINES} && clear"
 alias ej="eject /Volumes/LaCie"
 alias convert-file="ffmpeg"
 alias w='printf "%s" "$(vipe)" | pbcopy'
