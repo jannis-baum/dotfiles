@@ -97,6 +97,9 @@ call s:HI('Folded',       s:neut3, 'italic')
 call s:HI('VertSplit',    s:neut1, 'bold')
 call s:HI('LineNr',       s:neut3)
 hi! link EndOfBuffer LineNr
+call s:HI('TabLineFill', s:neut3, 'none', 'none')
+call s:HI('TabLine', s:neut3, 'none', 'none')
+call s:HI('TabLineSel', s:synB1, 'bold', 'none')
 
 " diff
 call s:HI('DiffAdd',    '', '', s:neut1)
