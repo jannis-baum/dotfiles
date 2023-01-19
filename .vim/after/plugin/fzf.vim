@@ -111,7 +111,7 @@ function! s:rgi() abort
             \'--no-multi',
             \'--bind', 'change:reload:' . s:rg_command . ' {q} | sed "s/^/{q}:/g" || true',
             \'--disabled',
-            \'--preview-window', 'right,70%,wrap,border-left',
+            \'--preview-window', 'right,70%,wrap,border-left,nohidden',
             \'--preview', 'bat --style=numbers --color=always --line-range={3}: {2} 2>/dev/null ' .
                 \'| rg --color always --context 10 {q}',
             \'--expect', 'ctrl-o,ctrl-u'
