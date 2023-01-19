@@ -5,6 +5,8 @@ alias gp="git push"
 alias gpf="git push --force"
 alias gpp="git pull && gprune-branches"
 alias gx="git config --get remote.origin.url | xargs open"
+alias gst="git stash"
+alias gsp="git stash pop"
 
 # stage all or given files/dirs
 function ga() {
