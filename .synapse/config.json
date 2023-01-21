@@ -33,6 +33,25 @@
         "keychain",
         "pkill",
         "/native/indexer",
-        "safari-histmarks"
+        "safari-histmarks",
+        { "/inline/debugging-tester": {
+            "name": "Tester",
+            "trigger": "^TEST (abc )?(.+)",
+            "suppressOthers": true,
+            "source": {
+                "path": "/bin/zsh",
+                "args": ["-c",
+                    "echo '[{\"title\": \"{{ 1 }} {{ 2 }} {{ 3 ?? no third }}\"}]'"
+                ]
+            },
+            "sink": {
+                "path": "/bin/zsh",
+                "args": ["-c",
+                    "printf 'title: |{{ title ?? no title }}|, caption: |{{ caption ?? no caption }}|, hehe: |{{ hehehe ?? hehe }}|' | pbcopy"
+                ]
+            },
+            "reloadsOnChange": true,
+            "isSearchDisabled": true
+        } }
     ]
 }
