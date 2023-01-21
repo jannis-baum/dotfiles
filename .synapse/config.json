@@ -34,6 +34,21 @@
         "pkill",
         "/native/indexer",
         "safari-histmarks",
+        { "/inline/date-copy": {
+            "name": "Today's date",
+            "trigger": "date ",
+            "suppressOthers": true,
+            "source": {
+                "path": "/bin/zsh",
+                "args": ["-c", "echo \"[{ \\\"title\\\": \\\"$(date +%y-%m-%d)\\\" }]\""]
+            },
+            "sink": {
+                "path": "/bin/zsh",
+                "args": ["-c", "printf {{ title }} | pbcopy && printf closePanel"]
+            },
+            "defaultSymbol": "􀉃",
+            "isSearchDisabled": true
+        } },
         { "/inline/debugging-tester": {
             "name": "Tester",
             "trigger": "^TEST (abc )?(.+)",
