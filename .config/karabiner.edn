@@ -24,7 +24,7 @@
   :simlayers {
     :char-l {:key :a} :char-r {:key :semicolon}
     :ctrl-l {:key :q} :ctrl-r {:key :p}
-    :numbers {:key :z}
+    :numbers {:key :z :modi {:optional :any}}
     :gui {:key :slash}}
 
   :main [
