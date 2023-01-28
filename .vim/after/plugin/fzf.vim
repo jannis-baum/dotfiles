@@ -121,6 +121,32 @@ endfunction
 
 command! RGI let @/ = '' | call s:rgi() | set hlsearch
 
+" git status file picker -------------------------------------------------------
+
+function! s:gsi_select(lines) abort
+    let l:file = split(a:lines[1], ':')[0]
+    call s:finder_select([a:lines[0], l:file])
+endfunction
+
+function! s:gsi() abort
+    call fzf#run(fzf#wrap({
+        \'source': 'source $HOME/.zsh/scripts/git/_helpers.zsh && _git_interactive_status_helper',
+        \'options': [
+            \'--ansi',
+            \'--exit-0',
+            \'--delimiter', ':',
+            \'--with-nth', '2',
+            \'--expect=ctrl-o,ctrl-u,ctrl-n',
+            \'--no-multi',
+            \'--preview-window=right,60%,border-left,nohidden',
+            \'--preview', 'git diff --color=always HEAD -- {1} | tail -n +5'
+        \],
+        \'sink*': function('s:gsi_select')
+    \}))
+endfunction
+
+command! GSI call s:gsi()
+
 " buffers ----------------------------------------------------------------------
 
 function! s:buffers_list()
