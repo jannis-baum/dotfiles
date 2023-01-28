@@ -8,10 +8,6 @@
   - sdf
   - togglable kitty overlay & vriter
 
-## vim
-
-- auto-tiling splits
-
 ## scripts
 
 ### sdf
