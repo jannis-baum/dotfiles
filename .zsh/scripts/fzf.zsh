@@ -33,7 +33,7 @@ _fzf_finder() {
                 && $_fzf_ls_cmd {} \
                 || bat --style=numbers --color=always {}" \
             --preview-window="nohidden" \
-            --bind "left:reload(fd --no-ignore $fzf_opts)")
+            --bind "left:reload(fd --no-ignore $fd_opts)")
     zle reset-prompt
 
     local key=$(head -1 <<< $out)
