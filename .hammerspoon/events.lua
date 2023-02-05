@@ -1,5 +1,5 @@
 -- launch
-hs.execute('open -g -a Synapse')
+hs.execute('open -g ~/Applications/Synapse')
 
 -- reload config
 hs.urlevent.bind("reloadConfig", function(eventName, params)
