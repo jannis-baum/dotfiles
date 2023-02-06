@@ -1,4 +1,5 @@
 {
+    "launchAtLogin": true,
     "panel": {
         "keepCentered": true
     },
