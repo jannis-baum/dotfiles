@@ -37,13 +37,16 @@ function _gh_get_issue_title() {
         | sed -r 's/^title:[[:blank:]]*//'
 }
 
-function _gh_checkout_issue_branch() {
-    local branch
-    branch="issue/$1-$(_gh_get_issue_title $1 \
+function _gh_get_branch_name_for_issue() {
+    echo "issue/$1-$(_gh_get_issue_title $1 \
         | tr ' ' '-' \
         | tr -cd '[:alnum:]-' \
         | tr '[:upper:]' '[:lower:]' \
         | sed -r 's/--+/-/g')"
+}
+
+function _gh_checkout_issue_branch() {
+    local branch=$(_gh_get_branch_name_for_issue $1)
     git checkout $branch 2>/dev/null \
         || git checkout -b $branch
 }

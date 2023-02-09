@@ -41,10 +41,23 @@ function ghin() {
         echo "Please specify an issue name."
         return 1
     fi
-    issue=$(gh issue create --title "$*" --body "" \
+    local issue=$(gh issue create --title "$*" --body "" \
         | tail -1 \
         | sed -r 's|^.*/([[:digit:]]+)$|\1|')
     [ -n "$issue" ] && _gh_checkout_issue_branch $issue
+}
+
+# rename current issue & branch
+function ghir() {
+    local issue=$(_gh_get_branch_issue)
+    if [ -z "$1" -o -z "$issue" ]; then
+        return 1
+    fi
+    gh issue edit $issue --title "$*"
+    git push origin --delete $(git branch --show-current)
+    local newname=$(_gh_get_branch_name_for_issue $issue)
+    git branch -m $newname
+    git push origin -u $newname
 }
 
 # if PR exists for branch, open PR. if not:
