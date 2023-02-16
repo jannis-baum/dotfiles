@@ -44,3 +44,6 @@
 [submodule ".synapse/modules/safari-histmarks"]
 	path = .synapse/modules/safari-histmarks
 	url = https://github.com/jannis-baum/synapse-safari-histmarks.git
+[submodule ".synapse/modules/safari-tabs"]
+	path = .synapse/modules/safari-tabs
+	url = https://github.com/jannis-baum/synapse-safari-tabs.git
