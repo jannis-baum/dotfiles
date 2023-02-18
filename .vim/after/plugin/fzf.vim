@@ -149,6 +149,8 @@ function! s:gsi() abort
 endfunction
 
 command! GSI call s:gsi()
+noremap <silent> <leader>gs :GSI<CR>
+
 
 " buffers ----------------------------------------------------------------------
 
