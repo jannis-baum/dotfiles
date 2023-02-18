@@ -21,7 +21,10 @@
         }
     },
     "search": {
-        "program": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] }
+        "programs": {
+            "searchAndSort": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] },
+            "searchOnly": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "--no-sort", "-f"] }
+        }
     },
     "modules": [
         { "/native/controller": { "trigger": "^sc (.*)" } },
