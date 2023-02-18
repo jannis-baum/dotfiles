@@ -60,8 +60,8 @@
        [{:sim [:i :o] :modi :any} :!To]
        :!kitty
        [{:sim [:u :i] :modi :any} :!Cf8]
-       [{:sim [:i :o] :modi :any} [:!CSreturn_or_enter [:uri "hammerspoon://smartMagnify"]] ["inWooshy" 1]]
-       [{:sim [:i :o] :modi :any} :!Cf9 ["inWooshy" 0]]]}
+       :safari
+       [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [{:sim [:x :c] :modi :any} :left_arrow]
