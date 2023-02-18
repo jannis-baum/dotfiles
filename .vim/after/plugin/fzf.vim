@@ -124,6 +124,9 @@ command! RGI let @/ = '' | call s:rgi() | set hlsearch
 " git status file picker -------------------------------------------------------
 
 function! s:gsi_select(lines) abort
+    if len(a:lines) < 2
+        return
+    endif
     let l:file = split(a:lines[1], ':')[0]
     call s:finder_select([a:lines[0], l:file])
 endfunction
