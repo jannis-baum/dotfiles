@@ -53,6 +53,6 @@ function sna() {
 # keep directory history file
 export ZSH_DIR_HIST_FILE="$HOME/.zsh/.zsh_dir_history"
 function chpwd_dir_history() {
-    echo "$(tail -1000 $ZSH_DIR_HIST_FILE; pwd)" > $ZSH_DIR_HIST_FILE
+    echo "$(pwd; head -n1000 $ZSH_DIR_HIST_FILE)" > $ZSH_DIR_HIST_FILE
 }
 chpwd_functions=( chpwd_dir_history )
