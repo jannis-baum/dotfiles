@@ -49,3 +49,10 @@ function sna() {
     local entries=$(cd $dir && P=$(pwd); ls -t | head -n $count | sed "s,^,'$P/," | sed "s,$,',")
     echo $entries
 }
+
+# keep directory history file
+export ZSH_DIR_HIST_FILE="$HOME/.zsh/.zsh_dir_history"
+function chpwd_dir_history() {
+    echo "$(tail -1000 $ZSH_DIR_HIST_FILE; pwd)" > $ZSH_DIR_HIST_FILE
+}
+chpwd_functions=( chpwd_dir_history )

@@ -89,10 +89,13 @@ rgi() {
     fi
 }
 
-# dirstack picker
+# dir history picker
 #   - enter    go to directory
 function df() {
-    local target=$(dirs -p | tail -n+2 \
+    local target=$(cat -n $ZSH_DIR_HIST_FILE \
+        | sort -uk2 \
+        | sort -nk1 \
+        | cut -f2- \
         | fzf --preview-window="nohidden" \
             --preview="$_fzf_ls_cmd "'$(sed "s|~|$HOME|" <<<{})')
     if [[ -n "$target" ]]; then
