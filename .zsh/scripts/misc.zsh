@@ -32,7 +32,11 @@ function passn() {
 }
 ## quick look
 function ql() {
-    qlmanage -p "$1" >& /dev/null
+    if test -e "$1"; then
+        qlmanage -p "$1" >& /dev/null
+    else
+        echo "\"$1\": No such file or directory"
+    fi
 }
 
 # options
