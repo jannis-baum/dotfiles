@@ -5,10 +5,10 @@
 --glob=!.git/*
 --glob=!node_modules/*
 
---colors
-match:bg:229
---colors
-match:fg:235
+--colors=match:bg:229
+--colors=match:fg:235
 
---context-separator
-...
+--context-separator=...
+
+--pre=/Users/jannisbaum/.rg/pre-pdf.sh
+--pre-glob=*.pdf
