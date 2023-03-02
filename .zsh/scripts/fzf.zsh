@@ -92,15 +92,25 @@ rgi() {
 # dir history picker
 #   - enter    go to directory
 function df() {
-    local target=$({
-            printf "\e[$(sed -r 's/^.*di=([^:]+):.*$/\1/' <<< $LS_COLORS)m"
-            cat -n $ZSH_DIR_HIST_FILE \
-                | sort -uk2 \
-                | sort -nk1 \
-                | cut -f2-
-        } \
+    # make paths unique and delete non-existing
+    local valid_paths=""
+    for p in $(
+        cat -n $ZSH_DIR_HIST_FILE \
+            | sort -uk2 \
+            | sort -nk1 \
+            | cut -f2-
+    ); do
+        test -d $p && valid_paths+=$p"\n"
+    done
+    echo $valid_paths > $ZSH_DIR_HIST_FILE
+
+    # pick target
+    local target=$(
+        printf "\e[$(sed -r 's/^.*di=([^:]+):.*$/\1/' <<< $LS_COLORS)m$valid_paths" \
         | fzf --ansi --preview-window="nohidden" \
             --preview="$_fzf_ls_cmd "'$(sed "s|~|$HOME|" <<<{})')
+
+    # go to dir
     if [[ -n "$target" ]]; then
         cd ${(q-)$(sed "s|~|$HOME|" <<<$target)}
     fi
