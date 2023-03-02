@@ -19,5 +19,8 @@ augroup END
 inoremap <right> <esc>:call AutoPairsJump()<cr>a
 
 packadd fugitive
+
 packadd slime
+let g:slime_target = "kitty"
+
 packadd dart-vim-plugin
