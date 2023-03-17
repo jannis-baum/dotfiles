@@ -111,18 +111,34 @@ function _MINE_git_branch_names() {
 compdef _MINE_git_branch_names gd
 
 # fzf to see git log
-# ctrl-r starts rebase from parent of selected commit
-# ctrl-o copies commit hash
-# return opens diff (gd, see above) between commit and parent
+# log args:
+# - uses `git log main..` if not on main branch
+#   - first arg -a or --all to avoid this
+# - otherwise passes args to git log
+# bindings:
+# - ctrl-r starts rebase from parent of selected commit
+# - ctrl-o copies commit hash
+# - return opens diff (gd, see above) between commit and parent
 function gl() {
-    local commit hash key
-    out=$(git log --oneline --decorate --color=always $* \
+    local commit hash key logargs
+
+    if [ -n "$*" ]; then
+        [ "$1" = "-a" -o "$1" = "--all" ] \
+            && logargs="" || logargs="$1"
+    else
+        [ $(git branch --show-current) = "main" ] \
+            && logargs="" || logargs="main.."
+    fi
+
+    out=$(git log --oneline --decorate --color=always $logargs \
         | fzf --delimiter=' ' --with-nth='2..' --no-sort --exact --ansi --expect=ctrl-r,ctrl-o \
             --preview 'zsh -c "source $ZDOTDIR/scripts/git/_helpers.zsh 2> /dev/null;
                 _git_pretty_diff $(git log --pretty=%P -n 1 {1}) {1} | less -R"' \
             --preview-window='60%,nowrap,nohidden')
+
     key=$(head -1 <<< $out)
     hash=$(tail -n +2 <<< $out | sed 's/ .*$//')
+
     if [ -n "$hash" ]; then
         if [[ "$key" == ctrl-r ]]; then git rebase -i $hash^;
         elif [[ "$key" == ctrl-o ]]; then printf $hash | pbcopy;
