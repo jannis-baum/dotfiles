@@ -26,5 +26,9 @@
 [difftool]
 	prompt = false
     trustExitCode = true
+
 [commit]
 	gpgsign = true
+
+[tag]
+    forceSignAnnotated = true
