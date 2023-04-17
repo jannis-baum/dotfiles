@@ -5,7 +5,8 @@ let g:fzf_layout = { 'window': {
 \} }
 
 let s:sink_by_key = {
-    \'ctrl-u': 'SPLIT',
+    \'ctrl-o': 'SPLIT',
+    \'ctrl-u': 'tabnew',
     \'': 'edit'
 \}
 
@@ -24,7 +25,7 @@ function! s:fzf_finder() abort
         \'source': split(system(s:finder_fd_cmd), '\n'),
         \'options': [
             \'--ansi',
-            \'--expect=ctrl-o,ctrl-u,ctrl-n',
+            \'--expect=ctrl-o,ctrl-u,ctrl-b,ctrl-n',
             \'--no-multi',
             \'--preview-window=right,60%,border-left,nohidden',
             \'--preview', 'test -d {} ' .
@@ -48,7 +49,7 @@ function! s:finder_select(lines)
 
     if l:key == 'ctrl-n'
         call s:finder_new_file(l:dir)
-    elseif l:key == 'ctrl-o'
+    elseif l:key == 'ctrl-b'
         call s:finder_action(l:pick)
     elseif !isdirectory(l:pick) && has_key(s:sink_by_key, l:key)
         execute s:sink_by_key[l:key] l:pick
