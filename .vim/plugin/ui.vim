@@ -44,6 +44,9 @@ endfunction
 
 function! SLContent()
     let l:right = ' ' . s:coc_statusline() . @% . ' '
+    if getbufinfo('%')[0].changed
+        let l:right ..= '✻ '
+    endif
     let l:spacer_width = winwidth(0) - strwidth(l:right)
     let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
