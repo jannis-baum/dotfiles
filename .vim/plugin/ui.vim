@@ -62,14 +62,15 @@ endfunction
 function! TLContent()
     let l:right = ''
     let l:spacer_width = &columns
-    for i in range(tabpagenr('$'))
+    let l:tabnr = tabpagenr('$')
+    for i in range(l:tabnr)
         let l:right ..= i + 1 == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
 	    " set the tab page number (for mouse clicks)
 	    let l:right ..= '%' .. (i + 1) .. 'T'
         " set label
-        let l:label = ' ' . s:tl_label(i + 1) .  ' '
-        let l:spacer_width -= strwidth(l:label)
-        let l:right ..= label
+        let l:label = ' ' . s:tl_label(i + 1) . ' '
+        let l:spacer_width -= strwidth(l:label) + 1
+        let l:right ..= label . '%#TabLine#' . (i < l:tabnr - 1 ? '│' : ' ')
     endfor
     " after the last tab fill with TabLineFill and reset tab page nr
     let l:right ..= '%#TabLineFill#%T'
