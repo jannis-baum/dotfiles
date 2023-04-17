@@ -26,6 +26,11 @@ let &t_Cs = "\e[4:3m"
 let &t_ds = "\e[4:4m"
 let &t_Ds = "\e[4:5m"
 
+" status & tab line
+function! s:modified_marker(buf)
+    return getbufinfo(a:buf)[0].changed ? ' ✻' : ''
+endfunction
+
 " status line
 function! s:coc_statusline()
     let l:info = get(b:, 'coc_diagnostic_info', {})
@@ -43,10 +48,7 @@ function! s:coc_statusline()
 endfunction
 
 function! SLContent()
-    let l:right = ' ' . s:coc_statusline() . @% . ' '
-    if getbufinfo('%')[0].changed
-        let l:right ..= '✻ '
-    endif
+    let l:right = ' ' . s:coc_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
     let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
@@ -57,9 +59,10 @@ set laststatus=2
 
 " tab line
 function! s:tl_label(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
-    return bufname(buflist[winnr - 1])
+    let l:buflist = tabpagebuflist(a:n)
+    let l:winnr = tabpagewinnr(a:n)
+    let l:bufname = bufname(buflist[l:winnr - 1])
+    return l:bufname . s:modified_marker(l:bufname)
 endfunction
 
 function! TLContent()
