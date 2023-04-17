@@ -52,6 +52,29 @@ endfunction
 set statusline=%{SLContent()}
 set laststatus=2
 
+" tab line
+function! TLLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return bufname(buflist[winnr - 1])
+endfunction
+
+function! TLContent()
+    let l:right = '%='
+    for i in range(tabpagenr('$'))
+        let l:right ..= i + 1 == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+	    " set the tab page number (for mouse clicks)
+	    let l:right ..= '%' .. (i + 1) .. 'T'
+        " set label
+	    let l:right ..= ' %{TLLabel(' .. (i + 1) .. ')} '
+    endfor
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let l:right ..= '%#TabLineFill#%T'
+    return l:right
+endfunction
+
+set tabline=%!TLContent()
+
 " clear message area / command text
 augroup ClearMessageArea
     autocmd!
