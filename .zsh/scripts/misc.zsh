@@ -14,19 +14,6 @@ alias pass="~/_lib/keychains/main"
 alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
 # generic functions
-## make dirs to open editor
-## open in running vim if suspended
-function v() {
-    mkdir -p $(dirname $1)
-
-    local vim_id=$(jobs | sed -E -n 's/\[([0-9])\][ +-]* [a-zA-Z]*[[:space:]]*v .*/\1/p' | head -1)
-    if [[ -n "$vim_id" ]]; then
-        echo "tabedit $1\nfiletype detect" > $HOME/.vim/resume-source.vim
-        fg %$vim_id
-    else
-        vim $1
-    fi
-}
 ## generate new password
 function passn() {
 	echo | pbcopy
