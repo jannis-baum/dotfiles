@@ -15,3 +15,9 @@ function v() {
         vim $1
     fi
 }
+
+autoload -U add-zsh-hook
+function _write_v_jobs() {
+    _get_vim_ids | wc -l > "/tmp/current-jobs-$$"
+}
+add-zsh-hook precmd _write_v_jobs
