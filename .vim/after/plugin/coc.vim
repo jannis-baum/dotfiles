@@ -18,7 +18,8 @@ let g:coc_global_extensions = [
     \'coc-flutter',
     \'coc-html', 'coc-css', '@yaegassy/coc-tailwindcss3', 'coc-json',
     \'coc-git', 'coc-docker',
-    \'coc-markdownlint'
+    \'coc-markdownlint',
+    \'coc-julia'
 \]
 
 " BINDINGS ---
