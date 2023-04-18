@@ -6,6 +6,9 @@ nnoremap <esc>^[ <esc>^[
 " close all with ZZ, one with ZX
 nnoremap <S-z><S-z> :xa<CR>
 nnoremap <S-z><S-x> :x<CR>
+" tab navigation
+nnoremap <leader>, gT
+nnoremap <leader>. gt
 " remove search highlight
 nnoremap <Esc> :noh<CR>
 " paste over selection without copying
