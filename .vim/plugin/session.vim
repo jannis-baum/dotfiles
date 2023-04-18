@@ -5,15 +5,11 @@ augroup LastPos
         \| exe "normal! g'\"" | endif
 augroup END
 
-" save /restore latest session
-augroup Stdin
+" execute extra commands after suspension
+augroup SusResume
     autocmd!
-    autocmd StdinReadPre * let g:read_stdin = 1
-augroup END
-augroup SaveSession
-    autocmd!
-    autocmd VimLeave * if !exists('g:read_stdin') | execute 'mksession!' '~/.vim/latest-session.vim' | endif
-    autocmd VimEnter * if eval("@%") == "" && !exists('g:read_stdin') | source ~/.vim/latest-session.vim | :colorscheme translucent-dark | edit | endif
+    let s:resume_source = $HOME . '/.vim/resume-source.vim'
+    autocmd VimResume * if filereadable(s:resume_source) | execute('source ' . s:resume_source) | call delete(s:resume_source) | endif
 augroup END
 
 " backups
