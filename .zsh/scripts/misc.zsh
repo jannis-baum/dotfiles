@@ -21,7 +21,7 @@ function v() {
 
     local vim_id=$(jobs | sed -E -n 's/\[([0-9])\][ +-]* [a-zA-Z]*[[:space:]]*v .*/\1/p' | head -1)
     if [[ -n "$vim_id" ]]; then
-        echo "tabedit $1" > $HOME/.vim/resume-source.vim
+        echo "tabedit $1\nfiletype detect" > $HOME/.vim/resume-source.vim
         fg %$vim_id
     else
         vim $1

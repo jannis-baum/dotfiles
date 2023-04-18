@@ -9,7 +9,10 @@ augroup END
 augroup SusResume
     autocmd!
     let s:resume_source = $HOME . '/.vim/resume-source.vim'
-    autocmd VimResume * if filereadable(s:resume_source) | execute('source ' . s:resume_source) | call delete(s:resume_source) | endif
+    autocmd VimResume * if filereadable(s:resume_source)
+            \| execute('source ' . s:resume_source)
+            \| call delete(s:resume_source)
+        \| endif
 augroup END
 
 " backups
