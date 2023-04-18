@@ -19,7 +19,7 @@ alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 function v() {
     mkdir -p $(dirname $1)
 
-    local vim_id=$(jobs | sed -n "/vim/s/\[\([0-9]\)\].*/\1/p" | head -1)
+    local vim_id=$(jobs | sed -E -n 's/\[([0-9])\][ +-]* [a-zA-Z]*[[:space:]]*v .*/\1/p' | head -1)
     if [[ -n "$vim_id" ]]; then
         echo "tabedit $1" > $HOME/.vim/resume-source.vim
         fg %$vim_id
