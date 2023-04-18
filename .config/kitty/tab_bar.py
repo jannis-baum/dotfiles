@@ -94,12 +94,13 @@ def get_git_info():
     except: return
     return (git_branch, git_status)
 
-def draw_git_info(git_branch, git_status, draw_data: DrawData, screen: Screen):
-    spaces = screen.columns - screen.cursor.x - len(git_status) - len(git_branch)
+def draw_right(data: list[tuple[str, bool]], draw_data: DrawData, screen: Screen):
+    spaces = screen.columns - screen.cursor.x - sum((len(text) for text, _ in data))
     screen.draw(' ' * spaces)
-    screen.draw(git_branch)
-    screen.cursor.fg = as_rgb(color_as_int(draw_data.active_fg))
-    screen.draw(git_status)
+    for text, is_active in data:
+        screen.cursor.fg = 0 if not is_active else \
+            as_rgb(color_as_int(draw_data.active_fg))
+        screen.draw(text)
     screen.cursor.fg = 0
 
 def draw_tab(
@@ -125,9 +126,22 @@ def draw_tab(
     end = screen.cursor.x
 
     if is_last:
+        right_data: list[tuple[str, bool]] = list()
+        
+        try:
+            active_window = get_boss().active_window_for_cwd
+            active_pid = active_window.child.pid
+            with open(f'/tmp/current-jobs-{active_pid}', 'r') as fp:
+                job_count = fp.read().replace(' ', '')
+                if int(job_count) > 0:
+                    right_data.append((job_count + ' ', True))
+        except: pass
+
         git_info = get_git_info()
         if git_info:
-            draw_git_info(git_info[0], git_info[1], draw_data, screen)
+            right_data += [(git_info[0], False), (git_info[1], True)]
+
+        draw_right(right_data, draw_data, screen)
     else:
         screen.cursor.bg = as_rgb(color_as_int(draw_data.inactive_bg))
         screen.draw(draw_data.sep)
