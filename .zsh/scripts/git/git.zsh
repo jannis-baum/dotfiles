@@ -48,7 +48,7 @@ function gsi() {
     elif [[ "$key" == ctrl-v ]]; then; git difftool HEAD -- "$file" && gsi
     elif [[ "$key" == ctrl-o ]]; then; gc
     elif [[ "$key" == ctrl-b ]]; then; gca
-    else $EDITOR $file; fi
+    else v $file; fi
 }
 
 # commit
@@ -101,7 +101,7 @@ function gd() {
     [[ -z "$file" ]] && return
     file="$(git rev-parse --show-toplevel)/$file"
 
-    if [[ "$key" == ctrl-o ]]; then $EDITOR $file;
+    if [[ "$key" == ctrl-o ]]; then v $file;
     else git difftool $1 $2 -- "$file" && gd $1 $2;
     fi
 }

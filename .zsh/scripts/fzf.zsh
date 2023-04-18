@@ -54,7 +54,7 @@ _fzf_finder() {
     else
         test -d $pick \
             && BUFFER="cd $pick" \
-            || BUFFER="$EDITOR $pick"
+            || BUFFER="v $pick"
         zle accept-line; zle reset-prompt
     fi
 }
