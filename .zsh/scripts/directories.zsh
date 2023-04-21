@@ -55,4 +55,5 @@ export ZSH_DIR_HIST_FILE="$HOME/.zsh/.zsh_dir_history"
 function chpwd_dir_history() {
     echo "$(pwd; head -n1000 $ZSH_DIR_HIST_FILE)" > $ZSH_DIR_HIST_FILE
 }
-chpwd_functions=( chpwd_dir_history )
+autoload -U add-zsh-hook
+add-zsh-hook chpwd chpwd_dir_history
