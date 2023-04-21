@@ -127,16 +127,6 @@ def draw_tab(
 
     if is_last:
         right_data: list[tuple[str, bool]] = list()
-        
-        try:
-            active_window = get_boss().active_window_for_cwd
-            active_pid = active_window.child.pid
-            with open(f'/tmp/current-jobs-{active_pid}', 'r') as fp:
-                job_count = fp.read().replace(' ', '')
-                if int(job_count) > 0:
-                    right_data.append((job_count + ' ', True))
-        except: pass
-
         git_info = get_git_info()
         if git_info:
             right_data += [(git_info[0], False), (git_info[1], True)]

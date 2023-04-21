@@ -16,10 +16,6 @@ function v() {
     fi
 }
 
-function _write_v_jobs() {
-    _get_vim_ids | wc -l > "/tmp/current-jobs-$$"
-}
-
 # function to find job name in list
 function __si_vim() {
     vim
