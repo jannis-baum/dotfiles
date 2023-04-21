@@ -8,10 +8,9 @@ augroup END
 " execute extra commands after suspension
 augroup SusResume
     autocmd!
-    let s:resume_source = $HOME . '/.vim/resume-source.vim'
-    autocmd VimResume * if filereadable(s:resume_source)
-            \| execute('source ' . s:resume_source)
-            \| call delete(s:resume_source)
+    autocmd VimResume,VimEnter * if filereadable($RESUME_SOURCE)
+            \| execute('source ' . $RESUME_SOURCE)
+            \| call delete($RESUME_SOURCE)
         \| endif
 augroup END
 

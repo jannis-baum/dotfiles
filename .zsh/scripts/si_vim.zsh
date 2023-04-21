@@ -2,9 +2,14 @@
 # always keeps one instance of vim running in the background ready to be used
 # for anything
 
+# file that vim sources when it is taken to foreground
+_si_vim_resume_source_dir=$HOME/.vim/resume-source
+mkdir -p $_si_vim_resume_source_dir
+_si_vim_resume_source=$_si_vim_resume_source_dir/$$.vim
+
 # function to find job name in list
 function _si_vim_job() {
-    vim
+    RESUME_SOURCE=$_si_vim_resume_source vim
 }
 # check if si_vim is running
 function _si_vim_isrunning() {
@@ -23,7 +28,7 @@ add-zsh-hook precmd _si_vim_run
 function v() {
     mkdir -p $(dirname $1)
 
-    echo "tabedit $1\nfiletype detect" > $HOME/.vim/resume-source.vim
+    echo "tabedit $1\nfiletype detect" > $_si_vim_resume_source
     fg %_si_vim_job
 }
 
