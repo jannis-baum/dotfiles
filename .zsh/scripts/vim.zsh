@@ -16,8 +16,22 @@ function v() {
     fi
 }
 
-autoload -U add-zsh-hook
 function _write_v_jobs() {
     _get_vim_ids | wc -l > "/tmp/current-jobs-$$"
 }
-add-zsh-hook precmd _write_v_jobs
+
+# function to find job name in list
+function __si_vim() {
+    vim
+}
+# check if si_vim is running
+function _si_vim_isrunning() {
+    [[ -n "$(jobs | grep '__si_vim')" ]]
+}
+
+# ensure si_vim is always running
+autoload -U add-zsh-hook
+function _si_vim_run() {
+    _si_vim_isrunning || __si_vim &
+}
+add-zsh-hook precmd _si_vim_run
