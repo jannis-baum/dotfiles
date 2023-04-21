@@ -28,7 +28,7 @@ add-zsh-hook precmd _si_vim_run
 function v() {
     mkdir -p $(dirname $1)
 
-    echo "tabedit $1\nfiletype detect" > $_si_vim_resume_source
+    echo "SivOpen $1" > $_si_vim_resume_source
     fg %_si_vim_job
 }
 
