@@ -13,7 +13,7 @@ function! s:SivOpen(file)
     " we check if the file is open anywhere and switch to its buffer
     " this works well with `set switchbuf=usetab`
     for buf in getbufinfo({ 'bufloaded': 1 })
-        if buf.name == a:file
+        if buf.name =~ a:file
             execute 'sbuffer ' . buf.bufnr
             return
         endif
