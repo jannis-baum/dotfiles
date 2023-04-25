@@ -8,16 +8,16 @@ augroup END
 augroup Suspension
     autocmd!
     " execute commands after resuming from suspension
-    autocmd VimResume,VimEnter * if filereadable($RESUME_SOURCE)
-            \| execute('source ' . $RESUME_SOURCE)
-            \| call delete($RESUME_SOURCE)
+    autocmd VimResume,VimEnter * if filereadable($SIVIM_RESUME_SOURCE)
+            \| execute('source ' . $SIVIM_RESUME_SOURCE)
+            \| call delete($SIVIM_RESUME_SOURCE)
         \| endif
     " set modified marker if not all files were saved
-    autocmd VimSuspend * if !empty($RESUME_SOURCE)
+    autocmd VimSuspend * if !empty($SIVIM_MARK_MODIFIED)
             \| if getbufinfo({  'buflisted': 1 })->filter({ _, buf -> buf.changed })->len() > 0
-                \| call writefile([''], $RESUME_SOURCE . '.modified')
+                \| call writefile([''], $SIVIM_MARK_MODIFIED)
             \| else
-                \| call delete($RESUME_SOURCE . '.modified')
+                \| call delete($SIVIM_MARK_MODIFIED)
             \| endif
         \| endif
 augroup END

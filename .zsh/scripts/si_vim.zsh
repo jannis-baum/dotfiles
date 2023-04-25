@@ -7,6 +7,7 @@
 _si_vim_resume_source_dir=$HOME/.vim/resume-source
 mkdir -p $_si_vim_resume_source_dir
 _si_vim_resume_source=$_si_vim_resume_source_dir/$$.vim
+_si_vim_modified=$_si_vim_resume_source.modified
 # add to command buffer
 function _si_vim_cmd() {
     echo "$1" >> $_si_vim_resume_source
@@ -15,7 +16,7 @@ function _si_vim_cmd() {
 # JOB --------------------------------------------------------------------------
 # function to find job name in list
 function _si_vim_job() {
-    RESUME_SOURCE=$_si_vim_resume_source vim
+    SIVIM_RESUME_SOURCE=$_si_vim_resume_source SIVIM_MARK_MODIFIED=$_si_vim_modified vim
 }
 # check if si_vim is running
 function _si_vim_isrunning() {
@@ -45,6 +46,22 @@ _si_vim_widget() {
 }
 zle -N _si_vim_widget
 bindkey ^u _si_vim_widget
+
+# safely quit vim & shell if no unsaved changes
+_si_vim_safe_exit() {
+    if test -e $_si_vim_modified; then
+        echo "\nVim has unsaved changes."
+        zle reset-prompt
+        return
+    fi
+    _si_vim_cmd ":qa"
+    fg %_si_vim_job
+    exit
+}
+zle -N _si_vim_safe_exit
+bindkey '^d' _si_vim_safe_exit
+# prevent ^d from sending eof
+stty eof undef
 
 # USER FUNCTIONS ---------------------------------------------------------------
 # make dirs to open editor
