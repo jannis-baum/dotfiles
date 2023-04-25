@@ -5,12 +5,20 @@ augroup LastPos
         \| exe "normal! g'\"" | endif
 augroup END
 
-" execute extra commands after suspension
-augroup SusResume
+augroup Suspension
     autocmd!
+    " execute commands after resuming from suspension
     autocmd VimResume,VimEnter * if filereadable($RESUME_SOURCE)
             \| execute('source ' . $RESUME_SOURCE)
             \| call delete($RESUME_SOURCE)
+        \| endif
+    " set modified marker if not all files were saved
+    autocmd VimSuspend * if !empty($RESUME_SOURCE)
+            \| if getbufinfo({  'buflisted': 1 })->filter({ _, buf -> buf.changed })->len() > 0
+                \| call writefile([''], $RESUME_SOURCE . '.modified')
+            \| else
+                \| call delete($RESUME_SOURCE . '.modified')
+            \| endif
         \| endif
 augroup END
 
