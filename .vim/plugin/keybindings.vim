@@ -4,8 +4,8 @@ map <space> <leader>
 " fix vim randomly starting in R mode
 nnoremap <esc>^[ <esc>^[
 " close all with ZZ, one with ZX, suspend with ctrl-u
-nnoremap <S-z><S-z> :xa<CR>
-nnoremap <S-z><S-x> :x<CR>
+nnoremap <S-z><S-z> :bufdo bw<CR>:sus<CR>
+nnoremap <S-z><S-x> :bw<CR>
 nnoremap <C-u> :sus<CR>
 " tab navigation
 nnoremap <leader>, gT
