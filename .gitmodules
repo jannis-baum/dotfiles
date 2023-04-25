@@ -47,3 +47,6 @@
 [submodule ".synapse/modules/safari-tabs"]
 	path = .synapse/modules/safari-tabs
 	url = https://github.com/jannis-baum/synapse-safari-tabs.git
+[submodule ".synapse/modules/timer"]
+	path = .synapse/modules/timer
+	url = https://github.com/jannis-baum/synapse-timer.git

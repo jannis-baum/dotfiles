@@ -39,6 +39,7 @@
         "/native/indexer",
         "safari-histmarks",
         "safari-tabs",
+        "timer",
         { "/inline/date-copy": {
             "name": "Today's date",
             "trigger": "date ",
