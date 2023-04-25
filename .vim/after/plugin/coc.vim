@@ -37,13 +37,15 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 " ctrl-space to bring up completion
 inoremap <silent><expr> <c-@> coc#refresh()
 
-" gd / gr - go to definition of word / type under cursor
+" gd / gy - go to definition of word / type under cursor
 nmap <silent> gdd <Plug>(coc-definition)
 nmap <silent> gdv :call CocAction('jumpDefinition', 'vsplit')<CR>
 nmap <silent> gdp :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gdt :call CocAction('jumpDefinition', 'tabnew')<CR>
 nmap <silent> gyy <Plug>(coc-type-definition)
 nmap <silent> gyv :call CocAction('jumpTypeDefinition', 'vsplit')<CR>
 nmap <silent> gyv :call CocAction('jumpTypeDefinition', 'split')<CR>
+nmap <silent> gyt :call CocAction('jumpTypeDefinition', 'tabnew')<CR>
 
 " gr - find references
 nmap <silent> gr <Plug>(coc-references)
