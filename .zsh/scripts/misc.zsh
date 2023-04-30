@@ -13,7 +13,7 @@ alias desknotes="~/_lib/desktop-notes/desknotes"
 alias pass="~/_lib/keychains/main"
 alias fbm="~/_lib/file-bookmarks/file-bookmarks"
 
-# generic functions
+# functions
 ## generate new password
 function passn() {
 	echo | pbcopy
@@ -33,6 +33,10 @@ function ql() {
     else
         echo "\"$1\": No such file or directory"
     fi
+}
+## pip installed version for requirements.txt
+function pipf() {
+    pip3 freeze | rg "$1" | sed 's/==/>=/' | pbcopy
 }
 
 # options
