@@ -64,10 +64,11 @@ bindkey '^d' _si_vim_safe_exit
 stty eof undef
 
 # USER FUNCTIONS ---------------------------------------------------------------
-# make dirs to open editor
+# open file, create directories if needed
 # open in running vim if suspended
 function v() {
-    mkdir -p $(dirname $1)
-    _si_vim_cmd "SivOpen $1"
+    [[ $# == 1 ]] \
+        && mkdir -p $(dirname $1) \
+        && _si_vim_cmd "SivOpen $1"
     fg %_si_vim_job
 }
