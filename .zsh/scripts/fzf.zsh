@@ -84,8 +84,7 @@ rgi() {
         local file=$(awk -F: '{ print $1 }' <<< $details)
         local line=$(awk -F: '{ print $2 }' <<< $details)
         local column=$(awk -F: '{ print $3 }' <<< $details)
-        vim "+call cursor($line, $column)" "+let @/='$query'" "+set hls" "$file" \
-            && rgi "$query"
+        v "+call cursor($line, $column)" "+let @/='$query'" "+call feedkeys('/\<CR>')" "$file"
     fi
 }
 

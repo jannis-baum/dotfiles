@@ -64,11 +64,20 @@ bindkey '^d' _si_vim_safe_exit
 stty eof undef
 
 # USER FUNCTIONS ---------------------------------------------------------------
-# open file, create directories if needed
-# open in running vim if suspended
+# open file in running si_vim
+# create directories if needed for new file
+# supports running additional commands in vim prefixed by +
 function v() {
-    [[ $# == 1 ]] \
-        && mkdir -p $(dirname $1) \
-        && _si_vim_cmd "SivOpen $1"
+    if ! [[ $# == 0 ]]; then
+        for arg in $@; do
+            if [[ $arg =~ '^\+' ]]; then
+                _si_vim_cmd "$(sed -e 's/"/\\"/g' -e 's/^\+\(.*\)/:exec "\1"/' <<< $arg)"
+            else
+                mkdir -p $(dirname $arg)
+                _si_vim_cmd "SivOpen $arg"
+            fi
+        done
+    fi
+    cat $_si_vim_resume_source
     fg %_si_vim_job
 }
