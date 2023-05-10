@@ -99,14 +99,17 @@ function! s:rgi_select(lines) abort
     call cursor(l:line, l:column)
     normal zz
     let @/ = l:query
+    call feedkeys("/\<CR>")
 endfunction
 
 let s:rg_command = 'rg --column --line-number --no-heading'
 function! s:rgi() abort
     call fzf#run(fzf#wrap({
-        \'source': @/ == '' ? [] : split(system(s:rg_command . ' ' . @/ . ' | sed "s/^/' . @/ . ':/g"'), '\n'),
+        \'source': v:hlsearch
+            \? split(system(s:rg_command . ' ' . @/ . ' | sed "s/^/' . @/ . ':/g"'), '\n')
+            \: [],
         \'options': [
-            \'--query', @/,
+            \'--query', v:hlsearch ? @/ : '',
             \'--delimiter', ':',
             \'--with-nth', '2',
             \'--no-multi',
@@ -121,7 +124,7 @@ function! s:rgi() abort
     \}))
 endfunction
 
-command! RGI call s:rgi() | set hlsearch
+command! RGI call s:rgi()
 
 " git status file picker -------------------------------------------------------
 
