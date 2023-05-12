@@ -125,6 +125,8 @@ function! s:rgi() abort
 endfunction
 
 command! RGI call s:rgi()
+noremap <silent> <leader>/ :RGI<CR>
+
 
 " git status file picker -------------------------------------------------------
 
