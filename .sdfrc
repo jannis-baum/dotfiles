@@ -12,6 +12,7 @@ dotfiles_actions=( \
     ['karabiner\.edn$']='goku' \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
     ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
+    ['^\.vim/']="_si_vim_cmd ReloadConfig" \
     ['^\.synapse']="_restart_synapse" \
     ['^\.synapse/modules/control-center$']="open -g hammerspoon://reloadConfig" \
     ['^\.hammerspoon/']="open -g hammerspoon://reloadConfig" \

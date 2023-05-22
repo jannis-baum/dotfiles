@@ -5,7 +5,6 @@ function! s:Split(file)
         execute 'vsplit ' . a:file
     endif
 endfunction
-
 command! -nargs=? -complete=file SPLIT call s:Split(<q-args>)
 
 " function to open file from si_vim (see .zsh/scripts/si_vim.zsh)
@@ -30,5 +29,15 @@ function! s:SivOpen(file)
     " fix some problem with ft detection
     filetype detect
 endfunction
-
 command! -nargs=1 -complete=file SivOpen call s:SivOpen(<q-args>)
+
+" reload (most of) the config
+if !exists('g:reload_config_defined')
+    let g:reload_config_defined = 1
+    function! s:ReloadConfig()
+        for f in glob($HOME . '/.vim/plugin/**/*.vim', 0, 1) + glob($HOME . '/.vim/after/plugin/**/*.vim', 0, 1)
+            execute 'source ' . f
+        endfor
+    endfunction
+    command! ReloadConfig call s:ReloadConfig()
+endif
