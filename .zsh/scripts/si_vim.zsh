@@ -78,6 +78,5 @@ function v() {
             fi
         done
     fi
-    cat $_si_vim_resume_source
     fg %_si_vim_job
 }
