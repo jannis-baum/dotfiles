@@ -26,6 +26,9 @@ nnoremap <Down> <C-w><C-j>
 nnoremap <Up> <C-w><C-k>
 nnoremap <Right> <C-w><C-l>
 nnoremap <Left> <C-w><C-h>
+" scrolling
+nnoremap <silent> <leader>j :execute 'normal! ' winheight(0) / 3 . 'j'<CR>
+nnoremap <silent> <leader>k :execute 'normal! ' winheight(0) / 3 . 'k'<CR>
 
 " TEXT EDITING -----------------------------------------------------------------
 " x & s delete without copy
@@ -80,4 +83,3 @@ lnoremap <F2><S-o> <C-k><S-o><S-:>
 " map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 " \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 " \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
