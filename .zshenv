@@ -29,3 +29,5 @@ export PATH=$(tr -d ' ' <<<"$PATH\
     :$HOME/.flutter/bin/\
     :$HOME/.pub-cache/bin/\
 ")
+
+export CHROME_EXECUTABLE=/Applications/Chromium.app/Contents/MacOS/Chromium
