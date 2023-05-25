@@ -27,4 +27,5 @@ export PATH=$(tr -d ' ' <<<"$PATH\
     :/Library/TeX/texbin/\
     :/Applications/Postgres.app/Contents/Versions/latest/bin/\
     :$HOME/.flutter/bin/\
+    :$HOME/.pub-cache/bin/\
 ")
