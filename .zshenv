@@ -32,3 +32,5 @@ export PATH=$(tr -d ' ' <<<"\
 ")
 
 export CHROME_EXECUTABLE=/Applications/Chromium.app/Contents/MacOS/Chromium
+
+export TITR_DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/titr-data"
