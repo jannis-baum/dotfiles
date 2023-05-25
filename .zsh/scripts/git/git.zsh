@@ -112,7 +112,8 @@ compdef _MINE_git_branch_names gd
 
 # fzf to see git log
 # log args:
-# - uses `git log main..` if not on main branch
+# - uses `git log main..` if not on main branch (uses remote head branch if
+#                                                main doesn't exist)
 #   - first arg -a or --all to avoid this
 # - otherwise passes args to git log
 # bindings:
@@ -126,8 +127,12 @@ function gl() {
         [ "$1" = "-a" -o "$1" = "--all" ] \
             && logargs="" || logargs="$1"
     else
-        [ $(git branch --show-current) = "main" ] \
-            && logargs="" || logargs="main.."
+        local head_branch=""
+        git rev-parse --verify main &>/dev/null \
+            && head_branch="main" \
+            || head_branch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+        [ $(git branch --show-current) = "$head_branch" ] \
+            && logargs="" || logargs="$head_branch.."
     fi
 
     out=$(git log --oneline --decorate --color=always $logargs \
