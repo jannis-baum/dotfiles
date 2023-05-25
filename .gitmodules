@@ -50,3 +50,6 @@
 [submodule ".synapse/modules/timer"]
 	path = .synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
+[submodule ".zsh/scripts/plugins/time-tracker"]
+	path = .zsh/scripts/plugins/time-tracker
+	url = https://github.com/jannis-baum/time-tracker.git
