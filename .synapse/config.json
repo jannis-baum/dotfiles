@@ -22,8 +22,8 @@
     },
     "search": {
         "programs": {
-            "searchAndSort": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] },
-            "searchOnly": { "path": "/usr/local/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "--no-sort", "-f"] }
+            "searchAndSort": { "path": "/opt/homebrew/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "-f"] },
+            "searchOnly": { "path": "/opt/homebrew/bin/fzf", "args": ["--delimiter=:", "--nth=2..", "--no-sort", "-f"] }
         }
     },
     "modules": [
