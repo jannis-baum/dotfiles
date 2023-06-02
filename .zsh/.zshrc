@@ -3,6 +3,17 @@ export PS1=$'%F{183}%f%K{183}%F{235}✻%f%k%F{183}%f %F{248}%{\x1b[3m%}%2~
 # vi keybindings
 bindkey -v
 
+# PATH
+export PATH=$(tr -d ' ' <<<"\
+     /opt/homebrew/bin\
+    :$HOME/.bin/\
+    :/Library/TeX/texbin/\
+    :/Applications/Postgres.app/Contents/Versions/latest/bin/\
+    :$HOME/.flutter/bin/\
+    :$HOME/.pub-cache/bin/\
+    :$PATH
+")
+
 if $(test -d $ZDOTDIR/scripts); then
     for script in $(find $ZDOTDIR/scripts -name '*.zsh'); do
         source $script
