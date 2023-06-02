@@ -11,8 +11,8 @@ import subprocess, atexit, os
 class GitStatusD:
     def __init__(self):
         self.process = subprocess.Popen([
-            '/usr/local/opt/gitstatus/usrbin/gitstatusd-darwin-x86_64',
-            '--num-threads=16' # should be 2 * number of virtual cpu
+            '/opt/homebrew/opt/gitstatus/usrbin/gitstatusd-darwin-arm64',
+            '--num-threads=12' # should be 2 * number of virtual cpu
         ], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         atexit.register(self.terminate)
         self.request_id = 0
