@@ -23,7 +23,8 @@ export EXA_COLORS="sn=38;5;183:sb=1;38;5;183:da=38;5;153:lp=3;38;5;248"
 
 # PATH
 export PATH=$(tr -d ' ' <<<"\
-     $HOME/.bin/\
+     /opt/homebrew/bin\
+    :$HOME/.bin/\
     :/Library/TeX/texbin/\
     :/Applications/Postgres.app/Contents/Versions/latest/bin/\
     :$HOME/.flutter/bin/\
