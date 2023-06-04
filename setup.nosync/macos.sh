@@ -11,6 +11,8 @@ sudo -v
 # keep-alive: update existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+
+# --------------------------------------------------------------------------
 # UI -----------------------------------------------------------------------
 
 # disable the sound effects on boot
@@ -26,6 +28,8 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
+
+# --------------------------------------------------------------------------
 # DOCK, FINDER, DASHBOARD, MENUBAR -----------------------------------------
 
 # avoid creating .DS_Store files on network or USB volumes
@@ -53,9 +57,41 @@ defaults write NSGlobalDomain _HIHideMenuBar -bool true
 # disable shadow in window screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+# show hidden files in finder
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+
+# --------------------------------------------------------------------------
+# IO -----------------------------------------------------------------------
+
+# mouse/trackpad
+# enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# correct scrolling direction
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# keyboard
+# fast key hold repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+# disable auto capitalization
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+# disable smart dashes
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+# disable automatic period substitution
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+# disable smart quotes
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+# disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+
+# --------------------------------------------------------------------------
 # SAFARI -------------------------------------------------------------------
 
-# privacy: don’t send search queries to apple
+# privacy: don't send search queries to apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
