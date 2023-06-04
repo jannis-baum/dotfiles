@@ -41,3 +41,14 @@ if !exists('g:reload_config_defined')
     endfunction
     command! ReloadConfig call s:ReloadConfig()
 endif
+
+" close all but current buffer
+function! s:CloseOthers()
+    let l:thisbuf = bufnr()
+    for buf in getbufinfo({ 'bufloaded': 1 })
+        if buf.bufnr != l:thisbuf
+            execute 'bw ' . buf.bufnr
+        endif
+    endfor
+endfunction
+command! BC call s:CloseOthers()
