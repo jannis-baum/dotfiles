@@ -1,5 +1,6 @@
 {
     "launchAtLogin": true,
+    "hotkey": "cmd+f7",
     "panel": {
         "keepCentered": true
     },
