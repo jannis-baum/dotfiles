@@ -56,3 +56,6 @@
 [submodule ".lib/nosync/cookie-cleaner"]
 	path = .lib/nosync/cookie-cleaner
 	url = https://github.com/jannis-baum/cookie-cleaner.git
+[submodule ".lib/markup-export"]
+	path = .lib/markup-export
+	url = https://github.com/jannis-baum/markup-export.git
