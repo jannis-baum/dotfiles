@@ -53,3 +53,6 @@
 [submodule ".zsh/scripts/plugins/time-tracker"]
 	path = .zsh/scripts/plugins/time-tracker
 	url = https://github.com/jannis-baum/time-tracker.git
+[submodule ".lib/nosync/cookie-cleaner"]
+	path = .lib/nosync/cookie-cleaner
+	url = https://github.com/jannis-baum/cookie-cleaner.git
