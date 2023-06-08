@@ -52,9 +52,19 @@ sdf() {
         fi
     }
 
+    is_ignored() {
+        for pattern in ${(@)ignore_patterns}; do
+            [[ "$1" == ${~pattern} ]] && return 0
+        done
+        return 1
+    }
+
     # find submodules
     if [[ -f '.gitmodules' ]]; then
-        local submodules=("${(f)$(rg --no-line-number --replace '' '^\s*path ?= ?' '.gitmodules')}")
+        local -a submodules
+        for submodule in $(rg --no-line-number --replace '' '^\s*path ?= ?' '.gitmodules'); do
+            is_ignored "$submodule" || submodules+="$submodule"
+        done
         ignore_patterns+=("${(@)submodules}")
     fi
 
