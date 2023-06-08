@@ -15,6 +15,7 @@ printf "\\033[0m"
 hl_print "SETTING MACOS PREFERENCES"
 ./setup.nosync/macos.sh
 
+export PATH="/opt/homebrew/bin:$PATH"
 if ! which brew &> /dev/null; then
     hl_print "INSTALLING HOMEBREW"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
