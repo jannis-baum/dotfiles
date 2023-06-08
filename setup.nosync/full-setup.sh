@@ -4,7 +4,7 @@ function hl_print() {
     printf "\\033[1m$1\\033[0m\n"
 }
 
-[[ -n "$DOTFILES_DIR" ]] && DOTFILES_DIR=$HOME/_dotfiles
+[[ -z "$DOTFILES_DIR" ]] && DOTFILES_DIR=$HOME/_dotfiles
 
 hl_print "CLONING INTO DOTFILES & INITIALIZING SUBMODULES"
 printf "\\033[2m"
