@@ -7,11 +7,7 @@ alias ssh='kitty +kitten ssh'
 alias trm='trash -F'
 
 # linking scripts
-alias mue="~/_lib/markup-export/main"
-alias cookie-cleaner="~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/.safari/cookie-whitelist.txt"
-alias desknotes="~/_lib/desktop-notes/desknotes"
-alias pass="~/_lib/keychains/main"
-alias fbm="~/_lib/file-bookmarks/file-bookmarks"
+alias mue="~/.lib/markup-export/main"
 
 # functions
 ## generate new password
