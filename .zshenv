@@ -1,6 +1,6 @@
 export ZDOTDIR=~/.zsh
 
-export EDITOR=vim
+export EDITOR=v
 export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
 
 # fzf
