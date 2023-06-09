@@ -62,3 +62,6 @@
 [submodule ".lib/nosync/Synapse"]
 	path = .lib/nosync/Synapse
 	url = https://github.com/jannis-baum/synapse.git
+[submodule ".zsh/scripts/plugins/git.zsh-dotfiles"]
+	path = .zsh/scripts/plugins/git.zsh-dotfiles
+	url = https://github.com/jannis-baum/git.zsh-dotfiles.git
