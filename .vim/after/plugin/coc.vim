@@ -4,7 +4,7 @@ augroup Coc
     " highlight the symbol and its references when holding the cursor
     autocmd CursorHold * silent call CocActionAsync('highlight')
     " format on save in dart files
-    autocmd BufWritePost *.dart silent call CocAction('format')
+    " autocmd BufWritePost *.dart silent call CocAction('format')
 augroup END
 
 " EXTENSIONS ---
