@@ -25,7 +25,8 @@ _fzf_ls_cmd=$(which l | sed 's/^l: aliased to //')
 _fzf_finder() {
     [[ -z "$1" ]] && local target_dir="." || local target_dir=$1
 
-    local fd_opts=("--color=always" "--hidden" "--follow" "--strip-cwd-prefix")
+    local fd_opts=("--follow" "--strip-cwd-prefix" "--color=always" \
+        "--hidden" "--exclude" '**/.git/')
     local out=$(fd $fd_opts --full-path $1 \
         | fzf --ansi \
             --expect=ctrl-o,ctrl-n,ctrl-u \
