@@ -15,18 +15,14 @@
 #
 # -u --upgrade pulls repo and updates submodules before install.
 
-function _sdf_cmp_dirs() {
-    local tmp1=$(mktemp)
-    local tmp2=$(mktemp)
-
-    fd --no-ignore --hidden --print0 . "$1" | sort -z | xargs -0 cat > "$tmp1" 2>/dev/null
-    fd --no-ignore --hidden --print0 . "$2" | sort -z | xargs -0 cat > "$tmp2" 2>/dev/null
-
-    cmp "$tmp1" "$tmp2" &>/dev/null
-    local code="$?"
-    rm "$tmp1" "$tmp2"
-
-    return "$code"
+function _sdf_dir_diff() {
+    paste -sd '+' \
+        <(paste -d '>' \
+            <(fd --no-ignore --hidden --print0 . "$1" | sort -z | xargs -0 stat -f %m) \
+            <(fd --no-ignore --hidden --print0 . "$2" | sort -z | xargs -0 stat -f %m) \
+            | sed -e 's/^.*>$/1/' -e 's/^>.*$/1/' \
+            | bc) \
+        | bc
 }
 
 function sdf() {
@@ -84,9 +80,7 @@ function sdf() {
 
     # install submodules if different from submodule in $HOME
     for sm in $submodules; do
-        # _sdf_cmp_dirs "$sm" "$HOME/$sm"
-        # if [[ $? > 0 || ! -d "$HOME/$sm" ]]; then
-        if [[ "$sm" -nt "$HOME/$sm"  || ! -d "$HOME/$sm" ]]; then
+        if [[ $(_sdf_dir_diff "$sm" "$HOME/$sm") != "0" || ! -d "$HOME/$sm" ]]; then
             _sdf_install_dotfile "$sm" "$HOME/$sm"
         fi
     done
