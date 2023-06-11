@@ -15,7 +15,21 @@
 #
 # -u --upgrade pulls repo and updates submodules before install.
 
-sdf() {
+function _sdf_cmp_dirs() {
+    local tmp1=$(mktemp)
+    local tmp2=$(mktemp)
+
+    fd --no-ignore --hidden --print0 . "$1" | sort -z | xargs -0 cat > "$tmp1" 2>/dev/null
+    fd --no-ignore --hidden --print0 . "$2" | sort -z | xargs -0 cat > "$tmp2" 2>/dev/null
+
+    cmp "$tmp1" "$tmp2" &>/dev/null
+    local code="$?"
+    rm "$tmp1" "$tmp2"
+
+    return "$code"
+}
+
+function sdf() {
     # load config, go to dotfiles_dir and setup ignore
     local dotfiles_actions dotfiles_dir ignore_patterns
     typeset -A dotfiles_actions
@@ -38,7 +52,7 @@ sdf() {
     [[ -t 0 ]] && readq_flags=('-q') || readq_flags=('-q' '-u' '0' '-E')
 
     # prompt to install of $1 to $2, i.a. run custom command
-    install_dotfile() {
+    function _sdf_install_dotfile() {
         printf "install $1? (y/*) "
         if read $readq_flags; then
             [[ -d $2 ]] && rm -rf $2 # directories aren't overwritten -> delete first
@@ -52,7 +66,7 @@ sdf() {
         fi
     }
 
-    is_ignored() {
+    function _sdf_is_ignored() {
         for pattern in ${(@)ignore_patterns}; do
             [[ "$1" == ${~pattern} ]] && return 0
         done
@@ -63,15 +77,17 @@ sdf() {
     if [[ -f '.gitmodules' ]]; then
         local -a submodules
         for submodule in $(rg --no-line-number --replace '' '^\s*path ?= ?' '.gitmodules'); do
-            is_ignored "$submodule" || submodules+="$submodule"
+            _sdf_is_ignored "$submodule" || submodules+="$submodule"
         done
         ignore_patterns+=("${(@)submodules}")
     fi
 
-    # install submodules if newer than submodule in $HOME
+    # install submodules if different from submodule in $HOME
     for sm in $submodules; do
+        # _sdf_cmp_dirs "$sm" "$HOME/$sm"
+        # if [[ $? > 0 || ! -d "$HOME/$sm" ]]; then
         if [[ "$sm" -nt "$HOME/$sm"  || ! -d "$HOME/$sm" ]]; then
-            install_dotfile "$sm" "$HOME/$sm"
+            _sdf_install_dotfile "$sm" "$HOME/$sm"
         fi
     done
 
@@ -83,7 +99,7 @@ sdf() {
     # install files if different from file in $HOME
     for df in $dotfiles; do
         if ! cmp "$df" "$HOME/$df" &> /dev/null; then
-            install_dotfile "$df" "$HOME/$df"
+            _sdf_install_dotfile "$df" "$HOME/$df"
         fi
     done
 
