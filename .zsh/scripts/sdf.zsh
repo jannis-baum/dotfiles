@@ -16,10 +16,11 @@
 # -u --upgrade pulls repo and updates submodules before install.
 
 function _sdf_dir_diff() {
+    local files=$(fd --no-ignore --hidden . "$1")
     paste -sd '+' \
         <(paste -d '>' \
-            <(fd --no-ignore --hidden --print0 . "$1" | sort -z | xargs -0 stat -f %m) \
-            <(fd --no-ignore --hidden --print0 . "$2" | sort -z | xargs -0 stat -f %m) \
+            <(xargs stat -f %m <<<"$files") \
+            <(sed "s|^|$HOME/|" <<<"$files" | xargs stat -f %m) \
             | sed -e 's/^.*>$/1/' -e 's/^>.*$/1/' \
             | bc) \
         | bc
@@ -80,7 +81,7 @@ function sdf() {
 
     # install submodules if different from submodule in $HOME
     for sm in $submodules; do
-        if [[ $(_sdf_dir_diff "$sm" "$HOME/$sm") != "0" || ! -d "$HOME/$sm" ]]; then
+        if [[ $(_sdf_dir_diff "$sm") != "0" || ! -d "$HOME/$sm" ]]; then
             _sdf_install_dotfile "$sm" "$HOME/$sm"
         fi
     done
