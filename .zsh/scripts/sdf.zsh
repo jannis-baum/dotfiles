@@ -16,11 +16,15 @@
 # -u --upgrade pulls repo and updates submodules before install.
 
 function _sdf_dir_diff() {
+    # - find all files in dotfiles subrepo
+    # - get modified time for these and the corresponding files in $HOME
+    # - compare times with >, i.e. 1 if dotfile is newer, 0 if install is newer
+    # - return sum of these comparisons
     local files=$(fd --no-ignore --hidden . "$1")
     paste -sd '+' \
         <(paste -d '>' \
-            <(xargs stat -f %m <<<"$files") \
-            <(sed "s|^|$HOME/|" <<<"$files" | xargs stat -f %m) \
+            <(xargs stat -f %m 2> /dev/null <<<"$files") \
+            <(sed "s|^|$HOME/|" <<<"$files" | xargs stat -f %m 2> /dev/null) \
             | sed -e 's/^.*>$/1/' -e 's/^>.*$/1/' \
             | bc) \
         | bc
