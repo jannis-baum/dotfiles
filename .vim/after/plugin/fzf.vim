@@ -19,7 +19,7 @@ let s:finder_ls = substitute(
     \ system('source $ZDOTDIR/scripts/directories.zsh'
         \ . " && which l | sed 's/^l: aliased to //'"),
     \ '\n', '', '')
-let s:finder_fd_cmd = "fd --color=always --hidden --follow --strip-cwd-prefix"
+let s:finder_fd_cmd = "fd --follow --strip-cwd-prefix --color=always --hidden --exclude '**/.git/'"
 function! s:fzf_finder() abort
     call fzf#run(fzf#wrap({
         \'source': split(system(s:finder_fd_cmd), '\n'),
