@@ -6,7 +6,7 @@ end)
 -- apps
 safariWatcher = hs.application.watcher.new(function(name, eventType, app)
     if name == 'Safari' and eventType == hs.application.watcher.terminated then
-        out, status = hs.execute('~/_lib/cookie-cleaner/.build/release/cookie-cleaner ~/.safari/cookie-whitelist.txt')
+        out, status = hs.execute('~/.bin/cookie-cleaner ~/.safari/cookie-whitelist.txt')
     end
 end)
 safariWatcher:start()
