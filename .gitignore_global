@@ -4,4 +4,5 @@
 .Spotlight-V100
 .Trashes
 __pycache__
+.ipynb_checkpoints
 ignoreme*
