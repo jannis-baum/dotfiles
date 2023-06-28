@@ -1,17 +1,40 @@
 # My personal config
 
 Here is where I try to keep all configuration of all the tools I use. This is
-not intended to be used by anyone else in its entirety, but might be nice to
-look at for reference.
+not intended to be used by anyone else in its entirety, but is nice to look at
+for reference.
 
-## Installing/syncing dotfiles
+## Reusable parts
 
-[`sdf`](.zsh/scripts/sdf.zsh) is my script (zsh function) that I use to
-synchronize/install my dotfiles based on its own config file [.sdfrc](.sdfrc).
-See the comment in [sdf.zsh](.zsh/scripts/sdf.zsh) for more information on how
-to use it and what it does.
+I am currently working on extracting all parts of my dotfiles that I think may
+be useful for others into their own repositories. If you want to use them, I
+recommend keeping them as git submodules in your own dotfiles! This is easy if
+you use my tool [`sdf`](https://github.com/jannis-baum/sync-dotfiles.zsh) to
+manage your dotfiles.
 
-## Most important development tools
+Below is a list of things I already have & still want to extract into their own
+repositories
+
+### Submodules
+
+- [sync-dotfiles.zsh](https://github.com/jannis-baum/sync-dotfiles.zsh): the zsh
+  utility function I use to manage my own configuration files as well as all my
+  plugins & dependiencies, and automatically reload configs for all tools
+- [git.zsh dotfiles](https://github.com/jannis-baum/git.zsh-dotfiles): my zsh
+  functions to blaze through git & GitHub workflows
+- [cookie-cleaner](https://github.com/jannis-baum/cookie-cleaner): tool to purge
+  all non-whitelisted cookies from safari
+
+### To-do
+
+The following are parts of my dotfiles that I will create separate repositories
+for soon:
+
+- si_vim to keep a single instance of vim for each zsh session
+- fzf file & directory management
+- ibkp.zsh to back up files in iCloud
+
+## Most important tools
 
 - [kitty](https://sw.kovidgoyal.net/kitty/) terminal & as a `tmux`-replacement
   for working locally with much better performance. See
@@ -35,9 +58,6 @@ to use it and what it does.
   visualized keyboard layers](docs.nosync/keyboard-layers.md)** to get a rough
   idea of how I use my five column aka "tiny" [Corne
   keyboard](https://github.com/foostan/crkbd).
-
-## Tools that help with macOS
-
 - [kindaVim](https://kindavim.app) for amazing vi-bindings **everywhere**
 - [Wooshy](https://wooshy.app) so I (almost) never need to use a mouse
 
