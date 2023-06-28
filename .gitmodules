@@ -65,3 +65,6 @@
 [submodule ".zsh/scripts/plugins/git.zsh-dotfiles"]
 	path = .zsh/plugins/git.zsh-dotfiles
 	url = https://github.com/jannis-baum/git.zsh-dotfiles.git
+[submodule ".zsh/plugins/sync-dotfiles.zsh"]
+	path = .zsh/plugins/sync-dotfiles.zsh
+	url = https://github.com/jannis-baum/sync-dotfiles.zsh.git
