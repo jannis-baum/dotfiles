@@ -51,7 +51,7 @@
 	path = .synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
 [submodule ".zsh/scripts/plugins/time-tracker"]
-	path = .zsh/scripts/plugins/time-tracker
+	path = .zsh/plugins/time-tracker
 	url = https://github.com/jannis-baum/time-tracker.git
 [submodule ".lib/nosync/cookie-cleaner"]
 	path = .lib/nosync/cookie-cleaner
@@ -63,5 +63,5 @@
 	path = .lib/nosync/Synapse
 	url = https://github.com/jannis-baum/synapse.git
 [submodule ".zsh/scripts/plugins/git.zsh-dotfiles"]
-	path = .zsh/scripts/plugins/git.zsh-dotfiles
+	path = .zsh/plugins/git.zsh-dotfiles
 	url = https://github.com/jannis-baum/git.zsh-dotfiles.git
