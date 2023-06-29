@@ -106,7 +106,7 @@ function df() {
 
     # pick target
     local target=$(
-        printf "\e[$(sed -r 's/^.*di=([^:]+):.*$/\1/' <<< $LS_COLORS)m$valid_paths" \
+        printf "\e[$(sed -r 's/^.*di=([^:]+):.*$/\1/' <<< $LS_COLORS)m$(printf $valid_paths | tail -n +2)" \
         | fzf --ansi --preview-window="nohidden" \
             --preview="$_fzf_ls_cmd "'$(sed "s|~|$HOME|" <<<{})')
 
