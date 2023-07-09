@@ -49,13 +49,13 @@ _fzf_finder() {
     if [[ -n "$BUFFER" || "$key" == ctrl-o ]]; then
         LBUFFER+="$pick"
     elif [[ "$key" == ctrl-n ]]; then
-        LBUFFER="v $dir"
+        LBUFFER="$EDITOR $dir"
     elif [[ "$key" == ctrl-u ]]; then
         _fzf_finder "$dir" || _fzf_finder "$target"
     else
         test -d $pick \
             && BUFFER="cd $pick" \
-            || BUFFER="v $pick"
+            || BUFFER="$EDITOR $pick"
         zle accept-line; zle reset-prompt
     fi
 }
@@ -85,7 +85,7 @@ rgi() {
         local file=$(awk -F: '{ print $1 }' <<< $details)
         local line=$(awk -F: '{ print $2 }' <<< $details)
         local column=$(awk -F: '{ print $3 }' <<< $details)
-        v "+call cursor($line, $column)" "+let @/='$query'" "+call feedkeys('/\<CR>')" "$file"
+        $EDITOR "+call cursor($line, $column)" "+let @/='$query'" "+call feedkeys('/\<CR>')" "$file"
     fi
 }
 
