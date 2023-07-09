@@ -13,6 +13,7 @@ dotfiles_actions=( \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
     ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
     ['^\.vim/']="_si_vim_cmd ReloadConfig" \
+    ['^\.zv/']="_si_vim_cmd ReloadConfig && source $HOME/.zsh/.zshrc" \
     ['^\.synapse']="_restart_synapse" \
     ['^\.synapse/modules/control-center$']="open -g hammerspoon://reloadConfig" \
     ['^\.hammerspoon/']="open -g hammerspoon://reloadConfig" \

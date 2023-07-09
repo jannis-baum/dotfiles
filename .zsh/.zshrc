@@ -14,9 +14,9 @@ export PATH=$(tr -d ' ' <<<"\
     :$PATH
 ")
 
-for d in scripts plugins; do
-    if $(test -d $ZDOTDIR/$d); then
-        for script in $(find $ZDOTDIR/$d -name '*.zsh'); do
+for d in $ZDOTDIR/scripts $ZDOTDIR/plugins $HOME/.zv; do
+    if $(test -d $d); then
+        for script in $(find $d -name '*.zsh'); do
             source $script
         done
     fi
