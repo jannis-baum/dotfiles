@@ -68,3 +68,6 @@
 [submodule ".zsh/plugins/sync-dotfiles.zsh"]
 	path = .zsh/plugins/sync-dotfiles.zsh
 	url = https://github.com/jannis-baum/sync-dotfiles.zsh.git
+[submodule ".zv/plugins/si-vim.zsh"]
+	path = .zv/plugins/si-vim.zsh
+	url = https://github.com/jannis-baum/si-vim.zsh.git
