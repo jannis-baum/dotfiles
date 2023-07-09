@@ -22,6 +22,9 @@ repositories
   plugins & dependiencies, and automatically reload configs for all tools
 - [git.zsh dotfiles](https://github.com/jannis-baum/git.zsh-dotfiles): my zsh
   functions to blaze through git & GitHub workflows
+- [si-vim.zsh](https://github.com/jannis-baum/si-vim.zsh): keeps a single
+  instance of vim running & attached to each interactive zsh session. This
+  enables you to switch back and forth between vim and zsh instantly.
 - [cookie-cleaner](https://github.com/jannis-baum/cookie-cleaner): tool to purge
   all non-whitelisted cookies from safari
 
@@ -30,7 +33,6 @@ repositories
 The following are parts of my dotfiles that I will create separate repositories
 for soon:
 
-- si_vim to keep a single instance of vim for each zsh session
 - fzf file & directory management
 - ibkp.zsh to back up files in iCloud
 
