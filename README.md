@@ -12,7 +12,7 @@ recommend keeping them as git submodules in your own dotfiles! This is easy if
 you use my tool [`sdf`](https://github.com/jannis-baum/sync-dotfiles.zsh) to
 manage your dotfiles.
 
-Below is a list of things I already have & still want to extract into their own
+Below are lists of things I already have & still want to extract into their own
 repositories
 
 ### Submodules
