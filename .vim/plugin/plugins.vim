@@ -20,6 +20,8 @@ inoremap <right> <esc>:call AutoPairsJump()<cr>a
 
 packadd fugitive
 
+packadd vim-commentary
+
 packadd slime
 let g:slime_target = "vimterminal"
 let g:slime_vimterminal_config = {

@@ -71,3 +71,6 @@
 [submodule ".zv/plugins/si-vim.zsh"]
 	path = .zv/plugins/si-vim.zsh
 	url = https://github.com/jannis-baum/si-vim.zsh.git
+[submodule ".vim/pack/plugins/opt/vim-commentary"]
+	path = .vim/pack/plugins/opt/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
