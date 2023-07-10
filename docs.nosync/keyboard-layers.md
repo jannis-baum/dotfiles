@@ -28,7 +28,8 @@ HOLD   | opt | sft | cmd |      | cmd | sft | ctr |
           |    *1    |       *2
 ----------+----------+-----------------
 terminal  |  ctrl+u  |  ctrl+o
-else      |  wooshy  |  smart magnify
+safari    |  wooshy  |  switch tabs
+else      |  wooshy  |
 ```
 
 ## Layers
