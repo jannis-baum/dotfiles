@@ -74,3 +74,6 @@
 [submodule ".vim/pack/plugins/opt/vim-commentary"]
 	path = .vim/pack/plugins/opt/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule ".zv/plugins/fzf-dotfiles"]
+	path = .zv/plugins/fzf-dotfiles
+	url = https://github.com/jannis-baum/fzf-dotfiles.git
