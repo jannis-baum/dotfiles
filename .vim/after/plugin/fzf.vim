@@ -3,6 +3,7 @@ let g:fzf_layout = { 'window': {
     \'yoffset': 0,
     \'border': 'sharp',
 \} }
+let $FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS . ' --preview-window=border-left'
 
 " buffers ----------------------------------------------------------------------
 
