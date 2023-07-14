@@ -6,6 +6,7 @@ setopt pushd_ignore_dups
 setopt pushdminus
 
 alias d=cd
+alias df=cdf
 
 alias -g ...='../..'
 alias -g ....='../../..'
