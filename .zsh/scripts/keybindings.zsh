@@ -14,3 +14,9 @@ bindkey -M vicmd "${terminfo[kcbt]}" reverse-menu-complete
 
 # si-vim
 bindkey ^u _si_vim_widget
+
+# fzf-dotfiles
+FZFDF_ACT_RELOAD=left
+
+# git.zsh-dotfiles
+GDF_GSI_STAGE=left

@@ -1,6 +1,5 @@
-# command to list directory contents in preview window
+# command to list directory contents in preview window (for fzf-dotfiles)
 FZFDF_LS=$(which l | sed 's/^l: aliased to //')
-FZFDF_ACT_RELOAD=left
 
 # find large & old files
 function large-files() {
