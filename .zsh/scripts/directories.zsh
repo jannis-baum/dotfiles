@@ -25,7 +25,7 @@ alias 9='cd -9'
 
 alias s="exa --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
 alias l="exa --long --all --git --no-permissions --no-user --ignore-glob='.DS_Store' --group-directories-first --time-style=iso"
-alias ts="_exa --long --no-user --no-permissions --no-time --tree --group-directories-first"
+alias ts="s --long --no-user --no-permissions --no-time --tree --group-directories-first"
 alias ta="exa --long --no-user --no-permissions --no-filesize --no-time --git --tree --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
 alias t="ta --git-ignore --level=5"
 
