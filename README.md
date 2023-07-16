@@ -4,7 +4,7 @@ Here is where I try to keep all configuration of all the tools I use. This is
 not intended to be used by anyone else in its entirety, but is nice to look at
 for reference.
 
-## :sparkles: Reusable parts :sparkles:
+## [:sparkles: Reusable parts :sparkles:](https://github.com/stars/jannis-baum/lists/my-dotfiles)
 
 I try to keep all parts of my dotfiles that I think may be useful for others in
 their own repositories that you can find in [my dotfiles
