@@ -38,9 +38,6 @@
 [submodule ".synapse/modules/pkill"]
 	path = .synapse/modules/pkill
 	url = https://github.com/jannis-baum/synapse-pkill.git
-[submodule ".vim/pack/plugins/opt/markdown-preview.nvim"]
-	path = .vim/pack/plugins/opt/markdown-preview.nvim
-	url = https://github.com/jannis-baum/markdown-preview.nvim.git
 [submodule ".synapse/modules/safari-histmarks"]
 	path = .synapse/modules/safari-histmarks
 	url = https://github.com/jannis-baum/synapse-safari-histmarks.git
@@ -77,3 +74,6 @@
 [submodule ".zv/plugins/fzf-dotfiles"]
 	path = .zv/plugins/fzf-dotfiles
 	url = https://github.com/jannis-baum/fzf-dotfiles.git
+[submodule ".vim/pack/plugins/opt/vivify.vim"]
+	path = .vim/pack/plugins/opt/vivify.vim
+	url = https://github.com/jannis-baum/vivify.vim.git
