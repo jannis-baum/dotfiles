@@ -12,7 +12,7 @@ augroup AutoPairs
     autocmd!
     autocmd Filetype markdown let b:AutoPairs = {"(": ")"}
 augroup END
-inoremap <right> <esc>:call AutoPairsJump()<cr>a
+inoremap <silent> <right> <esc>:call AutoPairsJump()<cr>a
 
 packadd fugitive
 
