@@ -110,3 +110,5 @@ hi! link DiffText DiffAdd
 " misc
 call s:HI('Search', s:neut1, 'none', s:main1)
 call s:HI('CocHighlightText', 'none', 'underline', 'none', s:neut6)
+call s:HI('Sneak', s:neut1, 'none', s:synB1)
+call s:HI('SneakLabel', s:neut1, 'bold', s:synB1)
