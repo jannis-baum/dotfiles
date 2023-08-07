@@ -17,6 +17,7 @@ inoremap <silent> <right> <esc>:call AutoPairsJump()<cr>a
 packadd fugitive
 
 packadd vim-commentary
+packadd vim-sneak
 
 packadd slime
 let g:slime_target = "vimterminal"
