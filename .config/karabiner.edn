@@ -61,7 +61,7 @@
        [{:sim [:u :i] :modi :any} :!Tu]
        [{:sim [:i :o] :modi :any} :!To]
        :!kitty
-       [{:sim [:u :i] :modi :any} :!Cf8]
+       [{:sim [:u :i] :modi :any} [:uri "hammerspoon://mouseToMenubar"] nil {:delayed {:invoked :!Cf8 :canceled :!Cf8} :params {:delay 200}}]
        :safari
        [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]]}
 
