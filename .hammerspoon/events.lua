@@ -50,7 +50,7 @@ e.setupKarabinerDNs('ScrollaDidEngage', 'ScrollaDidDisengage', 'inScrolla')
 --------------------------------------------------------------------------------
 -- wooshy ----------------------------------------------------------------------
 hs.urlevent.bind('mouseToMenubar', function()
-    pos = hs.mouse.getAbsolutePosition()
+    pos = hs.mouse.absolutePosition()
     event = hs.eventtap.event.newEvent()
     event:setType(hs.eventtap.event.types.mouseMoved)
     event:location({ x=pos.x, y=0 })
@@ -58,7 +58,7 @@ hs.urlevent.bind('mouseToMenubar', function()
 end)
 
 e.setupDNWatcher('WooshyInputDidDisappear', function()
-    pos = hs.mouse.getAbsolutePosition()
+    pos = hs.mouse.absolutePosition()
     if pos.y < 24 then
         event = hs.eventtap.event.newEvent()
         event:setType(hs.eventtap.event.types.mouseMoved)
