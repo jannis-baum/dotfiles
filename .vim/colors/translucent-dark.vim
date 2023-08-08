@@ -33,28 +33,28 @@ endfunction
 " colors: dark -> light
 
 " neutrals (gray)
-let s:neut1 = 235
-let s:neut2 = 238
-let s:neut3 = 240
-let s:neut4 = 246
-let s:neut5 = 248
-let s:neut6 = 252
+let s:neut1 = 235 " eb
+let s:neut2 = 238 " ee
+let s:neut3 = 240 " f0
+let s:neut4 = 246 " f6
+let s:neut5 = 248 " f8
+let s:neut6 = 252 " fc
 
 " syntax
 " A (pink)
-let s:synA1 = 175
+let s:synA1 = 175 " af
 " B (purple)
-let s:synB1 = 183
-let s:synB2 = 182
+let s:synB1 = 183 " b7
+let s:synB2 = 182 " b6
 " C (blue)
-let s:synC1 = 147
-let s:synC2 = 153
+let s:synC1 = 147 " 93
+let s:synC2 = 153 " 99
 " errors & warnings
-let s:syner = 203
-let s:swarn = 214
+let s:syner = 203 " cb
+let s:swarn = 214 " d6
 
 " main hightlight (pale yellow)
-let s:main1 = 229
+let s:main1 = 229 " e5
 
 " blues: 105, 111
 " cyan: 123
