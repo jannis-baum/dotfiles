@@ -7,7 +7,7 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>translucent-dark</string>
+	<string>translucent-dynamic</string>
 	<key>settings</key>
 	<array>
 		<dict>

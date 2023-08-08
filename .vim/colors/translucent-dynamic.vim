@@ -1,11 +1,10 @@
 " test colors: `:so $VIMRUNTIME/syntax/hitest.vim`
 
-" BOILERPLATE (dark coloschemes) -----------------------------------------------
+" BOILERPLATE ------------------------------------------------------------------
 highlight clear
 if exists("syntax_on")
     syntax reset
 endif
-set background=dark
 
 " DEFINITIONS ------------------------------------------------------------------
 " setter: group, foreground, deco, background, underline color
