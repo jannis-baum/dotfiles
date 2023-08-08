@@ -7,8 +7,8 @@ function _restart_synapse() {
     open -g -a Synapse
 }
 
-# TODO: refresh kitty through remote control
 dotfiles_actions=( \
+    ['^\.config/kitty/']="kill -SIGUSR1 $KITTY_PID" \
     ['karabiner\.edn$']='goku' \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
     ['^\.zsh/']="source $HOME/.zsh/.zshrc" \
