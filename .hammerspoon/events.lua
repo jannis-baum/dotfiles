@@ -50,9 +50,10 @@ e.setupKarabinerDNs('ScrollaDidEngage', 'ScrollaDidDisengage', 'inScrolla')
 --------------------------------------------------------------------------------
 -- wooshy ----------------------------------------------------------------------
 hs.urlevent.bind('mouseToMenubar', function()
+    pos = hs.mouse.getAbsolutePosition()
     event = hs.eventtap.event.newEvent()
     event:setType(hs.eventtap.event.types.mouseMoved)
-    event:location({ x=100, y=0 })
+    event:location({ x=pos.x, y=0 })
     event:post()
 end)
 
