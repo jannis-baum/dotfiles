@@ -17,9 +17,13 @@ function show-color() {
     fi
 
     printf "\e[48;2;$r;$g;${b}m"
-    for row in {1..8}; do
-        printf ' %.0s' {1..32}
-        printf "\n"
-    done
+    if [[ -z "$2" ]]; then
+        for row in {1..8}; do
+            printf ' %.0s' {1..32}
+            printf "\n"
+        done
+    else
+        printf "\e[30m$2"
+    fi
     printf "\e[0m"
 }
