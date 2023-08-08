@@ -35,7 +35,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#949494</string>
+				<string>#f6000000</string>
 				<key>fontStyle</key>
 				<string> italic</string>
 			</dict>
@@ -48,7 +48,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#D787AF</string>
+				<string>#af000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -59,7 +59,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#D787AF</string>
+				<string>#af000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -70,7 +70,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#D787AF</string>
+				<string>#af000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -81,7 +81,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#D787AF</string>
+				<string>#af000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -94,7 +94,7 @@
 				<key>fontStyle</key>
 				<string> bold</string>
 				<key>foreground</key>
-				<string>#D7AEFF</string>
+				<string>#b7000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -105,7 +105,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AED7FF</string>
+				<string>#99000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -118,7 +118,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#AEAFFF</string>
+				<string>#93000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -129,7 +129,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AEAFFF</string>
+				<string>#93000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -140,7 +140,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AEAFFF</string>
+				<string>#93000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -151,7 +151,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AEAFFF</string>
+				<string>#93000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -164,7 +164,7 @@
 				<key>fontStyle</key>
 				<string> bold</string>
 				<key>foreground</key>
-				<string>#D7AEFF</string>
+				<string>#b7000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -175,7 +175,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#C7C7C7</string>
+				<string>#fc000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -188,7 +188,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#D7AFD7</string>
+				<string>#b6000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -201,7 +201,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#D7AFD7</string>
+				<string>#b6000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -214,7 +214,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#AED7FF</string>
+				<string>#99000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -227,7 +227,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#AED7FF</string>
+				<string>#99000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -238,7 +238,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#AED7FF</string>
+				<string>#99000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -251,7 +251,7 @@
 				<key>fontStyle</key>
 				<string></string>
 				<key>foreground</key>
-				<string>#AED7FF</string>
+				<string>#99000000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -288,7 +288,7 @@
 	<key>colorSpaceName</key>
 	<string>sRGB</string>
 	<key>semanticClass</key>
-	<string>theme.dark.monokai</string>
+	<string>theme.dark.translucent</string>
 	<key>author</key>
 	<string>Jannis Baum</string>
 </dict>
