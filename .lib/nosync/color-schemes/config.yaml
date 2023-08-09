@@ -82,7 +82,7 @@ vim:
     - groups: [Constant]
       fg: { dark: '#d787af', light: '#d787af' }
     - groups: [Special]
-      fg: { dark: '#d787af', light: '#d787af' }
+      fg: { dark: '#d7afd7', light: '#d7afd7' }
     - groups: [Identifier]
       fg: { dark: '#d7afff', light: '#d7afff' }
       deco: bold
@@ -98,8 +98,6 @@ vim:
     - groups: [Todo]
       fg: { dark: '#94', light: '#94' }
       deco: bold
-    - groups: [MatchParen]
-      fg: { dark: '#26', light: '#26' }
     # errors & warnings
     - groups: [Error, SpellCap, SpellBad, CocErrorHighlight]
       deco: undercurl
@@ -124,6 +122,7 @@ vim:
       deco: bold
     - groups: [TabLineSel]
       fg: { dark: '#d7afff', light: '#d7afff' }
+      deco: bold
     - groups: [FoldColumn]
     - groups: [Folded]
       fg: { dark: '#58', light: '#58' }
@@ -135,7 +134,7 @@ vim:
     - groups: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
     # misc
-    - groups: [Search]
+    - groups: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#ffffaf', light: '#ffffaf' }
     - groups: [CocHighlightText]
