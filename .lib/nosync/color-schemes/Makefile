@@ -1,3 +1,3 @@
 .PHONY: generate
 generate:
-	@generator/generate config.yaml
+	@generator/generate translucent.yaml
