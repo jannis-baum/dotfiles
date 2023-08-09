@@ -1,3 +1,7 @@
+# useful commands
+# so $VIMRUNTIME/syntax/hitest.vim
+# vert terminal generator/parse-colors %
+
 kitty:
   destinations:
     dark: ~/.config/kitty/themes/translucent-dark.conf
@@ -14,7 +18,7 @@ kitty:
 
     #: Cursor colors
     cursor                          #ffb472|||#f37c13
-    cursor_text_color               #000000|||#eee
+    cursor_text_color               #000000|||#eeeeee
 
     #: URL underline color when hovering with mouse
     url_color                       #ffb472|||#f37c13
