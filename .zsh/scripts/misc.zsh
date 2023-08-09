@@ -34,6 +34,12 @@ function ql() {
 function pipf() {
     pip3 freeze | rg "$1" | sed 's/==/>=/' | pbcopy
 }
+## reload color schemes
+function rcols() {
+    make -C ~/_dotfiles/.lib/nosync/color-schemes
+    [[ -n "$KITTY_PID" ]] && kill -SIGUSR1 $KITTY_PID
+    _si_vim_isrunning && _si_vim_cmd ReloadConfig
+}
 
 # options
 setopt no_beep
