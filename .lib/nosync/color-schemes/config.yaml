@@ -1,0 +1,150 @@
+kitty:
+  destinations:
+    dark: ~/.config/kitty/themes/translucent-dark.conf
+    light: ~/.config/kitty/themes/translucent-light.conf
+  header: |
+    ## name: translucent-dark|||translucent-light
+    ## author: Jannis Baum
+
+    #: The basic colors
+    foreground                      #c7c7c7|||#111111
+    background                      #000000|||#eeeeee
+    selection_foreground            #262626|||#262626
+    selection_background            #ffffaf|||#ffff8f
+
+    #: Cursor colors
+    cursor                          #ffb472|||#f37c13
+    cursor_text_color               #000000|||#eee
+
+    #: URL underline color when hovering with mouse
+    url_color                       #ffb472|||#f37c13
+
+    #: kitty window border colors and terminal bell colors
+    active_border_color             #777777|||#999999
+    inactive_border_color           #333333|||#cccccc
+    bell_border_color               #ff5a00
+    visual_bell_color               none
+
+    #: Tab bar colors
+    active_tab_foreground           #d0b1fa|||#ac70ff
+    active_tab_background           #000000|||#eeeeee
+    inactive_tab_foreground         #999999|||#777777
+    inactive_tab_background         #000000|||#eeeeee
+    tab_bar_background              none
+    tab_bar_margin_color            none
+
+    #: Colors for marks (marked text in the terminal)
+    mark1_foreground black
+    mark1_background #98d3cb
+    mark2_foreground black
+    mark2_background #f2dcd3
+    mark3_foreground black
+    mark3_background #f274bc
+
+    #: The basic 16 colors
+    #: black
+    color0  #616161
+    color8  #8e8e8e
+    #: red
+    color1  #ff8272
+    color9  #ffc4bd
+    #: green
+    color2  #b4fa72|||#4caf50
+    color10 #d6fcb9|||#8cbb8e
+    #: yellow
+    color3  #fefdc2
+    color11 #fefdd5
+    #: blue
+    color4  #a5d5fe
+    color12 #c1e3fe
+    #: magenta
+    color5  #ff8ffd
+    color13 #ffb1fe
+    #: cyan
+    color6  #d0d1fe
+    color14 #e5e6fe
+    #: white
+    color7  #f1f1f1
+    color15 #fefefe
+
+vim:
+  destination: ~/.vim/colors/translucent-dynamic.vim
+  header: |
+    highlight clear
+    if exists("syntax_on")
+        syntax reset
+    endif
+  colors:
+    # syntax
+    - groups: [Comment]
+      fg: { dark: '#94', light: '#94' }
+      deco: italic
+    - groups: [Constant]
+      fg: { dark: '#d787af', light: '#d787af' }
+    - groups: [Special]
+      fg: { dark: '#d787af', light: '#d787af' }
+    - groups: [Identifier]
+      fg: { dark: '#d7afff', light: '#d7afff' }
+      deco: bold
+    - groups: [Statement, Preproc]
+      fg: { dark: '#afd7ff', light: '#afd7ff' }
+    - groups: [Type]
+      fg: { dark: '#afafff', light: '#afafff' }
+    - groups: [Underlined]
+      fg: { dark: '#afd7ff', light: '#afd7ff' }
+      deco: underline
+    - groups: [Ignore]
+      fg: { dark: '#a8', light: '#a8' }
+    - groups: [Todo]
+      fg: { dark: '#94', light: '#94' }
+      deco: bold
+    - groups: [MatchParen]
+      fg: { dark: '#26', light: '#26' }
+    # errors & warnings
+    - groups: [Error, SpellCap, SpellBad, CocErrorHighlight]
+      deco: undercurl
+      ul: { dark: '#ff5f5f', light: '#ff5f5f' }
+    - groups: [CocWarningHighlight, CocUnusedHighlight]
+      deco: undercurl
+      ul: { dark: '#ffaf00', light: '#0' }
+    - groups: [CocInfoHighlight, CocHintHightlight]
+      deco: undercurl
+      ul: { dark: '#afafff', light: '#afafff' }
+    - groups: [ErrorMsg]
+      fg: { dark: '#ff5f5f', light: '#ff5f5f' }
+    - groups: [Type]
+      fg: { dark: '#afafff', light: '#afafff' }
+    # ui
+    - groups: [SignColumn]
+      fg: { dark: '#d0', light: '#d0' }
+    - groups: [StatusLineNC, StatusLineTermNC]
+      fg: { dark: '#4', light: '#4' }
+    - groups: [StatusLine, StatusLineTerm, LineNr, EndOfBuffer, TabLine, TabLineFill]
+      fg: { dark: '#58', light: '#58' }
+      deco: bold
+    - groups: [TabLineSel]
+      fg: { dark: '#d7afff', light: '#d7afff' }
+    - groups: [FoldColumn]
+    - groups: [Folded]
+      fg: { dark: '#58', light: '#58' }
+      deco: italic
+    - groups: [VertSplit]
+      fg: { dark: '#26', light: '#26' }
+      deco: bold
+    # diff
+    - groups: [DiffAdd, DiffChange, DiffDelete, DiffText]
+      bg: { dark: '#26', light: '#26' }
+    # misc
+    - groups: [Search]
+      fg: { dark: '#26', light: '#26' }
+      bg: { dark: '#ffffaf', light: '#ffffaf' }
+    - groups: [CocHighlightText]
+      deco: underline
+      ul: { dark: '#d0', light: '#d0' }
+    - groups: [Sneak]
+      fg: { dark: '#26', light: '#26' }
+      bg: { dark: '#d7afff', light: '#d7afff' }
+    - groups: [SneakLabel]
+      fg: { dark: '#26', light: '#26' }
+      bg: { dark: '#d7afff', light: '#d7afff' }
+      deco: bold
