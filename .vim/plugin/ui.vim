@@ -3,8 +3,8 @@ set mouse=a                     " mouse
 set visualbell                  " bell
 set t_vb=                       " .
 set scrolloff=8                 " extra lines while scrolling
-syntax on                       " colors
-colorscheme translucent-dynamic " .
+syntax on                       " syntax highlighting
+colorscheme translucent-dynamic " scheme is generated; see .lib/nosync/color-schemes
 " set number rnu                " line numbers
 set nuw=6                       " .
 set splitbelow                  " splits
