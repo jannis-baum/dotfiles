@@ -152,7 +152,7 @@ vim:
       bg: { dark: '#d7afff', light: '#d7afff' }
       deco: bold
 
-tm-theme:
+text-mate:
   destination: '~/.config/bat/themes/translucent-dynamic.tmTheme'
   author: Jannis Baum
   name: Translucent Dynamic
