@@ -22,6 +22,14 @@ command! BC call s:CloseOthers()
 
 " parse #hex-colors in file
 function! s:ParseColors()
+    let l:thisbuf = bufnr()
+    normal ms
+    normal gg
+    set scrollbind
     exec expand('vert terminal parse-colors %')
+    normal gg
+    set scrollbind
+    execute 'sbuffer ' . l:thisbuf
+    normal `s
 endfunction
 command! ParseColors call s:ParseColors()
