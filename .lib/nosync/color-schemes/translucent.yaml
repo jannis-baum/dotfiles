@@ -151,3 +151,21 @@ vim:
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#d7afff', light: '#d7afff' }
       deco: bold
+
+tm-theme:
+  destination: '~/.config/bat/themes/translucent-dynamic.tmTheme'
+  author: Jannis Baum
+  name: Translucent Dynamic
+  groups:
+    - scopes: [comment]
+      vim: Comment
+    - scopes: [string, constant.numeric, constant.language, constant.character, constant.other, support.constant]
+      vim: Constant
+    - scopes: [variable, variable.parameter, support.other.variable]
+      vim: Identifier
+    - scopes: [keyword]
+      vim: Statement
+    - scopes: [storage, storage.type, entity.name.class, entity.other.inherited-class, entity.name.function, support.function, support.type, support.class]
+      vim: Type
+    - scopes: [entity.name.tag, entity.other.attribute-name]
+      vim: Special
