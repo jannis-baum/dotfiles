@@ -27,14 +27,3 @@ function show-color() {
     fi
     printf "\e[0m"
 }
-
-function parse-colors() {
-    if ! test -f "$1"; then
-        echo "file not found."
-        return 1
-    fi
-    eval "echo \"$(cat "$1" | sed -r \
-        -e 's/"/\\"/g' \
-        -e 's/\$/\\$/g' \
-        -e 's/#([[:digit:]a-f]{3}([[:digit:]a-f]{3})?)/$(show-color \1 "#\1")/g')\""
-}

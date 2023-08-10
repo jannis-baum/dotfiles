@@ -22,6 +22,6 @@ command! BC call s:CloseOthers()
 
 " parse #hex-colors in file
 function! s:ParseColors()
-    exec expand("vert terminal zsh -c \"source ~/.zsh/.zshrc; parse-colors %\"")
+    exec expand('vert terminal parse-colors %')
 endfunction
 command! ParseColors call s:ParseColors()
