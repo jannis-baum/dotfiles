@@ -4,10 +4,10 @@
 
 kitty:
   destinations:
-    dark: ~/.config/kitty/themes/translucent-dark.conf
-    light: ~/.config/kitty/themes/translucent-light.conf
+    dark: ~/.config/kitty/themes/jellyfish-night.conf
+    light: ~/.config/kitty/themes/jellyfish-day.conf
   header: |
-    ## name: translucent-dark|||translucent-light
+    ## name: jellyfish-night|||jellyfish-day
     ## author: Jannis Baum
 
     #: The basic colors
@@ -72,7 +72,7 @@ kitty:
     color15 #fefefe
 
 vim:
-  destination: ~/.vim/colors/translucent-dynamic.vim
+  destination: ~/.vim/colors/jellyfish.vim
   header: |
     highlight clear
     if exists("syntax_on")
@@ -153,9 +153,9 @@ vim:
       deco: bold
 
 text-mate:
-  destination: '~/.config/bat/themes/translucent-dynamic.tmTheme'
+  destination: '~/.config/bat/themes/jellyfish.tmTheme'
   author: Jannis Baum
-  name: Translucent Dynamic
+  name: jellyfish
   groups:
     - scopes: [comment]
       vim: Comment
