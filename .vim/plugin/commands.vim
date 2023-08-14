@@ -53,10 +53,7 @@ command! PreviewColorsStop call s:PreviewColorsStop()
 
 " reload color config
 function s:ReloadColors()
-    call system('make -C ~/_dotfiles/.lib/nosync/color-schemes')
-    if $KITTY_PID != ''
-        call system('kill -SIGUSR1 ' . $KITTY_PID)
-        ReloadConfig
-    endif
+    call system('make -C ~/_dotfiles/.lib/nosync/color-schemes load')
+    ReloadConfig
 endfunction
 command! RCOLS call s:ReloadColors()

@@ -36,8 +36,7 @@ function pipf() {
 }
 ## reload color schemes
 function rcols() {
-    make -C ~/_dotfiles/.lib/nosync/color-schemes
-    [[ -n "$KITTY_PID" ]] && kill -SIGUSR1 $KITTY_PID
+    make -C ~/_dotfiles/.lib/nosync/color-schemes load
     _si_vim_isrunning && _si_vim_cmd ReloadConfig
 }
 
