@@ -79,30 +79,43 @@ vim:
         syntax reset
     endif
   colors:
-    # syntax
+    # syntax -------------------------------------------------------------------
+    # gray
     - groups: [Comment]
       fg: { dark: '#94', light: '#94' }
       deco: italic
-    - groups: [Constant]
-      fg: { dark: '#d787af', light: '#d787af' }
-    - groups: [Special]
-      fg: { dark: '#d7afd7', light: '#d7afd7' }
-    - groups: [Identifier]
-      fg: { dark: '#d7afff', light: '#d7afff' }
-      deco: bold
-    - groups: [Statement, Preproc]
-      fg: { dark: '#afd7ff', light: '#afd7ff' }
-    - groups: [Type]
-      fg: { dark: '#afafff', light: '#afafff' }
-    - groups: [Underlined]
-      fg: { dark: '#afd7ff', light: '#afd7ff' }
-      deco: underline
     - groups: [Ignore]
       fg: { dark: '#a8', light: '#a8' }
     - groups: [Todo]
       fg: { dark: '#94', light: '#94' }
       deco: bold
-    # errors & warnings
+    # constants & variables
+    - groups: [Constant]
+      fg: { dark: '#d787af', light: '#d787af' }
+    - groups: [String]
+      fg: { dark: '#fc897e', light: '#fc897e' }
+    - groups: [Number]
+      fg: { dark: '#ffac8f', light: '#ffac8f' }
+    - groups: [CocSemVariable]
+      fg: { dark: '#d7afff', light: '#d7afff' }
+    # language
+    - groups: [Statement, Preproc, Keyword]
+      fg: { dark: '#afd7ff', light: '#afd7ff' }
+    - groups: [Special]
+      fg: { dark: '#d7afd7', light: '#d7afd7' }
+    - groups: [Identifier]
+      fg: { dark: '#d7afff', light: '#d7afff' }
+      deco: bold
+    # types, classes, functions
+    - groups: [Type]
+      fg: { dark: '#c5f1ff', light: '#c5f1ff' }
+    - groups: [CocSemClass, Function]
+      fg: { dark: '#7fb7c3', light: '#7fb7c3' }
+    # other
+    - groups: [Underlined]
+      fg: { dark: '#afd7ff', light: '#afd7ff' }
+      deco: underline
+    # errors & warnings --------------------------------------------------------
     - groups: [Error, SpellCap, SpellBad, CocErrorHighlight]
       deco: undercurl
       ul: { dark: '#ff5f5f', light: '#ff5f5f' }
@@ -116,7 +129,7 @@ vim:
       fg: { dark: '#ff5f5f', light: '#ff5f5f' }
     - groups: [Type]
       fg: { dark: '#afafff', light: '#afafff' }
-    # ui
+    # ui -----------------------------------------------------------------------
     - groups: [SignColumn]
       fg: { dark: '#d0', light: '#d0' }
     - groups: [StatusLineNC, StatusLineTermNC]
@@ -137,7 +150,7 @@ vim:
     # diff
     - groups: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
-    # misc
+    # misc ---------------------------------------------------------------------
     - groups: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#ffffaf', light: '#ffffaf' }
@@ -159,13 +172,21 @@ text-mate:
   groups:
     - scopes: [comment]
       vim: Comment
-    - scopes: [string, constant.numeric, constant.language, constant.character, constant.other, support.constant]
+    - scopes: [string, constant.character]
+      vim: String
+    - scopes: [constant.numeric]
+      vim: Number
+    - scopes: [constant.language, constant.other, support.constant]
       vim: Constant
     - scopes: [variable, variable.parameter, support.other.variable]
-      vim: Identifier
+      vim: CocSemVariable
     - scopes: [keyword]
       vim: Statement
-    - scopes: [storage, storage.type, entity.name.class, entity.other.inherited-class, entity.name.function, support.function, support.type, support.class]
+    - scopes: [entity.name.class, entity.other.inherited-class, support.class]
+      vim: CocSemClass
+    - scopes: [storage.type, storage, support.type]
       vim: Type
+    - scopes: [entity.name.function, support.function]
+      vim: Function
     - scopes: [entity.name.tag, entity.other.attribute-name]
       vim: Special
