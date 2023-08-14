@@ -168,6 +168,9 @@ vim:
       fg: { dark: '#ffaf00', light: '#ffaf00' }
     - groups: [Visual]
       bg: { dark: '#4', light: '#4' }
+    # not a vim hl group, just so we can reuse it below
+    - groups: [NormalText]
+      fg: { dark: '#c7c7c7', light: '#111111' }
 
 text-mate:
   destination: '~/.config/bat/themes/jellyfish.tmTheme'
@@ -194,3 +197,15 @@ text-mate:
       vim: Function
     - scopes: [entity.name.tag, entity.other.attribute-name]
       vim: Special
+
+custom:
+    - destination: '~/.zsh/scripts/_theme.zsh'
+      content: |
+        export PS1=$'%F{{{ Title.fg }}}%f%K{{{ Title.fg }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Title.fg }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
+        export LS_COLORS="fi=1;38;5;{{ NormalText.fg }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
+        export EXA_COLORS="sn=38;5;{{ Title.fg }}:sb=1;38;5;{{ Title.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
+        export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
+            --color='fg+:{{ NormalText.fg }}:underline,bg+:-1'
+            --color='hl:{{ Statement.fg }},hl+:{{ Title.fg }}'
+            --color='prompt:{{ Title.fg }}:bold,query:regular:italic'
+            --color='marker:{{ Title.fg }},pointer:{{ Title.fg }},spinner:{{ Title.fg }},info:{{ Statement.fg }}'"
