@@ -25,6 +25,8 @@ let &t_Us = "\e[4:2m"
 let &t_Cs = "\e[4:3m"
 let &t_ds = "\e[4:4m"
 let &t_Ds = "\e[4:5m"
+" underline color
+let &t_AU = "\e[58;5;%dm"
 
 " status & tab line
 function! s:modified_marker(buf)
