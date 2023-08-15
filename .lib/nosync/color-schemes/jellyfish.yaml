@@ -3,9 +3,13 @@
 # h highlight-groups
 
 colors:
+  - set: Text
+    fg: { dark: '#c7c7c7', light: '#111111' }
   - set: Main
     fg: { dark: '#d7afff', light: '#d7afff' }
     deco: bold
+  - set: Cursor
+    bg: { dark: '#ffb472', light: '#f37c13' }
 
 kitty:
   destinations:
@@ -16,17 +20,17 @@ kitty:
     ## author: Jannis Baum
 
     #: The basic colors
-    foreground                      #c7c7c7|||#111111
+    foreground                      {{ Text.fg }}
     background                      #000000|||#eeeeee
-    selection_foreground            #262626|||#262626
-    selection_background            #ffffaf|||#ffff8f
+    selection_foreground            {{ Search.fg }}
+    selection_background            {{ Search.bg }}
 
     #: Cursor colors
-    cursor                          #ffb472|||#f37c13
+    cursor                          {{ Cursor.bg }}
     cursor_text_color               #000000|||#eeeeee
 
     #: URL underline color when hovering with mouse
-    url_color                       #ffb472|||#f37c13
+    url_color                       {{ Cursor.bg }}
 
     #: kitty window border colors and terminal bell colors
     active_border_color             #777777|||#999999
@@ -172,9 +176,6 @@ vim:
       fg: { dark: '#ffaf00', light: '#ffaf00' }
     - set: [Visual, CocMenuSel, CocListLine]
       bg: { dark: '#58', light: '#58' }
-    # not a vim hl group, just so we can reuse it below
-    - set: [NormalText]
-      fg: { dark: '#c7c7c7', light: '#111111' }
 
 text-mate:
   destination: '~/.config/bat/themes/jellyfish.tmTheme'
@@ -206,10 +207,10 @@ custom:
     - destination: '~/.zsh/scripts/_theme.zsh'
       content: |
         export PS1=$'%F{{{ Main.fg }}}%f%K{{{ Main.fg }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Main.fg }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
-        export LS_COLORS="fi=1;38;5;{{ NormalText.fg }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
+        export LS_COLORS="fi=1;38;5;{{ Text.fg }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
         export EXA_COLORS="sn=38;5;{{ Main.fg }}:sb=1;38;5;{{ Main.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
-            --color='fg+:{{ NormalText.fg }}:underline,bg+:-1'
+            --color='fg+:{{ Text.fg }}:underline,bg+:-1'
             --color='hl:{{ Statement.fg }},hl+:{{ Main.fg }}'
             --color='prompt:{{ Main.fg }}:bold,query:regular:italic'
             --color='marker:{{ Main.fg }},pointer:{{ Main.fg }},spinner:{{ Main.fg }},info:{{ Statement.fg }}'"
