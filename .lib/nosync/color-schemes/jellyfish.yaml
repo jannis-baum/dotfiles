@@ -2,6 +2,11 @@
 # so $VIMRUNTIME/syntax/hitest.vim
 # h highlight-groups
 
+colors:
+  - set: Main
+    fg: { dark: '#d7afff', light: '#d7afff' }
+    deco: bold
+
 kitty:
   destinations:
     dark: ~/.config/kitty/themes/jellyfish-night.conf
@@ -30,7 +35,7 @@ kitty:
     visual_bell_color               none
 
     #: Tab bar colors
-    active_tab_foreground           #d0b1fa|||#ac70ff
+    active_tab_foreground           {{ Main.fg }}
     active_tab_background           #000000|||#eeeeee
     inactive_tab_foreground         #999999|||#777777
     inactive_tab_background         #000000|||#eeeeee
@@ -78,134 +83,133 @@ vim:
     if exists("syntax_on")
         syntax reset
     endif
-  colors:
+  highlight:
     # syntax -------------------------------------------------------------------
     # gray
-    - groups: [Comment]
+    - set: [Comment]
       fg: { dark: '#94', light: '#94' }
       deco: italic
-    - groups: [Ignore]
+    - set: [Ignore]
       fg: { dark: '#a8', light: '#a8' }
-    - groups: [Todo]
+    - set: [Todo]
       fg: { dark: '#94', light: '#94' }
       deco: bold
     # constants & variables
-    - groups: [Constant]
+    - set: [Constant]
       fg: { dark: '#d787af', light: '#d787af' }
-    - groups: [String]
+    - set: [String]
       fg: { dark: '#fc897e', light: '#fc897e' }
-    - groups: [Number]
+    - set: [Number]
       fg: { dark: '#ffac8f', light: '#ffac8f' }
-    - groups: [CocSemVariable]
+    - set: [CocSemVariable]
       fg: { dark: '#d7afff', light: '#d7afff' }
     # language
-    - groups: [Statement, Preproc, Keyword]
+    - set: [Statement, Preproc, Keyword]
       fg: { dark: '#afd7ff', light: '#afd7ff' }
-    - groups: [Special]
+    - set: [Special]
       fg: { dark: '#d7afd7', light: '#d7afd7' }
-    - groups: [Identifier, Title]
-      fg: { dark: '#d7afff', light: '#d7afff' }
-      deco: bold
+    - set: [Identifier, Title]
+      from: Main
     # types, classes, functions
-    - groups: [Type]
+    - set: [Type]
       fg: { dark: '#c5f1ff', light: '#c5f1ff' }
-    - groups: [CocSemClass, Function]
+    - set: [CocSemClass, Function]
       fg: { dark: '#7fb7c3', light: '#7fb7c3' }
     # other
-    - groups: [Underlined]
+    - set: [Underlined]
       fg: { dark: '#afd7ff', light: '#afd7ff' }
       deco: underline
     # errors & warnings --------------------------------------------------------
-    - groups: [Error, SpellCap, SpellBad, CocErrorHighlight]
+    - set: [Error, SpellCap, SpellBad, CocErrorHighlight]
       deco: undercurl
       ul: { dark: '#ff5f5f', light: '#ff5f5f' }
-    - groups: [CocWarningHighlight, CocUnusedHighlight]
+    - set: [CocWarningHighlight, CocUnusedHighlight]
       deco: undercurl
       ul: { dark: '#ffaf00', light: '#0' }
-    - groups: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
+    - set: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
       deco: undercurl
       ul: { dark: '#afafff', light: '#afafff' }
-    - groups: [ErrorMsg]
+    - set: [ErrorMsg]
       fg: { dark: '#ff5f5f', light: '#ff5f5f' }
-    - groups: [Type]
+    - set: [Type]
       fg: { dark: '#afafff', light: '#afafff' }
     # ui -----------------------------------------------------------------------
-    - groups: [SignColumn]
+    - set: [SignColumn]
       fg: { dark: '#d0', light: '#d0' }
-    - groups: [StatusLineNC, StatusLineTermNC]
+    - set: [StatusLineNC, StatusLineTermNC]
       fg: { dark: '#4', light: '#4' }
-    - groups: [StatusLine, StatusLineTerm, LineNr, EndOfBuffer, TabLine, TabLineFill]
+    - set: [StatusLine, StatusLineTerm, LineNr, EndOfBuffer, TabLine, TabLineFill]
       fg: { dark: '#58', light: '#58' }
       deco: bold
-    - groups: [TabLineSel]
+    - set: [TabLineSel]
       fg: { dark: '#d7afff', light: '#d7afff' }
       deco: bold
-    - groups: [FoldColumn]
-    - groups: [Folded]
+    - set: [FoldColumn]
+    - set: [Folded]
       fg: { dark: '#58', light: '#58' }
       deco: italic
-    - groups: [VertSplit]
+    - set: [VertSplit]
       fg: { dark: '#26', light: '#26' }
       deco: bold
     # diff
-    - groups: [DiffAdd, DiffChange, DiffDelete, DiffText]
+    - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
     # misc ---------------------------------------------------------------------
-    - groups: [Search, MatchParen]
+    - set: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#ffffaf', light: '#ffffaf' }
-    - groups: [CocHighlightText]
+    - set: [CocHighlightText]
       deco: underline
       ul: { dark: '#d0', light: '#d0' }
-    - groups: [Sneak]
+    - set: [Sneak]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#d7afff', light: '#d7afff' }
-    - groups: [SneakLabel]
+    - set: [SneakLabel]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#d7afff', light: '#d7afff' }
       deco: bold
-    - groups: [MoreMsg, Question]
+    - set: [MoreMsg, Question]
       fg: { dark: '#ffaf00', light: '#ffaf00' }
-    - groups: [Visual, CocMenuSel, CocListLine]
+    - set: [Visual, CocMenuSel, CocListLine]
       bg: { dark: '#58', light: '#58' }
     # not a vim hl group, just so we can reuse it below
-    - groups: [NormalText]
+    - set: [NormalText]
       fg: { dark: '#c7c7c7', light: '#111111' }
 
 text-mate:
   destination: '~/.config/bat/themes/jellyfish.tmTheme'
   author: Jannis Baum
   name: jellyfish
-  groups:
-    - scopes: [comment]
-      vim: Comment
-    - scopes: [string, constant.character]
-      vim: String
-    - scopes: [constant.numeric]
-      vim: Number
-    - scopes: [constant.language, constant.other, support.constant]
-      vim: Constant
-    - scopes: [variable, variable.parameter, support.other.variable]
-      vim: CocSemVariable
-    - scopes: [keyword]
-      vim: Statement
-    - scopes: [entity.name.class, entity.other.inherited-class, support.class]
-      vim: CocSemClass
-    - scopes: [storage.type, storage, support.type]
-      vim: Type
-    - scopes: [entity.name.function, support.function]
-      vim: Function
-    - scopes: [entity.name.tag, entity.other.attribute-name]
-      vim: Special
+  highlight:
+    - set: [comment]
+      from: Comment
+    - set: [string, constant.character]
+      from: String
+    - set: [constant.numeric]
+      from: Number
+    - set: [constant.language, constant.other, support.constant]
+      from: Constant
+    - set: [variable, variable.parameter, support.other.variable]
+      from: CocSemVariable
+    - set: [keyword]
+      from: Statement
+    - set: [entity.name.class, entity.other.inherited-class, support.class]
+      from: CocSemClass
+    - set: [storage.type, storage, support.type]
+      from: Type
+    - set: [entity.name.function, support.function]
+      from: Function
+    - set: [entity.name.tag, entity.other.attribute-name]
+      from: Special
 
 custom:
     - destination: '~/.zsh/scripts/_theme.zsh'
       content: |
-        export PS1=$'%F{{{ Title.fg }}}%f%K{{{ Title.fg }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Title.fg }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
+        export PS1=$'%F{{{ Main.fg }}}%f%K{{{ Main.fg }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Main.fg }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
         export LS_COLORS="fi=1;38;5;{{ NormalText.fg }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
-        export EXA_COLORS="sn=38;5;{{ Title.fg }}:sb=1;38;5;{{ Title.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
+        export EXA_COLORS="sn=38;5;{{ Main.fg }}:sb=1;38;5;{{ Main.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
             --color='fg+:{{ NormalText.fg }}:underline,bg+:-1'
-            --color='hl:{{ Statement.fg }},hl+:{{ Title.fg }}'
-            --color='prompt:{{ Title.fg }}:bold,query:regular:italic'
-            --color='marker:{{ Title.fg }},pointer:{{ Title.fg }},spinner:{{ Title.fg }},info:{{ Statement.fg }}'"
+            --color='hl:{{ Statement.fg }},hl+:{{ Main.fg }}'
+            --color='prompt:{{ Main.fg }}:bold,query:regular:italic'
+            --color='marker:{{ Main.fg }},pointer:{{ Main.fg }},spinner:{{ Main.fg }},info:{{ Statement.fg }}'"
