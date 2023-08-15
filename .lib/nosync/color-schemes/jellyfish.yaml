@@ -166,8 +166,8 @@ vim:
       deco: bold
     - groups: [MoreMsg, Question]
       fg: { dark: '#ffaf00', light: '#ffaf00' }
-    - groups: [Visual]
-      bg: { dark: '#4', light: '#4' }
+    - groups: [Visual, CocMenuSel, CocListLine]
+      bg: { dark: '#58', light: '#58' }
     # not a vim hl group, just so we can reuse it below
     - groups: [NormalText]
       fg: { dark: '#c7c7c7', light: '#111111' }
