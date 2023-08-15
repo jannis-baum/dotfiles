@@ -68,4 +68,10 @@ e.setupDNWatcher('WooshyInputDidDisappear', function()
 end)
 
 
+--------------------------------------------------------------------------------
+-- dark/light mode -------------------------------------------------------------
+e.setupDNWatcher('AppleInterfaceThemeChangedNotification', function()
+    os.execute(os.getenv('HOME') .. '/.config/kitty/sync-theme')
+end)
+
 return e
