@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+kitty_dir="${0:a:h}"
+theme="$kitty_dir/theme.conf"
+
+[[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]] \
+    && target="$kitty_dir/themes/jellyfish-night.conf" \
+    || target="$kitty_dir/themes/jellyfish-day.conf"
+
+rm -rf "$theme"
+ln -s "$target" "$theme"
+
+for pid in "$(ps -x | grep '/Applications/kitty.app/Contents/MacOS/kitty' | grep -v grep | awk '{ print $1 }')"; do
+    kill -SIGUSR1 $pid
+done
