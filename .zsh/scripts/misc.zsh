@@ -40,6 +40,13 @@ function rcols() {
     source $ZDOTDIR/.zshrc
     _si_vim_isrunning && _si_vim_cmd ReloadConfig
 }
+## clone repo in clones dir & cd there
+function gclo() {
+    [[ "$#" != "1" ]] && echo "Repo URL required" && return 1
+    cd ~/_/development/clones
+    git clone "$1"
+    cd $(basename "$_" .git)
+}
 
 # options
 setopt no_beep
