@@ -53,8 +53,8 @@
        [{:sim [:j :k] :modi :any} :escape]
        [{:sim [:k :l] :modi :any} :return_or_enter]
        :inWooshy
-       [{:sim [:k :l] :modi :left_command} [:return_or_enter :!Cf8]]
-       [:!Creturn_or_enter [:return_or_enter :!Cf8]] ]}
+       [{:sim [:k :l] :modi :shift} [:return_or_enter :!Cf8]]
+       [:!Sreturn_or_enter [:return_or_enter :!Cf8]] ]}
 
     {:des "upper row combos: we > up, er > right, yu > scrolla (Cf9), ui > wooshy (Cf8) / ctrl+u, io > switch tabs / ctrl+o" :rules [
        [{:sim [:w :e] :modi :any} :up_arrow]
