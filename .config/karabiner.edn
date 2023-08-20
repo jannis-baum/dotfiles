@@ -66,10 +66,16 @@
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [{:sim [:x :c] :modi :any} :left_arrow]
        [{:sim [:c :v] :modi :any} :down_arrow]
-       [{:sim [:m :comma] :modi :any} :!TStab ["kVNormal" 0]]
-       [{:sim [:m :comma] :modi :any} [:a :!TStab :escape] ["kVNormal" 1]]
-       [{:sim [:comma :period] :modi :any} :!Ttab ["kVNormal" 0]]
-       [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape] ["kVNormal" 1]]]}
+       [:condis :!kVNormal :!inWooshy]
+       [{:sim [:m :comma] :modi :any} :!TStab]
+       [{:sim [:comma :period] :modi :any} :!Ttab]
+       :kVNormal
+       [{:sim [:m :comma] :modi :any} [:a :!TStab :escape]]
+       [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape]]
+       :inWooshy
+       [{:sim [:m :comma] :modi :any} [:!Cf8 :!TStab :!Cf8]]
+       [{:sim [:comma :period] :modi :any} [:!Cf8 :!Ttab :!Cf8]]
+    ]}
 
     ; --------------------------------------------------------------------------
     ; mouse --------------------------------------------------------------------
