@@ -33,7 +33,7 @@
     ; thumb keys ---------------------------------------------------------------
 
     {:des "thumb keys" :rules [
-       [:##spacebar :left_shift nil {:alone [:spacebar]}]
+       [:##spacebar :left_shift [:!inWooshy] {:alone [:spacebar]}]
 
        [:right_command :right_command :kitty {:alone "~/.config/kitty/set-terminal hidden"}]
        [:right_command :right_command :!kitty {:alone "~/.config/kitty/set-terminal active"}]
@@ -90,6 +90,8 @@
        [:!Cm [:!Cf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
        ; make sure menubar hides when we close wooshy
        [{:sim [:u :i] :modi :any} [:!Cf8 [:uri "hammerspoon://hideMenubar"]]]
+       ; SCROLLA
+       [:##spacebar :!Cf9 nil {:afterup :!Cf8}]
     ]}
 
     ; --------------------------------------------------------------------------
