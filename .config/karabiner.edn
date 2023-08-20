@@ -51,10 +51,7 @@
        [{:sim [:s :d] :modi :any} :tab]
        [{:sim [:d :f] :modi :any} :delete_or_backspace]
        [{:sim [:j :k] :modi :any} :escape]
-       [{:sim [:k :l] :modi :any} :return_or_enter]
-       :inWooshy
-       [{:sim [:k :l] :modi :shift} [:return_or_enter :!Cf8]]
-       [:!Sreturn_or_enter [:return_or_enter :!Cf8]] ]}
+       [{:sim [:k :l] :modi :any} :return_or_enter]]}
 
     {:des "upper row combos: we > up, er > right, yu > scrolla (Cf9), ui > wooshy (Cf8) / ctrl+u, io > switch tabs / ctrl+o" :rules [
        [{:sim [:w :e] :modi :any} :up_arrow]
@@ -63,8 +60,6 @@
        :kitty
        [{:sim [:u :i] :modi :any} :!Tu]
        [{:sim [:i :o] :modi :any} :!To]
-       :!kitty
-       [{:sim [:u :i] :modi :any} [:uri "hammerspoon://mouseToMenubar"] nil {:delayed {:invoked :!Cf8 :canceled :!Cf8} :params {:delay 200}}]
        :safari
        [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]]}
 
@@ -75,6 +70,18 @@
        [{:sim [:m :comma] :modi :any} [:a :!TStab :escape] ["kVNormal" 1]]
        [{:sim [:comma :period] :modi :any} :!Ttab ["kVNormal" 0]]
        [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape] ["kVNormal" 1]]]}
+
+    ; --------------------------------------------------------------------------
+    ; mouse --------------------------------------------------------------------
+
+    {:des "mouse mode" :rules [
+       :!kitty
+       [{:sim [:u :i] :modi :any} :!Cf8]
+       :inWooshy
+       ; persistent wooshy
+       [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
+       [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
+    ]}
 
     ; --------------------------------------------------------------------------
     ; layers -------------------------------------------------------------------
