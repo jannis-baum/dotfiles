@@ -88,19 +88,23 @@
          ; activation
          [{:sim [:u :i] :modi :any} :!Cf8]
        :inWooshy
-         ; PERSISTENT WOOSHY
+         ; persistent wooshy ---------------------------------------------------
          [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
          [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
-         ; REFRESH
-         [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
-         ; MENU BAR
+         ; menu bar ------------------------------------------------------------
          ; close & reopen wooshy to refresh, seems there's a  bug in karabiner
          ; so we have to use right command on reactivation
          [:!Cm [:!Cf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
          ; make sure menubar hides when we close wooshy
          [{:sim [:u :i] :modi :any} [:!Cf8 [:uri "hammerspoon://hideMenubar"]]]
-         ; SCROLLA
+         ; misc ----------------------------------------------------------------
+         ; refresh
+         [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
+         ; scroll mode (scrolla)
          [:##spacebar :!Cf9 nil {:afterup :!Cf8}]
+       :inScrolla
+         [:b :!Sg]
+         [:g [:g :g]]
     ]}
 
     ; --------------------------------------------------------------------------
