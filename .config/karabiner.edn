@@ -42,7 +42,8 @@
        [:left_command :left_command [["kVNormal" 1]] {:alone [:a [:!Cf7]]}]
        
        [:left_option :left_option ["language" 0] {:alone [["language" 1]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
-       [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]]}
+       [:left_option :left_option ["language" 1] {:alone [["language" 2]] :delayed {:invoked ["language" 0]} :params {:delay 500}}]
+    ]}
 
     ; --------------------------------------------------------------------------
     ; combo keys ---------------------------------------------------------------
@@ -51,17 +52,19 @@
        [{:sim [:s :d] :modi :any} :tab]
        [{:sim [:d :f] :modi :any} :delete_or_backspace]
        [{:sim [:j :k] :modi :any} :escape]
-       [{:sim [:k :l] :modi :any} :return_or_enter]]}
+       [{:sim [:k :l] :modi :any} :return_or_enter]
+    ]}
 
     {:des "upper row combos: we > up, er > right, yu > scrolla (Cf9), ui > wooshy (Cf8) / ctrl+u, io > switch tabs / ctrl+o" :rules [
        [{:sim [:w :e] :modi :any} :up_arrow]
        [{:sim [:e :r] :modi :any} :right_arrow]
        [{:sim [:y :u] :modi :any} :!Cf9]
        :kitty
-       [{:sim [:u :i] :modi :any} :!Tu]
-       [{:sim [:i :o] :modi :any} :!To]
+         [{:sim [:u :i] :modi :any} :!Tu]
+         [{:sim [:i :o] :modi :any} :!To]
        :safari
-       [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]]}
+         [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]
+    ]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [{:sim [:x :c] :modi :any} :left_arrow]
@@ -70,36 +73,34 @@
        [{:sim [:m :comma] :modi :any} :!TStab]
        [{:sim [:comma :period] :modi :any} :!Ttab]
        :kVNormal
-       [{:sim [:m :comma] :modi :any} [:a :!TStab :escape]]
-       [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape]]
+         [{:sim [:m :comma] :modi :any} [:a :!TStab :escape]]
+         [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape]]
        :inWooshy
-       [{:sim [:m :comma] :modi :any} [:!Cf8 :!TStab :!Cf8]]
-       [{:sim [:comma :period] :modi :any} [:!Cf8 :!Ttab :!Cf8]]
+         [{:sim [:m :comma] :modi :any} [:!Cf8 :!TStab :!Cf8]]
+         [{:sim [:comma :period] :modi :any} [:!Cf8 :!Ttab :!Cf8]]
     ]}
 
     ; --------------------------------------------------------------------------
     ; mouse --------------------------------------------------------------------
 
     {:des "mouse mode" :rules [
-       ; outside of wooshy -----------------------------------------------------
        [:condis :!kitty :!inWooshy]
-       ; activation
-       [{:sim [:u :i] :modi :any} :!Cf8]
-       ; in wooshy -------------------------------------------------------------
+         ; activation
+         [{:sim [:u :i] :modi :any} :!Cf8]
        :inWooshy
-       ; PERSISTENT WOOSHY
-       [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
-       [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
-       ; REFRESH
-       [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
-       ; MENU BAR
-       ; close & reopen wooshy to refresh, seems there's a  bug in karabiner so
-       ; we have to use right command on reactivation
-       [:!Cm [:!Cf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
-       ; make sure menubar hides when we close wooshy
-       [{:sim [:u :i] :modi :any} [:!Cf8 [:uri "hammerspoon://hideMenubar"]]]
-       ; SCROLLA
-       [:##spacebar :!Cf9 nil {:afterup :!Cf8}]
+         ; PERSISTENT WOOSHY
+         [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
+         [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
+         ; REFRESH
+         [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
+         ; MENU BAR
+         ; close & reopen wooshy to refresh, seems there's a  bug in karabiner
+         ; so we have to use right command on reactivation
+         [:!Cm [:!Cf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
+         ; make sure menubar hides when we close wooshy
+         [{:sim [:u :i] :modi :any} [:!Cf8 [:uri "hammerspoon://hideMenubar"]]]
+         ; SCROLLA
+         [:##spacebar :!Cf9 nil {:afterup :!Cf8}]
     ]}
 
     ; --------------------------------------------------------------------------
@@ -125,7 +126,8 @@
          [:h :!S5] [:j :hyphen] [:k :!S9] [:l :!S0]
          ; bottom row
          [:z :vk_none] [:x :!Sequal_sign] [:c :equal_sign] [:v :!S1] [:b :!S2]
-         [:n :!S7] [:m :!Shyphen] [:comma :!Sopen_bracket] [:period :!Sclose_bracket] [:slash :vk_none]]}
+         [:n :!S7] [:m :!Shyphen] [:comma :!Sopen_bracket] [:period :!Sclose_bracket] [:slash :vk_none]
+    ]}
 
     {:des "number layer" :rules [
        :numbers
@@ -136,7 +138,8 @@
          ; left half disabled
          [:q :vk_none] [:w :vk_none] [:e :vk_none] [:r :vk_none] [:t :vk_none]
          [:a :vk_none] [:s :vk_none] [:d :vk_none] [:f :vk_none] [:g :vk_none]
-         [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]]}
+         [:x :vk_none] [:c :vk_none] [:v :vk_none] [:b :vk_none]
+    ]}
 
     {:des "gui layer" :rules [
        :gui
@@ -151,7 +154,8 @@
          ; right half disabled
          [:y :vk_none] [:u :vk_none] [:i :vk_none] [:o :vk_none] [:p :vk_none]
          [:h :vk_none] [:j :vk_none] [:k :vk_none] [:l :vk_none] [:semicolon :vk_none]
-         [:n :vk_none] [:m :vk_none] [:comma :vk_none] [:period :vk_none]]}
+         [:n :vk_none] [:m :vk_none] [:comma :vk_none] [:period :vk_none]
+    ]}
 
     {:des "extended control layer" :rules [
        :ctrl-l
@@ -173,7 +177,8 @@
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
          ; bottom row
          [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
-         [:n :!Tn] [:m :!Tm] [:comma :!Tcomma] [:period :!Tperiod] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]]}
+         [:n :!Tn] [:m :!Tm] [:comma :!Tcomma] [:period :!Tperiod] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
+    ]}
 
     ; --------------------------------------------------------------------------
     ; languages ----------------------------------------------------------------
@@ -192,27 +197,32 @@
         [:e [:!Oe :e ["language" 0]]]   [:!Se [:!Oe :!Se ["language" 0]]]
         [:i [:!Oe :i ["language" 0]]]   [:!Si [:!Oe :!Si ["language" 0]]]
         [:o [:!Oe :o ["language" 0]]]   [:!So [:!Oe :!So ["language" 0]]]
-        [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]]}
+        [:u [:!Oe :u ["language" 0]]]   [:!Su [:!Oe :!Su ["language" 0]]]
+    ]}
 
     {:des "caps > escape / control s (kitty), held > control" :rules [
         [:##caps_lock :left_control :!kitty {:alone [:escape]}]
-        [:##caps_lock :left_control :kitty {:alone [:!Ts]}]]}
+        [:##caps_lock :left_control :kitty {:alone [:!Ts]}]
+    ]}
 
     ; --------------------------------------------------------------------------
     ; kV mods ------------------------------------------------------------------
     {:des "normal mode Y > y$" :rules [
       [:condis ["kVNormal" 1]]
-        [:!Sy [:y :!S4]]]}
+        [:!Sy [:y :!S4]]
+    ]}
 
     {:des "safari normal mode" :rules [
       [:condis :safari ["kVNormal" 1]]
         [:q :!Ct]
-        [:period :!Cl]]}
+        [:period :!Cl]
+    ]}
 
     {:des "xcode normal mode" :rules [
       [:condis :xcode ["kVNormal" 1] :ctrl-l]
         [:o :!CSo]
       [:condis :xcode ["kVNormal" 1] :ctrl-r]
-        [:o :!CSo]]}
+        [:o :!CSo]
+    ]}
   ]
 }
