@@ -3,13 +3,13 @@
 # h highlight-groups
 
 colors:
-  - set: Text
-    fg: { dark: '#c7c7c7', light: '#111111' }
+  Text: { dark: '#c7c7c7', light: '#111111' }
+  Main: { dark: '#d7afff', light: '#d7afff' }
+  Cursor: { dark: '#ffb472', light: '#f37c13' }
+highlights:
   - set: Main
-    fg: { dark: '#d7afff', light: '#d7afff' }
+    fg: Main
     deco: bold
-  - set: Cursor
-    bg: { dark: '#ffb472', light: '#f37c13' }
 
 kitty:
   destinations:
@@ -20,17 +20,17 @@ kitty:
     ## author: Jannis Baum
 
     #: The basic colors
-    foreground                      {{ Text.fg }}
+    foreground                      {{ Text }}
     background                      #000000|||#eeeeee
     selection_foreground            {{ Search.fg }}
     selection_background            {{ Search.bg }}
 
     #: Cursor colors
-    cursor                          {{ Cursor.bg }}
+    cursor                          {{ Cursor }}
     cursor_text_color               #000000|||#eeeeee
 
     #: URL underline color when hovering with mouse
-    url_color                       {{ Cursor.bg }}
+    url_color                       {{ Cursor }}
 
     #: kitty window border colors and terminal bell colors
     active_border_color             #777777|||#999999
@@ -39,7 +39,7 @@ kitty:
     visual_bell_color               none
 
     #: Tab bar colors
-    active_tab_foreground           {{ Main.fg }}
+    active_tab_foreground           {{ Main }}
     active_tab_background           #000000|||#eeeeee
     inactive_tab_foreground         #999999|||#777777
     inactive_tab_background         #000000|||#eeeeee
@@ -106,7 +106,7 @@ vim:
     - set: [Number]
       fg: { dark: '#ffac8f', light: '#ffac8f' }
     - set: [CocSemVariable]
-      fg: { dark: '#d7afff', light: '#d7afff' }
+      fg: Main
     # language
     - set: [Statement, Preproc, Keyword]
       fg: { dark: '#afd7ff', light: '#afd7ff' }
@@ -132,11 +132,9 @@ vim:
       ul: { dark: '#ffaf00', light: '#0' }
     - set: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
       deco: undercurl
-      ul: { dark: '#afafff', light: '#afafff' }
+      ul: { dark: '#afafff', light: '#afafff' } 
     - set: [ErrorMsg]
       fg: { dark: '#ff5f5f', light: '#ff5f5f' }
-    - set: [Type]
-      fg: { dark: '#afafff', light: '#afafff' }
     # ui -----------------------------------------------------------------------
     - set: [SignColumn]
       fg: { dark: '#d0', light: '#d0' }
@@ -146,8 +144,7 @@ vim:
       fg: { dark: '#58', light: '#58' }
       deco: bold
     - set: [TabLineSel]
-      fg: { dark: '#d7afff', light: '#d7afff' }
-      deco: bold
+      from: Main
     - set: [FoldColumn]
     - set: [Folded]
       fg: { dark: '#58', light: '#58' }
@@ -167,10 +164,10 @@ vim:
       ul: { dark: '#d0', light: '#d0' }
     - set: [Sneak]
       fg: { dark: '#26', light: '#26' }
-      bg: { dark: '#d7afff', light: '#d7afff' }
+      bg: Main
     - set: [SneakLabel]
       fg: { dark: '#26', light: '#26' }
-      bg: { dark: '#d7afff', light: '#d7afff' }
+      bg: Main
       deco: bold
     - set: [MoreMsg, Question]
       fg: { dark: '#ffaf00', light: '#ffaf00' }
@@ -206,11 +203,11 @@ text-mate:
 custom:
     - destination: '~/.zsh/scripts/_theme.zsh'
       content: |
-        export PS1=$'%F{{{ Main.fg }}}%f%K{{{ Main.fg }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Main.fg }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
-        export LS_COLORS="fi=1;38;5;{{ Text.fg }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
-        export EXA_COLORS="sn=38;5;{{ Main.fg }}:sb=1;38;5;{{ Main.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
+        export PS1=$'%F{{{ Main }}}%f%K{{{ Main }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Main }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
+        export LS_COLORS="fi=1;38;5;{{ Text }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
+        export EXA_COLORS="sn=38;5;{{ Main }}:sb=1;38;5;{{ Main.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
-            --color='fg+:{{ Text.fg }}:underline,bg+:-1'
-            --color='hl:{{ Statement.fg }},hl+:{{ Main.fg }}'
-            --color='prompt:{{ Main.fg }}:bold,query:regular:italic'
-            --color='marker:{{ Main.fg }},pointer:{{ Main.fg }},spinner:{{ Main.fg }},info:{{ Statement.fg }}'"
+            --color='fg+:{{ Text }}:underline,bg+:-1'
+            --color='hl:{{ Statement.fg }},hl+:{{ Main }}'
+            --color='prompt:{{ Main }}:bold,query:regular:italic'
+            --color='marker:{{ Main }},pointer:{{ Main }},spinner:{{ Main }},info:{{ Statement.fg }}'"
