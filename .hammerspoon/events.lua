@@ -49,7 +49,7 @@ e.setupKarabinerDNs('ScrollaDidEngage', 'ScrollaDidDisengage', 'inScrolla')
 
 --------------------------------------------------------------------------------
 -- wooshy ----------------------------------------------------------------------
-hs.urlevent.bind('mouseToMenubar', function()
+hs.urlevent.bind('showMenubar', function()
     pos = hs.mouse.absolutePosition()
     event = hs.eventtap.event.newEvent()
     event:setType(hs.eventtap.event.types.mouseMoved)
@@ -57,16 +57,15 @@ hs.urlevent.bind('mouseToMenubar', function()
     event:post()
 end)
 
-e.setupDNWatcher('WooshyInputDidDisappear', function()
+hs.urlevent.bind('hideMenubar', function()
     pos = hs.mouse.absolutePosition()
-    if pos.y < 24 then
-        event = hs.eventtap.event.newEvent()
-        event:setType(hs.eventtap.event.types.mouseMoved)
-        event:location({ x=pos.x, y=pos.y + 100 })
-        event:post()
-    end
-end)
+    if pos.y > 24 then return end
 
+    event = hs.eventtap.event.newEvent()
+    event:setType(hs.eventtap.event.types.mouseMoved)
+    event:location({ x=pos.x, y=pos.y + 100 })
+    event:post()
+end)
 
 --------------------------------------------------------------------------------
 -- dark/light mode -------------------------------------------------------------

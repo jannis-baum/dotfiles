@@ -75,12 +75,17 @@
     ; mouse --------------------------------------------------------------------
 
     {:des "mouse mode" :rules [
-       :!kitty
+       ; activation
+       [:condis :!kitty :!inWooshy]
        [{:sim [:u :i] :modi :any} :!Cf8]
        :inWooshy
        ; persistent wooshy
        [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
        [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
+       ; menu bar (close & reopen wooshy to refresh)
+       [:!Cm [:!Cf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
+       ; make sure menubar hides when we close wooshy
+       [{:sim [:u :i] :modi :any} [:!Cf8 [:uri "hammerspoon://hideMenubar"]]]
     ]}
 
     ; --------------------------------------------------------------------------
