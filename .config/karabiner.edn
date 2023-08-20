@@ -84,6 +84,8 @@
        ; PERSISTENT WOOSHY
        [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
        [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Cf8} :params {:delay 200}}]
+       ; REFRESH
+       [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
        ; MENU BAR
        ; close & reopen wooshy to refresh, seems there's a  bug in karabiner so
        ; we have to use right command on reactivation
