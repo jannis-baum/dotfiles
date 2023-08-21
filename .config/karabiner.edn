@@ -101,7 +101,7 @@
          ; refresh
          [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
          ; scroll mode (scrolla)
-         [:##spacebar :!Cf9 nil {:afterup :!Cf8}]
+         [:##spacebar :!Cf9 nil {:afterup :!Cf8 :alone :spacebar}]
        :inScrolla
          [:b :!Sg]
          [:g [:g :g]]
