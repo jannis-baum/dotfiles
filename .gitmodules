@@ -80,6 +80,6 @@
 [submodule ".vim/pack/plugins/opt/vim-sneak"]
 	path = .vim/pack/plugins/opt/vim-sneak
 	url = https://github.com/justinmk/vim-sneak.git
-[submodule ".lib/nosync/color-schemes/generator"]
-	path = .lib/nosync/color-schemes/generator
-	url = https://github.com/jannis-baum/dynamic-term-colors.git
+[submodule ".lib/nosync/color-schemes/chameleon"]
+	path = .lib/nosync/color-schemes/chameleon
+	url = https://github.com/jannis-baum/Chameleon.git

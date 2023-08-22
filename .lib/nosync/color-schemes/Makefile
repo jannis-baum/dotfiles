@@ -5,12 +5,12 @@ static: link generate
 
 .PHONY: generate
 generate:
-	@generator/generate jellyfish.yaml
+	@chameleon/generate jellyfish.yaml
 
 .PHONY: link
 link:
 	@rm -rf ~/.bin/parse-colors
-	@ln -s $(CURDIR)/generator/parse-colors ~/.bin/parse-colors
+	@ln -s $(CURDIR)/chameleon/parse-colors ~/.bin/parse-colors
 
 .PHONY: load
 load: generate
