@@ -72,15 +72,24 @@
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
        [{:sim [:x :c] :modi :any} :left_arrow]
        [{:sim [:c :v] :modi :any} :down_arrow]
-       [:condis :!kVNormal :!inWooshy]
-       [{:sim [:m :comma] :modi :any} :!TStab]
-       [{:sim [:comma :period] :modi :any} :!Ttab]
-       :kVNormal
+       [:condis :!kVNormal :!inWooshy :!xcode]
+         [{:sim [:m :comma] :modi :any} :!TStab]
+         [{:sim [:comma :period] :modi :any} :!Ttab]
+       [:condis :kVNormal :!xcode]
          [{:sim [:m :comma] :modi :any} [:a :!TStab :escape]]
          [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape]]
-       :inWooshy
+       [:condis :inWooshy :!xcode]
          [{:sim [:m :comma] :modi :any} [:!Cf8 :!TStab :!Cf8]]
          [{:sim [:comma :period] :modi :any} [:!Cf8 :!Ttab :!Cf8]]
+       [:condis :!kVNormal :!inWooshy :xcode]
+         [{:sim [:m :comma] :modi :any} :!CSopen_bracket]
+         [{:sim [:comma :period] :modi :any} :!CSclose_bracket]
+       [:condis :kVNormal :xcode]
+         [{:sim [:m :comma] :modi :any} [:a :!CSopen_bracket :escape]]
+         [{:sim [:comma :period] :modi :any} [:a :!CSclose_bracket :escape]]
+       [:condis :inWooshy :!xcode]
+         [{:sim [:m :comma] :modi :any} [:!Cf8 :!CSopen_bracket :!Cf8]]
+         [{:sim [:comma :period] :modi :any} [:!Cf8 :!CSclose_bracket :!Cf8]]
     ]}
 
     ; --------------------------------------------------------------------------
