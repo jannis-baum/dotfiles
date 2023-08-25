@@ -65,6 +65,8 @@
          [{:sim [:i :o] :modi :any} :!To]
        :safari
          [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]
+       :xcode
+         [{:sim [:i :o] :modi :any} :!CSo]
     ]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
@@ -221,13 +223,6 @@
       [:condis :safari ["kVNormal" 1]]
         [:q :!Ct]
         [:period :!Cl]
-    ]}
-
-    {:des "xcode normal mode" :rules [
-      [:condis :xcode ["kVNormal" 1] :ctrl-l]
-        [:o :!CSo]
-      [:condis :xcode ["kVNormal" 1] :ctrl-r]
-        [:o :!CSo]
     ]}
   ]
 }
