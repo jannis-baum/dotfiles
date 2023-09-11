@@ -152,6 +152,9 @@ vim:
     - set: [VertSplit]
       fg: { dark: '#26', light: '#26' }
       deco: bold
+    - set: [QuickScopePrimary, QuickScopeSecondary]
+      deco: underdouble
+      ul: Cursor
     # diff
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
