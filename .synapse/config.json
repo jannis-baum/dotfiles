@@ -4,6 +4,7 @@
     "panel": {
         "keepCentered": true
     },
+    "PATH": ["/opt/homebrew/bin"],
     "statusInfo": {
         "placeholder": {
             "font": "Poiret One",
