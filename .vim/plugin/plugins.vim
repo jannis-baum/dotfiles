@@ -18,7 +18,6 @@ packadd fugitive
 
 packadd vim-commentary
 packadd quick-scope
-packadd vim-sneak
 
 packadd slime
 let g:slime_target = "vimterminal"
