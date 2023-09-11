@@ -77,9 +77,6 @@
 [submodule ".vim/pack/plugins/opt/vivify.vim"]
 	path = .vim/pack/plugins/opt/vivify.vim
 	url = https://github.com/jannis-baum/vivify.vim.git
-[submodule ".vim/pack/plugins/opt/vim-sneak"]
-	path = .vim/pack/plugins/opt/vim-sneak
-	url = https://github.com/justinmk/vim-sneak.git
 [submodule ".lib/nosync/color-schemes/chameleon"]
 	path = .lib/nosync/color-schemes/chameleon
 	url = https://github.com/jannis-baum/Chameleon.git

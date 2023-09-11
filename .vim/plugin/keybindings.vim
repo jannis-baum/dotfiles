@@ -29,9 +29,6 @@ nnoremap <Left> <C-w><C-h>
 " scrolling
 nnoremap <silent> <leader>j :execute 'normal! ' winheight(0) / 3 . 'j'<CR>
 nnoremap <silent> <leader>k :execute 'normal! ' winheight(0) / 3 . 'k'<CR>
-" sneak
-map <leader>f <Plug>Sneak_s
-map <leader>F <Plug>Sneak_S
 
 " TEXT EDITING -----------------------------------------------------------------
 " x & s delete without copy
