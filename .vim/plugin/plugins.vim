@@ -17,6 +17,7 @@ inoremap <silent> <right> <esc>:call AutoPairsJump()<cr>a
 packadd fugitive
 
 packadd vim-commentary
+packadd quick-scope
 packadd vim-sneak
 
 packadd slime
