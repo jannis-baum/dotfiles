@@ -16,3 +16,15 @@ function large-files() {
     | fzf --ansi -d ' ' \
         --bind 'return:execute(open $(dirname {3..}))'
 }
+
+# select makefile target
+function mkf() {
+    # list make targets: adjusted from https://stackoverflow.com/a/26339924
+    local target=$(make -pRrq : 2>/dev/null \
+        | awk -v RS= -F: '/(^|\n)# Files(\n|$)/,/(^|\n)# Finished Make data base/ {if ($1 !~ "^[#.]") {print $1}}' \
+        | sort \
+        | grep -E -v -e '^[^[:alnum:]]' -e '^$@$' \
+        | fzf)
+    [[ -z "$target" ]] && return
+    make "$target"
+}
