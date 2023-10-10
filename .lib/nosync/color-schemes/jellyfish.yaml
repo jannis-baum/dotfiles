@@ -90,7 +90,7 @@ vim:
   highlight:
     # syntax -------------------------------------------------------------------
     # gray
-    - set: [Comment]
+    - set: [Comment, CocFloating]
       fg: { dark: '#94', light: '#94' }
       deco: italic
     - set: [Ignore]
@@ -155,7 +155,6 @@ vim:
     - set: [QuickScopePrimary, QuickScopeSecondary]
       deco: underdouble
       ul: Cursor
-    # diff
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
     # misc ---------------------------------------------------------------------
