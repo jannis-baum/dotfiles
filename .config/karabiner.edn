@@ -101,8 +101,8 @@
          [{:sim [:u :i] :modi :any} :!Cf8]
        :inWooshy
          ; persistent wooshy ---------------------------------------------------
-         [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Qf8} :params {:delay 200}}]
-         [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Qf8} :params {:delay 200}}]
+         ; [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Qf8} :params {:delay 200}}]
+         ; [:##return_or_enter        :return_or_enter nil {:delayed {:invoked :!Qf8} :params {:delay 200}}]
          ; menu bar ------------------------------------------------------------
          ; close & reopen wooshy to refresh, seems there's a  bug in karabiner
          ; so we have to use right command on reactivation
@@ -113,7 +113,7 @@
          ; refresh
          [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
          ; scroll mode (scrolla)
-         [:##spacebar :!Cf9 nil {:afterup :!Cf8 :alone :spacebar}]
+         ; [:##spacebar :!Cf9 nil {:afterup :!Cf8 :alone :spacebar}]
        :inScrolla
          [:b :!Sg]
          [:g [:g :g]]
