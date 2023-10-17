@@ -7,7 +7,6 @@ export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-te
 export FZF_DEFAULT_OPTS="
     --height 60% --reverse --no-info --cycle
     --preview-window='right,60%,wrap,hidden,border-sharp'
-    --preview 'bat --style=numbers --color=always {}'
     --prompt=' ╰➤ '
     --pointer='→'
     --bind 'tab:down'
