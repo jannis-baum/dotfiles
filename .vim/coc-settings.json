@@ -9,6 +9,7 @@
     "git.changeRemovedSign.hlGroup": "SignColumn",
 
     "python.pythonPath": "python3",
+    "r.lsp.diagnostics": false,
 
     "eslint.autoFixOnSave": true,
     "typescript.preferences.importModuleSpecifier": "relative",
