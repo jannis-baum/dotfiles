@@ -6,3 +6,4 @@ figma\.com
 stackoverflow\.com
 apple\.com
 telegram\.org
+uni-potsdam\.de
