@@ -1,7 +1,11 @@
 function! s:RenderRMarkdown()
-    let l:out = substitute(system('mktemp'), '\n', '', 'g') . '.html'
-    call system('R -e "library(rmarkdown); render(''' . expand('%:p') . ''', output_file = ''' . l:out . ''')"')
-    call system('open ' . l:out)
+    if !exists('g:rmd_out')
+        let g:rmd_out = substitute(system('mktemp'), '\n', '', 'g') . '.html'
+    endif
+
+    write
+    call system('R -e "library(rmarkdown); render(''' . expand('%:p') . ''', output_file = ''' . g:rmd_out . ''')"')
+    call system('open ' . g:rmd_out)
 endfunction
 
 command! RMD call s:RenderRMarkdown()
