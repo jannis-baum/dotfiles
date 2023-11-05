@@ -33,7 +33,7 @@
     ; thumb keys ---------------------------------------------------------------
 
     {:des "thumb keys" :rules [
-       [:##spacebar :left_shift [:!inWooshy] {:alone [:spacebar]}]
+       [:##spacebar :left_shift nil {:alone [:spacebar]}]
 
        [:right_command :right_command :kitty {:alone "~/.config/kitty/set-terminal hidden"}]
        [:right_command :right_command :!kitty {:alone "~/.config/kitty/set-terminal active"}]
