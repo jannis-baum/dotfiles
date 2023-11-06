@@ -35,3 +35,11 @@ function gclo() {
     git clone "$1"
     cd $(basename "$_" .git)
 }
+
+function mda() {
+    [[ "$#" != "1" ]] && echo "Markdown file required" && return 1
+    local export_f="$(mktemp)"
+    mdanki --config ~/.mdanki/settings.json "$1" "$export_f"
+    curl localhost:8765 -X POST -d \
+        '{ "action": "importPackage", "version": 6, "params": { "path": "'"$export_f"'" } }'
+}
