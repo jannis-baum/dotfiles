@@ -1,16 +1,5 @@
 # command to list directory contents in preview window (for fzf-dotfiles)
 FZFDF_LS="$(which l | sed 's/^l: aliased to //') {}"
-FZFDF_IMG='
-data=$(kitty icat \
-    --clear \
-    --transfer-mode=memory \
-    --align center \
-    --stdin=no \
-    --unicode-placeholder \
-    --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@$((${COLUMNS} - ${FZF_PREVIEW_COLUMNS}))x0 \
-    {})
-printf "$(sed "s/\x1b7.*$//" <<< $data)"
-printf "\x1b7$(sed "s/^.*\x1b7//" <<< $data)" 1> /dev/tty'
 
 # find large & old files
 function large-files() {
