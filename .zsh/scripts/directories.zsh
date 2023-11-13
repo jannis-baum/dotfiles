@@ -33,20 +33,16 @@ alias t="ta --git-ignore --level=5"
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
 }
-# list newest (date changed) files
-function sn() {
-    if [[ $# -eq 1 ]]; then
-        _exa --sort=oldest $1
-    else
-        _exa --sort=oldest --oneline --color=always $2 | head -n $1
-    fi
-}
 # list newest files with absolute paths for piping
 function sna() {
     local count=1
     local dir="."
-    [[ $# -eq 1 ]] && dir=$1
-    [[ $# -eq 2 ]] && count=$1 && dir=$2
-    local entries=$(cd $dir && P=$(pwd); ls -t | head -n $count | sed "s,^,'$P/," | sed "s,$,',")
-    echo $entries
+    [[ $# -eq 1 ]] && dir="$1"
+    [[ $# -eq 2 ]] && count="$1" && dir="$2"
+
+    echo "$(\
+        SI_VIM_DISABLED=1
+        cd "$dir"; \
+        entries=$(exa --sort=oldest | head -n "$count"); \
+        echo ${(F)${(f)entries}:P})"
 }
