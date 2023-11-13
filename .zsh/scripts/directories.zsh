@@ -46,3 +46,4 @@ function sna() {
         entries=$(exa --sort=oldest | head -n "$count"); \
         echo ${(F)${(f)entries}:P})"
 }
+alias downl="sna ~/Downloads"
