@@ -51,6 +51,8 @@ call s:oviamap('t', '[')
 " (delete word before cursor)
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
+" forward delete in insert mode
+inoremap <left> <delete>
 
 " SPECIAL CHARACTERS -----------------------------------------------------------
 "   spanish tildes
