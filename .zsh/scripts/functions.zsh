@@ -36,7 +36,9 @@ function gclo() {
     cd $(basename "$_" .git)
 }
 
-# knit & open rmarkdown file
+# rmarkdown
+# 1 arg: knit $1 to temporary file & open
+# 2 args: knit to $2
 function rmd() {
     if ! test -f "$1"; then
         echo "File required"
@@ -44,9 +46,10 @@ function rmd() {
     fi
 
     local f="$(realpath "$1")"
-    local out="$(mktemp).html"
+    [[ -z "$2" ]] && local out="$(mktemp).html" || local out="$2"
+
     R -e "library(rmarkdown); render('$f', output_file = '$out')"
-    open "$out"
+    [[ -z "$2" ]] && open "$out"
 }
 
 function mda() {
