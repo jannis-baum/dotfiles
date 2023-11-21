@@ -36,6 +36,19 @@ function gclo() {
     cd $(basename "$_" .git)
 }
 
+# knit & open rmarkdown file
+function rmd() {
+    if ! test -f "$1"; then
+        echo "File required"
+        exit 1
+    fi
+
+    local f="$(realpath "$1")"
+    local out="$(mktemp).html"
+    R -e "library(rmarkdown); render('$f', output_file = '$out')"
+    open "$out"
+}
+
 function mda() {
     [[ "$#" != "1" ]] && echo "Markdown file required" && return 1
     local export_f="$(mktemp)"
@@ -43,3 +56,4 @@ function mda() {
     curl localhost:8765 -X POST -d \
         '{ "action": "importPackage", "version": 6, "params": { "path": "'"$export_f"'" } }'
 }
+
