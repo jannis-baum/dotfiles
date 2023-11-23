@@ -199,7 +199,7 @@
     ; languages ----------------------------------------------------------------
 
     {:des "language character layers" :rules [
-      ; german (command)
+      ; german
       [:condis ["language" 1]]
         [:s [:!Os ["language" 0]]]
         [:a [:!Ou :a ["language" 0]]]   [:!Sa [:!Ou :!Sa ["language" 0]]]
