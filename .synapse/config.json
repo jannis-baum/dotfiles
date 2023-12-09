@@ -17,6 +17,10 @@
                 {
                     "updateFrequency": 1,
                     "main": { "path": "/bin/date", "args": ["+%l:%M"] },
+                    "alt": { "path": "/bin/date", "args": ["+%l:%M:%S"] }
+                },
+                {
+                    "updateFrequency": 1,
                     "alt": { "path": "/bin/date", "args": ["+%m/%d"] }
                 }
             ]
