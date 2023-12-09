@@ -17,7 +17,8 @@
     :xcode ["^com\\.apple\\.dt\\.Xcode$"]
     :kitty ["^net\\.kovidgoyal\\.kitty$"]
     :synapse ["^com\\jannis\\.synapse$"]
-    :safari ["^com\\.apple\\.Safari$"]}
+    :safari ["^com\\.apple\\.Safari$"]
+    :citrix ["com.citrix.receiver.icaviewer.mac"]}
 
   :modifiers {
     :any {:optional [:fn :left_command :left_control :left_option :left_shift]}}
@@ -216,8 +217,9 @@
     ]}
 
     {:des "caps > escape / control s (kitty), held > control" :rules [
-        [:##caps_lock :left_control :!kitty {:alone [:escape]}]
+        [:##caps_lock :left_control [:!kitty :!citrix] {:alone [:escape]}]
         [:##caps_lock :left_control :kitty {:alone [:!Ts]}]
+        [:##caps_lock :left_control :citrix {:alone [:!Ts]}]
     ]}
 
     ; --------------------------------------------------------------------------
