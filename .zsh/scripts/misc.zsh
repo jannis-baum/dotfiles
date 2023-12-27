@@ -6,6 +6,7 @@ alias ssh='kitty +kitten ssh'
 alias trm='trash -F'
 alias g='gsi'
 alias mue="~/.lib/markup-export/main"
+alias stitch-jpegs="cat *.jpeg | ffmpeg -f image2pipe -vcodec mjpeg -i - -vcodec libx264 out.mp4"
 
 # options
 setopt no_beep
