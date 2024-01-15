@@ -83,3 +83,6 @@
 [submodule ".vim/pack/plugins/opt/quick-scope"]
 	path = .vim/pack/plugins/opt/quick-scope
 	url = https://github.com/unblevable/quick-scope.git
+[submodule ".zsh/plugins-other/fzf-tab-completion"]
+	path = .zsh/plugins-other/fzf-tab-completion
+	url = https://github.com/lincheney/fzf-tab-completion.git

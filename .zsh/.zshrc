@@ -19,3 +19,5 @@ for d in $ZDOTDIR/scripts $ZDOTDIR/plugins $HOME/.zv; do
         done
     fi
 done
+
+source $ZDOTDIR/plugins-other/plugins.zsh
