@@ -1,8 +1,6 @@
 # hidden files & dirs
 setopt globdots
 
-autoload -U compinit; compinit
-
 # menu takes up less space
 setopt list_packed
 # show selection

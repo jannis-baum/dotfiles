@@ -1,3 +1,5 @@
+# completion
+autoload -U compinit; compinit
 # vi keybindings
 bindkey -v
 
