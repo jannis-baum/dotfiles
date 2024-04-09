@@ -23,10 +23,10 @@ alias 7='cd -7'
 alias 8='cd -8'
 alias 9='cd -9'
 
-alias s="exa --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
-alias l="exa --long --all --git --no-permissions --no-user --ignore-glob='.DS_Store' --group-directories-first --time-style=iso"
+alias s="eza --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
+alias l="eza --long --all --git --no-permissions --no-user --ignore-glob='.DS_Store' --group-directories-first --time-style=iso"
 alias ts="s --long --no-user --no-permissions --no-time --tree --group-directories-first"
-alias ta="exa --long --no-user --no-permissions --no-filesize --no-time --git --tree --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
+alias ta="eza --long --no-user --no-permissions --no-filesize --no-time --git --tree --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
 alias t="ta --git-ignore --level=5"
 
 # make and change to directory
@@ -43,7 +43,7 @@ function sna() {
     echo "$(\
         SI_VIM_DISABLED=1
         cd "$dir"; \
-        entries=$(exa --sort=oldest | head -n "$count"); \
+        entries=$(eza --sort=oldest | head -n "$count"); \
         echo ${(F)${(f)entries}:P})"
 }
 alias downl="sna ~/Downloads"

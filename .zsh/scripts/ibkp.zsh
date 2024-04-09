@@ -39,7 +39,7 @@ ibkp() {
 
     [[ -n "$should_print" ]] && echo $backup_dir
     [[ -n "$should_tree" ]] && \
-        exa --long --no-user --no-permissions --no-time \
+        eza --long --no-user --no-permissions --no-time \
             --tree --all --group-directories-first \
             --ignore-glob='.git|node_modules|.DS_Store' \
             $backup_dir
