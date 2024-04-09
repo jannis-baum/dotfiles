@@ -54,3 +54,8 @@ EOF
         source "$act_path"
     fi
 }
+
+function _pyv() {
+    compadd "${(@)${(f)$(pyv -l)}}"
+}
+compdef _pyv pyv
