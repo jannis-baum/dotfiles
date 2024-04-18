@@ -104,7 +104,7 @@ snippet '(\S+)\^([a-zA-Z0-9(-]{2})' "auto superscript (general)" wrA
 endsnippet
 
 # --------------------------------
-# fractions 
+# fractions & derivatives
 
 context "math()"
 snippet / "visual frac" i
@@ -129,6 +129,11 @@ while True:
 	i-=1
 snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 `\{$1\}$0
+endsnippet
+
+context "math()"
+snippet DDF "derivative" wA
+\\frac{d $1}{d $2}
 endsnippet
 
 # --------------------------------
