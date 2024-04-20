@@ -11,16 +11,28 @@ function fbm() {
         return
     fi
 
-    local target=$((
+    local out=$((
         local prefix="."
         while [[ "$(pwd)" != "/" ]]; do
-            local path_comp="$_fbm_path_color$prefix/$(basename "$(realpath .)")/\\x1b[0m"
-            test -f '.fbms' && cat .fbms | sed -e "s|^|$path_comp|"
+            local dir="$(realpath .)"
+            local path_comp="$_fbm_path_color$prefix/$(basename "$dir")/\\x1b[0m"
+            test -f '.fbms' && cat .fbms | sed -e "s|^|$dir\t$path_comp|"
             cd ..
             prefix="$prefix."
         done
-    ) | fzf --delimiter="\t" --with-nth=1 --ansi)
+    ) | fzf --delimiter="\t" --ansi \
+        --with-nth=2 --nth=2 \
+        --expect=ctrl-o \
+    )
 
-    [[ -z "$target" ]] && return
-    open "$(cut -f2 <<< "$target")"
+    local key=$(head -1 <<< $out)
+    local pick=$(tail -n +2 <<< $out)
+
+    [[ -z "$pick" ]] && return
+
+    if [[ "$key" == "ctrl-o" ]]; then
+        $EDITOR "$(cut -f1 <<< "$pick")/.fbms"
+    else
+        open "$(cut -f3 <<< "$pick")"
+    fi
 }
