@@ -21,7 +21,7 @@ function fb() {
             prefix="$prefix."
         done
     ) | fzf --delimiter="\t" --ansi \
-        --with-nth=2 --nth=2 \
+        --with-nth=2 \
         --expect=ctrl-o \
     )
 
