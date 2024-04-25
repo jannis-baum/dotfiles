@@ -2,15 +2,32 @@ function pyv() {
     local pyv_path="$HOME/.pyv"
     mkdir -p $pyv_path
 
-    local arg_help arg_list arg_new
-    case "$1" in
-        "-h" | "--help") arg_help=1;;
-        "-l" | "--list") arg_list=1;;
-        "-n" | "--new") arg_new=1;;
-        "-"*)
-            echo "Illegal option: $1" >&2
-            arg_help=1;;
-    esac
+    # MARK: ARUGMENT PARSING ---------------------------------------------------
+    # from https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
+    local arg_help=""
+    local positional=()
+    local arg_list arg_new
+
+    while (( $# )); do
+        _echo_error() {
+            echo "$1" >&2
+            arg_help=1; break
+        }
+        local arg="$1"; shift
+
+        case "$arg" in
+            "-h" | "--help") arg_help=1; continue;;
+            "-l" | "--list") arg_list=1; continue;;
+            "-n" | "--new")
+                [[ -z "$1" ]] && _echo_error "Missing argument for --new"
+                arg_new="$1"; shift;
+                continue;;
+        esac
+
+        [[ "$arg" == "-"* ]] && _echo_error "Illegal option: $arg"
+        positional+=("$arg")
+    done
+    unfunction _echo_error
 
     if [[ -n "$arg_help" ]]; then
         cat <<EOF
@@ -24,20 +41,17 @@ options:
 EOF
         return
     fi
+    # MARK: ARUGMENT PARSING done ----------------------------------------------
 
     if [[ -n "$arg_new" ]]; then
-        local new_env="$2"
-        if [[ -z "$new_env" ]]; then
-            echo "Please provide a name for the new environment to create." >&2
-            return
-        fi
-        local new_path="$pyv_path/$new_env"
+        local new_path="$pyv_path/$arg_new"
         if test -e "$new_path"; then
-            echo "Environment \"$new_env\" already exists, exiting." >&2
+            echo "Environment \"$arg_new\" already exists, exiting." >&2
             return
         fi
+
         /usr/bin/env python3 -m venv "$new_path"
-        pyv "$new_env"
+        pyv "$arg_new"
         return
     fi
 
@@ -46,10 +60,11 @@ EOF
         return
     fi
 
-    if [[ -n "$1" ]]; then
-        local act_path="$pyv_path/$1/bin/activate"
+    local activate_env="$positional[1]"
+    if [[ -n "$activate_env" ]]; then
+        local act_path="$pyv_path/$activate_env/bin/activate"
         if ! test -f "$act_path"; then
-            echo "Environment \"$1\" does not exist or is broken." >&2
+            echo "Environment \"$activate_env\" does not exist or is broken." >&2
             return
         fi
         source "$act_path"
