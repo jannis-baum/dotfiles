@@ -19,7 +19,7 @@ usage: pyv [-h] [-l] [-n "new_env"] ["activate_env"]
 options:
   -h, --help            show this help message and exit
   -l, --list            list environments
-  -n, --new "new_env"   create a new environment named "new_env"
+  -n, --new "new_env"   create a new environment named "new_env" and activate it
   "activate_env"        activate given environment
 EOF
         return
@@ -37,6 +37,7 @@ EOF
             return
         fi
         /usr/bin/env python3 -m venv "$new_path"
+        pyv "$new_env"
         return
     fi
 
