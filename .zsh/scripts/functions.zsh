@@ -12,11 +12,26 @@ function passn() {
 }
 # quick look
 function ql() {
-    if test -e "$1"; then
-        qlmanage -p "$1" >& /dev/null
-    else
+    if ! test -e "$1"; then
         echo "\"$1\": No such file or directory"
+        return 1
     fi
+
+    case "$1" in
+        *.ipynb)
+            if ! which jupyter >/dev/null; then
+                echo "jupyter not found"
+                return 1
+            fi
+            local TMP=$(mktemp).html
+            jupyter nbconvert --to html --stdout "$1" > $TMP
+            ql $TMP
+            trm $TMP
+            ;;
+        *)
+            qlmanage -p "$1" >& /dev/null
+            ;;
+    esac
 }
 # pip installed version for requirements.txt
 function pipf() {
