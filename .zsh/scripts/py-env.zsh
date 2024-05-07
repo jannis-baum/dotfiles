@@ -1,7 +1,7 @@
 function pyv() {
     # MARK: ARUGMENT PARSING ---------------------------------------------------
     # from https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
-    local arg_help="" positional=() arg_location arg_new arg_noipython
+    local arg_help="" positional=() arg_location arg_new arg_noipython arg_noreqs
 
     while (( $# )); do
         _echo_error() {
@@ -13,7 +13,8 @@ function pyv() {
         case "$arg" in
             "-h" | "--help") arg_help=1; continue;;
             "-l" | "--location") arg_location=1; continue;;
-            "-p" | "--no-ipython") arg_noipython=1; continue;;
+            "-np" | "--no-ipython") arg_noipython=1; continue;;
+            "-nr" | "--no-requirements") arg_noreqs=1; continue;;
             "-n" | "--new")
                 if [[ -z "$1" || "$1" == -* ]]; then
                     arg_new="$(basename "$(realpath .)")"
@@ -33,11 +34,15 @@ function pyv() {
 usage: pyv [-h] [-l] [-n ["new_env"]]
 
 options:
-  -h, --help              show this help message and exit
-  -l, --location          show path of pyv for current directory if exists
-  -n, --new ["new_env"]   create a new environment named "new_env" (default
-                          name of current directory) and activate it
-  -p, --no-ipython        don't install ipykernel for a new environment
+  -h, --help               show this help message and exit
+  -l, --location           show path of pyv for current directory if exists
+  -n, --new ["new_env"]    - create a new environment named "new_env" (default
+                             name of current directory)
+                           - activate it
+                           - install requirements.txt if exist
+                           - install ipython kernel unless -p is specified
+  -np, --no-ipython        don't install ipykernel for a new environment
+  -nr, --no-requirements   don't install requirements.txt
 EOF
         return
     fi
@@ -62,6 +67,11 @@ EOF
             source "$new_path/bin/activate"
             pip install jupyterlab
         fi
+
+        if [[ -z "$arg_noreqs" ]] && test -f requirements.txt; then
+            pip install -r requirements.txt
+        fi
+
         return
     fi
 
