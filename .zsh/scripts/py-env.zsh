@@ -83,9 +83,9 @@ EOF
 }
 
 function _pyv_find() {
-    while [[ "$(pwd)" != "/" ]]; do
+    while [[ "$(pwd)" != "$HOME" ]]; do
         if test -d .pyv; then
-            echo "$(realpath .)/.pyv"
+            echo "$(pwd)/.pyv"
             break
         fi
         cd ..
