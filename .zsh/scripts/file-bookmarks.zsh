@@ -11,13 +11,13 @@ function fb() {
         return
     fi
 
+    # cd -q omits chpwd hooks
     local out=$((
         local prefix="."
         while [[ "$(pwd)" != "/" ]]; do
             local dir="$(realpath .)"
             local path_comp="$_fb_path_color$prefix/$(basename "$dir")/\\x1b[0m"
             test -f '.fbs' && cat .fbs | sed -e "s|^|$dir\t$path_comp|"
-            # -q omits chpwd hooks
             cd -q ..
             prefix="$prefix."
         done
