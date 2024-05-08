@@ -83,6 +83,7 @@ EOF
 }
 
 function _pyv_find() {
+    [[ "$(pwd)" != $HOME* ]] && return
     while [[ "$(pwd)" != "$HOME" ]]; do
         if test -d .pyv; then
             echo "$(pwd)/.pyv"
