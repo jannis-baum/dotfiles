@@ -17,7 +17,8 @@ function fb() {
             local dir="$(realpath .)"
             local path_comp="$_fb_path_color$prefix/$(basename "$dir")/\\x1b[0m"
             test -f '.fbs' && cat .fbs | sed -e "s|^|$dir\t$path_comp|"
-            cd ..
+            # -q omits chpwd hooks
+            cd -q ..
             prefix="$prefix."
         done
     ) | fzf --delimiter="\t" --ansi \

@@ -88,7 +88,8 @@ function _pyv_find() {
             echo "$(pwd)/.pyv"
             break
         fi
-        cd ..
+        # -q omits chpwd hooks
+        cd -q ..
     done
 }
 
