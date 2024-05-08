@@ -57,7 +57,8 @@ EOF
         fi
 
         PYENV_VERSION="$arg_new_version" pyenv exec python \
-            -m venv "$new_path" --prompt "pyv:$arg_new_name"
+            -m venv "$new_path" --prompt "pyv:$arg_new_name" \
+            || return 1
         source "$new_path/bin/activate"
 
         if [[ -z "$arg_noipython" ]]; then
