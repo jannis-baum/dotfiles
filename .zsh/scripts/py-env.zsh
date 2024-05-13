@@ -102,12 +102,6 @@ EOF
     source "$new_path/bin/activate"
 
     if [[ -z "$arg_noipython" ]]; then
-        pip install ipykernel
-        ipython kernel install --user --name="$arg_name"
-        # iphython kernel install fucks up the environment so we have to
-        # reactivate it
-        deactivate
-        source "$new_path/bin/activate"
         pip install jupyterlab
     fi
 
