@@ -140,5 +140,7 @@ function _pyv_cd() {
 }
 autoload -U add-zsh-hook
 add-zsh-hook chpwd _pyv_cd
+
 # for initial pyv
+# CAUTION! this needs to happen after `pyenv init -`
 _pyv_cd
