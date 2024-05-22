@@ -35,8 +35,7 @@
     },
     "modules": [
         { "/native/controller": { "trigger": "^sc (.*)" } },
-        { "/native/switcher": { "trigger": "(^.*)" } },
-        { "safari-tabs": { "trigger": "(^.*)", "suppressOthers": false } },
+        { "/native/switcher": { "name": "", "trigger": "(^.*)" } },
         { "app-search": { "trigger": "(^.+)", "maxResults": 3 } },
         { "/native/clipboard": { "trigger": "^p (.*)" } },
         "unicode",
@@ -46,6 +45,7 @@
         "pkill",
         "/native/indexer",
         "safari-histmarks",
+        "safari-tabs",
         "timer",
         { "/inline/date-copy": {
             "name": "Today's date",
