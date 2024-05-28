@@ -94,12 +94,12 @@ snippet '([A-Za-z])(\d)' "auto subscript (1 digit)" wrA
 endsnippet
 
 context "math()"
-snippet '(\S+)_([a-zA-Z0-9(-]{2})' "auto subscript (general)" wrA
+snippet '(\S+)_([a-zA-Z0-9(-=]{2})' "auto subscript (general)" wrA
 `!p snip.rv = match.group(1)`_\{`!p snip.rv = match.group(2)`$1\}
 endsnippet
 
 context "math()"
-snippet '(\S+)\^([a-zA-Z0-9(-]{2})' "auto superscript (general)" wrA
+snippet '(\S+)\^([a-zA-Z0-9(-=]{2})' "auto superscript (general)" wrA
 `!p snip.rv = match.group(1)`^\{`!p snip.rv = match.group(2)`$1\}
 endsnippet
 
