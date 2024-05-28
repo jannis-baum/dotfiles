@@ -1,3 +1,4 @@
 {
-    "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd"]
+    "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd"],
+    "styles": "~/.vivify/styles.css"
 }
