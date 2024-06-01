@@ -5,8 +5,14 @@ alias w='printf "%s" "$(VISUAL=vim vipe)" | pbcopy'
 alias ssh='kitty +kitten ssh'
 alias trm='trash -F'
 alias g='gsi'
-alias mue="~/.lib/markup-export/main"
 alias stitch-jpegs="cat *.jpeg | ffmpeg -f image2pipe -vcodec mjpeg -i - -vcodec libx264 out.mp4"
+
+function mue() {
+    which deactivate &>/dev/null && deactivate
+    source $HOME/.lib/markup-export/.pyv/bin/activate
+    $HOME/.lib/markup-export/main $@
+    _pyv_cd
+}
 
 # options
 setopt no_beep
