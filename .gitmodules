@@ -86,3 +86,6 @@
 [submodule ".zsh/plugins-other/fzf-tab-completion"]
 	path = .zsh/plugins-other/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
+[submodule ".vim/pack/plugins/opt/copilot.vim"]
+	path = .vim/pack/plugins/opt/copilot.vim
+	url = https://github.com/github/copilot.vim.git

@@ -32,3 +32,5 @@ augroup SlimeTerm
 augroup END
 
 packadd dart-vim-plugin
+
+packadd copilot.vim
