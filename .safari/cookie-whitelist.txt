@@ -1,7 +1,9 @@
 github\.com
 hpi\.de
 netflix\.com
-notion
+notion\.so
+notion\.site
+createwithnotion\.site
 figma\.com
 stackoverflow\.com
 apple\.com
