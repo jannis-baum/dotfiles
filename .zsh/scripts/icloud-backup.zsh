@@ -19,7 +19,8 @@ ibkp() {
             continue
         fi
 
-        local source_dir="$(realpath $(dirname $arg))"
+        local source_file="$(realpath $arg)"
+        local source_dir="$(dirname "$source_file")"
         if [[ "$source_dir" != "$HOME"* ]]; then
             echo "\e[2m\e[3m$arg not in home directory, skipping\e[0m"
             continue
@@ -30,7 +31,7 @@ ibkp() {
         fi
 
         local dest_dir="$(sed "s|$HOME|$backup_dir|" <<< "$source_dir")"
-        local file_name="$(sed "s|$source_dir||" <<< "$arg")"
+        local file_name="$(sed "s|$source_dir||" <<< "$source_file")"
         local dest_path="$dest_dir/$file_name"
         rm -rf "$dest_path"
         mkdir -p "$dest_dir"
