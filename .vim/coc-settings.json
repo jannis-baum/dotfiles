@@ -12,6 +12,7 @@
     "r.lsp.diagnostics": false,
 
     "eslint.autoFixOnSave": true,
+    "eslint.experimental.useFlatConfig": true,
     "typescript.preferences.importModuleSpecifier": "relative",
     "snippets.autoTrigger": false,
 
