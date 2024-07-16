@@ -1,4 +1,5 @@
 {
     "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd"],
-    "styles": "~/.vivify/styles.css"
+    "styles": "~/.vivify/styles.css",
+    "dirListIgnore": ["~/.gitignore_global", "~/.vivify/ignore.txt"]
 }
