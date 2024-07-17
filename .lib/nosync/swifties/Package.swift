@@ -12,5 +12,8 @@ let package = Package(
         .executableTarget(
             name: "dnc-post",
             dependencies: []),
+        .executableTarget(
+            name: "pbpng",
+            dependencies: []),
     ]
 )
