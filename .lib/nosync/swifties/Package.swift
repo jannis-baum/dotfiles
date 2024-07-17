@@ -13,7 +13,7 @@ let package = Package(
             name: "dnc-post",
             dependencies: []),
         .executableTarget(
-            name: "pbpng",
+            name: "screenshot",
             dependencies: []),
     ]
 )
