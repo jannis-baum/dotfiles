@@ -12,8 +12,5 @@ let package = Package(
         .executableTarget(
             name: "dnc-post",
             dependencies: []),
-        .executableTarget(
-            name: "screenshot",
-            dependencies: []),
     ]
 )

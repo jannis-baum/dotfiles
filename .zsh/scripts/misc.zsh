@@ -6,6 +6,7 @@ alias ssh='kitty +kitten ssh'
 alias trm='trash -F'
 alias g='gsi'
 alias stitch-jpegs="cat *.jpeg | ffmpeg -f image2pipe -vcodec mjpeg -i - -vcodec libx264 out.mp4"
+alias screenshot='screencapture -i'
 
 function mue() {
     which deactivate &>/dev/null && deactivate
