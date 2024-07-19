@@ -1,4 +1,4 @@
-dotfiles_dir=$HOME/_dotfiles
+dotfiles_dir=$HOME/_/dev/dotfiles
 
 ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*' '*deleteme*')
 
