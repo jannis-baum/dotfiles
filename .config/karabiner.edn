@@ -183,7 +183,7 @@
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
          ; bottom row
          [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
-         [:n :!Tn] [:m :!Tm] [:comma :!Tcomma] [:period :!Tperiod] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
+         [:n :!Tn] [:m :!Tm] [:comma :!Tcomma] [:period :!Tperiod] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen :slash]]
        :ctrl-r
          ; upper row
          [:q :!Tq] [:w :!Tw] [:e :!Te] [:r :!Tr] [:t :!Tt]
@@ -193,7 +193,7 @@
          [:h :left_arrow] [:j :down_arrow] [:k :up_arrow] [:l :right_arrow]
          ; bottom row
          [:z :!Tz] [:x :!Tx] [:c :!Tc] [:v :!Tv] [:b :!Tb]
-         [:n :!Tn] [:m :!Tm] [:comma :!Tcomma] [:period :!Tperiod] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen]]
+         [:n :!Tn] [:m :!Tm] [:comma :!Tcomma] [:period :!Tperiod] [:slash [:!Sgrave_accent_and_tilde :slash :!Shyphen :slash]]
     ]}
 
     ; --------------------------------------------------------------------------
