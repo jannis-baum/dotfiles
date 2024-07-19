@@ -5,8 +5,8 @@ bindkey -v
 
 # PATH
 export PATH=$(tr -d ' ' <<<"\
-     /opt/homebrew/bin\
-    :$HOME/.bin/\
+    $HOME/.bin/\
+    :/opt/homebrew/bin\
     :/Library/TeX/texbin/\
     :/Applications/Postgres.app/Contents/Versions/latest/bin/\
     :$HOME/.flutter/bin/\
