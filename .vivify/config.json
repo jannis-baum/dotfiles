@@ -1,5 +1,8 @@
 {
     "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd"],
     "styles": "~/.vivify/styles.css",
-    "dirListIgnore": ["~/.gitignore_global", "~/.vivify/ignore.txt"]
+    "dirListIgnore": ["~/.gitignore_global", "~/.vivify/ignore.txt"],
+    "tocOptions": {
+        "includeLevel": [2, 3]
+    }
 }
