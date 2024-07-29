@@ -89,3 +89,6 @@
 [submodule ".vim/pack/plugins/opt/copilot.vim"]
 	path = .vim/pack/plugins/opt/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule ".vim/pack/plugins/opt/jupyviv.vim"]
+	path = .vim/pack/plugins/opt/jupyviv.vim
+	url = https://github.com/jannis-baum/jupyviv.vim
