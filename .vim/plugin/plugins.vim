@@ -34,4 +34,7 @@ augroup END
 packadd dart-vim-plugin
 
 packadd copilot.vim
-let g:copilot_filetypes = { 'markdown': v:false }
+let g:copilot_filetypes = {
+    \'markdown': v:false,
+    \'text': v:false
+\}
