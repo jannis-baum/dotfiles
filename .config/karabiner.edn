@@ -36,8 +36,8 @@
     {:des "thumb keys" :rules [
        [:##spacebar :left_shift nil {:alone [:spacebar]}]
 
-       [:right_command :right_command :kitty {:alone "~/.config/kitty/set-terminal hidden"}]
-       [:right_command :right_command :!kitty {:alone "~/.config/kitty/set-terminal active"}]
+       [:right_command :right_command :kitty {:alone :!Ch}]
+       [:right_command :right_command :!kitty {:alone [:open "kitty"]}]
 
        [:left_command :left_command [["kVNormal" 0]] {:alone [:!CFf7]}]
        [:left_command :left_command [["kVNormal" 1]] {:alone [:a [:!CFf7]]}]
