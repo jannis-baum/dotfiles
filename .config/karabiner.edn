@@ -56,10 +56,10 @@
        [{:sim [:k :l] :modi :any} :return_or_enter]
     ]}
 
-    {:des "upper row combos: we > up, er > right, yu > scrolla (Cf9), ui > wooshy (Cf8) / ctrl+u, io > switch tabs / ctrl+o" :rules [
+    {:des "upper row combos: we > up, er > right, yu > scrolla (CFf9), ui > ctrl+u, io > switch tabs / ctrl+o" :rules [
        [{:sim [:w :e] :modi :any} :up_arrow]
        [{:sim [:e :r] :modi :any} :right_arrow]
-       [{:sim [:y :u] :modi :any} :!Cf9]
+       [{:sim [:y :u] :modi :any} :!CFf9]
        :kitty
          [{:sim [:u :i] :modi :any} :!Tu]
          [{:sim [:i :o] :modi :any} :!To]
@@ -79,8 +79,8 @@
          [{:sim [:m :comma] :modi :any} [:a :!TStab :escape]]
          [{:sim [:comma :period] :modi :any} [:a :!Ttab :escape]]
        [:condis :inWooshy :!xcode]
-         [{:sim [:m :comma] :modi :any} [:!Cf8 :!TStab :!Cf8]]
-         [{:sim [:comma :period] :modi :any} [:!Cf8 :!Ttab :!Cf8]]
+         [{:sim [:m :comma] :modi :any} [:!CFf8 :!TStab :!CFf8]]
+         [{:sim [:comma :period] :modi :any} [:!CFf8 :!Ttab :!CFf8]]
        [:condis :!kVNormal :!inWooshy :xcode]
          [{:sim [:m :comma] :modi :any} :!CSopen_bracket]
          [{:sim [:comma :period] :modi :any} :!CSclose_bracket]
@@ -88,8 +88,8 @@
          [{:sim [:m :comma] :modi :any} [:a :!CSopen_bracket :escape]]
          [{:sim [:comma :period] :modi :any} [:a :!CSclose_bracket :escape]]
        [:condis :inWooshy :!xcode]
-         [{:sim [:m :comma] :modi :any} [:!Cf8 :!CSopen_bracket :!Cf8]]
-         [{:sim [:comma :period] :modi :any} [:!Cf8 :!CSclose_bracket :!Cf8]]
+         [{:sim [:m :comma] :modi :any} [:!CFf8 :!CSopen_bracket :!CFf8]]
+         [{:sim [:comma :period] :modi :any} [:!CFf8 :!CSclose_bracket :!CFf8]]
     ]}
 
     ; --------------------------------------------------------------------------
@@ -98,7 +98,7 @@
     {:des "mouse mode" :rules [
        [:condis :!kitty :!inWooshy]
          ; activation
-         [{:sim [:u :i] :modi :any} :!Cf8]
+         [{:sim [:u :i] :modi :any} :!CFf8]
        :inWooshy
          ; persistent wooshy ---------------------------------------------------
          ; [{:sim [:k :l] :modi :any} :return_or_enter nil {:delayed {:invoked :!Qf8} :params {:delay 200}}]
@@ -106,14 +106,14 @@
          ; menu bar ------------------------------------------------------------
          ; close & reopen wooshy to refresh, seems there's a  bug in karabiner
          ; so we have to use right command on reactivation
-         [:!Cm [:!Cf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
+         [:!Cm [:!CFf8 [:uri "hammerspoon://showMenubar"]] nil {:delayed {:invoked :!Qf8} :params {:delay 600}}]
          ; make sure menubar hides when we close wooshy
-         [{:sim [:u :i] :modi :any} [:!Cf8 [:uri "hammerspoon://hideMenubar"]]]
+         [{:sim [:u :i] :modi :any} [:!CFf8 [:uri "hammerspoon://hideMenubar"]]]
          ; misc ----------------------------------------------------------------
          ; refresh
-         [:!Cr :!Cf8 nil {:delayed {:invoked :!Cf8} :params {:delay 100}}]
+         [:!Cr :!CFf8 nil {:delayed {:invoked :!CFf8} :params {:delay 100}}]
          ; scroll mode (scrolla)
-         ; [:##spacebar :!Cf9 nil {:afterup :!Cf8 :alone :spacebar}]
+         ; [:##spacebar :!CFf9 nil {:afterup :!CFf8 :alone :spacebar}]
        :inScrolla
          [:b :!Sg]
          [:g [:g :g]]
