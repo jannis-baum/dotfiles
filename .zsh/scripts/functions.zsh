@@ -75,3 +75,14 @@ function mda() {
         '{ "action": "importPackage", "version": 6, "params": { "path": "'"$export_f"'" } }'
 }
 
+# apple photos orders photos by the file modification datetime at import...
+# so photos exported by lightroom are always messed up when imported into apple
+# photos because the modification (export) datetime is not the capture datetime.
+# this function takes the datetime defined in lightroom/exif data and sets the
+# modification date to that for all JPGs in the directory.
+function fix-photo-timstamps() {
+    for file in *.jpg; do
+        capture_date=$(exiftool -DateTimeOriginal -d "%Y%m%d%H%M.%S" "$file" | cut -d: -f2- | tr -d ' ')
+        touch -t "$capture_date" "$file"
+    done
+}
