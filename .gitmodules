@@ -92,3 +92,6 @@
 [submodule ".vim/pack/plugins/opt/jupyviv.vim"]
 	path = .vim/pack/plugins/opt/jupyviv.vim
 	url = https://github.com/jannis-baum/jupyviv.vim
+[submodule ".synapse/modules/clipboard"]
+	path = .synapse/modules/clipboard
+	url = https://github.com/jannis-baum/synapse-clipboard.git
