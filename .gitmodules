@@ -95,3 +95,6 @@
 [submodule ".synapse/modules/clipboard"]
 	path = .synapse/modules/clipboard
 	url = https://github.com/jannis-baum/synapse-clipboard.git
+[submodule ".synapse/modules/switcher"]
+	path = .synapse/modules/switcher
+	url = https://github.com/jannis-baum/synapse-switcher.git
