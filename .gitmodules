@@ -24,7 +24,7 @@
 	path = .synapse/modules/unicode
 	url = https://github.com/jannis-baum/synapse-unicode.git
 [submodule ".synapse/modules/cas"]
-	path = .synapse/modules/cas
+	path = .synapse/modules/math
 	url = https://github.com/jannis-baum/synapse-cas.git
 [submodule ".synapse/modules/control-center"]
 	path = .synapse/modules/control-center

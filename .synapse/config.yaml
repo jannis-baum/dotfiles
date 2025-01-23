@@ -1,0 +1,48 @@
+launchAtLogin: true
+hotkey: cmd+f7
+
+PATH:
+  - /opt/homebrew/bin
+
+panel:
+  keepCentered: true
+
+search:
+  program:
+    exec: fzf
+    args: ["--read0", "--print0", "--delimiter=:", "--nth=2..", "-f"] 
+
+modules:
+  - switcher:
+      name: ""
+  - app-search:
+      maxResults: 3
+
+  - /native/controller:
+      trigger: ^sc (.*)
+  - /native/childProcessMonitor:
+      trigger: ^mon (.*)
+  - /native/indexer
+
+  - control-center
+  - clipboard:
+      trigger: ^p (.*)
+  - math
+  - keychain
+  - /inline/debug-tester:
+      name: Tester
+      trigger: ^TEST (abc )?(.+)
+      suppressOthers: true
+      reloadsOnChange: true
+      isSearchDisabled: true
+      source:
+        program:
+          exec: zsh
+          args:
+            - "-c"
+            - "echo '[{\"title\": \"{{ 1 ?? no first }} {{ 2 ?? no second }} {{ 3 ?? no third }}\"}]'"
+      sink:
+        exec: zsh
+        args:
+          - "-c"
+          - "printf 'title: |{{ title ?? no title }}|, caption: |{{ caption ?? no caption }}|, hehe: |{{ hehehe ?? hehe }}|' | pbcopy"
