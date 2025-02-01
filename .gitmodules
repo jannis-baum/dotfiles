@@ -98,3 +98,6 @@
 [submodule ".synapse/modules/switcher"]
 	path = .synapse/modules/switcher
 	url = https://github.com/jannis-baum/synapse-switcher.git
+[submodule ".vim/pack/plugins/opt/vim-sneak"]
+	path = .vim/pack/plugins/opt/vim-sneak
+	url = https://github.com/justinmk/vim-sneak.git

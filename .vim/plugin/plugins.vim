@@ -15,6 +15,11 @@ augroup END
 inoremap <silent> <right> <esc>:call AutoPairsJump()<cr>a
 let g:AutoPairsMultilineClose = 0
 
+packadd vim-sneak
+let g:sneak#label = 1
+nmap m <Plug>Sneak_s
+nmap M <Plug>Sneak_S
+
 packadd fugitive
 
 packadd vim-commentary
