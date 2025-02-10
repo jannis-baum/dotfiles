@@ -5,10 +5,10 @@ export const command = `
 `;
 export const refreshFrequency = 1000;
 export const className =`
-    top: 0px; right: 0px; left: 0px; height: 32px;
-    padding: 6px 10px;
+    box-sizing: border-box;
+    top: 0; left: 12px; right: 12px; height: 32px;
 
-    color: #ddd;
+    color: #aaa;
     font-family: "Poiret One", -apple-system;
     font-size: 20px;
 
@@ -19,11 +19,19 @@ export const className =`
 
     .left {
         display: flex;
+        gap: 0.5em;
     }
     .right {
         display: flex;
         margin-left: auto;
-        gap: 1em;
+        gap: 0.5em;
+    }
+
+    span {
+        padding: 2px 6px;
+        background-color: #101010;
+        border-radius: 6px;
+        border: 1px solid #333;
     }
 `
 
