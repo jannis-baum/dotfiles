@@ -1,11 +1,14 @@
-.DEFAULT_GOAL := static
+.DEFAULT_GOAL := all
 
-.PHONY: static
-static: link generate
+.PHONY: all
+all: link generate load
 
 .PHONY: generate
 generate:
-	@chameleon/generate jellyfish.yaml
+	@zsh -c '\
+		cd chameleon; \
+		test -d .pyv || { source $$ZDOTDIR/.zshrc; pyv new }; \
+		source .pyv/bin/activate; ./generate ../jellyfish.yaml'
 
 .PHONY: link
 link:
