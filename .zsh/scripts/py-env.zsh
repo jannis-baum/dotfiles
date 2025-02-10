@@ -25,7 +25,7 @@ EOF
 function _pyv_new() {
     # MARK: ARUGMENT PARSING ---------------------------------------------------
     # from https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
-    local arg_help="" positional=() arg_version arg_noipython arg_noreqs
+    local arg_help="" positional=() arg_version arg_jupyter arg_noreqs
 
     while (( $# )); do
         _echo_error() {
@@ -36,7 +36,7 @@ function _pyv_new() {
 
         case "$arg" in
             "-h" | "--help") arg_help=1; continue;;
-            "-np" | "--no-ipython") arg_noipython=1; continue;;
+            "-j" | "--jupyter") arg_jupyter=1; continue;;
             "-nr" | "--no-requirements") arg_noreqs=1; continue;;
             "-v" | "--version")
                 [[ -z "$1" || "$1" == -* ]] && _echo_error "Version not specified"
@@ -63,7 +63,7 @@ options:
   -h, --help                    show this help message and exit
   -v, --version                 the python version to use, defaults to locally
                                 set pyenv version if exists
-  -np, --no-ipython             don't install ipykernel for the new environment
+  -j, --jupyter                 install Jupyter Lab for the new environment
   -nr, --no-requirements        don't install existing requirements.txt
 EOF
         return
@@ -101,7 +101,7 @@ EOF
     unfunction _error_version
     source "$new_path/bin/activate"
 
-    if [[ -z "$arg_noipython" ]]; then
+    if [[ -n "$arg_jupyter" ]]; then
         pip install jupyterlab
     fi
 
