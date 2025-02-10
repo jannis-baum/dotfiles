@@ -1,16 +1,18 @@
 export const command = `
     ~/.bin/battery
-    date +%m/%d
+    ~/.bin/battery --percentage
     date +%l:%M
+    date +%m/%d
+    date +%l:%M:%S
 `;
 export const refreshFrequency = 1000;
 export const className =`
     box-sizing: border-box;
     top: 0; left: 12px; right: 12px; height: 32px;
 
-    color: #aaa;
+    color: #bbb;
     font-family: "Poiret One", -apple-system;
-    font-size: 20px;
+    font-size: 18px;
 
     .container {
         display: flex;
@@ -27,24 +29,38 @@ export const className =`
         gap: 0.5em;
     }
 
-    span {
+    span.box {
         padding: 2px 6px;
         background-color: #101010;
         border-radius: 6px;
         border: 1px solid #333;
+        display: block;
     }
+    span.hover-container {
+        display: flex;
+        gap: 0.25em;
+    }
+    span.hover-container > span.alt { display: none }
+    span.hover-container:hover > span.main { display: none }
+    span.hover-container:hover > span.alt { display: block }
 `
 
 export const render = ({output}) => {
-    const [battery, date, time] = output.split('\n');
+    const [battery, batteryPercent, time, date, timeSeconds] = output.split('\n');
     return (
         <div className="container">
             <div className="left">
             </div>
             <div className="right">
-                <span>{battery}</span>
-                <span>{date}</span>
-                <span>{time}</span>
+                <span class="hover-container">
+                    <span class="main box">{battery}</span>
+                    <span class="alt box">{batteryPercent}</span>
+                </span>
+                <span class="hover-container">
+                    <span class="main box">{time}</span>
+                    <span class="alt box">{date}</span>
+                    <span class="alt box">{timeSeconds}</span>
+                </span>
             </div>
         </div>
     );
