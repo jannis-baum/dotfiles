@@ -8,5 +8,5 @@ battery=$(pmset -g batt)
 if [[ "$1" == "--percentage" || "$1" == "-p" ]]; then
     grep -o '\d\+%' <<< $battery
 else
-    grep -o '\d\+:\d\+' <<< $battery || echo '⋯'
+    grep -o '\d\+:\d\+' <<< $battery || grep -o '\d\+%' <<< $battery
 fi
