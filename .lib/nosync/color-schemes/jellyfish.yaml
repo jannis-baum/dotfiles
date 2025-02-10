@@ -21,7 +21,7 @@ kitty:
 
     #: The basic colors
     foreground                      {{ Text }}
-    background                      #000000|||#eeeeee
+    background                      #101010|||#eeeeee
     selection_foreground            {{ Search.fg }}
     selection_background            {{ Search.bg }}
 
@@ -40,9 +40,9 @@ kitty:
 
     #: Tab bar colors
     active_tab_foreground           {{ Main }}
-    active_tab_background           #000000|||#eeeeee
+    active_tab_background           #101010|||#eeeeee
     inactive_tab_foreground         #999999|||#777777
-    inactive_tab_background         #000000|||#eeeeee
+    inactive_tab_background         #101010|||#eeeeee
     tab_bar_background              none
     tab_bar_margin_color            none
 
