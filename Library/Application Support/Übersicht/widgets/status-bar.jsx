@@ -1,5 +1,5 @@
 export const command = `
-    ~/.synapse/status/battery.zsh
+    ~/.bin/battery
     date +%m/%d
     date +%l:%M
 `;
