@@ -8,7 +8,8 @@ export const command = `
 export const refreshFrequency = 1000;
 export const className =`
     box-sizing: border-box;
-    top: 0; left: 12px; right: 12px; height: 32px;
+    /* left/right to avoid hitting rounded corners */
+    top: 0; left: 8px; right: 8px; height: 32px;
 
     color: #bbb;
     font-family: "Poiret One", -apple-system;
@@ -30,10 +31,10 @@ export const className =`
     }
 
     span.box {
-        padding: 2px 6px;
+        padding: 2px 8px;
         background-color: #101010;
-        border-radius: 6px;
-        border: 1px solid #333;
+        border-radius: 12px;
+        border: 1px solid #444;
         display: block;
     }
     span.hover-container {
