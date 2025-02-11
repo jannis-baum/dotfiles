@@ -2,7 +2,11 @@
 
 battery=$(pmset -g batt)
 
-[[ -z "$battery" || "$battery" == *charged* ]] && exit 0
+if [[ -z "$battery" || "$battery" == *charged* ]]; then
+    echo ""
+    exit 0
+fi
+
 [[ "$battery" == *discharging* ]] || printf '⚡ '
 
 if [[ "$1" == "--percentage" || "$1" == "-p" ]]; then

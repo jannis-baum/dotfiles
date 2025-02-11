@@ -54,8 +54,8 @@ export const render = ({output}) => {
             </div>
             <div className="right">
                 <span class="hover-container">
-                    <span class="main box">{battery}</span>
-                    <span class="alt box">{batteryPercent}</span>
+                    {battery !== '' && <span class="main box">{battery}</span>}
+                    {batteryPercent !== '' && <span class="alt box">{batteryPercent}</span>}
                 </span>
                 <span class="hover-container">
                     <span class="main box">{time}</span>
