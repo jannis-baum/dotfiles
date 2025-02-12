@@ -101,3 +101,6 @@
 [submodule ".vim/pack/plugins/opt/vim-sneak"]
 	path = .vim/pack/plugins/opt/vim-sneak
 	url = https://github.com/justinmk/vim-sneak.git
+[submodule ".synapse/modules/kitty-tabs"]
+	path = .synapse/modules/kitty-tabs
+	url = https://github.com/jannis-baum/synapse-kitty-tabs.git
