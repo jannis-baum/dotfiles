@@ -1,6 +1,6 @@
 dotfiles_dir=$HOME/_/dev/dotfiles
 
-ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '*.fbms/*' '*deleteme*')
+ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '.fbs' '*deleteme*')
 
 function _restart_synapse() {
     pkill Synapse
