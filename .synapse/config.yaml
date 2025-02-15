@@ -36,3 +36,25 @@ modules:
   - safari-tabs
   - pkill
   - timer
+
+  - /inline/date-copy:
+      name: "Today's Date"
+      trigger: "^date (.*)"
+      suppressOthers: true
+      isSearchDisabled: true
+      reloadsOnChange: false
+      source:
+        program:
+          exec: zsh
+          args:
+            - -c
+            - |
+              echo "[{ \"title\": \"$(date +%y-%m-%d)\" }]"
+      sink:
+        program:
+          exec: zsh
+          args:
+            - -c
+            - |
+              printf {{ title }} | pbcopy && printf closePanel
+      defaultSymbol: 􀉃
