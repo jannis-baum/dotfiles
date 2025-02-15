@@ -32,3 +32,7 @@ modules:
   - math
   - keychain
   - unicode
+  - safari-histmarks
+  - safari-tabs
+  - pkill
+  - timer
