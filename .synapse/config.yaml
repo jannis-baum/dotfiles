@@ -33,7 +33,9 @@ modules:
   - keychain
   - unicode
   - safari-histmarks
-  - safari-tabs
+  - safari-tabs:
+      trigger: (.+)
+      suppressOthers: false
   - pkill
   - timer
 
