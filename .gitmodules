@@ -1,24 +1,24 @@
 [submodule ".vim/pack/plugins/opt/pandoc-syntax"]
-	path = .vim/pack/plugins/opt/pandoc-syntax
+	path = .config/nvim/pack/plugins/opt/pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
 [submodule ".vim/pack/plugins/opt/coc"]
-	path = .vim/pack/plugins/opt/coc
+	path = .config/nvim/pack/plugins/opt/coc
 	url = https://github.com/neoclide/coc.nvim.git
 	branch = release
 [submodule ".vim/pack/plugins/opt/fugitive"]
-	path = .vim/pack/plugins/opt/fugitive
+	path = .config/nvim/pack/plugins/opt/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule ".vim/pack/plugins/opt/ultisnips"]
-	path = .vim/pack/plugins/opt/ultisnips
+	path = .config/nvim/pack/plugins/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
 [submodule ".vim/pack/plugins/opt/slime"]
-	path = .vim/pack/plugins/opt/slime
+	path = .config/nvim/pack/plugins/opt/slime
 	url = https://github.com/jpalardy/vim-slime.git
 [submodule ".vim/pack/plugins/opt/dart-vim-plugin"]
-	path = .vim/pack/plugins/opt/dart-vim-plugin
+	path = .config/nvim/pack/plugins/opt/dart-vim-plugin
 	url = https://github.com/dart-lang/dart-vim-plugin.git
 [submodule ".vim/pack/plugins/opt/auto-pairs"]
-	path = .vim/pack/plugins/opt/auto-pairs
+	path = .config/nvim/pack/plugins/opt/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
 [submodule ".synapse/modules/unicode"]
 	path = .synapse/modules/unicode
@@ -69,28 +69,28 @@
 	path = .zv/plugins/si-vim.zsh
 	url = https://github.com/jannis-baum/si-vim.zsh.git
 [submodule ".vim/pack/plugins/opt/vim-commentary"]
-	path = .vim/pack/plugins/opt/vim-commentary
+	path = .config/nvim/pack/plugins/opt/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule ".zv/plugins/fzf-dotfiles"]
 	path = .zv/plugins/fzf-dotfiles
 	url = https://github.com/jannis-baum/fzf-dotfiles.git
 [submodule ".vim/pack/plugins/opt/vivify.vim"]
-	path = .vim/pack/plugins/opt/vivify.vim
+	path = .config/nvim/pack/plugins/opt/vivify.vim
 	url = https://github.com/jannis-baum/vivify.vim.git
 [submodule ".lib/nosync/color-schemes/chameleon"]
 	path = .lib/nosync/color-schemes/chameleon
 	url = https://github.com/jannis-baum/Chameleon.git
 [submodule ".vim/pack/plugins/opt/quick-scope"]
-	path = .vim/pack/plugins/opt/quick-scope
+	path = .config/nvim/pack/plugins/opt/quick-scope
 	url = https://github.com/unblevable/quick-scope.git
 [submodule ".zsh/plugins-other/fzf-tab-completion"]
 	path = .zsh/plugins-other/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
 [submodule ".vim/pack/plugins/opt/copilot.vim"]
-	path = .vim/pack/plugins/opt/copilot.vim
+	path = .config/nvim/pack/plugins/opt/copilot.vim
 	url = https://github.com/github/copilot.vim.git
 [submodule ".vim/pack/plugins/opt/jupyviv.vim"]
-	path = .vim/pack/plugins/opt/jupyviv.vim
+	path = .config/nvim/pack/plugins/opt/jupyviv.vim
 	url = https://github.com/jannis-baum/jupyviv.vim
 [submodule ".synapse/modules/clipboard"]
 	path = .synapse/modules/clipboard
@@ -99,7 +99,7 @@
 	path = .synapse/modules/switcher
 	url = https://github.com/jannis-baum/synapse-switcher.git
 [submodule ".vim/pack/plugins/opt/vim-sneak"]
-	path = .vim/pack/plugins/opt/vim-sneak
+	path = .config/nvim/pack/plugins/opt/vim-sneak
 	url = https://github.com/justinmk/vim-sneak.git
 [submodule ".synapse/modules/kitty-tabs"]
 	path = .synapse/modules/kitty-tabs
