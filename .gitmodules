@@ -104,3 +104,6 @@
 [submodule ".synapse/modules/kitty-tabs"]
 	path = .synapse/modules/kitty-tabs
 	url = https://github.com/jannis-baum/synapse-kitty-tabs.git
+[submodule ".config/nvim/pack/plugins/opt/treesitter"]
+	path = .config/nvim/pack/plugins/opt/treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git
