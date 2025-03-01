@@ -1,3 +1,4 @@
+set notermguicolors             " 256 instead of true color for chameleon hacks
 set wildmenu                    " menu
 set mouse=a                     " mouse
 set visualbell                  " bell
@@ -12,8 +13,7 @@ set splitright                  " .
 set noshowmode                  " other
 set showcmd                     " .
 set signcolumn=yes              " sign column (left)
-let &fillchars ..= ',eob:·'     " end of buffer filler character
-let &fillchars ..= ',vert:│'    " vertical separator
+set fillchars+=eob:·            " end of buffer filler character
 
 " cursor style
 let &t_SI = "\e[5 q"
@@ -73,8 +73,8 @@ function! TLContent()
     let l:tabnr = tabpagenr('$')
     for i in range(l:tabnr)
         let l:right ..= i + 1 == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-	    " set the tab page number (for mouse clicks)
-	    let l:right ..= '%' .. (i + 1) .. 'T'
+        " set the tab page number (for mouse clicks)
+        let l:right ..= '%' .. (i + 1) .. 'T'
         " set label
         let l:label = ' ' . s:tl_label(i + 1) . ' '
         let l:spacer_width -= strwidth(l:label) + 1
