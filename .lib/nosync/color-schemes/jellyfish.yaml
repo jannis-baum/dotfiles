@@ -135,7 +135,7 @@ vim:
       ul: { dark: '#ffaf00', light: '#0' }
     - set: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
       deco: undercurl
-      ul: { dark: '#afafff', light: '#afafff' } 
+      ul: { dark: '#afafff', light: '#afafff' }
     - set: [ErrorMsg]
       fg: { dark: '#ff5f5f', light: '#ff5f5f' }
     # ui -----------------------------------------------------------------------
@@ -160,6 +160,14 @@ vim:
       ul: Cursor
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
+    - set: [Pmenu]
+      fg: { dark: '#94', light: '#94' }
+      bg: { dark: '#26', light: '#26' }
+      deco: italic
+    - set: [PmenuSel]
+      fg: { dark: '#94', light: '#94' }
+      bg: { dark: '#58', light: '#58' }
+      deco: bold
     # misc ---------------------------------------------------------------------
     - set: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }
