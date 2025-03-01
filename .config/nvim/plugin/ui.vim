@@ -12,6 +12,7 @@ set noshowmode                  " other
 set showcmd                     " .
 set signcolumn=yes              " sign column (left)
 set fillchars+=eob:·            " end of buffer filler character
+set noruler
 
 " cursor style
 let &t_SI = "\e[5 q"
