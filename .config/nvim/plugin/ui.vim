@@ -6,8 +6,6 @@ set t_vb=                       " .
 set scrolloff=8                 " extra lines while scrolling
 syntax on                       " syntax highlighting
 colorscheme jellyfish           " scheme is generated; see .lib/nosync/color-schemes
-" set number rnu                " line numbers
-set nuw=6                       " .
 set splitbelow                  " splits
 set splitright                  " .
 set noshowmode                  " other
