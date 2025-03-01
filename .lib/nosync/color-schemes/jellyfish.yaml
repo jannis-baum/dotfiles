@@ -152,7 +152,7 @@ vim:
     - set: [Folded]
       fg: { dark: '#58', light: '#58' }
       deco: italic
-    - set: [VertSplit]
+    - set: [VertSplit, WinSeparator]
       fg: { dark: '#26', light: '#26' }
       deco: bold
     - set: [QuickScopePrimary, QuickScopeSecondary]
