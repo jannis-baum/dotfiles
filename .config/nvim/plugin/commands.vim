@@ -2,7 +2,7 @@
 if !exists('g:reload_config_defined')
     let g:reload_config_defined = 1
     function! s:ReloadConfig()
-        for f in glob($HOME . '/.vim/plugin/**/*.vim', 0, 1) + glob($HOME . '/.vim/after/plugin/**/*.vim', 0, 1)
+        for f in glob($HOME . '/.config/nvim/plugin/**/*.vim', 0, 1) + glob($HOME . '/.config/nvim/after/plugin/**/*.vim', 0, 1)
             execute 'source ' . f
         endfor
     endfunction
