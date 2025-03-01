@@ -1,3 +1,5 @@
+packadd treesitter
+
 packadd coc
 
 packadd vivify.vim
