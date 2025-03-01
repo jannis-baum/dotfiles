@@ -87,6 +87,9 @@ vim:
     if exists("syntax_on")
         syntax reset
     endif
+  destination_nvim: ~/.config/nvim/colors/jellyfish.vim
+  header_nvim: |
+    highlight clear
   highlight:
     # syntax -------------------------------------------------------------------
     # gray
