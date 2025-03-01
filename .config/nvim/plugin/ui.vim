@@ -50,7 +50,10 @@ endfunction
 function! SLContent()
     let l:right = ' ' . s:coc_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
-    let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
+    " count only "proper" editor windows whose bufnr is not 0 (e.g. overlays)
+    " and which are on the current tab
+    let l:win_count = len(filter(range(1, winnr('$')), 'win_gettype(v:val) == "" && tabpagenr() == tabpagenr()'))
+    let l:spacer = repeat(l:win_count > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
 
