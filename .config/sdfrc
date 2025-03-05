@@ -7,7 +7,7 @@ function _restart_synapse() {
     open -g -a Synapse
 }
 
-dotfiles_actions=( \
+actions=( \
     ['^\.config/kitty/']="kill -SIGUSR1 $KITTY_PID" \
     ['karabiner\.edn$']='goku' \
     ['^\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
