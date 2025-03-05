@@ -33,8 +33,7 @@ function! s:modified_marker(buf)
 endfunction
 
 function! s:win_is_editor(winnr)
-    let l:type = win_gettype(a:winnr)
-    return l:type == '' || l:type == 'unknown'
+    return win_gettype(a:winnr) == ''
 endfunction
 
 " status line
