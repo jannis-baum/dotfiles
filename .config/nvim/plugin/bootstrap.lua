@@ -23,6 +23,7 @@ end
 
 bootstrap_paq {
     'savq/paq-nvim',
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 }
 
 -- PYTHON -------------------------------------------------------------
