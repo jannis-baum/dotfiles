@@ -6,6 +6,7 @@ if executable(g:python3_host_prog)
     finish
 endif
 
+echo 'Setting up Python environment for Neovim'
 " if not create the python env & install pynvim
 call system('cd ' . stdpath('data') . '; pyenv exec python3 -m venv ' . s:env_name)
 call system(g:python3_host_prog . ' -m pip install --upgrade pynvim')
