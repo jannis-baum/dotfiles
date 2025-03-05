@@ -25,8 +25,6 @@ packadd fugitive
 packadd vim-commentary
 packadd quick-scope
 
-packadd dart-vim-plugin
-
 packadd copilot.vim
 let g:copilot_filetypes = {
     \'markdown': v:false,
