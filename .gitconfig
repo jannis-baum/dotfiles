@@ -5,8 +5,8 @@
 
 [core]
 	excludesfile = /Users/jannisbaum/.gitignore_global
-	editor = 'vim'
-	pager = $HOME/.bin/vim-ansi-pager
+	editor = 'nvim'
+	pager = $HOME/.bin/vipage
 
 [alias]
     tree = log --oneline --reverse
@@ -21,8 +21,9 @@
 	defaultBranch = main
 
 [diff]
-	tool = vimdiff
-
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [difftool]
 	prompt = false
     trustExitCode = true

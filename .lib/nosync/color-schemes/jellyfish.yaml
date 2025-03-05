@@ -87,6 +87,9 @@ vim:
     if exists("syntax_on")
         syntax reset
     endif
+  destination_nvim: ~/.config/nvim/colors/jellyfish.vim
+  header_nvim: |
+    highlight clear
   highlight:
     # syntax -------------------------------------------------------------------
     # gray
@@ -132,7 +135,7 @@ vim:
       ul: { dark: '#ffaf00', light: '#0' }
     - set: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
       deco: undercurl
-      ul: { dark: '#afafff', light: '#afafff' } 
+      ul: { dark: '#afafff', light: '#afafff' }
     - set: [ErrorMsg]
       fg: { dark: '#ff5f5f', light: '#ff5f5f' }
     # ui -----------------------------------------------------------------------
@@ -149,7 +152,7 @@ vim:
     - set: [Folded]
       fg: { dark: '#58', light: '#58' }
       deco: italic
-    - set: [VertSplit]
+    - set: [VertSplit, WinSeparator]
       fg: { dark: '#26', light: '#26' }
       deco: bold
     - set: [QuickScopePrimary, QuickScopeSecondary]
@@ -157,6 +160,14 @@ vim:
       ul: Cursor
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
+    - set: [Pmenu]
+      fg: { dark: '#94', light: '#94' }
+      bg: { dark: '#26', light: '#26' }
+      deco: italic
+    - set: [PmenuSel]
+      fg: { dark: '#94', light: '#94' }
+      bg: { dark: '#58', light: '#58' }
+      deco: bold
     # misc ---------------------------------------------------------------------
     - set: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }

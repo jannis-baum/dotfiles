@@ -1,3 +1,4 @@
+set notermguicolors             " 256 instead of true color for chameleon hacks
 set wildmenu                    " menu
 set mouse=a                     " mouse
 set visualbell                  " bell
@@ -5,15 +6,13 @@ set t_vb=                       " .
 set scrolloff=8                 " extra lines while scrolling
 syntax on                       " syntax highlighting
 colorscheme jellyfish           " scheme is generated; see .lib/nosync/color-schemes
-" set number rnu                " line numbers
-set nuw=6                       " .
 set splitbelow                  " splits
 set splitright                  " .
 set noshowmode                  " other
 set showcmd                     " .
 set signcolumn=yes              " sign column (left)
-let &fillchars ..= ',eob:·'     " end of buffer filler character
-let &fillchars ..= ',vert:│'    " vertical separator
+set fillchars+=eob:·            " end of buffer filler character
+set noruler
 
 " cursor style
 let &t_SI = "\e[5 q"
@@ -31,6 +30,10 @@ let &t_AU = "\e[58;5;%dm"
 " status & tab line
 function! s:modified_marker(buf)
     return getbufinfo(a:buf)[0].changed ? ' ✻' : ''
+endfunction
+
+function! s:win_is_editor(winnr)
+    return win_gettype(a:winnr) == ''
 endfunction
 
 " status line
@@ -52,7 +55,9 @@ endfunction
 function! SLContent()
     let l:right = ' ' . s:coc_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
-    let l:spacer = repeat(tabpagewinnr(tabpagenr(), '$') > 1 ? '―' : ' ', l:spacer_width)
+    " count only "proper" editor windows which are on the current tab
+    let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) && tabpagenr() == tabpagenr()'))
+    let l:spacer = repeat(l:win_count > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
 
@@ -61,9 +66,7 @@ set laststatus=2
 
 " tab line
 function! s:tl_label(n)
-    let l:buflist = tabpagebuflist(a:n)
-    let l:winnr = tabpagewinnr(a:n)
-    let l:bufname = bufname(buflist[l:winnr - 1])
+    let l:bufname = bufname(tabpagebuflist(a:n)[0])
     return l:bufname . s:modified_marker(l:bufname)
 endfunction
 
@@ -73,8 +76,8 @@ function! TLContent()
     let l:tabnr = tabpagenr('$')
     for i in range(l:tabnr)
         let l:right ..= i + 1 == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-	    " set the tab page number (for mouse clicks)
-	    let l:right ..= '%' .. (i + 1) .. 'T'
+        " set the tab page number (for mouse clicks)
+        let l:right ..= '%' .. (i + 1) .. 'T'
         " set label
         let l:label = ' ' . s:tl_label(i + 1) . ' '
         let l:spacer_width -= strwidth(l:label) + 1
