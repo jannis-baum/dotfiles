@@ -5,7 +5,7 @@
 
 [core]
 	excludesfile = /Users/jannisbaum/.gitignore_global
-	editor = 'vim'
+	editor = 'nvim'
 	pager = $HOME/.bin/vim-ansi-pager
 
 [alias]
@@ -21,8 +21,9 @@
 	defaultBranch = main
 
 [diff]
-	tool = vimdiff
-
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [difftool]
 	prompt = false
     trustExitCode = true
