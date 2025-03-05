@@ -24,6 +24,7 @@ end
 bootstrap_paq {
     'savq/paq-nvim',
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'neoclide/coc.nvim', branch = 'release' },
 }
 
 -- PYTHON -------------------------------------------------------------

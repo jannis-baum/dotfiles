@@ -1,5 +1,3 @@
-packadd coc
-
 packadd vivify.vim
 
 packadd ultisnips
