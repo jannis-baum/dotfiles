@@ -1,6 +1,3 @@
-[submodule ".vim/pack/plugins/opt/pandoc-syntax"]
-	path = .config/nvim/pack/plugins/opt/pandoc-syntax
-	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
 [submodule ".vim/pack/plugins/opt/coc"]
 	path = .config/nvim/pack/plugins/opt/coc
 	url = https://github.com/neoclide/coc.nvim.git

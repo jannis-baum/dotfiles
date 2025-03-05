@@ -3,8 +3,6 @@ packadd treesitter
 packadd coc
 
 packadd vivify.vim
-let g:pandoc#syntax#conceal#use = 0
-packadd pandoc-syntax
 
 packadd ultisnips
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/ultisnips']
