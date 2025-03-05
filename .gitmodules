@@ -1,72 +1,72 @@
 [submodule ".synapse/modules/unicode"]
-	path = .synapse/modules/unicode
+	path = home/.synapse/modules/unicode
 	url = https://github.com/jannis-baum/synapse-unicode.git
 [submodule ".synapse/modules/cas"]
-	path = .synapse/modules/math
+	path = home/.synapse/modules/math
 	url = https://github.com/jannis-baum/synapse-cas.git
 [submodule ".synapse/modules/control-center"]
-	path = .synapse/modules/control-center
+	path = home/.synapse/modules/control-center
 	url = https://github.com/jannis-baum/synapse-control-center.git
 [submodule ".synapse/modules/app-search"]
-	path = .synapse/modules/app-search
+	path = home/.synapse/modules/app-search
 	url = https://github.com/jannis-baum/synapse-app-search.git
 [submodule ".synapse/modules/keychain"]
-	path = .synapse/modules/keychain
+	path = home/.synapse/modules/keychain
 	url = https://github.com/jannis-baum/synapse-keychain.git
 [submodule ".synapse/modules/pkill"]
-	path = .synapse/modules/pkill
+	path = home/.synapse/modules/pkill
 	url = https://github.com/jannis-baum/synapse-pkill.git
 [submodule ".synapse/modules/safari-histmarks"]
-	path = .synapse/modules/safari-histmarks
+	path = home/.synapse/modules/safari-histmarks
 	url = https://github.com/jannis-baum/synapse-safari-histmarks.git
 [submodule ".synapse/modules/safari-tabs"]
-	path = .synapse/modules/safari-tabs
+	path = home/.synapse/modules/safari-tabs
 	url = https://github.com/jannis-baum/synapse-safari-tabs.git
 [submodule ".synapse/modules/timer"]
-	path = .synapse/modules/timer
+	path = home/.synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
 [submodule ".zsh/scripts/plugins/time-tracker"]
-	path = .zsh/plugins/time-tracker
+	path = home/.zsh/plugins/time-tracker
 	url = https://github.com/jannis-baum/time-tracker.git
 [submodule ".lib/nosync/cookie-cleaner"]
-	path = .lib/nosync/cookie-cleaner
+	path = home/.lib/nosync/cookie-cleaner
 	url = https://github.com/jannis-baum/cookie-cleaner.git
 [submodule ".lib/markup-export"]
-	path = .lib/markup-export
+	path = home/.lib/markup-export
 	url = https://github.com/jannis-baum/markup-export.git
 [submodule ".lib/nosync/Synapse"]
-	path = .lib/nosync/Synapse
+	path = home/.lib/nosync/Synapse
 	url = https://github.com/jannis-baum/synapse.git
 [submodule ".zsh/scripts/plugins/git.zsh-dotfiles"]
-	path = .zsh/plugins/git.zsh-dotfiles
+	path = home/.zsh/plugins/git.zsh-dotfiles
 	url = https://github.com/jannis-baum/git.zsh-dotfiles.git
 [submodule ".zsh/plugins/sync-dotfiles.zsh"]
-	path = .zsh/plugins/sync-dotfiles.zsh
+	path = home/.zsh/plugins/sync-dotfiles.zsh
 	url = https://github.com/jannis-baum/sync-dotfiles.zsh.git
 [submodule ".zv/plugins/si-vim.zsh"]
-	path = .zv/plugins/si-vim.zsh
+	path = home/.zv/plugins/si-vim.zsh
 	url = https://github.com/jannis-baum/si-vim.zsh.git
 [submodule ".zv/plugins/fzf-dotfiles"]
-	path = .zv/plugins/fzf-dotfiles
+	path = home/.zv/plugins/fzf-dotfiles
 	url = https://github.com/jannis-baum/fzf-dotfiles.git
 [submodule ".vim/pack/plugins/opt/vivify.vim"]
-	path = .config/nvim/pack/plugins/opt/vivify.vim
+	path = config/nvim/pack/plugins/opt/vivify.vim
 	url = https://github.com/jannis-baum/vivify.vim.git
 [submodule ".lib/nosync/color-schemes/chameleon"]
-	path = .lib/nosync/color-schemes/chameleon
+	path = home/.lib/nosync/color-schemes/chameleon
 	url = https://github.com/jannis-baum/Chameleon.git
 [submodule ".zsh/plugins-other/fzf-tab-completion"]
-	path = .zsh/plugins-other/fzf-tab-completion
+	path = home/.zsh/plugins-other/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
 [submodule ".vim/pack/plugins/opt/jupyviv.vim"]
-	path = .config/nvim/pack/plugins/opt/jupyviv.vim
+	path = config/nvim/pack/plugins/opt/jupyviv.vim
 	url = https://github.com/jannis-baum/jupyviv.vim
 [submodule ".synapse/modules/clipboard"]
-	path = .synapse/modules/clipboard
+	path = home/.synapse/modules/clipboard
 	url = https://github.com/jannis-baum/synapse-clipboard.git
 [submodule ".synapse/modules/switcher"]
-	path = .synapse/modules/switcher
+	path = home/.synapse/modules/switcher
 	url = https://github.com/jannis-baum/synapse-switcher.git
 [submodule ".synapse/modules/kitty-tabs"]
-	path = .synapse/modules/kitty-tabs
+	path = home/.synapse/modules/kitty-tabs
 	url = https://github.com/jannis-baum/synapse-kitty-tabs.git
