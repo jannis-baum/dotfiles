@@ -6,7 +6,7 @@
 [core]
 	excludesfile = /Users/jannisbaum/.gitignore_global
 	editor = 'nvim'
-	pager = $HOME/.bin/vim-ansi-pager
+	pager = $HOME/.bin/vipage
 
 [alias]
     tree = log --oneline --reverse
