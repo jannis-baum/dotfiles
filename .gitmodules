@@ -8,9 +8,6 @@
 [submodule ".vim/pack/plugins/opt/ultisnips"]
 	path = .config/nvim/pack/plugins/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule ".vim/pack/plugins/opt/slime"]
-	path = .config/nvim/pack/plugins/opt/slime
-	url = https://github.com/jpalardy/vim-slime.git
 [submodule ".vim/pack/plugins/opt/dart-vim-plugin"]
 	path = .config/nvim/pack/plugins/opt/dart-vim-plugin
 	url = https://github.com/dart-lang/dart-vim-plugin.git

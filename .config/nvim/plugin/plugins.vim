@@ -25,18 +25,6 @@ packadd fugitive
 packadd vim-commentary
 packadd quick-scope
 
-packadd slime
-let g:slime_target = "vimterminal"
-let g:slime_vimterminal_config = {
-    \"term_finish": "close",
-    \"vertical": 1
-\}
-augroup SlimeTerm
-    autocmd!
-    autocmd BufEnter * if &buftype == "terminal" | call feedkeys("\<C-W>N") | endif
-    autocmd BufLeave * if &buftype == "terminal" | silent! normal i | endif
-augroup END
-
 packadd dart-vim-plugin
 
 packadd copilot.vim
