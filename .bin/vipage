@@ -4,6 +4,7 @@
 
 temp_file=$(mktemp)
 cat > "$temp_file"
+
 exec /opt/homebrew/bin/nvim \
     -R -M \
     -c "autocmd TermClose * call cursor($cur_pos)" \
