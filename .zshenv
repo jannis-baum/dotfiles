@@ -1,7 +1,7 @@
 export ZDOTDIR=~/.zsh
 
 export EDITOR=siv
-export MANPAGER="col -b | vim -c 'set ft=man nomod nolist ignorecase' --not-a-term -"
+export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 
 # fzf
 export FZF_DEFAULT_OPTS="
