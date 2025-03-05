@@ -56,7 +56,7 @@ function! SLContent()
     let l:right = ' ' . s:coc_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
     " count only "proper" editor windows which are on the current tab
-    let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) == "" && tabpagenr() == tabpagenr()'))
+    let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) && tabpagenr() == tabpagenr()'))
     let l:spacer = repeat(l:win_count > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
@@ -66,12 +66,7 @@ set laststatus=2
 
 " tab line
 function! s:tl_label(n)
-    let l:buflist = tabpagebuflist(a:n)
-    let l:winnr = tabpagewinnr(a:n)
-    if !s:win_is_editor(l:winnr)
-        return '.'
-    endif
-    let l:bufname = bufname(buflist[l:winnr - 1])
+    let l:bufname = bufname(tabpagebuflist(a:n)[0])
     return l:bufname . s:modified_marker(l:bufname)
 endfunction
 
