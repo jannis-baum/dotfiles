@@ -32,6 +32,11 @@ function! s:modified_marker(buf)
     return getbufinfo(a:buf)[0].changed ? ' ✻' : ''
 endfunction
 
+function! s:win_is_editor(winnr)
+    let l:type = win_gettype(a:winnr)
+    return l:type == '' || l:type == 'unknown'
+endfunction
+
 " status line
 function! s:coc_statusline()
     let l:info = get(b:, 'coc_diagnostic_info', {})
@@ -51,9 +56,8 @@ endfunction
 function! SLContent()
     let l:right = ' ' . s:coc_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
-    " count only "proper" editor windows whose bufnr is not 0 (e.g. overlays)
-    " and which are on the current tab
-    let l:win_count = len(filter(range(1, winnr('$')), 'win_gettype(v:val) == "" && tabpagenr() == tabpagenr()'))
+    " count only "proper" editor windows which are on the current tab
+    let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) == "" && tabpagenr() == tabpagenr()'))
     let l:spacer = repeat(l:win_count > 1 ? '―' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
@@ -65,6 +69,9 @@ set laststatus=2
 function! s:tl_label(n)
     let l:buflist = tabpagebuflist(a:n)
     let l:winnr = tabpagewinnr(a:n)
+    if !s:win_is_editor(l:winnr)
+        return '.'
+    endif
     let l:bufname = bufname(buflist[l:winnr - 1])
     return l:bufname . s:modified_marker(l:bufname)
 endfunction
