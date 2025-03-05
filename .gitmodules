@@ -1,9 +1,3 @@
-[submodule ".vim/pack/plugins/opt/ultisnips"]
-	path = .config/nvim/pack/plugins/opt/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
-[submodule ".vim/pack/plugins/opt/auto-pairs"]
-	path = .config/nvim/pack/plugins/opt/auto-pairs
-	url = https://github.com/jiangmiao/auto-pairs
 [submodule ".synapse/modules/unicode"]
 	path = .synapse/modules/unicode
 	url = https://github.com/jannis-baum/synapse-unicode.git
@@ -64,9 +58,6 @@
 [submodule ".zsh/plugins-other/fzf-tab-completion"]
 	path = .zsh/plugins-other/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
-[submodule ".vim/pack/plugins/opt/copilot.vim"]
-	path = .config/nvim/pack/plugins/opt/copilot.vim
-	url = https://github.com/github/copilot.vim.git
 [submodule ".vim/pack/plugins/opt/jupyviv.vim"]
 	path = .config/nvim/pack/plugins/opt/jupyviv.vim
 	url = https://github.com/jannis-baum/jupyviv.vim
@@ -76,9 +67,6 @@
 [submodule ".synapse/modules/switcher"]
 	path = .synapse/modules/switcher
 	url = https://github.com/jannis-baum/synapse-switcher.git
-[submodule ".vim/pack/plugins/opt/vim-sneak"]
-	path = .config/nvim/pack/plugins/opt/vim-sneak
-	url = https://github.com/justinmk/vim-sneak.git
 [submodule ".synapse/modules/kitty-tabs"]
 	path = .synapse/modules/kitty-tabs
 	url = https://github.com/jannis-baum/synapse-kitty-tabs.git

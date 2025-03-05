@@ -28,6 +28,10 @@ bootstrap_paq {
     'tpope/vim-fugitive',
     'tpope/vim-commentary',
     'unblevable/quick-scope',
+    'SirVer/ultisnips',
+    'jiangmiao/auto-pairs',
+    'justinmk/vim-sneak',
+    'github/copilot.vim',
 }
 
 -- PYTHON -------------------------------------------------------------
