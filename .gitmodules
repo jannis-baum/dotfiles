@@ -29,13 +29,13 @@
 	path = home/.zsh/plugins/time-tracker
 	url = https://github.com/jannis-baum/time-tracker.git
 [submodule ".lib/nosync/cookie-cleaner"]
-	path = home/.lib/nosync/cookie-cleaner
+	path = lib/cookie-cleaner
 	url = https://github.com/jannis-baum/cookie-cleaner.git
 [submodule ".lib/markup-export"]
 	path = home/.lib/markup-export
 	url = https://github.com/jannis-baum/markup-export.git
 [submodule ".lib/nosync/Synapse"]
-	path = home/.lib/nosync/Synapse
+	path = lib/Synapse
 	url = https://github.com/jannis-baum/synapse.git
 [submodule ".zsh/scripts/plugins/git.zsh-dotfiles"]
 	path = home/.zsh/plugins/git.zsh-dotfiles
@@ -53,7 +53,7 @@
 	path = config/nvim/pack/plugins/opt/vivify.vim
 	url = https://github.com/jannis-baum/vivify.vim.git
 [submodule ".lib/nosync/color-schemes/chameleon"]
-	path = home/.lib/nosync/color-schemes/chameleon
+	path = lib/color-schemes/chameleon
 	url = https://github.com/jannis-baum/Chameleon.git
 [submodule ".zsh/plugins-other/fzf-tab-completion"]
 	path = home/.zsh/plugins-other/fzf-tab-completion
