@@ -48,5 +48,5 @@ dotfiles/config), make sure you have `git`, `zsh`, `bash`, `make` and `swift`
 installed and run
 
 ```zsh
-zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/setup/full-setup.sh)
+zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/lib/setup/full-setup.sh)
 ```
