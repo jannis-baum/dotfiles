@@ -12,7 +12,7 @@ export FZF_DEFAULT_OPTS="
     --bind 'tab:down'
     --bind 'right:toggle-preview'"
 # rg
-export RIPGREP_CONFIG_PATH="$HOME/.rg/ripgreprc"
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 
 export CHROME_EXECUTABLE=/Applications/Chromium.app/Contents/MacOS/Chromium
 
