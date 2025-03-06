@@ -26,7 +26,7 @@
 	path = home/.synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
 [submodule ".zsh/scripts/plugins/time-tracker"]
-	path = home/.zsh/plugins/time-tracker
+	path = config/zsh/plugins/time-tracker
 	url = https://github.com/jannis-baum/time-tracker.git
 [submodule ".lib/nosync/cookie-cleaner"]
 	path = lib/cookie-cleaner
@@ -38,10 +38,10 @@
 	path = lib/Synapse
 	url = https://github.com/jannis-baum/synapse.git
 [submodule ".zsh/scripts/plugins/git.zsh-dotfiles"]
-	path = home/.zsh/plugins/git.zsh-dotfiles
+	path = config/zsh/plugins/git.zsh-dotfiles
 	url = https://github.com/jannis-baum/git.zsh-dotfiles.git
 [submodule ".zsh/plugins/sync-dotfiles.zsh"]
-	path = home/.zsh/plugins/sync-dotfiles.zsh
+	path = config/zsh/plugins/sync-dotfiles.zsh
 	url = https://github.com/jannis-baum/sync-dotfiles.zsh.git
 [submodule ".zv/plugins/si-vim.zsh"]
 	path = home/.zv/plugins/si-vim.zsh
@@ -56,7 +56,7 @@
 	path = lib/color-schemes/chameleon
 	url = https://github.com/jannis-baum/Chameleon.git
 [submodule ".zsh/plugins-other/fzf-tab-completion"]
-	path = home/.zsh/plugins-other/fzf-tab-completion
+	path = config/zsh/plugins-other/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
 [submodule ".vim/pack/plugins/opt/jupyviv.vim"]
 	path = config/nvim/pack/plugins/opt/jupyviv.vim
