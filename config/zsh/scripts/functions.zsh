@@ -39,7 +39,7 @@ function pipf() {
 }
 # reload color schemes
 function rcols() {
-    make -C ~/_/dev/dotfiles/.lib/nosync/color-schemes load
+    make -C ~/_/dev/dotfiles/lib/color-schemes load
     source $ZDOTDIR/.zshrc
     _si_vim_isrunning && _si_vim_cmd ReloadConfig
 }

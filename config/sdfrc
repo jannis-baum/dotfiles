@@ -1,0 +1,25 @@
+dotfiles_dir=$HOME/_/dev/dotfiles
+
+ignore_patterns=('*nosync*' 'README.md' '.DS_Store' '.fbs' '*deleteme*')
+
+function _restart_synapse() {
+    pkill Synapse
+    open -g -a Synapse
+}
+
+mapping=( \
+    [home]=~ \
+    [config]=~/.config \
+)
+
+actions=( \
+    ['^config/kitty/']="kill -SIGUSR1 $KITTY_PID" \
+    ['karabiner\.edn$']='goku' \
+    ['^home/\.zshenv$']="source $HOME/.zshenv && source $HOME/.zsh/.zshrc" \
+    ['^home/\.zsh/']="source $HOME/.zsh/.zshrc" \
+    ['^config/nvim/']="_si_vim_cmd ReloadConfig" \
+    ['^config/\zv/']="_si_vim_cmd ReloadConfig && source $HOME/.zsh/.zshrc" \
+    ['^home/\.synapse']="_restart_synapse" \
+    ['^home/\.synapse/modules/control-center$']="open -g hammerspoon://reloadConfig" \
+    ['^home/\.hammerspoon/']="open -g hammerspoon://reloadConfig" \
+)
