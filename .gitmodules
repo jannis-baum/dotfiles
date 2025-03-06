@@ -44,10 +44,10 @@
 	path = config/zsh/plugins/sync-dotfiles.zsh
 	url = https://github.com/jannis-baum/sync-dotfiles.zsh.git
 [submodule ".zv/plugins/si-vim.zsh"]
-	path = home/.zv/plugins/si-vim.zsh
+	path = config/zv/plugins/si-vim.zsh
 	url = https://github.com/jannis-baum/si-vim.zsh.git
 [submodule ".zv/plugins/fzf-dotfiles"]
-	path = home/.zv/plugins/fzf-dotfiles
+	path = config/zv/plugins/fzf-dotfiles
 	url = https://github.com/jannis-baum/fzf-dotfiles.git
 [submodule ".vim/pack/plugins/opt/vivify.vim"]
 	path = config/nvim/pack/plugins/opt/vivify.vim
