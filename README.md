@@ -18,11 +18,11 @@ dotfiles.
 
 - [kitty](https://sw.kovidgoyal.net/kitty/) terminal & as a `tmux`-replacement
   for working locally with much better performance. See
-    **[.config/kitty/](.config/kitty)**.
-- [zsh](https://www.zsh.org) as a shell. See **[.zsh/](.zsh)**.
-- [vim](https://www.vim.org) as an editor with
+    **[config/kitty/](config/kitty)**.
+- [zsh](https://www.zsh.org) as a shell. See **[.config/zsh/](.config/zsh)**.
+- [nvim](https://neovim.io) as an editor with
   [CoC](https://github.com/neoclide/coc.nvim) for completion & language support.
-  See **[.vim/](.vim)**.
+  See **[.config/nvim/](.config/nvim)**.
 - [fzf](https://github.com/junegunn/fzf) with
   [fd](https://github.com/sharkdp/fd),
   [ripgrep](https://github.com/BurntSushi/ripgrep) &
@@ -32,9 +32,9 @@ dotfiles.
   dotfiles](https://github.com/jannis-baum/git.zsh-dotfiles.git)**.
 - [Karabiner Elements](https://karabiner-elements.pqrs.org) with
   [goku](https://github.com/yqrashawn/GokuRakuJoudo) to remap my keyboard. See
-  **[karabiner.edn](.config/karabiner.edn)** for the definitions and **[my
-  visualized keyboard layers](docs.nosync/keyboard-layers.md)** to get a rough
-  idea of how I use my five column aka "tiny" [Corne
+  **[karabiner.edn](config/karabiner.edn)** for the definitions and **[my
+  visualized keyboard layers](docs/keyboard-layers.md)** to get a rough idea of
+  how I use my five column aka "tiny" [Corne
   keyboard](https://github.com/foostan/crkbd).
 - [kindaVim](https://kindavim.app) for vi-bindings **everywhere** in macOS
 - [Wooshy](https://wooshy.app) so I (almost) never need to use a mouse
@@ -48,5 +48,5 @@ dotfiles/config), make sure you have `git`, `zsh`, `bash`, `make` and `swift`
 installed and run
 
 ```zsh
-zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/setup.nosync/full-setup.sh)
+zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/setup/full-setup.sh)
 ```
