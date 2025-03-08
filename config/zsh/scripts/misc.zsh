@@ -1,7 +1,7 @@
 # aliases
 alias c="printf '\n%.0s' {2..$LINES} && clear"
 alias ej="diskutil eject /Volumes/LaCie*"
-alias w='printf "%s" "$(VISUAL=vim vipe)" | pbcopy'
+alias w='printf "%s" "$(VISUAL=nvim vipe)" | pbcopy'
 alias ssh='kitty +kitten ssh'
 alias trm='trash -F'
 alias g='gsi'
