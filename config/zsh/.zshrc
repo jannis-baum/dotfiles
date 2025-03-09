@@ -5,10 +5,12 @@ bindkey -v
 
 # PATH
 export PATH=$(tr -d ' ' <<<"\
-    :/Library/TeX/texbin/\
-    :/Applications/Postgres.app/Contents/Versions/latest/bin/\
-    :$HOME/.flutter/bin/\
-    :$HOME/.pub-cache/bin/\
+    $HOME/.bin\
+    :/opt/homebrew/bin\
+    :/Library/TeX/texbin\
+    :/Applications/Postgres.app/Contents/Versions/latest/bin\
+    :$HOME/.flutter/bin\
+    :$HOME/.pub-cache/bin\
     :$PATH
 ")
 
