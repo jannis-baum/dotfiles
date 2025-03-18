@@ -33,3 +33,4 @@ function! s:fzf_buffers() abort
 endfunction
 
 command! BUF call s:fzf_buffers()
+nnoremap <tab> :BUF<cr>
