@@ -214,7 +214,7 @@ text-mate:
       from: Special
 
 custom:
-    - destination: '~/.zsh/scripts/_theme.zsh'
+    - destination: '~/.config/zsh/scripts/_theme.zsh'
       content: |
         export PS1=$'%F{{{ Main }}}%f%K{{{ Main }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Main }}}%f %F{{{ Comment.fg }}}%{\x1b[3m%}%2~%{\x1b[0m%}%f %B»%b '
         export LS_COLORS="fi=1;38;5;{{ Text }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
