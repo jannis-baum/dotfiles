@@ -140,7 +140,7 @@ vim:
       fg: { dark: '#ff5f5f', light: '#ff5f5f' }
     # ui -----------------------------------------------------------------------
     - set: [SignColumn]
-      fg: { dark: '#d0', light: '#d0' }
+      fg: { dark: '#90', light: '#90' }
     - set: [StatusLineNC, StatusLineTermNC]
       fg: { dark: '#4', light: '#4' }
     - set: [StatusLine, StatusLineTerm, LineNr, EndOfBuffer, TabLine, TabLineFill]
