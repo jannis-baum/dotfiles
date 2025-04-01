@@ -33,6 +33,7 @@ bootstrap_paq {
     'jiangmiao/auto-pairs',
     'justinmk/vim-sneak',
     'github/copilot.vim',
+    'nvim-focus/focus.nvim',
 }
 
 -- PYTHON -------------------------------------------------------------
