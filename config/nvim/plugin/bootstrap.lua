@@ -23,16 +23,21 @@ end
 
 bootstrap_paq {
     'savq/paq-nvim',
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-    { 'neoclide/coc.nvim', branch = 'release' },
-    'tpope/vim-fugitive',
-    'tpope/vim-commentary',
-    { 'echasnovski/mini.notify', branch = 'stable' },
-    'SirVer/ultisnips',
+    -- editing
     'jiangmiao/auto-pairs',
-    'justinmk/vim-sneak',
+    'tpope/vim-commentary',
     'github/copilot.vim',
+    'SirVer/ultisnips',
+    -- moves
+    'justinmk/vim-sneak',
+    -- ui
     'nvim-focus/focus.nvim',
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'echasnovski/mini.notify', branch = 'stable' },
+    -- lsp
+    { 'neoclide/coc.nvim', branch = 'release' },
+    -- misc
+    'tpope/vim-fugitive',
 }
 
 -- PYTHON -------------------------------------------------------------
