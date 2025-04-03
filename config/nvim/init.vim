@@ -1,10 +1,8 @@
-set runtimepath^=~/.config/nvim runtimepath+=~/.config/nvim/after
+set runtimepath^=~/.config/nvim
+set runtimepath+=/opt/homebrew/opt/fzf
 let &packpath = &runtimepath
-:filetype plugin on
+
 set clipboard=unnamed
-set ttimeoutlen=5                " key code delay
-set rtp+=/opt/homebrew/opt/fzf   " install fzf
+set ttimeoutlen=5
 set nomodeline
 set switchbuf=usetab
-" silent! helptags ALL
-
