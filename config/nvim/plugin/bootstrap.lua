@@ -28,7 +28,6 @@ bootstrap_paq {
     'tpope/vim-fugitive',
     'tpope/vim-commentary',
     { 'echasnovski/mini.notify', branch = 'stable' },
-    'unblevable/quick-scope',
     'SirVer/ultisnips',
     'jiangmiao/auto-pairs',
     'justinmk/vim-sneak',

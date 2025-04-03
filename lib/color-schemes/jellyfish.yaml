@@ -155,9 +155,6 @@ vim:
     - set: [VertSplit, WinSeparator]
       fg: { dark: '#26', light: '#26' }
       deco: bold
-    - set: [QuickScopePrimary, QuickScopeSecondary]
-      deco: underdouble
-      ul: Cursor
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
     - set: [Pmenu]
