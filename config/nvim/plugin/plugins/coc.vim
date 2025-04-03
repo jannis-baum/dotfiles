@@ -24,9 +24,7 @@ let g:coc_global_extensions = [
 
 " BINDINGS ---
 " completion scrolling
-iunmap <down>
 inoremap <expr><down> coc#pum#visible() ? coc#pum#next(1) : coc#refresh()
-iunmap <up>
 inoremap <expr><Up> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 " snippets
 let g:coc_snippet_next = '<tab>'
