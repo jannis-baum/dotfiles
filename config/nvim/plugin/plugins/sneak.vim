@@ -1,4 +1,3 @@
-let g:sneak#label = 1
 " repeat f/t/m to go to next match
 let g:sneak#s_next = 1
 
