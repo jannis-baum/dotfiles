@@ -35,7 +35,6 @@ bootstrap_paq {
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     { 'echasnovski/mini.notify', branch = 'stable' },
     -- lsp
-    { 'neoclide/coc.nvim', branch = 'release' },
     -- misc
     'tpope/vim-fugitive',
 }
