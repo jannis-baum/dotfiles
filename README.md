@@ -20,9 +20,7 @@ dotfiles.
   for working locally with much better performance. See
     **[config/kitty/](config/kitty)**.
 - [zsh](https://www.zsh.org) as a shell. See **[.config/zsh/](.config/zsh)**.
-- [nvim](https://neovim.io) as an editor with
-  [CoC](https://github.com/neoclide/coc.nvim) for completion & language support.
-  See **[.config/nvim/](.config/nvim)**.
+- [nvim](https://neovim.io) as an editor. See **[.config/nvim/](.config/nvim)**.
 - [fzf](https://github.com/junegunn/fzf) with
   [fd](https://github.com/sharkdp/fd),
   [ripgrep](https://github.com/BurntSushi/ripgrep) &
