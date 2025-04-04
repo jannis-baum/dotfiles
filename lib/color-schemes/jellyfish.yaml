@@ -144,7 +144,7 @@ vim:
       deco: undercurl
       ul: Hint
     # ui -----------------------------------------------------------------------
-    - set: [SignColumn]
+    - set: [SignColumn, GitGutterAdd, GitGutterChange, GitGutterDelete]
       fg: { dark: '#90', light: '#90' }
     - set: [StatusLineNC, StatusLineTermNC]
       fg: { dark: '#4', light: '#4' }
