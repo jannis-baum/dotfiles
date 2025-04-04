@@ -1,3 +1,4 @@
+-- COMPLETION ------------------------------------------------------------------
 -- automatically start completion
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
@@ -18,3 +19,20 @@ vim.keymap.set('i', '<down>', function()
 end, { noremap = true })
 
 vim.cmd('set completeopt+=menuone,noselect,popup')
+
+-- DIAGNOSTICS -----------------------------------------------------------------
+vim.diagnostic.config({
+    virtual_text = {
+        current_line = true,
+    },
+    signs = { text = {
+        [vim.diagnostic.severity.ERROR] = '􀒉',
+        [vim.diagnostic.severity.WARN] = '􀇾',
+        [vim.diagnostic.severity.INFO] = '􀛣',
+        [vim.diagnostic.severity.HINT] = '􀛣',
+    } }
+})
+
+vim.keymap.set('n', '<leader>d', function()
+    vim.diagnostic.setloclist({ open = true })
+end)
