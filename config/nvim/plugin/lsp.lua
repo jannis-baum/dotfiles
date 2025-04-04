@@ -21,16 +21,23 @@ end, { noremap = true })
 vim.cmd('set completeopt+=menuone,noselect,popup')
 
 -- DIAGNOSTICS -----------------------------------------------------------------
+local diagnostic_symbols = {
+    [vim.diagnostic.severity.ERROR] = '􀒉',
+    [vim.diagnostic.severity.WARN] = '􀇾',
+    [vim.diagnostic.severity.INFO] = '􀛣',
+    [vim.diagnostic.severity.HINT] = '􀛣',
+}
 vim.diagnostic.config({
     virtual_text = {
         current_line = true,
+        virt_text_pos = 'eol_right_align',
+        prefix = function(diagnostic)
+            return diagnostic_symbols[diagnostic.severity] .. ' '
+        end
     },
-    signs = { text = {
-        [vim.diagnostic.severity.ERROR] = '􀒉',
-        [vim.diagnostic.severity.WARN] = '􀇾',
-        [vim.diagnostic.severity.INFO] = '􀛣',
-        [vim.diagnostic.severity.HINT] = '􀛣',
-    } }
+    signs = {
+        text = diagnostic_symbols
+    },
 })
 
 vim.keymap.set('n', '<leader>d', function()
