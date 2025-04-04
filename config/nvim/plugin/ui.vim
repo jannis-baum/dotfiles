@@ -4,7 +4,6 @@ set mouse=a                     " mouse
 set visualbell                  " bell
 set t_vb=                       " .
 set scrolloff=8                 " extra lines while scrolling
-syntax on                       " syntax highlighting
 colorscheme jellyfish           " scheme is generated; see .lib/nosync/color-schemes
 set splitbelow                  " splits
 set splitright                  " .
@@ -13,6 +12,7 @@ set showcmd                     " .
 set signcolumn=yes              " sign column (left)
 set fillchars+=eob:·            " end of buffer filler character
 set noruler
+set winborder=solid
 
 " cursor style
 let &t_SI = "\e[5 q"

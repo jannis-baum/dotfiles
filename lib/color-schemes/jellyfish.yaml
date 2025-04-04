@@ -96,7 +96,7 @@ vim:
   highlight:
     # syntax -------------------------------------------------------------------
     # gray
-    - set: [Comment, CocFloating]
+    - set: [Comment]
       fg: { dark: '#94', light: '#94' }
       deco: italic
     - set: [Ignore]
@@ -111,8 +111,6 @@ vim:
       fg: { dark: '#fc897e', light: '#fc897e' }
     - set: [Number]
       fg: { dark: '#ffac8f', light: '#ffac8f' }
-    - set: [CocSemVariable]
-      fg: Main
     # language
     - set: [Statement, Preproc, Keyword]
       fg: { dark: '#afd7ff', light: '#afd7ff' }
@@ -123,7 +121,7 @@ vim:
     # types, classes, functions
     - set: [Type]
       fg: { dark: '#c5f1ff', light: '#c5f1ff' }
-    - set: [CocSemClass, Function]
+    - set: [Function]
       fg: { dark: '#7fb7c3', light: '#7fb7c3' }
     # other
     - set: [Underlined]
@@ -137,7 +135,7 @@ vim:
       ul: Error
     - set: [DiagnosticWarn]
       fg: Warning
-    - set: [DiagnosticUnderlineWarn, CocUnusedHighlight]
+    - set: [DiagnosticUnderlineWarn]
       deco: undercurl
       ul: Warning
     - set: [DiagnosticHint, DiagnosticInfo, DiagnosticOk]
@@ -164,6 +162,8 @@ vim:
       deco: bold
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
+    - set: [NormalFloat]
+      bg: { dark: '#1b', light: '#1b' }
     - set: [Pmenu]
       fg: { dark: '#94', light: '#94' }
       bg: { dark: '#26', light: '#26' }
@@ -176,9 +176,6 @@ vim:
     - set: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#ffffaf', light: '#ffffaf' }
-    - set: [CocHighlightText]
-      deco: underline
-      ul: { dark: '#d0', light: '#d0' }
     - set: [Sneak]
       fg: { dark: '#26', light: '#26' }
       bg: Main
@@ -188,7 +185,7 @@ vim:
       deco: bold
     - set: [MoreMsg, Question]
       fg: { dark: '#ffaf00', light: '#ffaf00' }
-    - set: [Visual, CocMenuSel, CocListLine]
+    - set: [Visual]
       bg: { dark: '#58', light: '#58' }
 
 text-mate:
@@ -202,17 +199,13 @@ text-mate:
       from: String
     - set: [constant.numeric]
       from: Number
-    - set: [constant.language, constant.other, support.constant]
+    - set: [constant.language, constant.other, support.constant, variable, variable.parameter, support.other.variable]
       from: Constant
-    - set: [variable, variable.parameter, support.other.variable]
-      from: CocSemVariable
     - set: [keyword]
       from: Statement
-    - set: [entity.name.class, entity.other.inherited-class, support.class]
-      from: CocSemClass
     - set: [storage.type, storage, support.type]
       from: Type
-    - set: [entity.name.function, support.function]
+    - set: [entity.name.function, support.function, entity.name.class, entity.other.inherited-class, support.class]
       from: Function
     - set: [entity.name.tag, entity.other.attribute-name]
       from: Special
