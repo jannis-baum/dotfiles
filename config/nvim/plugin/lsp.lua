@@ -54,3 +54,10 @@ vim.keymap.set('i', '<C-o>', function()
         focus = false,
     })
 end)
+
+-- USEFUL DEFAULT KEYMAPS ------------------------------------------------------
+
+-- grn in Normal mode maps to vim.lsp.buf.rename()
+-- grr in Normal mode maps to vim.lsp.buf.references()
+-- gri in Normal mode maps to vim.lsp.buf.implementation()
+-- gra in Normal and Visual mode maps to vim.lsp.buf.code_action()
