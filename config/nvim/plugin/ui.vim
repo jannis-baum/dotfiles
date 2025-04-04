@@ -37,23 +37,39 @@ function! s:win_is_editor(winnr)
 endfunction
 
 " status line
-function! s:coc_statusline()
-    let l:info = get(b:, 'coc_diagnostic_info', {})
-    if empty(l:info) | return '' | endif
+function! s:lsp_statusline()
+    let l:diagnostics = luaeval('vim.diagnostic.get(0)')
+    if empty(l:diagnostics) | return '' | endif
+
+    let l:errors = 0
+    let l:warnings = 0
+    let l:infos = 0
+    for l:diag in l:diagnostics
+        if l:diag['severity'] == 1
+            let l:errors += 1
+        elseif l:diag['severity'] == 2
+            let l:warnings += 1
+        elseif l:diag['severity'] > 2
+            let l:infos += 1
+        endif
+    endfor
 
     let l:msgs = []
-    if get(l:info, 'error', 0)
-      call add(l:msgs, '❌ ' . l:info['error'])
+    if l:errors > 0
+      call add(l:msgs, '× ' . l:errors)
     endif
-    if get(l:info, 'warning', 0)
-      call add(l:msgs, '⚠️  ' . l:info['warning'])
+    if l:warnings > 0
+      call add(l:msgs, '• ' . l:warnings)
+    endif
+    if l:infos > 0
+      call add(l:msgs, '◦ ' . l:infos)
     endif
     if empty(l:msgs) | return '' | endif
     return join(l:msgs, ' | ') . ' | '
 endfunction
 
 function! SLContent()
-    let l:right = ' ' . s:coc_statusline() . @% . s:modified_marker('%') . ' '
+    let l:right = ' ' . s:lsp_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
     " count only "proper" editor windows which are on the current tab
     let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) && tabpagenr() == tabpagenr()'))
