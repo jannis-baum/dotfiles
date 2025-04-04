@@ -9,7 +9,8 @@ require('mason-lspconfig').setup({
         'bashls',
         'clangd', 'cmake',
         'dockerls', 'docker_compose_language_service',
-        'ts_ls', 'eslint', 'jsonls',
+        'yamlls', 'jsonls',
+        'ts_ls', 'eslint',
         'html', 'cssls', 'tailwindcss',
     }
 })
