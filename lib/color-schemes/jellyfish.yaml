@@ -6,6 +6,9 @@ colors:
   Text: { dark: '#c7c7c7', light: '#111111' }
   Main: { dark: '#d7afff', light: '#d7afff' }
   Cursor: { dark: '#ffb472', light: '#f37c13' }
+  Error: { dark: '#ff5f5f', light: '#ff5f5f' }
+  Warning: { dark: '#ffaf00', light: '#0' }
+  Hint: { dark: '#afafff', light: '#afafff' }
 highlights:
   - set: Main
     fg: Main
@@ -127,17 +130,21 @@ vim:
       fg: { dark: '#afd7ff', light: '#afd7ff' }
       deco: underline
     # errors & warnings --------------------------------------------------------
-    - set: [Error, SpellCap, SpellBad, CocErrorHighlight]
+    - set: [ErrorMsg, DiagnosticError]
+      fg: Error
+    - set: [Error, SpellCap, SpellBad, DiagnosticUnderlineError]
       deco: undercurl
-      ul: { dark: '#ff5f5f', light: '#ff5f5f' }
-    - set: [CocWarningHighlight, CocUnusedHighlight]
+      ul: Error
+    - set: [DiagnosticWarn]
+      fg: Warning
+    - set: [DiagnosticUnderlineWarn, CocUnusedHighlight]
       deco: undercurl
-      ul: { dark: '#ffaf00', light: '#0' }
-    - set: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
+      ul: Warning
+    - set: [DiagnosticHint, DiagnosticInfo, DiagnosticOk]
+      fg: Hint
+    - set: [DiagnosticUnderlineHint, DiagnosticUnderlineInfo, DiagnosticUnderlineOk, SpellLocal, SpellRare]
       deco: undercurl
-      ul: { dark: '#afafff', light: '#afafff' }
-    - set: [ErrorMsg]
-      fg: { dark: '#ff5f5f', light: '#ff5f5f' }
+      ul: Hint
     # ui -----------------------------------------------------------------------
     - set: [SignColumn]
       fg: { dark: '#90', light: '#90' }
