@@ -6,6 +6,9 @@ colors:
   Text: { dark: '#c7c7c7', light: '#111111' }
   Main: { dark: '#d7afff', light: '#d7afff' }
   Cursor: { dark: '#ffb472', light: '#f37c13' }
+  Error: { dark: '#ff5f5f', light: '#ff5f5f' }
+  Warning: { dark: '#ffaf00', light: '#0' }
+  Hint: { dark: '#afafff', light: '#afafff' }
 highlights:
   - set: Main
     fg: Main
@@ -93,7 +96,7 @@ vim:
   highlight:
     # syntax -------------------------------------------------------------------
     # gray
-    - set: [Comment, CocFloating]
+    - set: [Comment]
       fg: { dark: '#94', light: '#94' }
       deco: italic
     - set: [Ignore]
@@ -108,8 +111,6 @@ vim:
       fg: { dark: '#fc897e', light: '#fc897e' }
     - set: [Number]
       fg: { dark: '#ffac8f', light: '#ffac8f' }
-    - set: [CocSemVariable]
-      fg: Main
     # language
     - set: [Statement, Preproc, Keyword]
       fg: { dark: '#afd7ff', light: '#afd7ff' }
@@ -120,26 +121,30 @@ vim:
     # types, classes, functions
     - set: [Type]
       fg: { dark: '#c5f1ff', light: '#c5f1ff' }
-    - set: [CocSemClass, Function]
+    - set: [Function]
       fg: { dark: '#7fb7c3', light: '#7fb7c3' }
     # other
     - set: [Underlined]
       fg: { dark: '#afd7ff', light: '#afd7ff' }
       deco: underline
     # errors & warnings --------------------------------------------------------
-    - set: [Error, SpellCap, SpellBad, CocErrorHighlight]
+    - set: [ErrorMsg, DiagnosticError]
+      fg: Error
+    - set: [Error, SpellCap, SpellBad, DiagnosticUnderlineError]
       deco: undercurl
-      ul: { dark: '#ff5f5f', light: '#ff5f5f' }
-    - set: [CocWarningHighlight, CocUnusedHighlight]
+      ul: Error
+    - set: [DiagnosticWarn]
+      fg: Warning
+    - set: [DiagnosticUnderlineWarn]
       deco: undercurl
-      ul: { dark: '#ffaf00', light: '#0' }
-    - set: [CocInfoHighlight, CocHintHightlight, SpellLocal, SpellRare]
+      ul: Warning
+    - set: [DiagnosticHint, DiagnosticInfo, DiagnosticOk]
+      fg: Hint
+    - set: [DiagnosticUnderlineHint, DiagnosticUnderlineInfo, DiagnosticUnderlineOk, SpellLocal, SpellRare]
       deco: undercurl
-      ul: { dark: '#afafff', light: '#afafff' }
-    - set: [ErrorMsg]
-      fg: { dark: '#ff5f5f', light: '#ff5f5f' }
+      ul: Hint
     # ui -----------------------------------------------------------------------
-    - set: [SignColumn]
+    - set: [SignColumn, GitGutterAdd, GitGutterChange, GitGutterDelete]
       fg: { dark: '#90', light: '#90' }
     - set: [StatusLineNC, StatusLineTermNC]
       fg: { dark: '#4', light: '#4' }
@@ -157,6 +162,8 @@ vim:
       deco: bold
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
       bg: { dark: '#26', light: '#26' }
+    - set: [NormalFloat]
+      bg: { dark: '#1b', light: '#1b' }
     - set: [Pmenu]
       fg: { dark: '#94', light: '#94' }
       bg: { dark: '#26', light: '#26' }
@@ -169,9 +176,6 @@ vim:
     - set: [Search, MatchParen]
       fg: { dark: '#26', light: '#26' }
       bg: { dark: '#ffffaf', light: '#ffffaf' }
-    - set: [CocHighlightText]
-      deco: underline
-      ul: { dark: '#d0', light: '#d0' }
     - set: [Sneak]
       fg: { dark: '#26', light: '#26' }
       bg: Main
@@ -181,7 +185,7 @@ vim:
       deco: bold
     - set: [MoreMsg, Question]
       fg: { dark: '#ffaf00', light: '#ffaf00' }
-    - set: [Visual, CocMenuSel, CocListLine]
+    - set: [Visual]
       bg: { dark: '#58', light: '#58' }
 
 text-mate:
@@ -195,17 +199,13 @@ text-mate:
       from: String
     - set: [constant.numeric]
       from: Number
-    - set: [constant.language, constant.other, support.constant]
+    - set: [constant.language, constant.other, support.constant, variable, variable.parameter, support.other.variable]
       from: Constant
-    - set: [variable, variable.parameter, support.other.variable]
-      from: CocSemVariable
     - set: [keyword]
       from: Statement
-    - set: [entity.name.class, entity.other.inherited-class, support.class]
-      from: CocSemClass
     - set: [storage.type, storage, support.type]
       from: Type
-    - set: [entity.name.function, support.function]
+    - set: [entity.name.function, support.function, entity.name.class, entity.other.inherited-class, support.class]
       from: Function
     - set: [entity.name.tag, entity.other.attribute-name]
       from: Special
