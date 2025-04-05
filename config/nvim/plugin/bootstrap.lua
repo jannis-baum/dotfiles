@@ -30,6 +30,7 @@ bootstrap_paq {
     'SirVer/ultisnips',
     -- moves
     'justinmk/vim-sneak',
+    { 'echasnovski/mini.ai', branch = 'stable' },
     -- ui
     'nvim-focus/focus.nvim',
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
