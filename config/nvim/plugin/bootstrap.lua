@@ -31,6 +31,7 @@ bootstrap_paq {
     -- moves
     'justinmk/vim-sneak',
     { 'echasnovski/mini.ai', branch = 'stable' },
+    { 'echasnovski/mini.surround', branch = 'stable' },
     -- ui
     'nvim-focus/focus.nvim',
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
