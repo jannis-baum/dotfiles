@@ -24,7 +24,7 @@ end
 bootstrap_paq {
     'savq/paq-nvim',
     -- editing
-    { 'echasnovski/mini.pairs', branch = 'stable' },
+    { 'echasnovski/mini.pairs', branch = 'main' }, -- we use main here because stable still overwrites user <cr> mappings
     'tpope/vim-commentary',
     'github/copilot.vim',
     -- moves
