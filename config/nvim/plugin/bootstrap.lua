@@ -24,7 +24,7 @@ end
 bootstrap_paq {
     'savq/paq-nvim',
     -- editing
-    'jiangmiao/auto-pairs',
+    { 'echasnovski/mini.pairs', branch = 'stable' },
     'tpope/vim-commentary',
     'github/copilot.vim',
     'SirVer/ultisnips',

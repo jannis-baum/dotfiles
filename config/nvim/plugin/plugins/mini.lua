@@ -59,3 +59,5 @@ require('mini.surround').setup({
         ['e'] = { input = { '`.-`', '^.().*().$' }, output = { left = '`', right = '`' } },
     }
 })
+
+require('mini.pairs').setup()
