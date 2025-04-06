@@ -12,22 +12,20 @@ require('mini.ai').setup({
     search_method = 'cover_or_next',
     custom_textobjects = {
         -- bracket aliases
-        b = { '%b()', '^.().*().$' },
-        r = { '%b{}', '^.().*().$' },
-        t = { '%b[]', '^.().*().$' },
+        ['l'] = { '%b()', '^.().*().$' },
+        ['.'] = { '%b{}', '^.().*().$' },
+        ['o'] = { '%b[]', '^.().*().$' },
         -- quotation aliases
-        q = { "%b''", '^.().*().$' },
-        Q = { '%b""', '^.().*().$' },
+        ['q'] = { "%b''", '^.().*().$' },
+        ['s'] = { '%b""', '^.().*().$' },
+        ['e'] = { '%b``', '^.().*().$' },
     }
 })
 
--- remove default mapping of ; that we don't need because of sneak and instead
--- use for surround
-vim.keymap.del('n', ';')
 require('mini.surround').setup({
     search_method = 'cover_or_next',
     mappings = {
-        add = ';a',          -- add surrounding in Normal and Visual modes
+        add = ';',           -- add surrounding in Normal and Visual modes
         delete = ';d',       -- delete surrounding
         replace = ';r',      -- replace surrounding
         find = '',           -- find surrounding (to the right)
@@ -40,11 +38,12 @@ require('mini.surround').setup({
     },
     custom_surroundings = {
         -- bracket aliases
-        b = { input = { '(.-)', '^.().*().$' }, output = { left = '(', right = ')' } },
-        r = { input = { '{.-}', '^.().*().$' }, output = { left = '{', right = '}' } },
-        t = { input = { '%[.-%]', '^.().*().$' }, output = { left = '[', right = ']' } },
+        ['l'] = { input = { '(.-)', '^.().*().$' }, output = { left = '(', right = ')' } },
+        ['.'] = { input = { '{.-}', '^.().*().$' }, output = { left = '{', right = '}' } },
+        ['o'] = { input = { '%[.-%]', '^.().*().$' }, output = { left = '[', right = ']' } },
         -- quotation aliases
-        q = { input = { "'.-'", '^.().*().$' }, output = { left = "'", right = "'" } },
-        Q = { input = { '".-"', '^.().*().$' }, output = { left = '"', right = '"' } },
+        ['q'] = { input = { "'.-'", '^.().*().$' }, output = { left = "'", right = "'" } },
+        ['s'] = { input = { '".-"', '^.().*().$' }, output = { left = '"', right = '"' } },
+        ['e'] = { input = { '`.-`', '^.().*().$' }, output = { left = '`', right = '`' } },
     }
 })
