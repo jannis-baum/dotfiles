@@ -27,7 +27,6 @@ bootstrap_paq {
     { 'echasnovski/mini.pairs', branch = 'stable' },
     'tpope/vim-commentary',
     'github/copilot.vim',
-    'SirVer/ultisnips',
     -- moves
     'justinmk/vim-sneak',
     { 'echasnovski/mini.ai', branch = 'stable' },
