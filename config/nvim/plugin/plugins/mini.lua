@@ -10,6 +10,18 @@ vim.keymap.set('n', '<leader>m', notify.show_history, { noremap = true, silent =
 
 require('mini.ai').setup({
     search_method = 'cover_or_next',
+    mappings = {
+        around = 'a',
+        around_last = 'aN',
+        around_next = 'an',
+
+        inside = 'i',
+        inside_last = 'iN',
+        inside_next = 'in',
+
+        goto_left = '',
+        goto_right = '',
+    },
     custom_textobjects = {
         -- bracket aliases
         ['l'] = { '%b()', '^.().*().$' },
@@ -33,7 +45,7 @@ require('mini.surround').setup({
         highlight = '',      -- highlight surrounding
         update_n_lines = '', -- update `n_lines`
 
-        suffix_last = 'l', -- suffix to search with "prev" method
+        suffix_last = 'N', -- suffix to search with "prev" method
         suffix_next = 'n', -- suffix to search with "next" method
     },
     custom_surroundings = {
