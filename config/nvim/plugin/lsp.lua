@@ -38,7 +38,9 @@ vim.diagnostic.config({
         end
     },
     signs = {
-        text = diagnostic_symbols
+        text = diagnostic_symbols,
+        severity_sort = true,
+        priority = 10,
     },
 })
 
