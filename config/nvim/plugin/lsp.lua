@@ -23,15 +23,6 @@ vim.keymap.set('i', '<cr>', function()
     return vim.fn.pumvisible() == 1 and '<C-y>' or '<CR>'
 end, { expr = true, noremap = true})
 
--- map tab to jump snippets
-vim.keymap.set('i', '<tab>', function()
-    if vim.snippet.active({ direction = 1 }) then
-        return '<cmd>lua vim.snippet.jump(1)<cr>'
-    else
-        return '<tab>'
-    end
-end, { expr = true, silent = true })
-
 -- DIAGNOSTICS -----------------------------------------------------------------
 
 local diagnostic_symbols = {
