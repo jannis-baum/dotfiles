@@ -9,6 +9,7 @@ vim.notify = notify.make_notify({})
 vim.keymap.set('n', '<leader>m', notify.show_history, { noremap = true, silent = true })
 
 require('mini.ai').setup({
+    search_method = 'cover_or_next',
     custom_textobjects = {
         -- bracket aliases
         b = { '%b()', '^.().*().$' },
@@ -21,6 +22,7 @@ require('mini.ai').setup({
 })
 
 require('mini.surround').setup({
+    search_method = 'cover_or_next',
     mappings = {
         add = ';a',        -- Add surrounding in Normal and Visual modes
         delete = ';d',     -- Delete surrounding
