@@ -10,14 +10,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
+-- sensible menu config
+vim.cmd('set completeopt+=menuone,noselect,popup,fuzzy')
+
 -- open completion with <down> key
 vim.keymap.set('i', '<down>', function()
     local key = vim.fn.pumvisible() == 1 and '<C-n>' or '<C-x><C-o>'
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), 'n', false)
 end, { noremap = true })
-
--- sensible menu config
-vim.cmd('set completeopt+=menuone,noselect,popup')
 
 -- remap <return> to accept completion and apply side effects (like <c-y>)
 vim.keymap.set('i', '<cr>', function()
