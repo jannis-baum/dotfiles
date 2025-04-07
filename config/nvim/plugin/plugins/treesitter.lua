@@ -22,15 +22,26 @@ local main_symbols = {
     'function_declaration', 'function_definition',
     'class_declaration', 'class_definition'
 }
+local blacklist_symbols = {
+    'comment'
+}
 
 local function inspect_node(node, depth, storage)
     local type = node:type()
-    if depth == 1 or vim.list_contains(main_symbols, type) then
+    if (depth == 1 and not vim.list_contains(blacklist_symbols, type)) or vim.list_contains(main_symbols, type) then
         table.insert(storage, { depth = depth, node = node })
     end
     for _, child in ipairs(node:named_children()) do
         inspect_node(child, depth + 1, storage)
     end
+end
+
+local function fzf_line(node, depth)
+    local row, column, _ = node:start()
+    row = row + 1
+    column = column + 1
+    local text = string.rep(' ', (depth - 1) * 2) .. string.sub(vim.fn.getline(row), column)
+    return tostring(row) .. ':' .. tostring(column) .. ':' .. text
 end
 
 function MainSymbols()
@@ -42,5 +53,9 @@ function MainSymbols()
     local root = parse_result[1]:root()
     local results = {}
     inspect_node(root, 0, results)
-    return results
+    local fzf_lines = {}
+    for _, result in pairs(results) do
+        table.insert(fzf_lines, fzf_line(result['node'], result['depth']))
+    end
+    return table.concat(fzf_lines, '\n')
 end
