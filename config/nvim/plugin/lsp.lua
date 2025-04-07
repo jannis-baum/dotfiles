@@ -41,9 +41,9 @@ vim.diagnostic.config({
     },
     signs = {
         text = diagnostic_symbols,
-        severity_sort = true,
         priority = 10,
     },
+    severity_sort = true,
 })
 
 vim.keymap.set('n', '<leader>d', function()
