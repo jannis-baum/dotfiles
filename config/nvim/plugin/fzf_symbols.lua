@@ -1,6 +1,4 @@
 -- TODO:
--- - sometimes the same function has a defintion and declaration (e.g.
---   Vimscript), these need to be omitted
 -- - multi line function definitions, e.g. with @attributes in Swift or Python
 -- - syntax highlighting on fzf lines
 -- - code preview
@@ -52,21 +50,26 @@ local function fzf_sink(line)
     vim.fn.setpos('.', { 0, row, column })
 end
 
-local function fzf_line(node, depth)
-    local row, column, _ = node:start()
-    row = row + 1
-    column = column + 1
-    local text = string.rep(' ', (depth - 1) * 2) .. string.sub(vim.fn.getline(row), column)
-    return tostring(row) .. ':' .. tostring(column) .. ':' .. text
-end
-
 function SelectSymbol()
     local symbols = symbol_nodes()
     if symbols == nil then return end
 
     local fzf_input = {}
+    local prev_row = 0
     for _, symbol in pairs(symbols) do
-        table.insert(fzf_input, fzf_line(symbol['node'], symbol['depth']))
+        local node = symbol['node']
+        local depth = symbol['depth']
+        local row, column, _ = node:start()
+        row = row + 1
+        column = column + 1
+        -- omit if we already have something on this line, e.g. in Vimscript
+        -- where there are both `function_declaration` and `function_definition`
+        if prev_row == row then goto continue end
+
+        local text = string.rep(' ', (depth - 1) * 2) .. string.sub(vim.fn.getline(row), column)
+        table.insert(fzf_input, tostring(row) .. ':' .. tostring(column) .. ':' .. text)
+        prev_row = row
+        ::continue::
     end
 
     local fzf_wrap = vim.fn['fzf#wrap']({
