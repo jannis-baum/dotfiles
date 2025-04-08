@@ -2,16 +2,27 @@
 -- - sometimes the same function has a defintion and declaration (e.g.
 --   Vimscript), these need to be omitted
 -- - multi line function definitions, e.g. with @attributes in Swift or Python
--- - add `init_declaration` to relevant symbols (e.g. from Swift)
--- - check how things look in C, C++, TypeScript
+-- - syntax highlighting on fzf lines
 -- - code preview
 
 local relevant_symbols = {
-    'function_declaration', 'function_definition',
-    'class_declaration', 'class_definition'
+    -- relevant symbols & examples for languages that use them
+    'function_declaration', -- Lua
+    'function_definition',  -- Python
+    'class_declaration',    -- Lua
+    'class_definition',     -- Python
+    'class_specifier',      -- C++
+    'init_declaration',     -- Swift
+    'field_declaration',    -- C++
+    'friend_declaration',   -- C++
+    'lexical_declaration',  -- TypeScript
 }
 local blacklist_symbols = {
-    'comment'
+    'comment',               -- everything
+    'import_statement',      -- Python
+    'import_from_statement', -- Python
+    'import_declaration',    -- Swift
+    'preproc_include',       -- C
 }
 
 local function inspect_node(node, depth, storage)
