@@ -1,6 +1,9 @@
 -- TODO:
 -- - sometimes the same function has a defintion and declaration (e.g.
 --   Vimscript), these need to be omitted
+-- - multi line function definitions, e.g. with @attributes in Swift or Python
+-- - add `init_declaration` to relevant symbols (e.g. from Swift)
+-- - check how things look in C, C++, TypeScript
 -- - code preview
 
 local relevant_symbols = {
