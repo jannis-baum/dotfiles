@@ -1,3 +1,5 @@
+local M = {}
+
 -- get hl keys (e.g. semantic tokens, treesitter, syntax) in priority order
 local _hl_priorities = nil
 local function get_hl_priorities()
@@ -76,11 +78,11 @@ local function get_ansi_cterm(hl)
     return '\27[' .. table.concat(codes, ';') .. 'm'
 end
 
-local function ansi_text(start_line, end_line, buf)
+M.get = function(start_line, end_line, buf)
     local lines = vim.api.nvim_buf_get_lines(buf, start_line, end_line, false)
     local result_lines = {}
 
-    -- assume starting with no highlighting/reset
+    -- start with no highlighting/reset
     local prev_ansi = ansi_reset
     for i, line_text in ipairs(lines) do
         local result_line = ''
@@ -101,20 +103,4 @@ local function ansi_text(start_line, end_line, buf)
     return table.concat(result_lines, '\n')
 end
 
-function TSHLTest()
-    local parser = vim.treesitter.get_parser(0)
-    if parser == nil then return end
-    local parse_result = parser:parse(true)
-    if parse_result == nil then return end
-
-    local root = parse_result[1]:root()
-    local start_line, _, end_line, _ = root:range()
-    local text = ansi_text(start_line, end_line, 0)
-    local fp = io.open('deleteme.txt', 'w')
-    if fp == nil then
-        vim.print('fp is nil')
-        return
-    end
-    fp:write(text)
-    fp:close()
-end
+return M
