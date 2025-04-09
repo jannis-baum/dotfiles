@@ -36,6 +36,8 @@ local function get_hl(inspect_data)
     end
 end
 
+local ansi_reset = '\27[0m'
+
 -- attributes handled the same in cterm and gui
 local function add_ansi_attr_codes(codes, attrs)
     if attrs == nil then return end
@@ -47,6 +49,7 @@ local function add_ansi_attr_codes(codes, attrs)
 end
 
 local function get_ansi_cterm(hl)
+    if hl == nil then return ansi_reset end
     -- cterm-specific foreground/background color
     local function get_ansi_color_code(attr, num)
         if not num then return nil end
@@ -68,24 +71,34 @@ local function get_ansi_cterm(hl)
     add_ansi_attr_codes(codes, hl['cterm'])
 
     -- no codes -> reset
-    if next(codes) == nil then return '\27[0m' end
+    if next(codes) == nil then return ansi_reset end
     return '\27[' .. table.concat(codes, ';') .. 'm'
 end
 
 local function ansi_text(node, buf)
     local start_line, _, end_line, _ = node:range()
-    local lines = vim.api.nvim_buf_get_lines(buf, start_line - 1, end_line, false)
+    local lines = vim.api.nvim_buf_get_lines(buf, start_line, end_line, false)
+    local result_lines = {}
+
+    -- assume starting with no highlighting/reset
+    local prev_ansi = ansi_reset
     for i, line_text in ipairs(lines) do
+        local result_line = ''
         local line_num = start_line - 1 + i
         for col = 0, #line_text - 1 do
             local inspect_data = vim.inspect_pos(buf, line_num, col)
             local hl = get_hl(inspect_data)
             local ansi = get_ansi_cterm(hl)
-            -- - translate hl to ansi & return ansi string
-            -- - run `get_hl()`, check if ansi has changed. if so, add it to the
-            --   string
+            if ansi ~= prev_ansi then
+                result_line = result_line .. ansi
+                prev_ansi = ansi
+            end
+            result_line = result_line .. line_text:sub(col + 1, col + 1)
         end
+        table.insert(result_lines, result_line)
     end
+
+    return table.concat(result_lines, '\n')
 end
 
 function TSHLTest()
@@ -95,7 +108,13 @@ function TSHLTest()
     if parse_result == nil then return end
 
     local root = parse_result[1]:root()
-    vim.print(ansi_text(root, 0))
+    local fp = io.open('deleteme.txt', 'w')
+    if fp == nil then
+        vim.print('fp is nil')
+        return
+    end
+    fp:write(ansi_text(root, 0))
+    fp:close()
 end
 
 function TSHLTest2()
