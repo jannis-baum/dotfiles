@@ -1,7 +1,7 @@
 -- TODO:
 -- - multi line function definitions, e.g. with @attributes in Swift or Python
--- - syntax highlighting on fzf lines
--- - code preview
+
+local ansi = require('ansi_highlight')
 
 local relevant_symbols = {
     -- relevant symbols & examples for languages that use them
@@ -60,14 +60,13 @@ function SelectSymbol()
         local node = symbol['node']
         local depth = symbol['depth']
         local row, column, _ = node:start()
-        row = row + 1
-        column = column + 1
         -- omit if we already have something on this line, e.g. in Vimscript
         -- where there are both `function_declaration` and `function_definition`
         if prev_row == row then goto continue end
 
-        local text = string.rep(' ', (depth - 1) * 2) .. string.sub(vim.fn.getline(row), column)
-        table.insert(fzf_input, tostring(row) .. ':' .. tostring(column) .. ':' .. text)
+        local text = ansi.get(0, row, column, row, #vim.fn.getline(row + 1))
+        local indented_text = string.rep(' ', (depth - 1) * 2) .. text
+        table.insert(fzf_input, tostring(row + 1) .. ':' .. tostring(column + 1) .. ':' .. indented_text)
         prev_row = row
         ::continue::
     end
@@ -76,7 +75,8 @@ function SelectSymbol()
         source = fzf_input,
         options = {
             '--delimiter', ':',
-            '--with-nth', '3..'
+            '--with-nth', '3..',
+            '--ansi',
         },
         sink = fzf_sink
     })

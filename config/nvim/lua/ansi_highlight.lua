@@ -78,8 +78,8 @@ local function get_ansi_cterm(hl)
     return '\27[' .. table.concat(codes, ';') .. 'm'
 end
 
-M.get = function(start_line, end_line, buf)
-    local lines = vim.api.nvim_buf_get_lines(buf, start_line, end_line, false)
+M.get = function(buf, start_line, start_col, end_line, end_col)
+    local lines = vim.api.nvim_buf_get_text(buf, start_line, start_col, end_line, end_col, {})
     local result_lines = {}
 
     -- start with no highlighting/reset
@@ -88,7 +88,8 @@ M.get = function(start_line, end_line, buf)
         local result_line = ''
         local line_num = start_line - 1 + i
         for col = 0, #line_text - 1 do
-            local inspect_data = vim.inspect_pos(buf, line_num, col)
+            local inspect_col = i == 1 and col + start_col or col
+            local inspect_data = vim.inspect_pos(buf, line_num, inspect_col)
             local hl = get_hl(inspect_data)
             local ansi = get_ansi_cterm(hl)
             if ansi ~= prev_ansi then
