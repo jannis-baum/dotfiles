@@ -1,3 +1,4 @@
+-- get hl keys (e.g. semantic tokens, treesitter, syntax) in priority order
 local _hl_priorities = nil
 local function get_hl_priorities()
     if _hl_priorities ~= nil then return _hl_priorities end
@@ -12,25 +13,20 @@ local function get_hl_priorities()
     return _hl_priorities
 end
 
-
+-- get hl group name from inspection data
 local function get_hl(inspect_data)
+    -- check elements by order of `vim.hl.priorities`
     local hl_priorities = get_hl_priorities()
     for _, capture_key in ipairs(hl_priorities) do
         local captures = inspect_data[capture_key]
         if captures ~= nil and next(captures) ~= nil then
+            -- get last name of capture item of highest priority element
             local capture = captures[#captures]
-            local hl = capture['hl_group'] or capture['opts']['hl_group']
-            return hl
+            -- ['hl_group'] for semantic tokens & syntax,
+            -- ['opts']['hl_group'] for treesitter
+            return capture['hl_group'] or capture['opts']['hl_group']
         end
     end
-    -- - check elements by order of `vim.hl.priorities`
-    -- - get last name of capture item of highest priority element
-    -- - use `hlID('<name>')` to get syntax hl ID
-    -- - use `synIDtrans(<syntax hl ID>)` to get translated syntax ID (e.g.
-    --   resolve links)
-    -- - use `synIDattr(<translated syntax ID>)` to get highlight attributes,
-    --   e.g. fg/bg/bold/italic/etc
-    -- - translate hl to ansi & return ansi string
 end
 
 local function ansi_text(node, buf)
@@ -41,8 +37,14 @@ local function ansi_text(node, buf)
         for col = 0, #line_text - 1 do
             local inspect_data = vim.inspect_pos(buf, line_num, col)
             local hl = get_hl(inspect_data)
-            -- run `get_hl()`, check if ansi has changed. if so, add it to the
-            -- string
+            -- - use `hlID('<name>')` to get syntax hl ID
+            -- - use `synIDtrans(<syntax hl ID>)` to get translated syntax ID
+            --   (e.g. resolve links)
+            -- - use `synIDattr(<translated syntax ID>)` to get highlight
+            --   attributes, e.g. fg/bg/bold/italic/etc
+            -- - translate hl to ansi & return ansi string
+            -- - run `get_hl()`, check if ansi has changed. if so, add it to the
+            --   string
         end
     end
 end
@@ -58,8 +60,6 @@ function TSHLTest()
 end
 
 function TSHLTest2()
-    -- run this on all cells
-    -- check treesitter, syntax & semantic_tokens and get the *last* hl that this defines
     local inspection = vim.inspect_pos()
     vim.print(get_hl(inspection))
 end
