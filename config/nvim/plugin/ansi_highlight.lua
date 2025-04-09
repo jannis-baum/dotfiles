@@ -36,8 +36,40 @@ local function get_hl(inspect_data)
     end
 end
 
-local function get_ansi(hl)
-    return hl
+-- attributes handled the same in cterm and gui
+local function add_ansi_attr_codes(codes, attrs)
+    if attrs == nil then return end
+    if attrs.bold then table.insert(codes, '1') end
+    if attrs.italic then table.insert(codes, '3') end
+    if attrs.underline then table.insert(codes, '4') end
+    if attrs.inverse then table.insert(codes, '7') end
+    if attrs.strikethrough then table.insert(codes, '9') end
+end
+
+local function get_ansi_cterm(hl)
+    -- cterm-specific foreground/background color
+    local function get_ansi_color_code(attr, num)
+        if not num then return nil end
+        -- first 16 colors are handled differently
+        if num < 16 then
+            if attr == 'fg' then
+                return num < 8 and tostring(30 + num) or tostring(90 + (num - 8))
+            else
+                return num < 8 and tostring(40 + num) or tostring(100 + (num - 8))
+            end
+        else
+            return string.format('%s;5;%d', (attr == 'fg' and '38' or '48'), num)
+        end
+    end
+
+    local codes = {}
+    table.insert(codes, get_ansi_color_code('fg', hl['ctermfg']))
+    table.insert(codes, get_ansi_color_code('bg', hl['ctermbg']))
+    add_ansi_attr_codes(codes, hl['cterm'])
+
+    -- no codes -> reset
+    if next(codes) == nil then return '\27[0m' end
+    return '\27[' .. table.concat(codes, ';') .. 'm'
 end
 
 local function ansi_text(node, buf)
@@ -48,6 +80,7 @@ local function ansi_text(node, buf)
         for col = 0, #line_text - 1 do
             local inspect_data = vim.inspect_pos(buf, line_num, col)
             local hl = get_hl(inspect_data)
+            local ansi = get_ansi_cterm(hl)
             -- - translate hl to ansi & return ansi string
             -- - run `get_hl()`, check if ansi has changed. if so, add it to the
             --   string
@@ -68,7 +101,7 @@ end
 function TSHLTest2()
     local inspection = vim.inspect_pos()
     local hl = get_hl(inspection)
-    vim.print(hl)
+    vim.print(get_ansi_cterm(hl))
 end
 
 TSHLTest2()
