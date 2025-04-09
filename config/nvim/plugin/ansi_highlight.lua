@@ -20,18 +20,19 @@ local function get_hl(inspect_data)
     for _, capture_key in ipairs(hl_priorities) do
         local captures = inspect_data[capture_key]
         if captures ~= nil and next(captures) ~= nil then
-            -- get last name of capture item of highest priority element
-            local capture = captures[#captures]
-            -- ['hl_group'] for semantic tokens & syntax,
-            -- ['opts']['hl_group'] for treesitter
-            local hl_group = capture['hl_group'] or capture['opts']['hl_group']
-            -- get syntax hl ID and "translate" it/resolve links (nvim_get_hl
-            -- also has link resolving option but it doesn't seem to work)
-            local hl_id = vim.fn.synIDtrans(vim.fn.hlID(hl_group))
-            local hl = vim.api.nvim_get_hl(0, { id = hl_id })
-            -- check that there is actually defined highlighting, else we fall
-            -- back to the next capture/lower priority hl key
-            if next(hl) ~= nil then return hl end
+            for i = 1, #captures do
+                local capture = captures[#captures + 1 - i]
+                -- ['hl_group'] for semantic tokens & syntax,
+                -- ['opts']['hl_group'] for treesitter
+                local hl_group = capture['hl_group'] or capture['opts']['hl_group']
+                -- get syntax hl ID and "translate" it/resolve links (nvim_get_hl
+                -- also has link resolving option but it doesn't seem to work)
+                local hl_id = vim.fn.synIDtrans(vim.fn.hlID(hl_group))
+                local hl = vim.api.nvim_get_hl(0, { id = hl_id })
+                -- check that there is actually defined highlighting, else we fall
+                -- back to the next capture/lower priority hl key
+                if next(hl) ~= nil then return hl end
+            end
         end
     end
 end
@@ -75,8 +76,7 @@ local function get_ansi_cterm(hl)
     return '\27[' .. table.concat(codes, ';') .. 'm'
 end
 
-local function ansi_text(node, buf)
-    local start_line, _, end_line, _ = node:range()
+local function ansi_text(start_line, end_line, buf)
     local lines = vim.api.nvim_buf_get_lines(buf, start_line, end_line, false)
     local result_lines = {}
 
@@ -108,19 +108,13 @@ function TSHLTest()
     if parse_result == nil then return end
 
     local root = parse_result[1]:root()
+    local start_line, _, end_line, _ = root:range()
+    local text = ansi_text(start_line, end_line, 0)
     local fp = io.open('deleteme.txt', 'w')
     if fp == nil then
         vim.print('fp is nil')
         return
     end
-    fp:write(ansi_text(root, 0))
+    fp:write(text)
     fp:close()
 end
-
-function TSHLTest2()
-    local inspection = vim.inspect_pos()
-    local hl = get_hl(inspection)
-    vim.print(get_ansi_cterm(hl))
-end
-
-TSHLTest2()
