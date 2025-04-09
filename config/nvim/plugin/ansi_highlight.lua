@@ -13,7 +13,7 @@ local function get_hl_priorities()
     return _hl_priorities
 end
 
--- get hl group name from inspection data
+-- get `nvim_get_hl` value for inspection data
 local function get_hl(inspect_data)
     -- check elements by order of `vim.hl.priorities`
     local hl_priorities = get_hl_priorities()
@@ -24,9 +24,20 @@ local function get_hl(inspect_data)
             local capture = captures[#captures]
             -- ['hl_group'] for semantic tokens & syntax,
             -- ['opts']['hl_group'] for treesitter
-            return capture['hl_group'] or capture['opts']['hl_group']
+            local hl_group = capture['hl_group'] or capture['opts']['hl_group']
+            -- get syntax hl ID and "translate" it/resolve links (nvim_get_hl
+            -- also has link resolving option but it doesn't seem to work)
+            local hl_id = vim.fn.synIDtrans(vim.fn.hlID(hl_group))
+            local hl = vim.api.nvim_get_hl(0, { id = hl_id })
+            -- check that there is actually defined highlighting, else we fall
+            -- back to the next capture/lower priority hl key
+            if next(hl) ~= nil then return hl end
         end
     end
+end
+
+local function get_ansi(hl)
+    return hl
 end
 
 local function ansi_text(node, buf)
@@ -37,11 +48,6 @@ local function ansi_text(node, buf)
         for col = 0, #line_text - 1 do
             local inspect_data = vim.inspect_pos(buf, line_num, col)
             local hl = get_hl(inspect_data)
-            -- - use `hlID('<name>')` to get syntax hl ID
-            -- - use `synIDtrans(<syntax hl ID>)` to get translated syntax ID
-            --   (e.g. resolve links)
-            -- - use `synIDattr(<translated syntax ID>)` to get highlight
-            --   attributes, e.g. fg/bg/bold/italic/etc
             -- - translate hl to ansi & return ansi string
             -- - run `get_hl()`, check if ansi has changed. if so, add it to the
             --   string
@@ -61,5 +67,8 @@ end
 
 function TSHLTest2()
     local inspection = vim.inspect_pos()
-    vim.print(get_hl(inspection))
+    local hl = get_hl(inspection)
+    vim.print(hl)
 end
+
+TSHLTest2()
