@@ -4,5 +4,4 @@ let &packpath = &runtimepath
 
 set clipboard=unnamed
 set ttimeoutlen=5
-set nomodeline
 set switchbuf=usetab
