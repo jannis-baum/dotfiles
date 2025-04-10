@@ -41,6 +41,7 @@ bootstrap_paq {
     'neovim/nvim-lspconfig',
     -- misc
     'tpope/vim-fugitive',
+    'hat0uma/csvview.nvim',
 }
 
 -- PYTHON -------------------------------------------------------------
