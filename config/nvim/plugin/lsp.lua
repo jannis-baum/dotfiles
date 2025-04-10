@@ -13,10 +13,32 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- sensible menu config
 vim.cmd('set completeopt+=menuone,noselect,popup,fuzzy')
 
--- open completion with <down> key
+-- open completion with <down> key if not open, else select next
 vim.keymap.set('i', '<down>', function()
-    return vim.fn.pumvisible() == 1 and '<C-n>' or '<C-x><C-o>'
+    -- if pum is visible: select next
+    if vim.fn.pumvisible() == 1 then
+        return '<C-n>'
+    end
+    -- else open pum without `noselect` so we already select the first match
+    vim.opt.completeopt:remove('noselect')
+    -- reset to `noselect` after this completion
+    vim.api.nvim_create_autocmd('CompleteDone', {
+        once = true,
+        callback = function() vim.opt.completeopt:append('noselect') end
+    })
+    -- open completion menu
+    return '<C-x><C-o>'
 end, { expr = true, noremap = true })
+
+-- reset completion with <up> key if upper-most item (or none) is selected, else select prev
+vim.keymap.set('i', '<up>', function()
+    local info = vim.fn.complete_info()
+    if info.pum_visible == 0 then return end
+    if info.selected <= 0 then
+        return '<C-e><C-x><C-o>'
+    end
+    return '<C-p>'
+end, { expr = true, noremap = true})
 
 -- remap <return> to accept completion and apply side effects (like <c-y>)
 vim.keymap.set('i', '<cr>', function()
