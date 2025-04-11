@@ -105,9 +105,9 @@ def _refresh_widgets(boss: Boss) -> None:
     if tab_manager is not None:
         active_id = (active_tab := tab_manager.active_tab) and active_tab.id
         def get_title(tab) -> str:
-            cwd = tab.get_cwd_of_active_window() or "??"
+            cwd = tab.get_cwd_of_active_window() or '??'
             cwd = '/'.join(cwd.split('/')[-2:])
-            active = "✻ " if tab.id == active_id else ""
+            active = '' if tab.id == active_id else 'class="faint" '
             return active + cwd
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'

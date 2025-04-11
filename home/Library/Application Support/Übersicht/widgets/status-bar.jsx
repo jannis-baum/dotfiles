@@ -39,6 +39,10 @@ export const className =`
         border: 1px solid #444;
         display: block;
     }
+    span.faint {
+        color: #888;
+        border: 1px solid #222;
+    }
     span.hover-container {
         display: flex;
         gap: 0.25em;
