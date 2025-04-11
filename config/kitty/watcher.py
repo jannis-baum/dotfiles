@@ -92,14 +92,12 @@ def _get_git_info(boss: Boss):
             git_info['num_untracked_files']
         git_status = '✻ ' if dirty > 0 else ''
     except: return
-    return f'{git_status}{git_branch}'
+    return f'{git_status}{git_branch} » '
 
 def _refresh_widgets(boss: Boss) -> None:
     result = ''
 
-    git_info = _get_git_info(boss)
-    if git_info is not None:
-        result += ''.join(git_info) + '\n'
+    git_info = _get_git_info(boss) or ''
 
     tab_manager = boss.active_tab_manager
     if tab_manager is not None:
@@ -107,7 +105,7 @@ def _refresh_widgets(boss: Boss) -> None:
         def get_title(tab) -> str:
             cwd = tab.get_cwd_of_active_window() or '??'
             cwd = '/'.join(cwd.split('/')[-2:])
-            active = '' if tab.id == active_id else 'class="faint" '
+            active = git_info if tab.id == active_id else 'class="faint" '
             return active + cwd
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'
