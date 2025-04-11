@@ -1,4 +1,6 @@
 export const command = `
+    ~/.bin/widgets
+    printf "\\0"
     ~/.bin/battery
     ~/.bin/battery --percentage
     date +%l:%M
@@ -46,11 +48,16 @@ export const className =`
     span.hover-container:hover > span.alt { display: block }
 `
 
+const getItems = (string) => string.trim().split('\n').filter((item) => item != '');
+
 export const render = ({output}) => {
-    const [battery, batteryPercent, time, date, timeSeconds] = output.split('\n');
+    const [left, right] = output.split('\0');
+    const dynamicWidgets = getItems(left);
+    const [battery, batteryPercent, time, date, timeSeconds] = getItems(right);
     return (
         <div className="container">
             <div className="left">
+                {dynamicWidgets.map((text) => <span class="box">{text}</span>)}
             </div>
             <div className="right">
                 <span class="hover-container">
