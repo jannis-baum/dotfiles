@@ -96,9 +96,22 @@ def _get_git_info(boss: Boss):
 
 def _refresh_widgets(boss: Boss) -> None:
     result = ''
+
     git_info = _get_git_info(boss)
     if git_info is not None:
-        result += ''.join(git_info)
+        result += ''.join(git_info) + '\n'
+
+    tab_manager = boss.active_tab_manager
+    if tab_manager is not None:
+        active_id = (active_tab := tab_manager.active_tab) and active_tab.id
+        def get_title(tab) -> str:
+            cwd = tab.get_cwd_of_active_window() or "??"
+            cwd = '/'.join(cwd.split('/')[-2:])
+            active = "✻ " if tab.id == active_id else ""
+            return active + cwd
+        tab_titles = [get_title(tab) for tab in tab_manager.tabs]
+        result += '\n'.join(tab_titles) + '\n'
+
     subprocess.run(
         [os.path.expanduser('~/.bin/widgets'), '--set', 'kitty'],
         input=result,
