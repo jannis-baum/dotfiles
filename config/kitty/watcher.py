@@ -123,3 +123,6 @@ def on_cmd_startstop(boss: Boss, window: Window, data: dict[str, Any]) -> None:
 
 def on_focus_change(boss: Boss, window: Window, data: dict[str, Any]) -> None:
     _refresh_widgets(boss)
+
+def on_title_change(boss: Boss, window: Window, data: dict[str, Any]) -> None:
+    _refresh_widgets(boss)
