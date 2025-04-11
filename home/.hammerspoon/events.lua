@@ -10,12 +10,13 @@ end)
 
 --------------------------------------------------------------------------------
 -- apps ------------------------------------------------------------------------
-e.safariWatcher = hs.application.watcher.new(function(name, eventType, app)
+e.appWatcher = hs.application.watcher.new(function(name, eventType, app)
+    hs.execute('~/.bin/widgets --refresh')
     if name == 'Safari' and eventType == hs.application.watcher.terminated then
         out, status = hs.execute('~/.bin/cookie-cleaner ~/.config/safari/cookie-whitelist.txt')
     end
 end)
-e.safariWatcher:start()
+e.appWatcher:start()
 
 
 --------------------------------------------------------------------------------
