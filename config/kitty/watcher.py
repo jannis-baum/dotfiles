@@ -90,9 +90,9 @@ def _get_git_info(boss: Boss):
             git_info['num_unstaged_changes'] + \
             git_info['num_conflicted_changes'] + \
             git_info['num_untracked_files']
-        git_status = f' ✻' if dirty > 0 else '  '
+        git_status = '✻ ' if dirty > 0 else ''
     except: return
-    return (git_branch, git_status)
+    return f'{git_status}{git_branch}'
 
 def _refresh_widgets(boss: Boss) -> None:
     result = ''
