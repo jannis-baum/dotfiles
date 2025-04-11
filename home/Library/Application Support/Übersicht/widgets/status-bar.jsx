@@ -49,15 +49,25 @@ export const className =`
 `
 
 const getItems = (string) => string.trim().split('\n').filter((item) => item != '');
+const parseItem = (item) => {
+    // e.g. `class="my_class" my_title`
+    const groups = /(class="(?<class>.+)"\s*)?(?<title>.+)/.exec(item)?.groups;
+    return {
+        class: groups['class'],
+        title: groups['title']
+    }
+}
 
 export const render = ({output}) => {
     const [left, right] = output.split('\0');
-    const dynamicWidgets = getItems(left);
+    const dynamicWidgets = getItems(left).map((item) => parseItem(item));
     const [battery, batteryPercent, time, date, timeSeconds] = getItems(right);
     return (
         <div className="container">
             <div className="left">
-                {dynamicWidgets.map((text) => <span class="box">{text}</span>)}
+                {dynamicWidgets.map((widget) =>
+                    <span class={'box ' + (widget['class'] ?? '')}>{widget['title']}</span>
+                )}
             </div>
             <div className="right">
                 <span class="hover-container">
