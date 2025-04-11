@@ -1,0 +1,38 @@
+#!/bin/zsh
+
+widget_dir="$HOME/.local/ubersicht-widgets"
+mkdir -p "$widget_dir"
+
+function refresh_widgets() {
+    # refresh async without waiting
+    osascript -e 'tell application id "tracesOf.Uebersicht" to refresh widget id "status-bar-jsx"' &
+}
+
+# get widgets matching PID of frontmost app
+if [[ $# == 0 ]]; then
+    current_pid="$(osascript -l JavaScript -e 'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.processIdentifier')"
+    for file in "$widget_dir"/**/*(N.); do
+        [[ "$(basename "$file")" == "$current_pid" ]] || continue
+        cat "$file"
+    done
+    return
+fi
+
+# have uebersicht refresh widgets
+if [[ $# == 1 && "$1" == "--refresh" ]]; then
+    refresh_widgets
+    return
+fi
+
+# set widgets from stdin for given PID
+if [[ $# == 2 && "$1" == "--set" ]]; then
+    # write stdin to target file
+    target_file="$widget_dir/$2"
+    cat > "$target_file"
+    # delete if empty
+    [ -s "$target_file" ] || rm "$target_file"
+    refresh_widgets
+    return
+fi
+
+echo "usage: $0 [--set PID]\n\nRead all widgets or set widgets for PID to stdin"
