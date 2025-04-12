@@ -52,19 +52,20 @@ export const className =`
     span.hover-container:hover > span.alt { display: block }
 `
 
-const getItems = (string) => string.trim().split('\n').filter((item) => item != '');
-const parseItem = (item) => {
+const getItems = (string) => string.split('\n');
+const parseItems = (items) => items.map((item) => {
     // e.g. `class="my_class" my_title`
     const groups = /(class="(?<class>.+)"\s*)?(?<title>.+)/.exec(item)?.groups;
+    if (!groups) return null;
     return {
         class: groups['class'],
         title: groups['title']
     }
-}
+}).filter((item) => item);
 
 export const render = ({output}) => {
     const [left, right] = output.split('\0');
-    const dynamicWidgets = getItems(left).map((item) => parseItem(item));
+    const dynamicWidgets = parseItems(getItems(left));
     const [battery, batteryPercent, time, date, timeSeconds] = getItems(right);
     return (
         <div className="container">
