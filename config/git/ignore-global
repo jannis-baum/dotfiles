@@ -5,6 +5,11 @@
 .Trashes
 __pycache__
 .ipynb_checkpoints
+
 ignoreme*
+
 .fbs
 .pyv
+
+*.jupyviv.py
+*.jupyviv.ipynb
