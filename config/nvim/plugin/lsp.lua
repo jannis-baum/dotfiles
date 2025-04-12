@@ -30,15 +30,20 @@ vim.keymap.set('i', '<down>', function()
     return '<C-x><C-o>'
 end, { expr = true, noremap = true })
 
--- reset completion with <up> key if upper-most item (or none) is selected, else select prev
+-- select previous item with <up> key
 vim.keymap.set('i', '<up>', function()
+    return vim.fn.pumvisible() == 1 and '<C-p>' or '<up>'
+end, { expr = true, noremap = true})
+
+-- reset completion with <bs> (backspace) when pum is open and an item is
+-- selected
+vim.keymap.set('i', '<bs>', function()
     local info = vim.fn.complete_info()
-    if info.pum_visible == 0 then return end
-    if info.selected <= 0 then
+    if info.pum_visible == 1 and info.selected > -1 then
         return '<C-e><C-x><C-o>'
     end
-    return '<C-p>'
-end, { expr = true, noremap = true})
+    return '<bs>'
+end, { expr = true, noremap = true })
 
 -- remap <return> to accept completion and apply side effects (like <c-y>)
 vim.keymap.set('i', '<cr>', function()
