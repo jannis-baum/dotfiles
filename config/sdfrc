@@ -10,6 +10,7 @@ function _restart_synapse() {
 mapping=( \
     [home]=~ \
     [config]=~/.config \
+    [app_support]=~/Library/'Application Support' \
 )
 
 actions=( \
