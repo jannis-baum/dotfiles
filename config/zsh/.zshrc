@@ -5,7 +5,7 @@ bindkey -v
 
 # PATH
 export PATH=$(tr -d ' ' <<<"\
-    $HOME/.bin\
+    $HOME/.local/bin\
     :/opt/homebrew/bin\
     :/Library/TeX/texbin\
     :/Applications/Postgres.app/Contents/Versions/latest/bin\

@@ -12,8 +12,8 @@ generate:
 
 .PHONY: link
 link:
-	@rm -rf ~/.bin/parse-colors
-	@ln -s $(CURDIR)/chameleon/parse-colors ~/.bin/parse-colors
+	@rm -rf ~/.local/bin/parse-colors
+	@ln -s $(CURDIR)/chameleon/parse-colors ~/.local/bin/parse-colors
 
 .PHONY: load
 load: generate

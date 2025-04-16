@@ -12,4 +12,4 @@ F=$(mktemp).md
 printf "%s" "$(cat $F)" | pbcopy
 
 rm $F
-~/.bin/set-kitty matching $KITTY_PID hidden
+~/.local/bin/set-kitty matching $KITTY_PID hidden

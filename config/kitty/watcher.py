@@ -112,7 +112,7 @@ def _refresh_widgets(boss: Boss) -> None:
         result += '\n'.join(tab_titles) + '\n'
 
     subprocess.run(
-        [os.path.expanduser('~/.bin/widgets'), '--set', 'kitty'],
+        [os.path.expanduser('~/.local/bin/widgets'), '--set', 'kitty'],
         input=result,
         text=True
     )

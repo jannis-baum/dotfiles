@@ -1,8 +1,8 @@
 export const command = `
-    ~/.bin/widgets
+    ~/.local/bin/widgets
     printf "\\0"
-    ~/.bin/battery
-    ~/.bin/battery --percentage
+    ~/.local/bin/battery
+    ~/.local/bin/battery --percentage
     date +%l:%M
     date +%m/%d
     date +%l:%M:%S

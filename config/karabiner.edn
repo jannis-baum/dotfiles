@@ -11,7 +11,7 @@
     :open "open -a \"%s.app\""
     :uri "open -g \"%s\""
     :set-win "open -g rectangle://execute-action?name=%s"
-    :dncp "~/.bin/dnc-post \"%s\""}
+    :dncp "~/.local/bin/dnc-post \"%s\""}
 
   :applications {
     :xcode ["^com\\.apple\\.dt\\.Xcode$"]
