@@ -1,0 +1,26 @@
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+# defaults & bar appearance
+sketchybar --bar position=top height=32 blur_radius=30 color=0x44000000
+sketchybar --load-font "$CONFIG_DIR/fonts/PoiretOne-With-Lightning.ttf"
+default=(
+  y_offset=1
+
+  label.padding_left=8
+  label.padding_right=8
+  label.font="Poiret One:Bold:18"
+  label.color=0xffbbbbbb
+
+  background.padding_left=8
+  background.padding_right=8
+  background.draw=on
+  background.color=0xff101010
+  background.corner_radius=12
+  background.border_color=0xff404040
+  background.border_width=1
+  background.height=30
+)
+sketchybar --default "${default[@]}"
+
+# update all items
+sketchybar --update
