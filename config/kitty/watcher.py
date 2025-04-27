@@ -106,8 +106,8 @@ def _refresh_widgets(boss: Boss) -> None:
             cwd = tab.get_cwd_of_active_window() or '??'
             cwd = cwd.replace(os.path.expanduser('~'), '~')
             cwd = cwd.split('/')[-1]
-            active = git_info if tab.id == active_id else 'class="faint" '
-            return active + cwd
+            prefix = git_info if tab.id == active_id else 'FAINT '
+            return prefix + cwd
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'
 
