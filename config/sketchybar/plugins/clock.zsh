@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 source "$CONFIG_DIR/helpers/hover.sh"
 
