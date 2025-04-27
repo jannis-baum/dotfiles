@@ -26,6 +26,9 @@ sketchybar --default "${default[@]}"
 sketchybar --add item clock right \
            --set clock update_freq=1 script="$PLUGIN_DIR/clock.sh" \
            --subscribe clock mouse.entered mouse.exited
+sketchybar --add item battery right \
+           --set battery update_freq=1 script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery mouse.entered mouse.exited
 
 # update all items
 sketchybar --update
