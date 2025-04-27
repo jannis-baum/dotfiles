@@ -111,10 +111,13 @@ def _refresh_widgets(boss: Boss) -> None:
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'
 
+    fixed_env = os.environ.copy()
+    fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     subprocess.run(
-        [os.path.expanduser('~/.local/bin/widgets'), '--set', 'kitty'],
+        [os.path.expanduser('~/.config/sketchybar/scripts/set-app-items.zsh'), 'kitty'],
         input=result,
-        text=True
+        text=True,
+        env=fixed_env
     )
 
 def on_cmd_startstop(boss: Boss, window: Window, data: dict[str, Any]) -> None:
