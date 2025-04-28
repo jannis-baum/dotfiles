@@ -1,0 +1,7 @@
+{
+    "name": "sketchytabs",
+    "description": "Display tabs on Sketchybar",
+    "path": "/Users/jannisbaum/.config/sketchybar/scripts/mozilla-sketchytabs.py",
+    "type": "stdio",
+    "allowed_extensions": ["sketchytabs@jannis.org"]
+}
