@@ -70,7 +70,6 @@
          [{:sim [:i :o] :modi :any} :!CSo]
        :zen
          [{:sim [:i :o] :modi :any} [:!Cl :!Ca :delete_or_backspace :!S5 :spacebar]]
-         [:!Cl [:!Cl :!Ca :delete_or_backspace]]
     ]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
