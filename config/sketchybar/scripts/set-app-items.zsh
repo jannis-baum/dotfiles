@@ -23,8 +23,8 @@ function set-app-items() {
                 script="~/.config/sketchybar/plugins/app.zsh" \
                 label="$label" \
                 drawing="$should_draw" \
-                label.color="$([[ "$line" = FAINT* ]] && printf "0xff808080" || printf "0xffbbbbbb")"
-                background.border_color="$([[ "$line" = FAINT* ]] && printf "0xff202020" || printf "0xff404040")"
+                label.color="$([[ "$line" = FAINT* ]] && printf "0xff808080" || printf "0xffbbbbbb")" \
+                background.border_color="$([[ "$line" = FAINT* ]] && printf "0xff202020" || printf "0xff404040")" \
             --subscribe "$item_name" front_app_switched
         ((line_num++))
     done
