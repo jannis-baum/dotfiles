@@ -3,9 +3,11 @@
 # `-u` flag in order to ensure that stdin and stdout are opened in binary,
 # rather than text, mode.
 
-import sys
 import json
+import os
 import struct
+import subprocess
+import sys
 
 # read a message from stdin and decode it.
 def getMessage():
@@ -33,6 +35,23 @@ def sendMessage(encodedMessage):
     sys.stdout.buffer.write(encodedMessage['content'])
     sys.stdout.buffer.flush()
 
+def ellipse_string(string, max_length):
+    return string if len(string) < max_length else string[:max_length] + '…'
+
+def get_title(tab):
+    if tab['active']:
+        return ellipse_string(tab['title'], 32)
+    return f'FAINT {ellipse_string(tab["title"], 8)}'
+
 while True:
     tabs = getMessage()
-    # TODO
+    titles = [get_title(tab) for tab in tabs]
+
+    fixed_env = os.environ.copy()
+    fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
+    subprocess.run(
+        [os.path.expanduser('~/.config/sketchybar/scripts/set-app-items.zsh'), 'Zen'],
+        input='\n'.join(titles) + '\n',
+        text=True,
+        env=fixed_env
+    )
