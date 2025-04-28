@@ -18,6 +18,7 @@
     :kitty ["^net\\.kovidgoyal\\.kitty$"]
     :synapse ["^com\\jannis\\.synapse$"]
     :safari ["^com\\.apple\\.Safari$"]
+    :zen ["^app\\.zen-browser\\.zen$"]
     :citrix ["com.citrix.receiver.icaviewer.mac"]}
 
   :modifiers {
@@ -67,6 +68,9 @@
          [{:sim [:i :o] :modi :any} [:uri "synapse://openPanel?query=t%20"]]
        :xcode
          [{:sim [:i :o] :modi :any} :!CSo]
+       :zen
+         [{:sim [:i :o] :modi :any} [:!Cl :!Ca :delete_or_backspace :!S5 :spacebar]]
+         [:!Cl [:!Cl :!Ca :delete_or_backspace]]
     ]}
 
     {:des "lower row combos: xc > left, cv > down, m, > tab left ,. > tab right" :rules [
