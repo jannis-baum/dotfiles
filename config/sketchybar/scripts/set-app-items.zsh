@@ -19,11 +19,9 @@ function set-app-items() {
         if [[ "$line" = FAINT* ]]; then
             label_font='Menlo:Normal:14'
             label_color='0xff808080'
-            background_border_color='0xff202020'
         else
             label_font='Menlo:Bold:14'
             label_color='0xffbbbbbb'
-            background_border_color='0xff404040'
         fi
 
         sketchybar \
@@ -34,7 +32,6 @@ function set-app-items() {
                 label="$label" \
                 label.font="$label_font" \
                 label.color="$label_color" \
-                background.border_color="$background_border_color" \
             --subscribe "$item_name" front_app_switched
         ((line_num++))
     done
