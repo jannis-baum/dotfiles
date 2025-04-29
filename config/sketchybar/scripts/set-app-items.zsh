@@ -16,15 +16,25 @@ function set-app-items() {
     while IFS= read -r line; do
         item_name="APP-$app_name-$line_num"
         label="$(sed 's/^FAINT //' <<<"$line")"
+        if [[ "$line" = FAINT* ]]; then
+            label_font='Menlo:Normal:14'
+            label_color='0xff808080'
+            background_border_color='0xff202020'
+        else
+            label_font='Menlo:Bold:14'
+            label_color='0xffbbbbbb'
+            background_border_color='0xff404040'
+        fi
 
         sketchybar \
             --add item "$item_name" left \
             --set "$item_name" \
                 script="~/.config/sketchybar/plugins/app.zsh" \
-                label="$label" \
                 drawing="$should_draw" \
-                label.color="$([[ "$line" = FAINT* ]] && printf "0xff808080" || printf "0xffbbbbbb")" \
-                background.border_color="$([[ "$line" = FAINT* ]] && printf "0xff202020" || printf "0xff404040")" \
+                label="$label" \
+                label.font="$label_font" \
+                label.color="$label_color" \
+                background.border_color="$background_border_color" \
             --subscribe "$item_name" front_app_switched
         ((line_num++))
     done
