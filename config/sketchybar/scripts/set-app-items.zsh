@@ -7,7 +7,8 @@ fi
 app_name="$1"
 
 function set-app-items() {
-    sketchybar --remove '/APP-'"$app_name"'-\d*/' &>/dev/null
+    # collect args & only call sketchybar once to speed up execution
+    sketchy_args=(--remove '/APP-'"$app_name"'-\d*/')
 
     frontmost_app="$(osascript -l JavaScript -e 'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName')"
     should_draw="$([[ "$frontmost_app" == "$app_name" ]] && printf "on" || printf "off")"
@@ -24,7 +25,7 @@ function set-app-items() {
             label_color='0xffbbbbbb'
         fi
 
-        sketchybar \
+        sketchy_args+=( \
             --add item "$item_name" left \
             --set "$item_name" \
                 script="~/.config/sketchybar/plugins/app.zsh" \
@@ -33,8 +34,10 @@ function set-app-items() {
                 label.font="$label_font" \
                 label.color="$label_color" \
             --subscribe "$item_name" front_app_switched
+        )
         ((line_num++))
     done
+    sketchybar "${sketchy_args[@]}" &>/dev/null
 }
 
 # non-blocking for kitty
