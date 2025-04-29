@@ -25,9 +25,6 @@
 [submodule ".synapse/modules/timer"]
 	path = home/.synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
-[submodule ".lib/nosync/cookie-cleaner"]
-	path = lib/cookie-cleaner
-	url = https://github.com/jannis-baum/cookie-cleaner.git
 [submodule ".lib/markup-export"]
 	path = home/.lib/markup-export
 	url = https://github.com/jannis-baum/markup-export.git
