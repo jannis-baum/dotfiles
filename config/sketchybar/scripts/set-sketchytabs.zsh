@@ -35,6 +35,16 @@ function set-sketchytabs() {
                 label.color="$label_color"
             --subscribe "$item_name" front_app_switched
         )
+
+        matching_images=(/Volumes/sketchytabs-icons/$app_name/$line_num.*(.N))
+        image="$matching_images[1]"
+        if [[ -n "$image" ]]; then
+            sketchy_args+=(--set "$item_name"
+                background.drawing=on background.image.drawing=on
+                icon.padding_left=20
+                background.image.string="$image"
+            )
+        fi
         ((line_num++))
     done
     sketchybar "${sketchy_args[@]}" &>/dev/null
