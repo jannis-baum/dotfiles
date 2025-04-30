@@ -25,14 +25,14 @@ function set-sketchytabs() {
             label_color='0xffbbbbbb'
         fi
 
-        sketchy_args+=( \
-            --add item "$item_name" left \
-            --set "$item_name" \
-                script="~/.config/sketchybar/plugins/sketchytab.zsh" \
-                drawing="$should_draw" \
-                label="$label" \
-                label.font="$label_font" \
-                label.color="$label_color" \
+        sketchy_args+=(
+            --add item "$item_name" left
+            --set "$item_name"
+                script="~/.config/sketchybar/plugins/sketchytab.zsh"
+                drawing="$should_draw"
+                label="$label"
+                label.font="$label_font"
+                label.color="$label_color"
             --subscribe "$item_name" front_app_switched
         )
         ((line_num++))
