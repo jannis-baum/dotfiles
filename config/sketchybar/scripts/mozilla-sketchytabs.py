@@ -40,21 +40,24 @@ def reset_icon_dir():
 
 def write_image(tab):
     if 'favIconUrl' not in tab: return
-    header, encoded = tab['favIconUrl'].split(',')
-    # header is e.g. "data:image/svg+xml;base64"
-    split_header = header.split(';')
-    mime_type = split_header[0].split(':')[1]
-    extension = mimetypes.guess_extension(mime_type)
-    path = os.path.join(icon_dir, f'{tab["index"] + 1}{extension}')
+    try:
+        header, encoded = tab['favIconUrl'].split(',')
+        # header is e.g. "data:image/svg+xml;base64"
+        split_header = header.split(';')
+        mime_type = split_header[0].split(':')[1]
+        extension = mimetypes.guess_extension(mime_type)
+        path = os.path.join(icon_dir, f'{tab["index"] + 1}{extension}')
 
-    if len(split_header) == 2 and split_header[1] == 'base64':
-        data = base64.b64decode(encoded)
-    elif len(split_header) == 1:
-        data = unquote(encoded).encode('utf-8')
-    else: return
+        if len(split_header) == 2 and split_header[1] == 'base64':
+            data = base64.b64decode(encoded)
+        elif len(split_header) == 1:
+            data = unquote(encoded).encode('utf-8')
+        else: return
 
-    with open(path, 'wb') as fp:
-        fp.write(data)
+        with open(path, 'wb') as fp:
+            fp.write(data)
+    except:
+        pass
 
 while True:
     tabs = getMessage()
