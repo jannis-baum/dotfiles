@@ -34,3 +34,6 @@ sketchybar --add item battery right \
 
 # update all items
 sketchybar --update
+
+# init sketchytabs
+$CONFIG_DIR/scripts/init-sketchytabs.zsh
