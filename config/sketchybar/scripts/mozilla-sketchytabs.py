@@ -50,7 +50,7 @@ while True:
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     subprocess.run(
-        [os.path.expanduser('~/.config/sketchybar/scripts/set-app-items.zsh'), 'Zen'],
+        [os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.zsh'), 'Zen'],
         input='\n'.join(titles) + '\n',
         text=True,
         env=fixed_env

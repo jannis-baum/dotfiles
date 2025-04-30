@@ -114,7 +114,7 @@ def _refresh_widgets(boss: Boss) -> None:
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     subprocess.run(
-        [os.path.expanduser('~/.config/sketchybar/scripts/set-app-items.zsh'), 'kitty'],
+        [os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.zsh'), 'kitty'],
         input=result,
         text=True,
         env=fixed_env

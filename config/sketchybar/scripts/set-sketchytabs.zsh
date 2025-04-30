@@ -6,7 +6,7 @@ if [[ $# != 1 ]]; then
 fi
 app_name="$1"
 
-function set-app-items() {
+function set-sketchytabs() {
     # collect args & only call sketchybar once to speed up execution
     sketchy_args=(--remove '/APP-'"$app_name"'-\d*/')
 
@@ -28,7 +28,7 @@ function set-app-items() {
         sketchy_args+=( \
             --add item "$item_name" left \
             --set "$item_name" \
-                script="~/.config/sketchybar/plugins/app.zsh" \
+                script="~/.config/sketchybar/plugins/sketchytab.zsh" \
                 drawing="$should_draw" \
                 label="$label" \
                 label.font="$label_font" \
@@ -41,4 +41,4 @@ function set-app-items() {
 }
 
 # non-blocking for kitty
-set-app-items &
+set-sketchytabs &
