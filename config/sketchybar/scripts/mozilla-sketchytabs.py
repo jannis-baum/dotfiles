@@ -18,23 +18,6 @@ def getMessage():
     message = sys.stdin.buffer.read(messageLength).decode('utf-8')
     return json.loads(message)
 
-# encode a message for transmission, given its content.
-def encodeMessage(messageContent):
-    # https://docs.python.org/3/library/json.html#basic-usage
-    # to get the most compact JSON representation, you should specify
-    # (',', ':') to eliminate whitespace.
-    # we want the most compact representation because the browser rejects
-    # messages that exceed 1 MB.
-    encodedContent = json.dumps(messageContent, separators=(',', ':')).encode('utf-8')
-    encodedLength = struct.pack('@I', len(encodedContent))
-    return {'length': encodedLength, 'content': encodedContent}
-
-# send an encoded message to stdout
-def sendMessage(encodedMessage):
-    sys.stdout.buffer.write(encodedMessage['length'])
-    sys.stdout.buffer.write(encodedMessage['content'])
-    sys.stdout.buffer.flush()
-
 def ellipse_string(string, max_length):
     return string if len(string) < max_length else string[:max_length] + '…'
 
