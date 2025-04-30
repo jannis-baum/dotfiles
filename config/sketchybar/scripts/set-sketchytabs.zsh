@@ -41,8 +41,10 @@ function set-sketchytabs() {
         if [[ -n "$image" ]]; then
             sketchy_args+=(--set "$item_name"
                 background.drawing=on background.image.drawing=on
-                icon.padding_left=20
+                icon.padding_left=8
+                background.padding_left=8
                 background.image.string="$image"
+                background.image.scale=0.5
             )
         fi
         ((line_num++))
