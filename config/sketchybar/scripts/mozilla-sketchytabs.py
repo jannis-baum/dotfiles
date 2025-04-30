@@ -25,12 +25,13 @@ def getMessage():
     return json.loads(message)
 
 def ellipse_string(string, max_length):
-    return string if len(string) < max_length else string[:max_length] + '…'
+    string = string.strip()
+    return string if len(string) <= max_length else string[:max_length - 1].rstrip() + '…'
 
 def get_title(tab):
     if tab['active']:
-        return ellipse_string(tab['title'], 32)
-    return f'FAINT {ellipse_string(tab["title"], 8)}'
+        return ellipse_string(tab['title'], 20)
+    return f'FAINT {ellipse_string(tab["title"], 6)}'
 
 icon_dir = os.path.join('/Volumes', 'sketchytabs-icons', browser_name)
 def reset_icon_dir():
