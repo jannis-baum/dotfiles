@@ -39,7 +39,8 @@ def reset_icon_dir():
         shutil.rmtree(icon_dir)
     os.mkdir(icon_dir)
 
-def write_image(tab):
+# need index because tab['index'] is not consistent
+def write_image(tab, index):
     if 'favIconUrl' not in tab: return
     try:
         header, encoded = tab['favIconUrl'].split(',')
@@ -47,7 +48,7 @@ def write_image(tab):
         split_header = header.split(';')
         mime_type = split_header[0].split(':')[1]
         extension = mimetypes.guess_extension(mime_type)
-        path = os.path.join(icon_dir, f'{tab["index"] + 1}{extension}')
+        path = os.path.join(icon_dir, f'{index + 1}{extension}')
 
         if len(split_header) == 2 and split_header[1] == 'base64':
             data = base64.b64decode(encoded)
@@ -64,7 +65,7 @@ while True:
     tabs = getMessage()
     titles = [get_title(tab) for tab in tabs]
     reset_icon_dir()
-    for tab in tabs: write_image(tab)
+    for index, tab in enumerate(tabs): write_image(tab, index)
 
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
