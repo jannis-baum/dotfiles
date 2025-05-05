@@ -84,5 +84,8 @@ function SelectSymbol()
 end
 
 vim.keymap.set('n', '<cr>', function()
-    SelectSymbol()
+    if not pcall(SelectSymbol) then
+        local key = vim.api.nvim_replace_termcodes('<cr>', true, false, true)
+        vim.api.nvim_feedkeys(key, 'n', false)
+    end
 end, { noremap = true })
