@@ -1,3 +1,7 @@
 :root {
     --zen-element-separation: 0px !important;
 }
+
+#zen-toast-container {
+    display: none !important;
+}
