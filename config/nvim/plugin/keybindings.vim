@@ -27,8 +27,8 @@ nnoremap <Up> <C-w><C-k>
 nnoremap <Right> <C-w><C-l>
 nnoremap <Left> <C-w><C-h>
 " scrolling
-nnoremap <silent> <leader>j :execute 'normal! ' winheight(0) / 3 . 'j'<CR>
-nnoremap <silent> <leader>k :execute 'normal! ' winheight(0) / 3 . 'k'<CR>
+nnoremap <silent> <C-f> :execute 'normal! ' winheight(0) / 3 . 'j'<CR>
+nnoremap <silent> <C-b> :execute 'normal! ' winheight(0) / 3 . 'k'<CR>
 
 " TEXT EDITING -----------------------------------------------------------------
 " x & s delete without copy
