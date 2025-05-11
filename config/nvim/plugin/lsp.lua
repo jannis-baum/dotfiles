@@ -73,8 +73,37 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
+
+local ansi = require('ansi_highlight')
+local diagnostic_ansi = {
+    [vim.diagnostic.severity.ERROR] = ansi.hl_to_ansi('DiagnosticError'),
+    [vim.diagnostic.severity.WARN] = ansi.hl_to_ansi('DiagnosticWarn'),
+    [vim.diagnostic.severity.INFO] = ansi.hl_to_ansi('DiagnosticInfo'),
+    [vim.diagnostic.severity.HINT] = ansi.hl_to_ansi('DiagnosticHint'),
+}
+local function fzf_diagnostic_sink(line)
+    vim.print(line)
+    -- local row, column = string.match(line, '([^:]+):([^:]+)')
+    -- vim.fn.setpos('.', { 0, row, column })
+end
+
 vim.keymap.set('n', '<leader>d', function()
-    vim.diagnostic.setloclist({ open = true })
+    local fzf_input = vim.tbl_map(function(diagnostic)
+        return table.concat({
+            diagnostic['bufnr'], diagnostic['lnum'], diagnostic['col'],
+            diagnostic_ansi[diagnostic['severity']] .. diagnostic_symbols[diagnostic['severity']] .. ' ' .. diagnostic['message']
+        }, ':')
+    end, vim.diagnostic.get(0))
+    local fzf_wrap = vim.fn['fzf#wrap']({
+        source = fzf_input,
+        options = {
+            '--delimiter', ':',
+            '--with-nth', '4..',
+            '--ansi',
+        },
+        sink = fzf_diagnostic_sink
+    })
+    vim.fn['fzf#run'](fzf_wrap)
 end)
 
 -- SIGNATURE HELP --------------------------------------------------------------
