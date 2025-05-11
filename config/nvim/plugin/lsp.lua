@@ -52,6 +52,7 @@ end, { expr = true, noremap = true})
 
 -- DIAGNOSTICS -----------------------------------------------------------------
 
+-- settings
 local diagnostic_symbols = {
     [vim.diagnostic.severity.ERROR] = '×',
     [vim.diagnostic.severity.WARN] = '•',
@@ -73,7 +74,7 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-
+-- fzf picker
 local ansi = require('ansi_highlight')
 local diagnostic_ansi = {
     [vim.diagnostic.severity.ERROR] = ansi.hl_to_ansi('DiagnosticError'),
@@ -83,14 +84,15 @@ local diagnostic_ansi = {
 }
 local function fzf_diagnostic_sink(line)
     local bufnr, row, column = string.match(line, '([^:]+):([^:]+):([^:]+)')
-    vim.fn.setpos('.', { bufnr, row, column })
+    vim.fn.setpos('.', { bufnr, row + 1, column + 1 })
 end
 
 vim.keymap.set('n', '<leader>d', function()
     local fzf_input = vim.tbl_map(function(diagnostic)
         return table.concat({
             diagnostic['bufnr'], diagnostic['lnum'], diagnostic['col'],
-            diagnostic_ansi[diagnostic['severity']] .. diagnostic_symbols[diagnostic['severity']] .. ' ' .. diagnostic['message']
+            diagnostic_ansi[diagnostic['severity']] .. diagnostic_symbols[diagnostic['severity']] ..
+            ansi.ansi_reset .. ' ' .. diagnostic['message']
         }, ':')
     end, vim.diagnostic.get(0))
     local fzf_wrap = vim.fn['fzf#wrap']({

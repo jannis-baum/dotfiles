@@ -78,6 +78,8 @@ local function get_ansi_cterm(hl)
     return '\27[' .. table.concat(codes, ';') .. 'm'
 end
 
+M.ansi_reset = ansi_reset
+
 M.hl_to_ansi = function(hl_group)
     -- get syntax hl ID and "translate" it/resolve links (nvim_get_hl
     -- also has link resolving option but it doesn't seem to work)
