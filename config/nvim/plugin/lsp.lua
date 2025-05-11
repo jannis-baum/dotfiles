@@ -82,10 +82,6 @@ local diagnostic_ansi = {
     [vim.diagnostic.severity.INFO] = ansi.hl_to_ansi('DiagnosticInfo'),
     [vim.diagnostic.severity.HINT] = ansi.hl_to_ansi('DiagnosticHint'),
 }
-local function fzf_diagnostic_sink(line)
-    local bufnr, row, column = string.match(line, '([^:]+):([^:]+):([^:]+)')
-    vim.fn.setpos('.', { bufnr, row + 1, column + 1 })
-end
 
 vim.keymap.set('n', '<leader>d', function()
     local fzf_input = vim.tbl_map(function(diagnostic)
@@ -102,7 +98,10 @@ vim.keymap.set('n', '<leader>d', function()
             '--with-nth', '4..',
             '--ansi',
         },
-        sink = fzf_diagnostic_sink
+        sink = function(line)
+            local bufnr, row, column = string.match(line, '([^:]+):([^:]+):([^:]+)')
+            vim.fn.setpos('.', { bufnr, row + 1, column + 1 })
+        end
     })
     vim.fn['fzf#run'](fzf_wrap)
 end)
