@@ -2,10 +2,9 @@ require('mason').setup()
 
 require('mason-lspconfig').setup({
     -- available LSP servers:
-    -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     ensure_installed = {
         'lua_ls', 'vimls',
-        'pyright',
         'bashls',
         'clangd', 'cmake',
         'dockerls', 'docker_compose_language_service',
