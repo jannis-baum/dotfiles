@@ -76,21 +76,51 @@ vim.diagnostic.config({
 
 -- fzf picker
 local ansi = require('ansi_highlight')
+local path_ansi = ansi.hl_to_ansi('Comment')
 local diagnostic_ansi = {
     [vim.diagnostic.severity.ERROR] = ansi.hl_to_ansi('DiagnosticError'),
     [vim.diagnostic.severity.WARN] = ansi.hl_to_ansi('DiagnosticWarn'),
     [vim.diagnostic.severity.INFO] = ansi.hl_to_ansi('DiagnosticInfo'),
     [vim.diagnostic.severity.HINT] = ansi.hl_to_ansi('DiagnosticHint'),
 }
-
 vim.keymap.set('n', '<leader>d', function()
+    local diagnostics = vim.diagnostic.get(nil)
+    local current_bufnr = vim.api.nvim_get_current_buf()
+
+    table.sort(diagnostics, function(a, b)
+        -- sort current buffer above
+        local a_is_current = a['bufnr'] == current_bufnr
+        local b_is_current = b['bufnr'] == current_bufnr
+        if a_is_current ~= b_is_current then
+            return a_is_current
+        -- sort by buffer, then severity, then line number
+        elseif a['bufnr'] ~= b['bufnr'] then
+            return a['bufnr'] < b['bufnr']
+        elseif a['severity'] ~= b['severity'] then
+            return a['severity'] < b['severity']
+        end
+        return a['lnum'] < b['lnum']
+    end)
+
     local fzf_input = vim.tbl_map(function(diagnostic)
+        -- label: colored diagnostic symbol
+        local label = diagnostic_ansi[diagnostic['severity']] .. diagnostic_symbols[diagnostic['severity']]
+        -- label: space
+        label = label .. path_ansi .. ' '
+        -- label: relative path for other buffers
+        if diagnostic['bufnr'] ~= current_bufnr then
+            local bufname = vim.api.nvim_buf_get_name(diagnostic['bufnr'])
+            local relpath = vim.fn.fnamemodify(bufname, ":.")
+            label = label .. relpath .. ' '
+        end
+        -- label: message
+        label = label .. ansi.ansi_reset .. diagnostic['message']
+        -- full fzf line
         return table.concat({
-            diagnostic['bufnr'], diagnostic['lnum'], diagnostic['col'],
-            diagnostic_ansi[diagnostic['severity']] .. diagnostic_symbols[diagnostic['severity']] ..
-            ansi.ansi_reset .. ' ' .. diagnostic['message']
+            diagnostic['bufnr'], diagnostic['lnum'], diagnostic['col'], label
         }, ':')
-    end, vim.diagnostic.get(0))
+    end, diagnostics)
+
     local fzf_wrap = vim.fn['fzf#wrap']({
         source = fzf_input,
         options = {
@@ -100,6 +130,7 @@ vim.keymap.set('n', '<leader>d', function()
         },
         sink = function(line)
             local bufnr, row, column = string.match(line, '([^:]+):([^:]+):([^:]+)')
+            vim.cmd('buffer ' .. bufnr)
             vim.fn.setpos('.', { bufnr, row + 1, column + 1 })
         end
     })
