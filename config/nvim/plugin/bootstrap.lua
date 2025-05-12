@@ -35,11 +35,8 @@ bootstrap_paq {
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     { 'echasnovski/mini.notify', branch = 'stable' },
     'airblade/vim-gitgutter',
-    -- lsp
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig',
     -- misc
+    'neovim/nvim-lspconfig',
     'tpope/vim-fugitive',
     'hat0uma/csvview.nvim',
 }
