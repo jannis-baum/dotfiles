@@ -28,7 +28,11 @@ def getMessage():
 def ellipse_string(string, max_length):
     if max_length == 0: return ''
     string = string.strip()
-    return string if len(string) <= max_length else string[:max_length - 1].rstrip() + '…'
+    if len(string) <= max_length:
+        return string
+    if max_length > 10:
+        return string[:max_length - 1].rstrip() + '…'
+    return string[:max_length]
 
 def get_title(tab, active_len, inactive_len):
     if tab['active']:
