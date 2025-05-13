@@ -5,6 +5,7 @@
 
 import base64
 import json
+import math
 import mimetypes
 import os
 import shutil
@@ -25,13 +26,14 @@ def getMessage():
     return json.loads(message)
 
 def ellipse_string(string, max_length):
+    if max_length == 0: return ''
     string = string.strip()
     return string if len(string) <= max_length else string[:max_length - 1].rstrip() + '…'
 
-def get_title(tab):
+def get_title(tab, active_len, inactive_len):
     if tab['active']:
-        return ellipse_string(tab['title'], 20)
-    return f'FAINT {ellipse_string(tab["title"], 6)}'
+        return ellipse_string(tab['title'], active_len)
+    return f'FAINT {ellipse_string(tab["title"], inactive_len)}'
 
 icon_dir = os.path.join('/Volumes', 'sketchytabs-icons', browser_name)
 def reset_icon_dir():
@@ -61,9 +63,31 @@ def write_image(tab, index):
     except:
         pass
 
+# find number of chars tab bar can show:
+# echo '0_2345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8_2345678_9_2345678_' \
+#     | config/sketchybar/scripts/set-sketchytabs.zsh Finder
+_max_chars = 74 # max chars displayable in tab bar
+# for these take a screenshot & compare widths
+_icon_w = 3     # approx. how wide an icon is
+_gap_w = 1.5    # approx. how wide the gap is
+# compute good lengths for titles (active, inactive)
+def title_lengths(tab_count: int) -> tuple[int, int]:
+    icons = _icon_w * tab_count
+    gaps = _gap_w * (tab_count - 1)
+    free_space = _max_chars - gaps - icons
+    # free_space = (tab_count - 1) * inactive + active
+    # free_space = (tab_count - 1) * inactive + 3 * inactive
+    # free_space = inactive * (tab_count - 1 + 3)
+    # free_space = inactive * (tab_count + 2)
+    # inactive = free_space / (tab_count + 2) -> floor & max(0, _)
+    inactive = max(0, math.floor(free_space / (tab_count + 2)))
+    active = max(0, math.floor(free_space - inactive * (tab_count - 1)))
+    return (active, inactive)
+
 while True:
     tabs = getMessage()
-    titles = [get_title(tab) for tab in tabs]
+    active_len, inactive_len = title_lengths(len(tabs))
+    titles = [get_title(tab, active_len, inactive_len) for tab in tabs]
     reset_icon_dir()
     for index, tab in enumerate(tabs): write_image(tab, index)
 
