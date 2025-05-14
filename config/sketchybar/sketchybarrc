@@ -5,10 +5,11 @@ bar=(
     position=top
     height=32
     blur_radius=30
-    color=0x44000000
+    color=0xbb000000
     # as close to edge as possible
     padding_left=-9999
     padding_right=-9999
+    topmost=window
 )
 sketchybar --bar "${bar[@]}"
 sketchybar --load-font "$CONFIG_DIR/fonts/PoiretOne-With-Lightning.ttf"
