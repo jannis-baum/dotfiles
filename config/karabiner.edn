@@ -10,7 +10,7 @@
   :templates {
     :open "open -a \"%s.app\""
     :uri "open -g \"%s\""
-    :set-win "open -g rectangle://execute-action?name=%s"
+    :set-win "open -g rectangle://execute-action?name=%s; open -g hammerspoon://fitWinBelowSketchybar"
     :dncp "~/.local/bin/dnc-post \"%s\""}
 
   :applications {
