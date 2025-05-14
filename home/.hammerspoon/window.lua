@@ -38,6 +38,8 @@ local function fit_win_below_sketchybar(window)
     }, 0)
 end
 
+hs.grid.setMargins({ w = 0, h = 0 })
+hs.grid.setGrid('2x2')
 local function set_pos(window, target)
     if target == 'next_screen' then
         window:moveToScreen(window:screen():next())
