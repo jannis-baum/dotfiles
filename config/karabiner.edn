@@ -10,7 +10,7 @@
   :templates {
     :open "open -a \"%s.app\""
     :uri "open -g \"%s\""
-    :set-win "open -g rectangle://execute-action?name=%s; open -g hammerspoon://fitWinBelowSketchybar"
+    :set-win "open -g hammerspoon://moveWindow?to=%s"
     :dncp "~/.local/bin/dnc-post \"%s\""}
 
   :applications {
@@ -163,9 +163,9 @@
     {:des "gui layer" :rules [
        :gui
          ; left half window sizing
-         [:e [:set-win "top-left"]]    [:r [:set-win "next-display"]]     [:t [:set-win "top-right"]]
-         [:d [:set-win "left-half"]]   [:f [:set-win "maximize"]]         [:g [:set-win "right-half"]]
-         [:c [:set-win "bottom-left"]] [:v [:set-win "previous-display"]] [:b [:set-win "bottom-right"]]
+         [:e [:set-win "0,0_1x1"]] [:r [:set-win "next_screen"]] [:t [:set-win "1,0_1x1"]]
+         [:d [:set-win "0,0_1x2"]] [:f [:set-win "0,0_2x2"]]     [:g [:set-win "1,0_1x2"]]
+         [:c [:set-win "0,1_1x1"]] [:v [:set-win "prev_screen"]] [:b [:set-win "1,1_1x1"]]
          ; left half others
          [:q :vk_none] [:w :!C0]
          [:a :!Cequal_sign] [:s :!Chyphen]

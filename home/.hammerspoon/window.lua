@@ -32,14 +32,30 @@ local function fit_win_below_sketchybar(window)
     if overlap <= 0 then
         return
     end
-    ax_enhanced_workaround(window:application(), function()
-        window:setFrame({
-            x = win_frame.x, y = win_frame.y + overlap,
-            w = win_frame.w, h = win_frame.h - overlap
-        }, 0)
-    end)
+    window:setFrame({
+        x = win_frame.x, y = win_frame.y + overlap,
+        w = win_frame.w, h = win_frame.h - overlap
+    }, 0)
 end
 
-hs.urlevent.bind('fitWinBelowSketchybar', function(eventName, params)
-    fit_win_below_sketchybar(hs.window.focusedWindow())
+local function set_pos(window, target)
+    if target == 'next_screen' then
+        window:moveToScreen(window:screen():next())
+        hs.grid.snap(window)
+    elseif target == 'prev_screen' then
+        window:moveToScreen(window:screen():previous())
+        hs.grid.snap(window)
+    else
+        hs.grid.set(window, string.gsub(target, '_', ' '), window:screen())
+    end
+end
+
+hs.urlevent.bind('moveWindow', function(eventName, params)
+    local window = hs.window.focusedWindow()
+    if window == nil then return end
+    ax_enhanced_workaround(window:application(), function()
+        set_pos(window, params['to'])
+        fit_win_below_sketchybar(window)
+    end)
+
 end)
