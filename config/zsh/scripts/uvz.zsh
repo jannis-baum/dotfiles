@@ -77,7 +77,8 @@ EOF
     if ! test -f "pyproject.toml"; then
         uv init "${uv_args[@]}" || return
     fi
-    uv venv
+    local project_name="$(uv version --output-format=json | jq -r '.package_name')"
+    uv venv --prompt "uvz:$project_name"
 
     source "$new_path/bin/activate"
 }
