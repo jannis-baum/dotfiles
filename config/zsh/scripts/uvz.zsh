@@ -1,28 +1,28 @@
-function pyv() {
+function uvz() {
     case "$1" in
         "new")
             shift
-            _pyv_new $@
+            _uvz_new $@
             ;;
         "location")
-            local pyv_dir=$(_pyv_find)
-            [[ -n "$pyv_dir" ]] && echo "$pyv_dir"
+            local uvz_dir=$(_uvz_find)
+            [[ -n "$uvz_dir" ]] && echo "$uvz_dir"
             ;;
         *) cat <<EOF
-usage: pyv [new | location | help]
+usage: uvz [new | location | help]
 
-Minimal zsh-centered Python virtual env management using pyenv, venv & pip
+Minimal zsh-centered Python virtual env management using uv
 
 positional aguments
   help       show this help message and exit
-  new        create a new environment, see \`pyv new --help\`
-  location   show path of pyv for current directory if one exists
+  new        create a new environment, see \`uvz new --help\`
+  location   show path of uvz for current directory if one exists
 EOF
             ;;
     esac
 }
 
-function _pyv_new() {
+function _uvz_new() {
     # MARK: ARUGMENT PARSING ---------------------------------------------------
     # from https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
     local arg_help="" positional=() arg_version arg_jupyter arg_noreqs
@@ -51,7 +51,7 @@ function _pyv_new() {
 
     if [[ -n "$arg_help" ]]; then
         cat <<EOF
-usage: pyv new [-h] [-np] [-nr] [-v] [name]
+usage: uvz new [-h] [-np] [-nr] [-v] [name]
 
 Create a new environment and activate it
 
@@ -74,9 +74,9 @@ EOF
     [[ -z "$arg_name" ]] \
         && arg_name="$(basename "$(realpath .)")"
 
-    local new_path=".pyv"
+    local new_path=".venv"
     if test -d "$new_path"; then
-        echo "pyv already exists here, exiting." >&2
+        echo "uvz already exists here, exiting." >&2
         return
     fi
 
@@ -93,7 +93,7 @@ EOF
         fi
     fi
 
-    if ! pyenv exec python -m venv "$new_path" --prompt "pyv:$arg_name" 2>/dev/null; then
+    if ! pyenv exec python -m venv "$new_path" --prompt "uvz:$arg_name" 2>/dev/null; then
         echo 'Please specify a version with `-v` or set it locally with `pyenv local "version"`.' >&2
         _error_version
         return 1
@@ -110,11 +110,11 @@ EOF
     fi
 }
 
-function _pyv_find() {
+function _uvz_find() {
     [[ "$(pwd)" != $HOME* ]] && return
     while [[ "$(pwd)" != "$HOME" ]]; do
-        if test -d .pyv; then
-            echo "$(pwd)/.pyv"
+        if test -d .venv; then
+            echo "$(pwd)/.venv"
             break
         fi
         # -q omits chpwd hooks
@@ -122,19 +122,19 @@ function _pyv_find() {
     done
 }
 
-function _pyv_cd() {
+function _uvz_cd() {
     # deactivate if we can
     which deactivate >/dev/null && deactivate
 
-    local pyv_dir=$(_pyv_find)
-    # if there is no (valid) pyv_dir return
-    {[[ -z "$pyv_dir" ]] || ! test -f "$pyv_dir/bin/activate"} && return
+    local uvz_dir=$(_uvz_find)
+    # if there is no (valid) uvz_dir return
+    {[[ -z "$uvz_dir" ]] || ! test -f "$uvz_dir/bin/activate"} && return
     # else we can activate
-    source "$pyv_dir/bin/activate"
+    source "$uvz_dir/bin/activate"
 }
 autoload -U add-zsh-hook
-add-zsh-hook chpwd _pyv_cd
+add-zsh-hook chpwd _uvz_cd
 
-# for initial pyv
+# for initial uvz
 # CAUTION! this needs to happen after `pyenv init -`
-_pyv_cd
+_uvz_cd
