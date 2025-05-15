@@ -79,6 +79,8 @@ EOF
     fi
     local project_name="$(uv version --output-format=json | jq -r '.package_name')"
     uv venv --prompt "uvz:$project_name"
+    # trigger lazy package install
+    uv run python -c ''
 
     source "$new_path/bin/activate"
 }
