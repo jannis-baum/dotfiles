@@ -36,7 +36,7 @@ function set-sketchytabs() {
             --subscribe "$item_name" front_app_switched
         )
 
-        matching_images=(/Volumes/sketchytabs-icons/$app_name/$line_num.*(.N))
+        matching_images=(/Volumes/sketchytabs/$app_name/$line_num.*(.N))
         image="$matching_images[1]"
         if [[ -n "$image" ]]; then
             sketchy_args+=(--set "$item_name"

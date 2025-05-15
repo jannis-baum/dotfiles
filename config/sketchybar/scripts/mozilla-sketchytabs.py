@@ -39,7 +39,7 @@ def get_title(tab, active_len, inactive_len):
         return ellipse_string(tab['title'], active_len)
     return f'FAINT {ellipse_string(tab["title"], inactive_len)}'
 
-icon_dir = os.path.join('/Volumes', 'sketchytabs-icons', browser_name)
+icon_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
 def reset_icon_dir():
     if os.path.exists(icon_dir):
         shutil.rmtree(icon_dir)
