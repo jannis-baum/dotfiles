@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# use nvim as pager
+
 [[ -n "$1" ]] && cur_pos=$1 || cur_pos="0, 0"
 
 temp_file=$(mktemp)
