@@ -1,6 +1,0 @@
-#!/bin/zsh
-
-/Applications/kitty.app/Contents/MacOS/kitty \
-    --config ~/.config/kitty/vriter/vriter.conf \
-    --single-instance --instance-group vriter \
-    ~/.config/kitty/vriter/vrite
