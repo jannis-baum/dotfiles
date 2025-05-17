@@ -1,14 +1,10 @@
 local e = {}
 
-
---------------------------------------------------------------------------------
 -- reload config ---------------------------------------------------------------
 hs.urlevent.bind("reloadConfig", function(eventName, params)
     hs.reload()
 end)
 
-
---------------------------------------------------------------------------------
 -- apps ------------------------------------------------------------------------
 e.appWatcher = hs.application.watcher.new(function(name, eventType, app)
     if name == 'Safari' and eventType == hs.application.watcher.terminated then
@@ -20,8 +16,6 @@ e.appWatcher = hs.application.watcher.new(function(name, eventType, app)
 end)
 e.appWatcher:start()
 
-
---------------------------------------------------------------------------------
 -- distributed notifications ---------------------------------------------------
 e.dnWatchers = {}
 function e.setupDNWatcher(dn, callback)
@@ -31,8 +25,6 @@ function e.setupDNWatcher(dn, callback)
     e.dnWatchers[#e.dnWatchers]:start()
 end
 
-
---------------------------------------------------------------------------------
 -- karabiner -------------------------------------------------------------------
 function e.karabinerSet(data)
     hs.execute(
@@ -49,8 +41,6 @@ e.setupKarabinerDNs('kindaVimDidEnterNormalMode', 'kindaVimDidExitNormalMode', '
 e.setupKarabinerDNs('WooshyInputDidAppear', 'WooshyInputDidDisappear', 'inWooshy')
 e.setupKarabinerDNs('ScrollaDidEngage', 'ScrollaDidDisengage', 'inScrolla')
 
-
---------------------------------------------------------------------------------
 -- wooshy ----------------------------------------------------------------------
 hs.urlevent.bind('showMenubar', function()
     pos = hs.mouse.absolutePosition()
@@ -70,7 +60,6 @@ hs.urlevent.bind('hideMenubar', function()
     event:post()
 end)
 
---------------------------------------------------------------------------------
 -- dark/light mode -------------------------------------------------------------
 e.setupDNWatcher('AppleInterfaceThemeChangedNotification', function()
     os.execute(os.getenv('HOME') .. '/.config/kitty/sync-theme')
