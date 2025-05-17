@@ -39,14 +39,14 @@ def get_title(tab, active_len, inactive_len):
         return ellipse_string(tab['title'], active_len)
     return f'FAINT {ellipse_string(tab["title"], inactive_len)}'
 
-icon_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
-def reset_icon_dir():
-    if os.path.exists(icon_dir):
-        shutil.rmtree(icon_dir)
-    os.mkdir(icon_dir)
+sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
+def reset_sketchytabs_dir():
+    if os.path.exists(sketchytabs_dir):
+        shutil.rmtree(sketchytabs_dir)
+    os.mkdir(sketchytabs_dir)
 
 # need index because tab['index'] is not consistent
-def write_image(tab, index):
+def write_image(tab, index) -> str | None:
     if 'favIconUrl' not in tab: return
     try:
         header, encoded = tab['favIconUrl'].split(',')
@@ -54,7 +54,7 @@ def write_image(tab, index):
         split_header = header.split(';')
         mime_type = split_header[0].split(':')[1]
         extension = mimetypes.guess_extension(mime_type)
-        path = os.path.join(icon_dir, f'{index + 1}{extension}')
+        path = os.path.join(sketchytabs_dir, f'{index + 1}{extension}')
 
         if len(split_header) == 2 and split_header[1] == 'base64':
             data = base64.b64decode(encoded)
@@ -64,6 +64,7 @@ def write_image(tab, index):
 
         with open(path, 'wb') as fp:
             fp.write(data)
+            return path
     except:
         pass
 
@@ -92,8 +93,14 @@ while True:
     tabs = getMessage()
     active_len, inactive_len = title_lengths(len(tabs))
     titles = [get_title(tab, active_len, inactive_len) for tab in tabs]
-    reset_icon_dir()
-    for index, tab in enumerate(tabs): write_image(tab, index)
+
+    reset_sketchytabs_dir()
+    icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
+    # tab info for Synapse
+    with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
+        json.dump([{
+            'title': tab['title'], 'caption': tab['url'], 'iconPath': icon_paths[index]
+        } for index, tab in enumerate(tabs)], fp)
 
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
