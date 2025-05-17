@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# edit clipboard in nvim
+
+temp_file=$(mktemp).md
+
+/opt/homebrew/bin/nvim "$temp_file" \
+    -c "normal p" \
+    -c "write" \
+    -c "normal G" \
+    -c "startinsert!"
+
+printf "%s" "$(cat "$temp_file")" | pbcopy
+rm "$temp_file"
