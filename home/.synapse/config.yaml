@@ -33,12 +33,19 @@ modules:
   - keychain
   - unicode
   - safari-histmarks
-  - safari-tabs:
+  - /inline/zen-sketchytabs:
+      name: Zen Tabs
       trigger: (.+)
-      suppressOthers: false
+      source:
+        program:
+          exec: zsh
+          args: ["-c", "test -f /Volumes/sketchytabs/Zen/tabs.json && cat /Volumes/sketchytabs/Zen/tabs.json"]
+      sink:
+        program:
+          exec: zsh
+          args: ["-c", "open {{ caption }}; printf closePanel"]
   - pkill
   - timer
-
   - /inline/date-copy:
       name: "Today's Date"
       trigger: "^date (.*)"
