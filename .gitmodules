@@ -1,29 +1,29 @@
 [submodule ".synapse/modules/unicode"]
-	path = home/.synapse/modules/unicode
+	path = config/synapse/modules/unicode
 	url = https://github.com/jannis-baum/synapse-unicode.git
 [submodule ".synapse/modules/cas"]
-	path = home/.synapse/modules/math
+	path = config/synapse/modules/math
 	url = https://github.com/jannis-baum/synapse-cas.git
 [submodule ".synapse/modules/control-center"]
-	path = home/.synapse/modules/control-center
+	path = config/synapse/modules/control-center
 	url = https://github.com/jannis-baum/synapse-control-center.git
 [submodule ".synapse/modules/app-search"]
-	path = home/.synapse/modules/app-search
+	path = config/synapse/modules/app-search
 	url = https://github.com/jannis-baum/synapse-app-search.git
 [submodule ".synapse/modules/keychain"]
-	path = home/.synapse/modules/keychain
+	path = config/synapse/modules/keychain
 	url = https://github.com/jannis-baum/synapse-keychain.git
 [submodule ".synapse/modules/pkill"]
-	path = home/.synapse/modules/pkill
+	path = config/synapse/modules/pkill
 	url = https://github.com/jannis-baum/synapse-pkill.git
 [submodule ".synapse/modules/safari-histmarks"]
-	path = home/.synapse/modules/safari-histmarks
+	path = config/synapse/modules/safari-histmarks
 	url = https://github.com/jannis-baum/synapse-safari-histmarks.git
 [submodule ".synapse/modules/safari-tabs"]
-	path = home/.synapse/modules/safari-tabs
+	path = config/synapse/modules/safari-tabs
 	url = https://github.com/jannis-baum/synapse-safari-tabs.git
 [submodule ".synapse/modules/timer"]
-	path = home/.synapse/modules/timer
+	path = config/synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
 [submodule ".lib/markup-export"]
 	path = home/.lib/markup-export
@@ -53,13 +53,13 @@
 	path = config/zsh/plugins-other/fzf-tab-completion
 	url = https://github.com/lincheney/fzf-tab-completion.git
 [submodule ".synapse/modules/clipboard"]
-	path = home/.synapse/modules/clipboard
+	path = config/synapse/modules/clipboard
 	url = https://github.com/jannis-baum/synapse-clipboard.git
 [submodule ".synapse/modules/switcher"]
-	path = home/.synapse/modules/switcher
+	path = config/synapse/modules/switcher
 	url = https://github.com/jannis-baum/synapse-switcher.git
 [submodule ".synapse/modules/kitty-tabs"]
-	path = home/.synapse/modules/kitty-tabs
+	path = config/synapse/modules/kitty-tabs
 	url = https://github.com/jannis-baum/synapse-kitty-tabs.git
 [submodule "config/nvim/pack/plugins/opt/jupyviv.nvim"]
 	path = config/nvim/pack/plugins/opt/jupyviv.nvim

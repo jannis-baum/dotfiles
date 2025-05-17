@@ -1,5 +1,5 @@
 require"events"
 require"smart-magnify"
 require"window"
-dofile"/Users/jannisbaum/.synapse/modules/control-center/hammerspoon.lua"
-dofile"/Users/jannisbaum/.synapse/modules/timer/hammerspoon.lua"
+dofile"/Users/jannisbaum/.config/synapse/modules/control-center/hammerspoon.lua"
+dofile"/Users/jannisbaum/.config/synapse/modules/timer/hammerspoon.lua"
