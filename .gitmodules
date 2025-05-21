@@ -64,3 +64,6 @@
 [submodule "config/nvim/pack/plugins/opt/jupyviv.nvim"]
 	path = config/nvim/pack/plugins/opt/jupyviv.nvim
 	url = https://github.com/jannis-baum/jupyviv.nvim.git
+[submodule "lib/drag"]
+	path = lib/drag
+	url = https://github.com/jannis-baum/drag.git
