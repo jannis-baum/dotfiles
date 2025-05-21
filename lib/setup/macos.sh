@@ -61,6 +61,8 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # show hidden files in finder
 defaults write com.apple.finder AppleShowAllFiles -bool true
+# disable desktop
+defaults write com.apple.finder CreateDesktop false
 
 
 # --------------------------------------------------------------------------
