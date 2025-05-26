@@ -1,18 +1,22 @@
+" OPTIONS -------------------------------------------------------------
+" colors
 set notermguicolors             " 256 instead of true color for chameleon hacks
-set wildmenu                    " menu
-set mouse=a                     " mouse
-set visualbell                  " bell
-set t_vb=                       " .
-set scrolloff=8                 " extra lines while scrolling
 colorscheme jellyfish           " scheme is generated; see .lib/nosync/color-schemes
-set splitbelow                  " splits
-set splitright                  " .
-set noshowmode                  " other
+" status/bottom bar
+set noshowmode                  " don't show "Insert"/"Visual" in status bar
+set noruler                     " don't show line/col in status bar
+" ui elements
 set signcolumn=yes              " sign column (left)
 set fillchars+=eob:·            " end of buffer filler character
-set noruler
-set winborder=solid
-
+set winborder=solid             " window border
+set wildmenu                    " menu
+" other
+set mouse=a                     " enable mouse
+set visualbell                  " terminal bell
+set t_vb=                       " .
+set scrolloff=8                 " extra lines while scrolling
+set splitbelow                  " splits
+set splitright                  " .
 " set experimental cmdheight=0 on VimEnter because otherwise we get some weird
 " "press enter" prompt on startup
 augroup SetCmdHeight
@@ -20,6 +24,7 @@ augroup SetCmdHeight
     autocmd VimEnter * set cmdheight=0
 augroup END
 
+" TERMINAL CONTROL CHARS ----------------------------------------------
 " cursor style
 let &t_SI = "\e[5 q"
 let &t_SR = "\e[4 q"
@@ -33,7 +38,7 @@ let &t_Ds = "\e[4:5m"
 " underline color
 let &t_AU = "\e[58;5;%dm"
 
-" status & tab line
+" STATUS AND TAB LINE -------------------------------------------------
 function! s:modified_marker(buf)
     return getbufinfo(a:buf)[0].changed ? ' ✻' : ''
 endfunction
