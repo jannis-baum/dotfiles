@@ -8,11 +8,17 @@ colorscheme jellyfish           " scheme is generated; see .lib/nosync/color-sch
 set splitbelow                  " splits
 set splitright                  " .
 set noshowmode                  " other
-set showcmd                     " .
 set signcolumn=yes              " sign column (left)
 set fillchars+=eob:·            " end of buffer filler character
 set noruler
 set winborder=solid
+
+" set experimental cmdheight=0 on VimEnter because otherwise we get some weird
+" "press enter" prompt on startup
+augroup SetCmdHeight
+    autocmd!
+    autocmd VimEnter * set cmdheight=0
+augroup END
 
 " cursor style
 let &t_SI = "\e[5 q"
@@ -106,9 +112,3 @@ function! TLContent()
 endfunction
 
 set tabline=%!TLContent()
-
-" clear message area / command text
-augroup ClearMessageArea
-    autocmd!
-    autocmd CursorHold * echo ''
-augroup END
