@@ -1,5 +1,6 @@
 -- TODO:
 -- - multi line function definitions, e.g. with @attributes in Swift or Python
+-- - doesn't work if symbol is in first line of file
 
 local ansi = require('ansi_highlight')
 
