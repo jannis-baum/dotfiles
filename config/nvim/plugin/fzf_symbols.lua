@@ -66,7 +66,7 @@ function SelectSymbol()
         if prev_row == row then goto continue end
 
         local text = ansi.get(0, row, column, row, #vim.fn.getline(row + 1))
-        local indented_text = string.rep(' ', (depth - 1) * 2) .. text
+        local indented_text = string.rep(' ', depth - 1) .. text
         table.insert(fzf_input, tostring(row + 1) .. ':' .. tostring(column + 1) .. ':' .. indented_text)
         prev_row = row
         ::continue::
