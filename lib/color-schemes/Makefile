@@ -7,8 +7,8 @@ all: link generate load
 generate:
 	@zsh -c '\
 		cd chameleon; \
-		test -d .pyv || { source $$ZDOTDIR/.zshrc; pyv new }; \
-		source .pyv/bin/activate; ./generate ../jellyfish.yaml'
+		test -d .venv || { echo "set up .venv to continue"; exit 1 }; \
+		source .venv/bin/activate; ./generate ../jellyfish.yaml'
 
 .PHONY: link
 link:
