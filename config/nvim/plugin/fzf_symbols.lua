@@ -14,6 +14,7 @@ local relevant_symbols = {
     'field_declaration',    -- C++
     'friend_declaration',   -- C++
     'lexical_declaration',  -- TypeScript
+    'atx_heading',          -- Markdown
 }
 local blacklist_symbols = {
     'comment',               -- everything
