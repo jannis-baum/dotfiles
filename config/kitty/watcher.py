@@ -101,13 +101,31 @@ def _refresh_widgets(boss: Boss) -> None:
 
     tab_manager = boss.active_tab_manager
     if tab_manager is not None:
+        def remote_title(tab) -> str | None:
+            if tab.get_exe_of_active_window().split('/')[-1] != 'ssh':
+                return None
+            if tab.active_window is None: return 'ssh'
+            try:
+                address = next((
+                    arg
+                    for proc in tab.active_window.child.foreground_processes
+                    for arg in proc['cmdline']
+                    if '@' in arg
+                ))
+            except StopIteration:
+                return 'ssh'
+            return address.split('@')[-1]
+
         active_id = (active_tab := tab_manager.active_tab) and active_tab.id
         def get_title(tab) -> str:
-            cwd = tab.get_cwd_of_active_window() or '??'
-            cwd = cwd.replace(os.path.expanduser('~'), 'home')
-            cwd = cwd.split('/')[-1]
+            title = remote_title(tab)
+            if title is None:
+                title = tab.get_cwd_of_active_window() or '??'
+                title = title.replace(os.path.expanduser('~'), 'home')
+                title = title.split('/')[-1]
             prefix = git_info if tab.id == active_id else 'FAINT '
-            return prefix + cwd
+            return prefix + title
+
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'
 
