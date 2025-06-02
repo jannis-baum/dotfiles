@@ -1,6 +1,5 @@
 -- TODO:
 -- - multi line function definitions, e.g. with @attributes in Swift or Python
--- - doesn't work if symbol is in first line of file
 
 local ansi = require('ansi_highlight')
 
@@ -57,7 +56,7 @@ function SelectSymbol()
     if symbols == nil then return end
 
     local fzf_input = {}
-    local prev_row = 0
+    local prev_row = -1
     for _, symbol in pairs(symbols) do
         local node = symbol['node']
         local depth = symbol['depth']
