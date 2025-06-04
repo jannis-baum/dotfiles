@@ -101,30 +101,33 @@ def _refresh_widgets(boss: Boss) -> None:
 
     tab_manager = boss.active_tab_manager
     if tab_manager is not None:
-        def remote_title(tab) -> str | None:
-            if tab.get_exe_of_active_window().split('/')[-1] != 'ssh':
-                return None
-            if tab.active_window is None: return 'ssh'
+        active_id = (active_tab := tab_manager.active_tab) and active_tab.id
+        def is_active(tab) -> bool:
+            return active_id == tab.id
+
+        def get_remote_title(tab) -> str:
             try:
-                address = next((
+                return next((
                     arg
                     for proc in tab.active_window.child.foreground_processes
                     for arg in proc['cmdline']
                     if '@' in arg
-                ))
-            except StopIteration:
+                )).split('@')[-1].split(':')[0]
+            except:
                 return 'ssh'
-            return address.split('@')[-1]
 
-        active_id = (active_tab := tab_manager.active_tab) and active_tab.id
+        def get_local_title(tab) -> str:
+            title = tab.get_cwd_of_active_window() or '??'
+            title = title.replace(os.path.expanduser('~'), 'home')
+            title = title.split('/')[-1]
+            return f'{git_info}{title}' if is_active(tab) else title
+
         def get_title(tab) -> str:
-            title = remote_title(tab)
-            if title is None:
-                title = tab.get_cwd_of_active_window() or '??'
-                title = title.replace(os.path.expanduser('~'), 'home')
-                title = title.split('/')[-1]
-            prefix = git_info if tab.id == active_id else 'FAINT '
-            return prefix + title
+            if tab.get_exe_of_active_window().split('/')[-1] == 'ssh':
+                title = get_remote_title(tab)
+            else:
+                title = get_local_title(tab)
+            return title if is_active(tab) else f'FAINT {title}'
 
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'
