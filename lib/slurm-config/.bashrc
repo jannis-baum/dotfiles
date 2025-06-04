@@ -26,6 +26,7 @@ cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
 alias sruni="srun --account=$slurm_account --time=8:0:0"
+alias sme="squeue --me"
 
 function gpu() {
     sruni \
