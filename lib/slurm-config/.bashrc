@@ -46,7 +46,7 @@ function cpu() {
     sruni \
         --partition=cpu-interactive \
         --cpus-per-task=$1 \
-        --mem=$(( $1 * 2 )) \
+        --mem=$(( $1 * 2 ))G \
         --pty bash
 }
 
