@@ -1,3 +1,8 @@
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # generic aliases
 alias s="ls --almost-all --color=always --group-directories-first"
 alias l="s -l"
@@ -8,7 +13,7 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias c="printf '\n%.0s' {2..$LINES} && clear"
-alias g="git status"#
+alias g="git status"
 
 # options & key bindings
 set -o vi
@@ -25,7 +30,7 @@ PS1="\[\e[38;5;210m\]\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\[\e[0m\]
 cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
-alias sruni="srun --account=$slurm_account --time=8:0:0"
+alias sruni="srun --account=sci-renard-student --time=8:0:0"
 alias sme="squeue --me"
 
 function gpu() {
@@ -36,7 +41,7 @@ function gpu() {
         --container-workdir=$HOME \
         --partition=gpu-interactive \
         --cpus-per-task=40 \
-        --mem=128G \
+        --mem=80G \
         --gpus=$2 \
         --nodelist=gx$1 \
         --pty bash
@@ -48,6 +53,41 @@ function cpu() {
         --cpus-per-task=$1 \
         --mem=$(( $1 * 2 ))G \
         --pty bash
+}
+
+function sbgeneric() {
+    temp_job="$(mktemp)"
+    cat <<EOF > "$temp_job"
+#!/bin/bash -ex
+
+# MARK: leave as is
+#SBATCH --account=sci-renard-student
+#SBATCH --job-name=generic
+
+# MARK: uncomment for bionemo
+# #SBATCH --container-writable
+# #SBATCH --container-name=bionemo
+# #SBATCH --container-mount-home
+# #SBATCH --gpus=1
+
+# MARK: optional specification
+# #SBATCH --nodelist=
+#SBATCH --time=24:00:00
+#SBATCH --partition=cpu
+#SBATCH --output=/dev/null
+#SBATCH --error=/dev/null
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=128G
+
+# MARK: script
+EOF
+
+    if ! vim "$temp_job"; then
+        echo "Cancelled" 1>&2
+        return 1
+    fi
+    sbatch "$temp_job"
+    rm "$temp_job"
 }
 
 function sjupyviv() {
@@ -73,12 +113,12 @@ function sjupyviv() {
 # #SBATCH --container-writable
 # #SBATCH --container-name=bionemo
 # #SBATCH --container-mount-home
+# #SBATCH --gpus=1
 
 # MARK: optional specification
+# #SBATCH --nodelist=
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=128G
-
-# MARK: have to specify
 #SBATCH --partition=cpu
 
 uv run jupyviv --log INFO agent python
@@ -104,4 +144,11 @@ EOF
             break
         fi
     done
+}
+
+# misc
+function ensure-jupyviv() {
+    source .venv/bin/activate \
+        && python -m ensurepip \
+        && python -m pip install git+https://github.com/jannis-baum/Jupyviv.git ipykernel
 }
