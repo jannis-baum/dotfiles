@@ -84,7 +84,6 @@ function sbgeneric() {
 EOF
         cat "$_template_dir/sbatch-bionemo"
         cat "$_template_dir/sbatch-resources"
-        cat sbatch-resources
     } | _prepare_template sbatch
 }
 
@@ -96,39 +95,23 @@ function sjupyviv() {
     logs_dir="$HOME/.cache/jupyviv/logs"
     mkdir -p "$logs_dir"
 
-    temp_job="$(mktemp)"
-    cat <<EOF > "$temp_job"
-#!/bin/bash
-
-# MARK: leave as is
-#SBATCH --account=sci-renard-student
+    output="$({
+        cat "$_template_dir/sbatch-header"
+        cat <<EOF
 #SBATCH --job-name=jupyviv
-#SBATCH --time=24:00:00
 #SBATCH --output=$logs_dir/%j
 #SBATCH --error=$logs_dir/%j
-
-# MARK: uncomment for bionemo
-# #SBATCH --container-writable
-# #SBATCH --container-name=bionemo
-# #SBATCH --container-mount-home
-# #SBATCH --gpus=1
-
-# MARK: optional specification
-# #SBATCH --nodelist=
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=128G
-#SBATCH --partition=cpu
+EOF
+        cat "$_template_dir/sbatch-bionemo"
+        cat "$_template_dir/sbatch-resources"
+        cat <<EOF
 
 uv run jupyviv --log INFO agent python
 EOF
+    } | _prepare_template sbatch)"
+    [[ $? -eq 0 ]] || return 1
 
-    if ! vim "$temp_job"; then
-        echo "Cancelled" 1>&2
-        return 1
-    fi
-    job_id=$(sbatch "$temp_job" | awk '{print $4}')
-    rm "$temp_job"
-
+    job_id=$(echo "$output" | awk '{print $4}')
     echo "Submitted job $job_id. Waiting for it to start..."
     while true; do
         state="$(squeue --job "$job_id" --noheader --format "%T")"
