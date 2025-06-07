@@ -75,38 +75,17 @@ EOF
 }
 
 function sbgeneric() {
-    temp_job="$(mktemp)"
-    cat <<EOF > "$temp_job"
-#!/bin/bash -ex
-
-# MARK: leave as is
-#SBATCH --account=sci-renard-student
+    {
+        cat "$_template_dir/sbatch-header"
+        cat <<EOF
 #SBATCH --job-name=generic
-
-# MARK: uncomment for bionemo
-# #SBATCH --container-writable
-# #SBATCH --container-name=bionemo
-# #SBATCH --container-mount-home
-# #SBATCH --gpus=1
-
-# MARK: optional specification
-# #SBATCH --nodelist=
-#SBATCH --time=24:00:00
-#SBATCH --partition=cpu
 #SBATCH --output=/dev/null
 #SBATCH --error=/dev/null
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=128G
-
-# MARK: script
 EOF
-
-    if ! vim "$temp_job"; then
-        echo "Cancelled" 1>&2
-        return 1
-    fi
-    sbatch "$temp_job"
-    rm "$temp_job"
+        cat "$_template_dir/sbatch-bionemo"
+        cat "$_template_dir/sbatch-resources"
+        cat sbatch-resources
+    } | _prepare_template sbatch
 }
 
 function sjupyviv() {
