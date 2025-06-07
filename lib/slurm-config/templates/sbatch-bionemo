@@ -1,0 +1,5 @@
+
+# MARK: uncomment for bionemo
+# #SBATCH --container-writable
+# #SBATCH --container-name=bionemo
+# #SBATCH --container-mount-home
