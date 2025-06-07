@@ -79,7 +79,7 @@ EOF
     } | _prepare_template --tty source
 }
 
-function sbgeneric() {
+function sb() {
     {
         cat "$_template_dir/sbatch-header"
         cat <<EOF
