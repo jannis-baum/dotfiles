@@ -1,0 +1,3 @@
+srun \
+    --account=sci-renard-student \
+    --time=8:00:00 \

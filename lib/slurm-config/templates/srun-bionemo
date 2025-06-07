@@ -1,0 +1,4 @@
+    --container-writable \
+    --container-name=bionemo \
+    --container-mount-home \
+    --container-workdir=$HOME \
