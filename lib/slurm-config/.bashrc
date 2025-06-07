@@ -30,7 +30,6 @@ PS1="\[\e[38;5;210m\]\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\[\e[0m\]
 cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
-alias sruni="srun --account=sci-renard-student --time=8:0:0"
 alias sme="squeue --me"
 
 function _prepare_template() {
@@ -49,25 +48,30 @@ function _prepare_template() {
 _template_dir="$HOME/slurm-templates"
 
 function gpu() {
-    sruni \
-        --container-writable \
-        --container-name=bionemo \
-        --container-mount-home \
-        --container-workdir=$HOME \
-        --partition=gpu-interactive \
-        --cpus-per-task=40 \
-        --mem=80G \
-        --gpus=$2 \
-        --nodelist=gx$1 \
-        --pty bash
+    {
+        cat "$_template_dir/srun-header"
+        cat "$_template_dir/srun-bionemo"
+        cat <<EOF
+    --partition=gpu-interactive \\
+    --cpus-per-task=40 \\
+    --mem=80G \\
+    --gpus=1 \\
+    --nodelist=gx \\
+    --pty bash
+EOF
+    } | _prepare_template source
 }
 
 function cpu() {
-    sruni \
-        --partition=cpu-interactive \
-        --cpus-per-task=$1 \
-        --mem=$(( $1 * 2 ))G \
-        --pty bash
+    {
+        cat "$_template_dir/srun-header"
+        cat <<EOF
+    --partition=cpu-interactive \\
+    --cpus-per-task=40 \\
+    --mem=80G \\
+    --pty bash
+EOF
+    } | _prepare_template source
 }
 
 function sbgeneric() {
