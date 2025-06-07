@@ -33,6 +33,21 @@ slurm_account="sci-renard-student"
 alias sruni="srun --account=sci-renard-student --time=8:0:0"
 alias sme="squeue --me"
 
+function _prepare_template() {
+    temp_job="$(mktemp)"
+    cat > "$temp_job"
+
+    if ! vim "$temp_job" < /dev/tty >/dev/tty; then
+        echo "Cancelled" 1>&2
+        rm "$temp_job"
+        return 1
+    fi
+
+    $@ "$temp_job"
+    rm "$temp_job"
+}
+_template_dir="$HOME/slurm-templates"
+
 function gpu() {
     sruni \
         --container-writable \
