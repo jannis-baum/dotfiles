@@ -42,7 +42,12 @@ function _prepare_template() {
         return 1
     fi
 
-    $@ "$temp_job"
+    if [[ $1 == "--tty" ]]; then
+        shift 1
+        $@ "$temp_job" </dev/tty >/dev/tty
+    else
+        $@ "$temp_job"
+    fi
     rm "$temp_job"
 }
 _template_dir="$HOME/slurm-templates"
@@ -59,7 +64,7 @@ function gpu() {
     --nodelist=gx \\
     --pty bash
 EOF
-    } | _prepare_template source
+    } | _prepare_template --tty source
 }
 
 function cpu() {
@@ -71,7 +76,7 @@ function cpu() {
     --mem=80G \\
     --pty bash
 EOF
-    } | _prepare_template source
+    } | _prepare_template --tty source
 }
 
 function sbgeneric() {
