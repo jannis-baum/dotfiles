@@ -16,13 +16,13 @@ function set-sketchytabs() {
     line_num=1
     while IFS= read -r line; do
         item_name="APP-$app_name-$line_num"
-        label="$(sed 's/^FAINT //' <<<"$line")"
-        if [[ "$line" = FAINT* ]]; then
-            label_font='Menlo:Normal:14'
-            label_color='0xff808080'
-        else
+        label="$(sed 's/^ACTIVE://' <<<"$line")"
+        if [[ "$line" = ACTIVE:* ]]; then
             label_font='Menlo:Bold:14'
             label_color='0xffbbbbbb'
+        else
+            label_font='Menlo:Normal:14'
+            label_color='0xff808080'
         fi
 
         sketchy_args+=(

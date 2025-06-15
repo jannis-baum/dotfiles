@@ -127,7 +127,7 @@ def _refresh_widgets(boss: Boss) -> None:
                 title = get_remote_title(tab)
             else:
                 title = get_local_title(tab)
-            return title if is_active(tab) else f'FAINT {title}'
+            return f'ACTIVE:{title}' if is_active(tab) else title
 
         tab_titles = [get_title(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_titles) + '\n'

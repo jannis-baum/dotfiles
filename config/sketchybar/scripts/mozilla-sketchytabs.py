@@ -36,8 +36,8 @@ def ellipse_string(string, max_length):
 
 def get_title(tab, active_len, inactive_len):
     if tab['active']:
-        return ellipse_string(tab['title'], active_len)
-    return f'FAINT {ellipse_string(tab["title"], inactive_len)}'
+        return f'ACTIVE:{ellipse_string(tab["title"], active_len)}'
+    return ellipse_string(tab['title'], inactive_len)
 
 sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
 def reset_sketchytabs_dir():
