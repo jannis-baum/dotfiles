@@ -92,7 +92,7 @@ def _get_git_info(boss: Boss):
             git_info['num_untracked_files']
         git_status = '✻ ' if dirty > 0 else ''
     except: return
-    return f'{git_status}{git_branch} » '
+    return f'{git_status}{git_branch}'
 
 def _refresh_widgets(boss: Boss) -> None:
     result = ''
@@ -120,7 +120,8 @@ def _refresh_widgets(boss: Boss) -> None:
             title = tab.get_cwd_of_active_window() or '??'
             title = title.replace(os.path.expanduser('~'), 'home')
             title = title.split('/')[-1]
-            return f'{git_info}{title}' if is_active(tab) else title
+            suffix = '' if git_info == '' else f': {git_info}'
+            return f'{title}{suffix}' if is_active(tab) else title
 
         def get_title(tab) -> str:
             if tab.get_exe_of_active_window().split('/')[-1] == 'ssh':
