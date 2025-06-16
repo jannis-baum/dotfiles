@@ -13,6 +13,42 @@ local function assert_non_nil(value)
     end
 end
 
+local function ellipse_string(s, max_length)
+    if max_length == 0 then return '' end
+
+    s = s:gsub('^%s+' ,''):gsub('%s+$', '')
+    if s:len() <= max_length then return s end
+
+    if max_length > 10 then
+        local result, _ = s:sub(1, max_length - 1):gsub('%s+$', '')
+        return result .. '…'
+    end
+
+    local result, _ = s:sub(1, max_length):gsub('%s+$', '')
+    return result
+end
+
+-- find number of chars tab bar can show:
+-- echo '0_2345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8_2345678_9_2345678_' \
+--     | config/sketchybar/scripts/set-sketchytabs.zsh Finder
+local max_chars = 74 -- max chars displayable in tab bar
+-- for these take a screenshot & compare widths
+local icon_w = 3     -- approx. how wide an icon is
+local gap_w = 2.5    -- approx. how wide the gap is
+-- compute good lengths for titles (active, inactive)
+local function title_lengths(tab_count)
+    local gaps = gap_w * (tab_count - 1)
+    local free_space = max_chars - gaps
+    -- free_space = (tab_count - 1) * inactive + active
+    -- free_space = (tab_count - 1) * inactive + 3 * inactive
+    -- free_space = inactive * (tab_count - 1 + 3)
+    -- free_space = inactive * (tab_count + 2)
+    -- inactive = free_space / (tab_count + 2) -> floor & max(0, _)
+    local inactive = math.max(0, math.floor(free_space / (tab_count + 2)))
+    local active = math.max(0, math.floor(free_space - inactive * (tab_count - 1)))
+    return active, inactive
+end
+
 local function main()
     local tab_app = arg[1]
     assert_non_nil(tab_app)
@@ -23,8 +59,12 @@ local function main()
     local sketchy_cmd = 'sketchybar --remove "/APP-' .. tab_app .. '\\d*/"'
     local drawing = arg[1] == current_app and 'on' or 'off'
 
+    local lines = io.read('*a')
+    local _, tab_count = lines:gsub('\n', '')
+    local active_len, inactive_len = title_lengths(tab_count)
+
     local line_num = 1
-    for line in io.read('*a'):gmatch('[^\n]+') do
+    for line in lines:gmatch('[^\n]+') do
         local is_active, image, label = line:match('([^:]*):([^:]*):(.*)')
         assert_non_nil(is_active)
         assert_non_nil(image)
@@ -32,6 +72,12 @@ local function main()
 
         local item_name = 'APP-' .. tab_app .. '-' .. tostring(line_num)
         local label_color = (is_active ~= '') and '0xffbbbbbb' or '0xff808080'
+
+        local max_title_len = (is_active ~= '') and active_len or inactive_len
+        if image ~= '' then
+            max_title_len = max_title_len - icon_w
+        end
+        label = ellipse_string(label, max_title_len)
 
         sketchy_cmd = sketchy_cmd
             .. ' --add item "' .. item_name .. '" left'

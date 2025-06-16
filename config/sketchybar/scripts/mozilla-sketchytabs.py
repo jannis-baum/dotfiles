@@ -5,7 +5,6 @@
 
 import base64
 import json
-import math
 import mimetypes
 import os
 import shutil
@@ -25,19 +24,8 @@ def getMessage():
     message = sys.stdin.buffer.read(messageLength).decode('utf-8')
     return json.loads(message)
 
-def ellipse_string(string, max_length):
-    if max_length == 0: return ''
-    string = string.strip()
-    if len(string) <= max_length:
-        return string
-    if max_length > 10:
-        return string[:max_length - 1].rstrip() + '…'
-    return string[:max_length]
-
-def get_line(tab, image_path, active_len, inactive_len):
-    title = ellipse_string(tab["title"], active_len if tab['active'] else inactive_len)
-    prefix = '1' if tab['active'] else ''
-    return f'{prefix}:{image_path}:{title}'
+def get_line(tab, image_path):
+    return f'{"1" if tab["active"] else ""}:{image_path}:{tab["title"]}'
 
 sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
 def reset_sketchytabs_dir():
@@ -68,36 +56,11 @@ def write_image(tab, index) -> str | None:
     except:
         pass
 
-# find number of chars tab bar can show:
-# echo '0_2345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8_2345678_9_2345678_' \
-#     | config/sketchybar/scripts/set-sketchytabs.zsh Finder
-_max_chars = 74 # max chars displayable in tab bar
-# for these take a screenshot & compare widths
-_icon_w = 3     # approx. how wide an icon is
-_gap_w = 1.5    # approx. how wide the gap is
-# compute good lengths for titles (active, inactive)
-def title_lengths(tab_count: int) -> tuple[int, int]:
-    icons = _icon_w * tab_count
-    gaps = _gap_w * (tab_count - 1)
-    free_space = _max_chars - gaps - icons
-    # free_space = (tab_count - 1) * inactive + active
-    # free_space = (tab_count - 1) * inactive + 3 * inactive
-    # free_space = inactive * (tab_count - 1 + 3)
-    # free_space = inactive * (tab_count + 2)
-    # inactive = free_space / (tab_count + 2) -> floor & max(0, _)
-    inactive = max(0, math.floor(free_space / (tab_count + 2)))
-    active = max(0, math.floor(free_space - inactive * (tab_count - 1)))
-    return (active, inactive)
-
 while True:
     tabs = getMessage()
-    active_len, inactive_len = title_lengths(len(tabs))
     reset_sketchytabs_dir()
     icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
-    lines = [
-        get_line(tab, icon_path, active_len, inactive_len)
-        for (tab, icon_path) in zip(tabs, icon_paths)
-    ]
+    lines = [get_line(tab, icon_path) for (tab, icon_path) in zip(tabs, icon_paths)]
 
     # tab info for Synapse
     with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
