@@ -1,16 +1,16 @@
-local function get_current_app()
-    local osascript = io.popen('osascript -l JavaScript -e \'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName\'')
-    if osascript == nil then return nil end
-    local app, _ = osascript:read('*a'):gsub('%s+', '')
-    return app
-end
-
 local function assert_non_nil(value)
     if value == nil then
         print('usage: ' .. arg[0] .. ' APP')
         print('Tabs are read from stdin as `[active]:[image-path]:tab title`')
         os.exit(1)
     end
+end
+
+local function get_current_app()
+    local osascript = io.popen('osascript -l JavaScript -e \'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName\'')
+    if osascript == nil then return nil end
+    local app, _ = osascript:read('*a'):gsub('%s+', '')
+    return app
 end
 
 local function ellipse_string(s, max_length)
