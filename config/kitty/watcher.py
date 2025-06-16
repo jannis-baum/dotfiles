@@ -123,20 +123,20 @@ def _refresh_widgets(boss: Boss) -> None:
             suffix = '' if git_info == '' else f': {git_info}'
             return f'{title}{suffix}' if is_active(tab) else title
 
-        def get_title(tab) -> str:
+        def get_line(tab) -> str:
             if tab.get_exe_of_active_window().split('/')[-1] == 'ssh':
                 title = get_remote_title(tab)
             else:
                 title = get_local_title(tab)
-            return f'ACTIVE:{title}' if is_active(tab) else title
+            return f'{"1" if is_active(tab) else ""}::{title}'
 
-        tab_titles = [get_title(tab) for tab in tab_manager.tabs]
-        result += '\n'.join(tab_titles) + '\n'
+        tab_lines = [get_line(tab) for tab in tab_manager.tabs]
+        result += '\n'.join(tab_lines) + '\n'
 
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     p = subprocess.Popen(
-        [os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.zsh'), 'kitty'],
+        ['luajit', os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.lua'), 'kitty'],
         stdin=subprocess.PIPE,
         env=fixed_env
     )
