@@ -34,10 +34,10 @@ def ellipse_string(string, max_length):
         return string[:max_length - 1].rstrip() + '…'
     return string[:max_length]
 
-def get_title(tab, active_len, inactive_len):
-    if tab['active']:
-        return f'ACTIVE:{ellipse_string(tab["title"], active_len)}'
-    return ellipse_string(tab['title'], inactive_len)
+def get_line(tab, image_path, active_len, inactive_len):
+    title = ellipse_string(tab["title"], active_len if tab['active'] else inactive_len)
+    prefix = '1' if tab['active'] else ''
+    return f'{prefix}:{image_path}:{title}'
 
 sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
 def reset_sketchytabs_dir():
@@ -92,10 +92,13 @@ def title_lengths(tab_count: int) -> tuple[int, int]:
 while True:
     tabs = getMessage()
     active_len, inactive_len = title_lengths(len(tabs))
-    titles = [get_title(tab, active_len, inactive_len) for tab in tabs]
-
     reset_sketchytabs_dir()
     icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
+    lines = [
+        get_line(tab, icon_path, active_len, inactive_len)
+        for (tab, icon_path) in zip(tabs, icon_paths)
+    ]
+
     # tab info for Synapse
     with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
         json.dump([{
@@ -105,8 +108,8 @@ while True:
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     subprocess.run(
-        [os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.zsh'), browser_name],
-        input='\n'.join(titles) + '\n',
+        ['/opt/homebrew/bin/luajit', os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.lua'), browser_name],
+        input='\n'.join(lines) + '\n',
         text=True,
         env=fixed_env
     )
