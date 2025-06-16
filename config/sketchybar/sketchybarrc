@@ -12,7 +12,7 @@ bar=(
     topmost=window
 )
 sketchybar --bar "${bar[@]}"
-sketchybar --load-font "$CONFIG_DIR/fonts/PoiretOne-With-Lightning.ttf"
+sketchybar --load-font "$CONFIG_DIR/media/PoiretOne-With-Lightning.ttf"
 
 # item defaults
 default=(
