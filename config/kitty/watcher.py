@@ -135,12 +135,14 @@ def _refresh_widgets(boss: Boss) -> None:
 
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
-    subprocess.run(
+    p = subprocess.Popen(
         [os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.zsh'), 'kitty'],
-        input=result,
-        text=True,
+        stdin=subprocess.PIPE,
         env=fixed_env
     )
+    p.stdin.write(result.encode())
+    p.stdin.close()
+
 
 def on_cmd_startstop(boss: Boss, window: Window, data: dict[str, Any]) -> None:
     _refresh_widgets(boss)
