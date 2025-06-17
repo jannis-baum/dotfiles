@@ -28,17 +28,17 @@ local function ellipse_string(s, max_length)
     return result
 end
 
--- find number of chars tab bar can show:
--- echo '0_2345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8_2345678_9_2345678_' \
---     | config/sketchybar/scripts/set-sketchytabs.zsh Finder
-local max_chars = 74 -- max chars displayable in tab bar
--- for these take a screenshot & compare widths
-local icon_w = 3     -- approx. how wide an icon is
-local gap_w = 2.5    -- approx. how wide the gap is
--- compute good lengths for titles (active, inactive)
-local function title_lengths(tab_count)
-    local gaps = gap_w * (tab_count - 1)
-    local free_space = max_chars - gaps
+local function get_widths(tab_count)
+    local bar_w = 648 -- check with screenshot tool cmd+shift+4
+    -- read dimension data
+    local widths = {}
+    for line in io.lines(os.getenv('HOME') .. '/.local/state/sketchybar/widths.txt') do
+        local key, value = line:match('([^:]+):(.+)')
+        widths[key] = value
+    end
+
+    local base = widths['base'] * tab_count
+    local free_space = bar_w - base
     -- free_space = (tab_count - 1) * inactive + active
     -- free_space = (tab_count - 1) * inactive + 3 * inactive
     -- free_space = inactive * (tab_count - 1 + 3)
@@ -46,7 +46,7 @@ local function title_lengths(tab_count)
     -- inactive = free_space / (tab_count + 2) -> floor & max(0, _)
     local inactive = math.max(0, math.floor(free_space / (tab_count + 2)))
     local active = math.max(0, math.floor(free_space - inactive * (tab_count - 1)))
-    return active, inactive
+    return active, inactive, widths['char'], widths['image']
 end
 
 local function main()
@@ -61,7 +61,7 @@ local function main()
 
     local lines = io.read('*a')
     local _, tab_count = lines:gsub('\n', '')
-    local active_len, inactive_len = title_lengths(tab_count)
+    local active_w, inactive_w, char_w, image_w = get_widths(tab_count)
 
     local line_num = 1
     for line in lines:gmatch('[^\n]+') do
@@ -73,11 +73,11 @@ local function main()
         local item_name = 'APP-' .. tab_app .. '-' .. tostring(line_num)
         local label_color = (is_active ~= '') and '0xffbbbbbb' or '0xff808080'
 
-        local max_title_len = (is_active ~= '') and active_len or inactive_len
+        local max_title_w = (is_active ~= '') and active_w or inactive_w
         if image ~= '' then
-            max_title_len = max_title_len - icon_w
+            max_title_w = max_title_w - image_w
         end
-        label = ellipse_string(label, max_title_len)
+        label = ellipse_string(label, math.floor(max_title_w / char_w))
 
         sketchy_cmd = sketchy_cmd
             .. ' --add item "' .. item_name .. '" left'
