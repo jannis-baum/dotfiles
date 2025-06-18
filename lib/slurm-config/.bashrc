@@ -33,7 +33,7 @@ slurm_account="sci-renard-student"
 alias sme="squeue --me"
 
 function _prepare_template() {
-    temp_job="$(mktemp)"
+    local temp_job="$(mktemp)"
     cat > "$temp_job"
 
     if ! vim "$temp_job" < /dev/tty >/dev/tty; then
@@ -97,10 +97,10 @@ function sjupyviv() {
         echo "Jupyviv not found" 1>&2
         return 1
     fi
-    logs_dir="$HOME/.cache/jupyviv/logs"
+    local logs_dir="$HOME/.cache/jupyviv/logs"
     mkdir -p "$logs_dir"
 
-    output="$({
+    local output="$({
         cat "$_template_dir/sbatch-header"
         cat <<EOF
 #SBATCH --job-name=jupyviv
@@ -116,7 +116,7 @@ EOF
     } | _prepare_template sbatch)"
     [[ $? -eq 0 ]] || return 1
 
-    job_id=$(echo "$output" | awk '{print $4}')
+    local job_id=$(echo "$output" | awk '{print $4}')
     echo "Submitted job $job_id. Waiting for it to start..."
     while true; do
         state="$(squeue --job "$job_id" --noheader --format "%T")"
