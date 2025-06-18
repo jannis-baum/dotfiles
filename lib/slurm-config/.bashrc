@@ -32,6 +32,28 @@ slurm_account="sci-renard-student"
 
 alias sme="squeue --me"
 
+function stop() {
+    local job="$1"
+    if [[ -z "$job" ]]; then
+        local user_jobs="$(squeue --noheader --user $USER --states=running --format %A)"
+        if [[ -z "$user_jobs" ]]; then
+            echo "No job running" >&2
+            return 1
+        fi
+        if [[ $(wc -l <<<"$user_jobs") -gt 1 ]]; then
+            echo "Multiple jobs running, please specify one" >&2
+            sme
+            return 1
+        fi
+        job="$user_jobs"
+    fi
+    # c to preserve stuff before top
+    c
+    srun --jobid="$job" --pty -- top -u $USER
+    # actual clear to remove stop leftovers
+    clear
+}
+
 function _prepare_template() {
     local temp_job="$(mktemp)"
     cat > "$temp_job"
