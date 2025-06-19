@@ -28,7 +28,7 @@ require('mini.ai').setup({
         ['.'] = { '%b{}', '^.().*().$' },
         ['o'] = { '%b[]', '^.().*().$' },
         -- quotation aliases
-        ['q'] = { "%b''", '^.().*().$' },
+        ['d'] = { "%b''", '^.().*().$' },
         ['s'] = { '%b""', '^.().*().$' },
         ['e'] = { '%b``', '^.().*().$' },
     }
@@ -54,7 +54,7 @@ require('mini.surround').setup({
         ['.'] = { input = { '{.-}', '^.().*().$' }, output = { left = '{', right = '}' } },
         ['o'] = { input = { '%[.-%]', '^.().*().$' }, output = { left = '[', right = ']' } },
         -- quotation aliases
-        ['q'] = { input = { "'.-'", '^.().*().$' }, output = { left = "'", right = "'" } },
+        ['d'] = { input = { "'.-'", '^.().*().$' }, output = { left = "'", right = "'" } },
         ['s'] = { input = { '".-"', '^.().*().$' }, output = { left = '"', right = '"' } },
         ['e'] = { input = { '`.-`', '^.().*().$' }, output = { left = '`', right = '`' } },
     }
