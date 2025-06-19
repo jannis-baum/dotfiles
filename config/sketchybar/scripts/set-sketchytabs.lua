@@ -44,9 +44,9 @@ local function get_widths(tab_count)
     -- free_space = inactive * (tab_count - 1 + 3)
     -- free_space = inactive * (tab_count + 2)
     -- inactive = free_space / (tab_count + 2) -> floor & max(0, _)
-    local inactive = math.max(0, math.floor(free_space / (tab_count + 2)))
-    local active = math.max(0, math.floor(free_space - inactive * (tab_count - 1)))
-    return active, inactive, widths['char'], widths['image']
+    widths['inactive'] = math.max(0, math.floor(free_space / (tab_count + 2)))
+    widths['active'] = math.max(0, math.floor(free_space - widths['inactive'] * (tab_count - 1)))
+    return widths
 end
 
 local function main()
@@ -61,7 +61,7 @@ local function main()
 
     local lines = io.read('*a')
     local _, tab_count = lines:gsub('\n', '')
-    local active_w, inactive_w, char_w, image_w = get_widths(tab_count)
+    local widths = get_widths(tab_count)
 
     local line_num = 1
     for line in lines:gmatch('[^\n]+') do
@@ -73,11 +73,11 @@ local function main()
         local item_name = 'APP-' .. tab_app .. '-' .. tostring(line_num)
         local label_color = (is_active ~= '') and '0xffbbbbbb' or '0xff808080'
 
-        local max_title_w = (is_active ~= '') and active_w or inactive_w
+        local max_title_w = (is_active ~= '') and widths['active'] or widths['inactive']
         if image ~= '' then
-            max_title_w = max_title_w - image_w
+            max_title_w = max_title_w - widths['image']
         end
-        label = ellipse_string(label, math.floor(max_title_w / char_w))
+        label = ellipse_string(label, math.floor(max_title_w / widths['char']))
 
         sketchy_cmd = sketchy_cmd
             .. ' --add item "' .. item_name .. '" left'
