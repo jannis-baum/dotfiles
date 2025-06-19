@@ -56,7 +56,7 @@ def write_image(tab, index) -> str | None:
     except:
         pass
 
-while True:
+if __name__ == '__main__':
     tabs = getMessage()
     reset_sketchytabs_dir()
     icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
