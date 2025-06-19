@@ -15,13 +15,21 @@ function get_width() {
     sketchybar --query "APP-$app-$1" | jq '.bounding_rects."display-1".size[0]'
 }
 
-echo "::a\n::aa\n:$sketchy_dir/media/placeholder-icon.png:a" | set_tabs
+# pretend everything has 0 width so we get no ellipising in test
+echo "base:0\nchar:0\nimage:0" > "$output_file"
+# prepare long title so we can get good estimate of char width (sketchybar
+# reports integer width for item)
+long_title_len=50
+long_title="$(cat /dev/urandom | base64 | head -c $long_title_len)"
+
+
+echo "::a\n::$long_title\n:$sketchy_dir/media/placeholder-icon.png:a" | set_tabs
 item_1_char=$(get_width 1)
-item_2_chars=$(get_width 2)
+item_long_chars=$(get_width 2)
 item_1_char_icon=$(get_width 3)
 echo '' | set_tabs
 
-char_w=$(bc <<< "$item_2_chars - $item_1_char")
+char_w=$(bc <<< "scale=5; ($item_long_chars - $item_1_char) / ($long_title_len - 1)")
 image_w=$(bc <<< "$item_1_char_icon - $item_1_char")
 base_w=$(bc <<< "$item_1_char - $char_w")
 
