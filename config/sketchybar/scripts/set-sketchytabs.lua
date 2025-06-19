@@ -29,7 +29,7 @@ local function ellipse_string(s, max_length)
 end
 
 local function get_widths(tab_count)
-    local bar_w = 648 -- check with screenshot tool cmd+shift+4
+    local bar_w = 647 -- check with screenshot tool cmd+shift+4, subtract 1 for rounding errors
     -- read dimension data
     local widths = {}
     for line in io.lines(os.getenv('HOME') .. '/.local/state/sketchybar/widths.txt') do
