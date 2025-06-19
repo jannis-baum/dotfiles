@@ -50,7 +50,7 @@ require('mini.surround').setup({
     },
     custom_surroundings = {
         -- bracket aliases
-        ['l'] = { input = { '(.-)', '^.().*().$' }, output = { left = '(', right = ')' } },
+        ['l'] = { input = { '%(.-%)', '^.().*().$' }, output = { left = '(', right = ')' } },
         ['.'] = { input = { '{.-}', '^.().*().$' }, output = { left = '{', right = '}' } },
         ['o'] = { input = { '%[.-%]', '^.().*().$' }, output = { left = '[', right = ']' } },
         -- quotation aliases
