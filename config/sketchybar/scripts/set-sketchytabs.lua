@@ -70,6 +70,12 @@ local function main()
         assert_non_nil(image)
         assert_non_nil(label)
 
+        -- only allow alphanumeric (%w), punctuation (%p) and spaces (%s)
+        -- because lua doesn't understand utf8
+        label, _ = label:gsub('[^%w%p%s]', '')
+        -- replace consecutive spaces with a single space
+        label, _ = label:gsub('%s%s+', ' ')
+
         local item_name = 'APP-' .. tab_app .. '-' .. tostring(line_num)
         local label_color = (is_active ~= '') and '0xffbbbbbb' or '0xff808080'
 
