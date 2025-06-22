@@ -115,26 +115,26 @@ vim:
       deco: bold
     # constants & variables
     - set: [Constant]
-      fg: { dark: '#d787af', light: '#d787af' }
+      fg: { dark: '#d787af', light: '#bf4c85' }
     - set: [String]
-      fg: { dark: '#fc897e', light: '#fc897e' }
+      fg: { dark: '#fc897e', light: '#ea493a' }
     - set: [Number]
-      fg: { dark: '#ffac8f', light: '#ffac8f' }
+      fg: { dark: '#ffac8f', light: '#ce7e61' }
     # language
     - set: [Statement, Preproc, Keyword]
-      fg: { dark: '#afd7ff', light: '#afd7ff' }
+      fg: { dark: '#afd7ff', light: '#3487db' }
     - set: [Special]
-      fg: { dark: '#d7afd7', light: '#d7afd7' }
+      fg: { dark: '#d7afd7', light: '#994399' }
     - set: [Identifier, Title]
       from: Main
     # types, classes, functions
     - set: [Type]
-      fg: { dark: '#c5f1ff', light: '#c5f1ff' }
+      fg: { dark: '#c5f1ff', light: '#4e9fb7' }
     - set: [Function]
-      fg: { dark: '#7fb7c3', light: '#7fb7c3' }
+      fg: { dark: '#7fb7c3', light: '#55a3b5' }
     # other
     - set: [Underlined]
-      fg: { dark: '#afd7ff', light: '#afd7ff' }
+      fg: { dark: '#afd7ff', light: '#3487db' }
       deco: underline
     # errors & warnings --------------------------------------------------------
     - set: [ErrorMsg, DiagnosticError]
@@ -183,8 +183,8 @@ vim:
       deco: bold
     # misc ---------------------------------------------------------------------
     - set: [Search, MatchParen]
-      fg: Gray2
-      bg: { dark: '#ffffaf', light: '#ffffaf' }
+      fg: Gray1
+      bg: { dark: '#ffffaf', light: '#ccb12a' }
     - set: [Sneak]
       fg: Gray2
       bg: Main
@@ -193,9 +193,9 @@ vim:
       bg: Main
       deco: bold
     - set: [MoreMsg, Question]
-      fg: { dark: '#ffaf00', light: '#ffaf00' }
+      fg: { dark: '#ffaf00', light: '#dd9700' }
     - set: [Visual]
-      bg: Gray4
+      bg: Gray3
 
 text-mate:
   destination: '~/.config/bat/themes/jellyfish.tmTheme'
