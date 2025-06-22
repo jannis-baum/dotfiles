@@ -2,19 +2,27 @@
 
 source "$CONFIG_DIR/helpers/hover.sh"
 
-BATTERY=$(pmset -g batt)
+batt_output=$(pmset -g batt)
 
-if [[ -z "$BATTERY" || "$BATTERY" == *charged* || "$BATTERY" == *"finishing charge"* ]]; then
+if [[ -z "$batt_output" || "$batt_output" == *charged* || "$batt_output" == *"finishing charge"* ]]; then
     sketchybar --set "$NAME" drawing=off
     exit 0
 fi
 
 sketchybar --set "$NAME" drawing=on
 
-CHARGING="$([[ "$BATTERY" == *discharging* ]] || printf '⚡ ')"
+charging="$([[ "$batt_output" == *discharging* ]] || printf '⚡ ')"
+percentage="$(grep -o '\d\+%' <<< "$batt_output" | tr -d '%')"
+time="$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
+
+[[ "$percentage" -gt 10 ]] \
+    && color=0xffbbbbbb \
+    || color=0xfffc897e
 
 [[ "$NAME" = *-hover ]] \
-    && LABEL="$CHARGING$(grep -o '\d\+%' <<< $BATTERY)" \
-    || LABEL="$CHARGING$(grep -o '\d\+:\d\+' <<< $BATTERY || echo '···')"
+    && LABEL="$charging$percentage%" \
+    || LABEL="$charging$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
 
-sketchybar --set "$NAME" label="$LABEL"
+sketchybar --set "$NAME" \
+    label="$LABEL" \
+    label.color="$color"
