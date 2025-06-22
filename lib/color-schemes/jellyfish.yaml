@@ -4,11 +4,20 @@
 
 colors:
   Text: { dark: '#c7c7c7', light: '#111111' }
-  Main: { dark: '#d7afff', light: '#d7afff' }
+  Background: { dark: '#10', light: '#e' }
+  Main: { dark: '#d7afff', light: '#a66edd' }
   Cursor: { dark: '#ffb472', light: '#f37c13' }
-  Error: { dark: '#ff5f5f', light: '#ff5f5f' }
-  Warning: { dark: '#ffaf00', light: '#0' }
-  Hint: { dark: '#afafff', light: '#afafff' }
+  Error: { dark: '#ff5f5f', light: '#c94444' }
+  Warning: { dark: '#ffaf00', light: '#ffaf00' }
+  Hint: { dark: '#afafff', light: '#5c5cd6' }
+  # smaller number -> closer to background
+  # light/dark picked for same diff to background
+  Gray1: { dark: '#1b', light: '#e3' }
+  Gray2: { dark: '#26', light: '#d8' }
+  Gray3: { dark: '#4', light: '#ba' }
+  Gray4: { dark: '#58', light: '#a6' }
+  Gray5: { dark: '#90', light: '#6e' }
+  Gray6: { dark: '#94', light: '#6a' }
 highlights:
   - set: Main
     fg: Main
@@ -24,7 +33,7 @@ kitty:
 
     #: The basic colors
     foreground                      {{ Text }}
-    background                      #101010|||#eeeeee
+    background                      {{ Background }}
     selection_foreground            {{ Search.fg }}
     selection_background            {{ Search.bg }}
 
@@ -43,9 +52,9 @@ kitty:
 
     #: Tab bar colors
     active_tab_foreground           {{ Main }}
-    active_tab_background           #101010|||#eeeeee
+    active_tab_background           {{ Background }}
     inactive_tab_foreground         #999999|||#777777
-    inactive_tab_background         #101010|||#eeeeee
+    inactive_tab_background         {{ Background }}
     tab_bar_background              none
     tab_bar_margin_color            none
 
@@ -97,12 +106,12 @@ vim:
     # syntax -------------------------------------------------------------------
     # gray
     - set: [Comment]
-      fg: { dark: '#94', light: '#94' }
+      fg: Gray6
       deco: italic
     - set: [Ignore]
       fg: { dark: '#a8', light: '#a8' }
     - set: [Todo]
-      fg: { dark: '#94', light: '#94' }
+      fg: Gray6
       deco: bold
     # constants & variables
     - set: [Constant]
@@ -145,48 +154,48 @@ vim:
       ul: Hint
     # ui -----------------------------------------------------------------------
     - set: [SignColumn, GitGutterAdd, GitGutterChange, GitGutterDelete]
-      fg: { dark: '#90', light: '#90' }
+      fg: Gray5
     - set: [StatusLineNC, StatusLineTermNC]
-      fg: { dark: '#4', light: '#4' }
+      fg: Gray3
     - set: [StatusLine, StatusLineTerm, LineNr, EndOfBuffer, TabLine, TabLineFill]
-      fg: { dark: '#58', light: '#58' }
+      fg: Gray4
       deco: bold
     - set: [TabLineSel]
       from: Main
     - set: [FoldColumn]
     - set: [Folded]
-      fg: { dark: '#58', light: '#58' }
+      fg: Gray4
       deco: italic
     - set: [VertSplit, WinSeparator]
-      fg: { dark: '#26', light: '#26' }
+      fg: Gray2
       deco: bold
     - set: [DiffAdd, DiffChange, DiffDelete, DiffText]
-      bg: { dark: '#26', light: '#26' }
+      bg: Gray2
     - set: [NormalFloat]
-      bg: { dark: '#1b', light: '#1b' }
+      bg: Gray1
     - set: [Pmenu]
-      fg: { dark: '#94', light: '#94' }
-      bg: { dark: '#26', light: '#26' }
+      fg: Gray6
+      bg: Gray2
       deco: italic
     - set: [PmenuSel]
-      fg: { dark: '#94', light: '#94' }
-      bg: { dark: '#58', light: '#58' }
+      fg: Gray6
+      bg: Gray4
       deco: bold
     # misc ---------------------------------------------------------------------
     - set: [Search, MatchParen]
-      fg: { dark: '#26', light: '#26' }
+      fg: Gray2
       bg: { dark: '#ffffaf', light: '#ffffaf' }
     - set: [Sneak]
-      fg: { dark: '#26', light: '#26' }
+      fg: Gray2
       bg: Main
     - set: [SneakLabel]
-      fg: { dark: '#26', light: '#26' }
+      fg: Gray2
       bg: Main
       deco: bold
     - set: [MoreMsg, Question]
       fg: { dark: '#ffaf00', light: '#ffaf00' }
     - set: [Visual]
-      bg: { dark: '#58', light: '#58' }
+      bg: Gray4
 
 text-mate:
   destination: '~/.config/bat/themes/jellyfish.tmTheme'
@@ -213,7 +222,7 @@ text-mate:
 custom:
     - destination: '~/.config/zsh/scripts/_theme.zsh'
       content: |
-        export PS1=$'%F{{{ Main }}}%f%K{{{ Main }}}%F{{{ Visual.bg }}}✻%f%k%F{{{ Main }}}%f %B»%b '
+        export PS1=$'%F{{{ Main }}}%f%K{{{ Main }}}%F{{{ Background }}}✻%f%k%F{{{ Main }}}%f %B»%b '
         export LS_COLORS="fi=1;38;5;{{ Text }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
         export EZA_COLORS="sn=38;5;{{ Main }}:sb=1;38;5;{{ Main.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
