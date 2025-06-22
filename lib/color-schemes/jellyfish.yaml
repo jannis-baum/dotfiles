@@ -68,29 +68,29 @@ kitty:
 
     #: The basic 16 colors
     #: black
-    color0  #616161
-    color8  #8e8e8e
+    color0  #616161|||#000000
+    color8  #8e8e8e|||#2d2d2d
     #: red
-    color1  #ff8272
-    color9  #ffc4bd
+    color1  #ff8272|||#db4b39
+    color9  #ffc4bd|||#db7264
     #: green
     color2  #b4fa72|||#4caf50
     color10 #d6fcb9|||#8cbb8e
     #: yellow
-    color3  #fefdc2
-    color11 #fefdd5
+    color3  #fefdc2|||#fcf80a
+    color11 #fefdd5|||#f9f74d
     #: blue
-    color4  #a5d5fe
-    color12 #c1e3fe
+    color4  #a5d5fe|||#3b8ed6
+    color12 #c1e3fe|||#62a0d6
     #: magenta
-    color5  #ff8ffd
-    color13 #ffb1fe
+    color5  #ff8ffd|||#d651d3
+    color13 #ffb1fe|||#d175cf
     #: cyan
-    color6  #d0d1fe
-    color14 #e5e6fe
+    color6  #7fb7c3|||#55a3b5
+    color14 #9bbac1|||#6faab7
     #: white
-    color7  #f1f1f1
-    color15 #fefefe
+    color7  #f1f1f1|||#ffffff
+    color15 #fefefe|||#ffffff
 
 vim:
   destination: ~/.vim/colors/jellyfish.vim
