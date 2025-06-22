@@ -16,7 +16,7 @@ function get_width() {
 }
 
 # pretend everything has 0 width so we get no ellipising in test
-echo "base:0\nchar:0\nimage:0" > "$output_file"
+echo "base=0\nchar=0\nimage=0" > "$output_file"
 # prepare long title so we can get good estimate of char width (sketchybar
 # reports integer width for item)
 long_title_len=50
@@ -33,7 +33,7 @@ char_w=$(bc <<< "scale=5; ($item_long_chars - $item_1_char) / ($long_title_len -
 image_w=$(bc <<< "$item_1_char_icon - $item_1_char")
 base_w=$(bc <<< "$item_1_char - $char_w")
 
-echo "base:$base_w\nchar:$char_w\nimage:$image_w" > "$output_file"
+echo "base=$base_w\nchar=$char_w\nimage=$image_w" > "$output_file"
 
 # set up icon RAM disk ---------------------------------------------------------
 

@@ -33,7 +33,7 @@ local function get_widths(tab_count)
     -- read dimension data
     local widths = {}
     for line in io.lines(os.getenv('HOME') .. '/.local/state/sketchybar/widths.txt') do
-        local key, value = line:match('([^:]+):(.+)')
+        local key, value = line:match('([^:]+)=(.+)')
         widths[key] = value
     end
 
