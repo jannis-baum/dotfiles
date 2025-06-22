@@ -142,7 +142,7 @@ vim:
     - set: [Error, SpellCap, SpellBad, DiagnosticUnderlineError]
       deco: undercurl
       ul: Error
-    - set: [DiagnosticWarn]
+    - set: [DiagnosticWarn, WarningMsg]
       fg: Warning
     - set: [DiagnosticUnderlineWarn]
       deco: undercurl
@@ -183,8 +183,11 @@ vim:
       deco: bold
     # misc ---------------------------------------------------------------------
     - set: [Search, MatchParen]
+      fg: Gray6
+      bg: { dark: '#fcfcd4', light: '#d8c14e' }
+    - set: [IncSearch, CurSearch]
       fg: Gray1
-      bg: { dark: '#ffffaf', light: '#ccb12a' }
+      bg: { dark: '#fcfc92', light: '#ccb12a' }
     - set: [Sneak]
       fg: Gray2
       bg: Main
