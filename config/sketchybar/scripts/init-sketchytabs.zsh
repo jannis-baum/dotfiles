@@ -15,6 +15,10 @@ function get_width() {
     sketchybar --query "APP-$app-$1" | jq '.bounding_rects."display-1".size[0]'
 }
 
+function get_x() {
+    sketchybar --query "APP-$app-$1" | jq '.bounding_rects."display-1".origin[0]'
+}
+
 # pretend everything has 0 width so we get no ellipising in test
 echo "base=0\nchar=0\nimage=0" > "$output_file"
 # prepare long title so we can get good estimate of char width (sketchybar
@@ -22,16 +26,18 @@ echo "base=0\nchar=0\nimage=0" > "$output_file"
 long_title_len=50
 long_title="$(cat /dev/urandom | base64 | head -c $long_title_len)"
 
-
 echo "::a\n::$long_title\n:$sketchy_dir/media/placeholder-icon.png:a" | set_tabs
-item_1_char=$(get_width 1)
-item_long_chars=$(get_width 2)
-item_1_char_icon=$(get_width 3)
+item_1_w=$(get_width 1)
+item_2_w=$(get_width 2)
+item_3_w=$(get_width 3)
+item_2_x=$(get_x 2)
+item_3_x=$(get_x 3)
 echo '' | set_tabs
 
-char_w=$(bc <<< "scale=5; ($item_long_chars - $item_1_char) / ($long_title_len - 1)")
-image_w=$(bc <<< "$item_1_char_icon - $item_1_char")
-base_w=$(bc <<< "$item_1_char - $char_w")
+char_w=$(bc <<< "scale=5; ($item_2_w - $item_1_w) / ($long_title_len - 1)")
+# account for additional padding added for images
+image_w=$(bc <<< "$item_3_w - $item_1_w + $item_3_x - $item_2_x - $item_2_w")
+base_w=$(bc <<< "$item_1_w - $char_w")
 
 echo "base=$base_w\nchar=$char_w\nimage=$image_w" > "$output_file"
 
