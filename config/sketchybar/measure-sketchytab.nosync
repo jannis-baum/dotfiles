@@ -1,0 +1,41 @@
+#!/bin/zsh
+
+if [[ $# != 2 ]]; then
+    echo "usage: $0 app i" >&2
+    exit 1
+fi
+
+source ~/.local/state/sketchybar/widths.txt
+
+# wait to activate app
+while true; do
+    app="$(osascript -l JavaScript -e 'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName')"
+    if [[ "$app" == "$1" ]]; then
+        break
+    fi
+    sleep 0.1
+done
+
+# sketchybar needs a bit to redraw properly
+sleep 0.1
+
+# query info
+q="$(sketchybar --query "APP-$1-$2")"
+
+# values
+real_w="$(jq '.bounding_rects."display-1".size[0]' <<< "$q")"
+real_x="$(jq '.bounding_rects."display-1".origin[0]' <<< "$q")"
+n_chars="$(jq -r '.label.value' <<< "$q" | tr -d '\n' | wc -c | xargs)"
+has_image="$(jq -r '.geometry.background.drawing' <<< "$q")"
+
+echo "real width: $real_w"
+echo "real x: $real_x"
+echo "n_chars: $n_chars"
+echo "image: $has_image"
+
+expression="$base + $char * $n_chars"
+if [[ "$has_image" == "on" ]]; then
+    expression="$expression + $image"
+fi
+echo "\nexpected width"
+echo "$expression = $(bc <<<"$expression")"
