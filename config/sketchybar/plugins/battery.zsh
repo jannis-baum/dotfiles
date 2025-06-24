@@ -2,14 +2,12 @@
 
 source "$CONFIG_DIR/helpers/hover.zsh"
 
-batt_output=$(pmset -g batt)
+batt_output="$(pmset -g batt)"
+drawing="on"
 
 if [[ -z "$batt_output" || "$batt_output" == *charged* || "$batt_output" == *"finishing charge"* ]]; then
-    sketchybar --set "$NAME" drawing=off
-    exit 0
+    drawing="off"
 fi
-
-sketchybar --set "$NAME" drawing=on
 
 charging="$([[ "$batt_output" == *discharging* ]] || printf '⚡ ')"
 percentage="$(grep -o '\d\+%' <<< "$batt_output" | tr -d '%')"
@@ -25,4 +23,5 @@ $HOVERING \
 
 sketchybar --set "$NAME" \
     label="$label" \
-    label.color="$color"
+    label.color="$color" \
+    drawing="$drawing"
