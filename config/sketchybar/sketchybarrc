@@ -33,7 +33,7 @@ sketchybar --add item clock right \
            --subscribe clock mouse.entered mouse.exited space_change
 sketchybar --add item battery right \
            --set battery update_freq=10 script="$PLUGIN_DIR/battery.zsh" \
-           --subscribe battery mouse.entered mouse.exited power_source_change
+           --subscribe battery mouse.entered mouse.exited power_source_change space_change
 sketchybar --add item cpu_busy right \
            --set cpu_busy update_freq=10 script="$PLUGIN_DIR/cpu-busy.zsh" \
                label.color=0xfffc897e \

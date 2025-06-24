@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 source "$CONFIG_DIR/helpers/hover.zsh"
+source "$CONFIG_DIR/helpers/fullscreen.zsh"
 
 batt_output="$(pmset -g batt)"
 drawing="on"
@@ -13,9 +14,12 @@ charging="$([[ "$batt_output" == *discharging* ]] || printf '⚡ ')"
 percentage="$(grep -o '\d\+%' <<< "$batt_output" | tr -d '%')"
 time="$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
 
-[[ "$percentage" -gt 10 ]] \
-    && color=0xffbbbbbb \
-    || color=0xfffc897e
+if [[ "$percentage" -gt 10 ]]; then
+    $FULLSCREEN && drawing=off
+    color=0xffbbbbbb
+else
+    color=0xfffc897e
+fi
 
 $HOVERING \
     && label="$charging$percentage%" \
