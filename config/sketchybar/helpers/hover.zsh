@@ -1,13 +1,13 @@
-NAME_ORIG="$(echo "$NAME" | sed 's/_HOVER_//')"
-NAME_NEW="$NAME"
+name_orig="$(echo "$NAME" | sed 's/_HOVER_//')"
+name_new="$NAME"
 
 case "$SENDER" in
-  "mouse.entered") NAME_NEW="${NAME_ORIG}_HOVER_";;
-  "mouse.exited") NAME_NEW="$NAME_ORIG";;
+  "mouse.entered") name_new="${name_orig}_HOVER_";;
+  "mouse.exited") name_new="$name_orig";;
 esac
-[[ "$NAME" != "$NAME_NEW" ]] && sketchybar --rename "$NAME" "$NAME_NEW"
+[[ "$NAME" != "$name_new" ]] && sketchybar --rename "$NAME" "$name_new"
 
-NAME="$NAME_NEW"
+NAME="$name_new"
 
 [[ "$NAME" = *_HOVER_* ]] \
     && HOVERING=true \
