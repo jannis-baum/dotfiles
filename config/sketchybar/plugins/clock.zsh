@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-source "$CONFIG_DIR/helpers/hover.sh"
+source "$CONFIG_DIR/helpers/hover.zsh"
 
 # | xargs trims whitespace
 [[ "$NAME" = *-hover ]] \

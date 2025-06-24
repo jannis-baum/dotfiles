@@ -1,5 +1,3 @@
-#!/bin/sh
-
 NAME_ORIG="$(echo "$NAME" | sed 's/-hover$//')"
 NAME_NEW="$NAME"
 

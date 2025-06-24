@@ -3,7 +3,7 @@
 # appear when CPU usage goes above threshold, mostly to detect stuck busy
 # processes
 
-source "$CONFIG_DIR/helpers/hover.sh"
+source "$CONFIG_DIR/helpers/hover.zsh"
 
 # ps:
 #   -A for all user processes
