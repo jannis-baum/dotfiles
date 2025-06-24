@@ -1,13 +1,13 @@
-NAME_ORIG="$(echo "$NAME" | sed 's/_FULLSCREEN_//')"
-NAME_NEW="$NAME"
+name_orig="$(echo "$NAME" | sed 's/_FULLSCREEN_//')"
+name_new="$NAME"
 
 if [[ "$SENDER" == "space_change" ]]; then
     space="$(jq -r '."display-1"' <<< "$INFO")"
     [[ "$space" -gt 1 ]] \
-        && NAME_NEW="${NAME_ORIG}_FULLSCREEN_" \
-        || NAME_NEW="$NAME_ORIG"
+        && name_new="${name_orig}_FULLSCREEN_" \
+        || name_new="$name_orig"
 fi
-[[ "$NAME" != "$NAME_NEW" ]] && sketchybar --rename "$NAME" "$NAME_NEW"
+[[ "$NAME" != "$name_new" ]] && sketchybar --rename "$NAME" "$name_new"
 
 [[ "$NAME" = *_FULLSCREEN_* ]] \
     && FULLSCREEN=true \
