@@ -19,7 +19,7 @@ time="$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
     && color=0xffbbbbbb \
     || color=0xfffc897e
 
-[[ "$NAME" = *-hover ]] \
+$HOVERING \
     && LABEL="$charging$percentage%" \
     || LABEL="$charging$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
 

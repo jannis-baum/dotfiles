@@ -22,7 +22,7 @@ fi
 
 sketchybar --set "$NAME" drawing=on
 
-[[ "$NAME" = *-hover ]] \
+$HOVERING \
     && LABEL="$(cut -w -f2- <<<"$ps_out")" \
     || LABEL="$cpu%"
 
