@@ -9,7 +9,9 @@ bar=(
     # as close to edge as possible
     padding_left=-9999
     padding_right=-9999
-    topmost=window
+    topmost=on
+    show_in_fullscreen=on
+    sticky=on
 )
 sketchybar --bar "${bar[@]}"
 sketchybar --load-font "$CONFIG_DIR/media/PoiretOne-With-Lightning.ttf"
@@ -28,7 +30,7 @@ sketchybar --default "${default[@]}"
 # right items
 sketchybar --add item clock right \
            --set clock update_freq=1 script="$PLUGIN_DIR/clock.zsh" \
-           --subscribe clock mouse.entered mouse.exited
+           --subscribe clock mouse.entered mouse.exited space_change
 sketchybar --add item battery right \
            --set battery update_freq=10 script="$PLUGIN_DIR/battery.zsh" \
            --subscribe battery mouse.entered mouse.exited power_source_change
