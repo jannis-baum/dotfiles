@@ -93,7 +93,7 @@ local function main()
                 .. ' label="' .. label .. '"'
                 .. ' label.font=Menlo:Bold:14'
                 .. ' label.color=' .. label_color
-            .. ' --subscribe "' .. item_name .. '" front_app_switched'
+            .. ' --subscribe "' .. item_name .. '" front_app_switched space_change'
 
         if image ~= '' then
             sketchy_cmd = sketchy_cmd .. ' --set "' .. item_name .. '"'
