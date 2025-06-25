@@ -60,7 +60,7 @@
     {:des "upper row combos: we > up, er > right, rt > viclip-kitty, yu > scrolla (CFf9), ui > ctrl+u, io > switch tabs / ctrl+o" :rules [
        [{:sim [:w :e] :modi :any} :up_arrow]
        [{:sim [:e :r] :modi :any} :right_arrow]
-       [{:sim [:r :t] :modi :any} [:!Ca :!Cc "~/.config/kitty/viclip-tab.zsh"]]
+       [{:sim [:r :t] :modi :any} "~/.config/kitty/viclip-tab.zsh"]
        [{:sim [:y :u] :modi :any} :!CFf9]
        :kitty
          [{:sim [:u :i] :modi :any} :!Tu]
