@@ -10,6 +10,8 @@ nnoremap <C-u> :sus<CR>
 " tab navigation
 nnoremap <leader>, gT
 nnoremap <leader>. gt
+" write buffer
+nnoremap <leader>w :write<CR>
 " remove search highlight
 nnoremap <Esc> :noh<CR>
 " paste over selection without copying
