@@ -7,7 +7,7 @@ export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 # fzf
 export FZF_DEFAULT_OPTS="
     --height 60% --reverse --no-info --cycle
-    --preview-window='right,60%,wrap,hidden,border-sharp'
+    --preview-window='right,60%,wrap,hidden,border-block'
     --prompt=' ╰➤ '
     --pointer='→'
     --bind 'right:toggle-preview'"

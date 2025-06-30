@@ -232,4 +232,6 @@ custom:
             --color='fg+:{{ Text }}:underline,bg+:-1'
             --color='hl:{{ Statement.fg }},hl+:{{ Main }}'
             --color='prompt:{{ Main }}:bold,query:regular:italic'
-            --color='marker:{{ Main }},pointer:{{ Main }},spinner:{{ Main }},info:{{ Statement.fg }}'"
+            --color='marker:{{ Main }},pointer:{{ Main }},spinner:{{ Main }},info:{{ Statement.fg }}'
+            --color='preview-bg:{{ NormalFloat.bg }},preview-border:{{ NormalFloat.bg }}'
+        "
