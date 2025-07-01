@@ -1,0 +1,14 @@
+{
+  "name": "karabiner-config",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsx src/index.ts",
+    "update": "yarn update karabiner.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "karabiner.ts": "latest",
+    "tsx": "^4",
+    "typescript": "^5"
+  }
+}
