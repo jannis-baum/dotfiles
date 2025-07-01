@@ -8,6 +8,6 @@ let g:fzf_colors = {
     \ 'gutter': ['bg', 'NormalFloat'],
 \}
 
-let $FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS . ' --preview-window=border-left'
+let $FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS . ' --preview-window=border-left --prompt="» "'
 
 nnoremap <silent> <tab> :BUF<cr>
