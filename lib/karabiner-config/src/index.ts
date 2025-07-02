@@ -1,12 +1,11 @@
 import {
     writeToProfile,
     rule, simlayer,
-    map, mapSimultaneous, withMapper,
+    map, withMapper,
     toApp,
-    ifApp, ifVar,
+    ifApp,
 } from 'karabiner.ts'
-
-const kVnnoremap = () => ifVar('kVnnoremap', true);
+import combos from './combos';
 
 writeToProfile('karabiner.ts',
     [
@@ -17,39 +16,7 @@ writeToProfile('karabiner.ts',
             map('right⌘').to('right⌘').toIfAlone('h', '⌘').condition(ifApp('kitty'))
         ]),
 
-        rule('home row combos: sd > ⇥, df > ⌫, jk > ⎋, kl > ⏎').manipulators([
-            mapSimultaneous(['s', 'd']).modifiers('optionalAny').to('⇥'),
-            mapSimultaneous(['d', 'f']).modifiers('optionalAny').to('⌫'),
-            mapSimultaneous(['j', 'k']).modifiers('optionalAny').to('⎋'),
-            mapSimultaneous(['k', 'l']).modifiers('optionalAny').to('⏎'),
-        ]),
-
-        rule('upper row combos: we > ↑, er > →, rt > viclip, yu > scrolla (CFf9), ui > ctrl+u, io > ctrl+o').manipulators([
-            mapSimultaneous(['w', 'e']).modifiers('optionalAny').to('↑'),
-            mapSimultaneous(['e', 'r']).modifiers('optionalAny').to('→'),
-            mapSimultaneous(['r', 't']).modifiers('optionalAny').to$('~/.config/kitty/viclip-tab.zsh'),
-            mapSimultaneous(['y', 'u']).modifiers('optionalAny').to('f9', ['⌘', 'fn']),
-            // in kitty
-            mapSimultaneous(['u', 'i']).condition(ifApp('kitty')).to('u', '⌃'),
-            mapSimultaneous(['i', 'o']).condition(ifApp('kitty')).to('o', '⌃'),
-        ]),
-
-        rule('lower row combos: xc > ←, cv > ↓, m, > tab left ,. > tab right').manipulators([
-            mapSimultaneous(['x', 'c']).modifiers('optionalAny').to('←'),
-            mapSimultaneous(['c', 'v']).modifiers('optionalAny').to('↓'),
-            // tab switching complicated because it's different in xcode & kv
-            // doesn't pass through control character
-            // prev tab
-            mapSimultaneous(['m', ',']).condition(ifApp('Xcode').unless(), kVnnoremap().unless()).to('⇥', ['⌃', '⇧']),
-            mapSimultaneous(['m', ',']).condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to('⇥', ['⌃', '⇧']).to('⎋'),
-            mapSimultaneous(['m', ',']).condition(ifApp('Xcode'), kVnnoremap().unless()).to('[', ['⌘', '⇧']),
-            mapSimultaneous(['m', ',']).condition(ifApp('Xcode'), kVnnoremap()).to('a').to('[', ['⌘', '⇧']).to('⎋'),
-            // next tab
-            mapSimultaneous([',', '.']).condition(ifApp('Xcode').unless(), kVnnoremap().unless()).to('⇥', '⌃'),
-            mapSimultaneous([',', '.']).condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to('⇥', '⌃').to('⎋'),
-            mapSimultaneous([',', '.']).condition(ifApp('Xcode'), kVnnoremap().unless()).to(']', ['⌘', '⇧']),
-            mapSimultaneous([',', '.']).condition(ifApp('Xcode'), kVnnoremap()).to('a').to(']', ['⌘', '⇧']).to('⎋'),
-        ]),
+        ...combos,
 
         simlayer(['a', ';'], 'char-mode').manipulators([
             // upper row
