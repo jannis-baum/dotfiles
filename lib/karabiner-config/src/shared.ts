@@ -1,11 +1,11 @@
 import {
-  FromKeyParam, Modifier, ModifierParam, modifierKeyAliases, ToKeyParam,
+  Modifier, ModifierParam, modifierKeyAliases, ToKeyParam,
   ifVar,
-  mapSimultaneous,
 } from 'karabiner.ts';
 
 // kindaVim
 export const kVnnoremap = () => ifVar('kVnnoremap', true);
+
 
 // helper to filter for single character string codes
 export type SingleChar<T> = T extends string // filter out non-strings
@@ -15,6 +15,7 @@ export type SingleChar<T> = T extends string // filter out non-strings
         : never
       : never
   : never;
+
 
 // helper to write short to's with modifiers
 // extend modifier aliases to include fn
@@ -41,7 +42,13 @@ export function to(short: ShortTo): ToArgs {
 }
 
 
-export function sim(from: `${SingleChar<FromKeyParam>}${SingleChar<FromKeyParam>}`): ReturnType<typeof mapSimultaneous> {
-    const [a, b] = from.split('') as [FromKeyParam, FromKeyParam]
-    return mapSimultaneous([a, b]).modifiers('optionalAny')
+const charMap = {
+    '!': '⇧_1', '@': '⇧_2', '#': '⇧_3', '$': '⇧_4', '%': '⇧_5',
+    '^': '⇧_6', '&': '⇧_7', '*': '⇧_8', '(': '⇧_9', ')': '⇧_0',
+    '{': '⇧_[', '}': '⇧_]', '|': '⇧_\\', '"': '⇧_\'',
+    '~': '⇧_`', '_': '⇧_-', '+': '⇧_='
+} as const;
+export function resolveChar(arg: keyof typeof charMap | ShortTo): ShortTo {
+    if (arg in charMap) return charMap[arg];
+    return arg as ShortTo;
 }

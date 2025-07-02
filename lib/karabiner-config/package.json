@@ -2,7 +2,7 @@
   "name": "karabiner-config",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsx src/index.ts",
+    "build": "tsx src/keymap.ts",
     "update": "yarn update karabiner.ts"
   },
   "devDependencies": {
