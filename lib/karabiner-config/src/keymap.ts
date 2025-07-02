@@ -1,14 +1,9 @@
 import {
-    writeToProfile,
-    rule,
-    map,
-    toApp,
-    ifApp,
-    ToEvent,
-    FromKeyParam,
+  writeToProfile, rule, map, toApp, ifApp,
+  ToEvent, FromKeyParam, ToKeyParam,
 } from 'karabiner.ts'
 import { combi } from './combis';
-import { fullSimlayer } from './layers';
+import { fullSimlayer, uniformSimlayer } from './layers';
 import { tk, resolveChar } from './shared';
 import { kVnnoremap, setWin } from './apps';
 
@@ -79,6 +74,9 @@ writeToProfile('karabiner.ts',
             a: tk('⌘_='), s: tk('⌘_-'), d: setWin('0,0_1x2'), f: setWin('0,0_2x2'),     g: setWin('1,0_1x2'),
             z: tk('⌘_['), x: tk('⌘_]'), c: setWin('0,1_1x1'), v: setWin('prev_screen'), b: setWin('1,1_1x1'),
         } as const, (k, v) => map(k).to(v)),
+
+        // control
+        uniformSimlayer(['q', 'p'], 'control-mode', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`)))
     ],
     {
        'basic.to_if_alone_timeout_milliseconds': 300,

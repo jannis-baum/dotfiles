@@ -45,3 +45,23 @@ export function fullSimlayer<const K extends string | number, const V>(
         withFullMapper(mapping, Array.isArray(key) ? key : [key])(mapper)
     ])
 }
+
+
+// uniform transformation on all keys except ignored ones
+export function withUniformMapper(
+  ignoreKeys: Array<string | number>
+): ReturnType<typeof withMapper<FromKeyParam, number>> {
+    return withMapper(allKeys.filter((k) => !ignoreKeys.includes(k)));
+}
+
+
+// helper to make uniform simlayer by omitting map for simlayer key(s)
+export function uniformSimlayer(
+    key: LayerKeyParam | LayerKeyParam[],
+    varName: string | undefined,
+    mapper: Parameters<ReturnType<typeof withUniformMapper>>[0],
+): ReturnType<typeof simlayer> {
+    return simlayer(key, varName).manipulators([
+        withUniformMapper(Array.isArray(key) ? key : [key])(mapper)
+    ])
+}
