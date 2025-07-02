@@ -33,8 +33,8 @@ type _MultipleModifiers = ModifierKeyAliasExt |
 export type ShortTo = `${'' | `${_MultipleModifiers}_`}${ToKeyParam}`;
 // helper type
 export type ToArgs = [ToKeyParam, ModifierParam?];
-// helper to convert to `.to` arguments
-export function to(short: ShortTo): ReturnType<typeof toKey> {
+// helper to convert short hand to `toKey` result
+export function tk(short: ShortTo): ReturnType<typeof toKey> {
     const split = short.split('_');
     if (split.length == 1) return toKey(split[0] as ToKeyParam);
     const modifiers = Array.from(split[0]).map((m) => modifierKeyAliasesExt[m]) as Array<Modifier>;
@@ -49,7 +49,7 @@ const charMap = {
     '{': '⇧_[', '}': '⇧_]', '|': '⇧_\\', '"': '⇧_\'',
     '~': '⇧_`', '_': '⇧_-', '+': '⇧_='
 } as const;
-export function resolveChar(arg: keyof typeof charMap | ShortTo): ShortTo {
-    if (arg in charMap) return charMap[arg];
-    return arg as ShortTo;
+export function resolveChar(arg: keyof typeof charMap | ShortTo): ReturnType<typeof tk> {
+    if (arg in charMap) return tk(charMap[arg]);
+    return tk(arg as ShortTo);
 }

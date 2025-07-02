@@ -7,16 +7,16 @@ import {
 } from 'karabiner.ts'
 import { combi } from './combis';
 import { fullSimlayer } from './layers';
-import { kVnnoremap, to, resolveChar } from './shared';
+import { kVnnoremap, tk, resolveChar } from './shared';
 
 writeToProfile('karabiner.ts',
     [
         // thumb keys
         rule('thumb keys').manipulators([
             map('␣', 'optionalAny').to('left⇧').toIfAlone('␣'),
-            map('left⌘').to('left⌘').toIfAlone('f7', ['⌘', 'fn']),
+            map('left⌘').to('left⌘').toIfAlone(tk('⌘f_f7')),
             map('right⌘').to('right⌘').toIfAlone(toApp('kitty')).condition(ifApp('kitty').unless()),
-            map('right⌘').to('right⌘').toIfAlone('h', '⌘').condition(ifApp('kitty'))
+            map('right⌘').to('right⌘').toIfAlone(tk('⌘_h')).condition(ifApp('kitty'))
         ]),
 
         // combi keys
@@ -25,10 +25,10 @@ writeToProfile('karabiner.ts',
             combi('we').to('↑'),
             combi('er').to('→'),
             combi('rt').to$('~/.config/kitty/viclip-tab.zsh'),
-            combi('yu').to('f9', ['⌘', 'fn']),
+            combi('yu').to(tk('⌘f_f9')),
             // in kitty
-            combi('ui').condition(ifApp('kitty')).to('u', '⌃'),
-            combi('io').condition(ifApp('kitty')).to('o', '⌃'),
+            combi('ui').condition(ifApp('kitty')).to(tk('⌃_u')),
+            combi('io').condition(ifApp('kitty')).to(tk('⌃_o')),
 
             // HOME ROW
             combi('sd').to('⇥'),
@@ -42,15 +42,15 @@ writeToProfile('karabiner.ts',
             // tab switching complicated because it's different in xcode & kv
             // doesn't pass through control character
             // prev tab
-            combi('m,').condition(ifApp('Xcode').unless(), kVnnoremap().unless()).to('⇥', ['⌃', '⇧']),
-            combi('m,').condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to('⇥', ['⌃', '⇧']).to('⎋'),
-            combi('m,').condition(ifApp('Xcode'), kVnnoremap().unless()).to('[', ['⌘', '⇧']),
-            combi('m,').condition(ifApp('Xcode'), kVnnoremap()).to('a').to('[', ['⌘', '⇧']).to('⎋'),
+            combi('m,').condition(ifApp('Xcode').unless(), kVnnoremap().unless()).to(tk('⌃⇧_⇥')),
+            combi('m,').condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to(tk('⌃⇧_⇥')).to('⎋'),
+            combi('m,').condition(ifApp('Xcode'), kVnnoremap().unless()).to(tk('⌘⇧_[')),
+            combi('m,').condition(ifApp('Xcode'), kVnnoremap()).to('a').to(tk('⌘⇧_[')).to('⎋'),
             // next tab
-            combi(',.').condition(ifApp('Xcode').unless(), kVnnoremap().unless()).to('⇥', '⌃'),
-            combi(',.').condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to('⇥', '⌃').to('⎋'),
-            combi(',.').condition(ifApp('Xcode'), kVnnoremap().unless()).to(']', ['⌘', '⇧']),
-            combi(',.').condition(ifApp('Xcode'), kVnnoremap()).to('a').to(']', ['⌘', '⇧']).to('⎋'),
+            combi(',.').condition(ifApp('Xcode').unless(), kVnnoremap().unless()).to(tk('⌃_⇥')),
+            combi(',.').condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to(tk('⌃_⇥')).to('⎋'),
+            combi(',.').condition(ifApp('Xcode'), kVnnoremap().unless()).to(tk('⌘⇧_]')),
+            combi(',.').condition(ifApp('Xcode'), kVnnoremap()).to('a').to(tk('⌘⇧_]')).to('⎋'),
         ]),
 
         // layers
@@ -58,7 +58,7 @@ writeToProfile('karabiner.ts',
             w: '~', e: '`', r: '^', t: '$',  y: '#', u: '*', i:   '[', o:   ']',
             s: '"', d: "'", f: '|', g: '\\', h: '%', j: '-', k:   '(', l:   ')',
             x: '+', c: '=', v: '!', b: '@',  n: '&', m: '_', ',': '{', '.': '}'
-        } as const, (k, v) => map(k).to(to(resolveChar(v)))),
+        } as const, (k, v) => map(k).to(resolveChar(v))),
 
         fullSimlayer('z', 'number-mode', {
             u: 7, i: 8, o: 9,
