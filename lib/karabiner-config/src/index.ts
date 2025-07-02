@@ -1,7 +1,14 @@
-import { writeToProfile } from 'karabiner.ts'
+import { writeToProfile, map, rule, ifApp, toApp, ifVar, mapSimultaneous } from 'karabiner.ts'
 
 writeToProfile('karabiner.ts',
-    [],
+    [
+        rule('thumb keys').manipulators([
+            map('␣', 'optionalAny').to('left⇧').toIfAlone('␣'),
+            map('left⌘').to('left⌘').toIfAlone('f7', ['⌘', 'fn']),
+            map('right⌘').to('right⌘').toIfAlone(toApp('kitty')).condition(ifApp('kitty').unless()),
+            map('right⌘').to('right⌘').toIfAlone('h', '⌘').condition(ifApp('kitty'))
+        ]),
+    ],
     {
        'basic.to_if_alone_timeout_milliseconds': 300,
        'basic.to_if_held_down_threshold_milliseconds': 50,
