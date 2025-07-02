@@ -6,7 +6,7 @@ import { combi } from './combis';
 import { ifLang, mapLangChars, mapLangSet } from './languages';
 import { fullSimlayer, uniformSimlayer } from './layers';
 import { tk, resolveChar } from './shared';
-import { kVnnoremap, setWin } from './apps';
+import { kVnnoremap, setWin, toHideKitty, toScrolla, toSynapse, toWooshy } from './apps';
 
 writeToProfile('karabiner.ts',
     [
@@ -14,9 +14,9 @@ writeToProfile('karabiner.ts',
         rule('thumb keys').manipulators([
             map('␣', 'optionalAny').to('left⇧').toIfAlone('␣'),
 
-            map('left⌘').to('left⌘').toIfAlone(tk('⌘f_f7')),
-            map('right⌘').to('right⌘').toIfAlone(toApp('kitty')).condition(ifApp('kitty').unless()),
-            map('right⌘').to('right⌘').toIfAlone(tk('⌘_u')).condition(ifApp('kitty')),
+            map('left⌘').to('left⌘').toIfAlone(toSynapse()),
+            map('right⌘').to('right⌘').condition(ifApp('kitty').unless()).toIfAlone(toApp('kitty')),
+            map('right⌘').to('right⌘').condition(ifApp('kitty')).toIfAlone(toHideKitty()),
 
             mapLangSet('left⌥', 'spanish'),
             mapLangSet('right⌥', 'german'),
@@ -29,8 +29,8 @@ writeToProfile('karabiner.ts',
             combi('we').to('↑'),
             combi('er').to('→'),
             combi('rt').to$('~/.config/kitty/viclip-tab.zsh'),
-            combi('yu').to(tk('⌘f_f9')), // scrolla
-            combi('ui').condition(ifApp('kitty').unless()).to(tk('⌘f_f8')), // wooshy
+            combi('yu').to(toScrolla()),
+            combi('ui').condition(ifApp('kitty').unless()).to(toWooshy()),
             combi('ui').condition(ifApp('kitty')).to(tk('⌃_u')),
             combi('io').condition(ifApp('kitty')).to(tk('⌃_o')),
 
