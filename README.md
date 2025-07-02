@@ -19,8 +19,8 @@ dotfiles.
 - [kitty](https://sw.kovidgoyal.net/kitty/) terminal & as a `tmux`-replacement
   for working locally with much better performance. See
     **[config/kitty/](config/kitty)**.
-- [zsh](https://www.zsh.org) as a shell. See **[.config/zsh/](.config/zsh)**.
-- [nvim](https://neovim.io) as an editor. See **[.config/nvim/](.config/nvim)**.
+- [zsh](https://www.zsh.org) as a shell. See **[config/zsh/](config/zsh)**.
+- [nvim](https://neovim.io) as an editor. See **[config/nvim/](config/nvim)**.
 - [fzf](https://github.com/junegunn/fzf) with
   [fd](https://github.com/sharkdp/fd),
   [ripgrep](https://github.com/BurntSushi/ripgrep) &
@@ -29,11 +29,10 @@ dotfiles.
 - [git](https://git-scm.com) and GitHub for version control. See **[my git
   dotfiles](https://github.com/jannis-baum/git.zsh-dotfiles.git)**.
 - [Karabiner Elements](https://karabiner-elements.pqrs.org) with
-  [goku](https://github.com/yqrashawn/GokuRakuJoudo) to remap my keyboard. See
-  **[karabiner.edn](config/karabiner.edn)** for the definitions and **[my
-  visualized keyboard layers](docs/keyboard-layers.md)** to get a rough idea of
-  how I use my five column aka "tiny" [Corne
-  keyboard](https://github.com/foostan/crkbd).
+  [karabiner.ts](https://github.com/evan-liu/karabiner.ts) to remap my keyboard.
+  See **[keymaps.ts](lib/karabiner-config/src/keymap.ts)** for the easily
+  readable definitions and to get a rough idea of how I use my five column aka
+  "tiny" [Corne keyboard](https://github.com/foostan/crkbd).
 - [kindaVim](https://kindavim.app) for vi-bindings **everywhere** in macOS
 - [Wooshy](https://wooshy.app) so I (almost) never need to use a mouse
 
@@ -42,8 +41,7 @@ dotfiles.
 **Disclaimer** If you are not me, you should never do this!
 
 To set up everything (set MacOS preferences, install Homebrew, brew packages &
-dotfiles/config), make sure you have `git`, `zsh`, `bash`, `make` and `swift`
-installed and run
+dotfiles/config), run
 
 ```zsh
 zsh <(curl -s https://raw.githubusercontent.com/jannis-baum/dotfiles/main/lib/setup/full-setup.sh)
