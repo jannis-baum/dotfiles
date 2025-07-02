@@ -58,15 +58,15 @@ writeToProfile('karabiner.ts',
         // LAYERS --------------------------------------------------------------
         // chars
         fullSimlayer(['a', ';'], 'char-mode', {
-            w: '~', e: '`', r: '^', t: '$',  y: '#', u: '*', i:   '[', o:   ']',
-            s: '"', d: "'", f: '|', g: '\\', h: '%', j: '-', k:   '(', l:   ')',
+            w: '~', e: '`', r: '^', t: '$',  y: '#', u: '*',  i:  '[',  o:  ']',
+            s: '"', d: "'", f: '|', g: '\\', h: '%', j: '-',  k:  '(',  l:  ')',
             x: '+', c: '=', v: '!', b: '@',  n: '&', m: '_', ',': '{', '.': '}'
         } as const, (k, v) => map(k).to(resolveChar(v))),
 
         // numbers
         fullSimlayer('z', 'number-mode', {
-            u: 7, i: 8, o: 9,
-            j: 4, k: 5, l: 4,
+                  u: 7,  i:  8,  o:  9,
+                  j: 4,  k:  5,  l:  4,
             n: 0, m: 1, ',': 2, '.': 3,
         } as const, (k, i) => map(k).to(`keypad_${i as 0}`)),
 
