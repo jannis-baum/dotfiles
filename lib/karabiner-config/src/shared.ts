@@ -1,11 +1,7 @@
 import {
   Modifier, ModifierParam, modifierKeyAliases, ToKeyParam,
-  ifVar,
   toKey,
 } from 'karabiner.ts';
-
-// kindaVim
-export const kVnnoremap = () => ifVar('kVnnoremap', true);
 
 
 // helper to filter for single character string codes

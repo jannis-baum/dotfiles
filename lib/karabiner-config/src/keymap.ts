@@ -4,10 +4,13 @@ import {
     map,
     toApp,
     ifApp,
+    ToEvent,
+    FromKeyParam,
 } from 'karabiner.ts'
 import { combi } from './combis';
 import { fullSimlayer } from './layers';
-import { kVnnoremap, tk, resolveChar } from './shared';
+import { tk, resolveChar } from './shared';
+import { kVnnoremap, setWin } from './apps';
 
 writeToProfile('karabiner.ts',
     [
@@ -18,6 +21,7 @@ writeToProfile('karabiner.ts',
             map('right⌘').to('right⌘').toIfAlone(toApp('kitty')).condition(ifApp('kitty').unless()),
             map('right⌘').to('right⌘').toIfAlone(tk('⌘_h')).condition(ifApp('kitty'))
         ]),
+
 
         // combi keys
         rule('upper row combos').manipulators([
@@ -53,19 +57,28 @@ writeToProfile('karabiner.ts',
             combi(',.').condition(ifApp('Xcode'), kVnnoremap()).to('a').to(tk('⌘⇧_]')).to('⎋'),
         ]),
 
+
         // layers
+        // chars
         fullSimlayer(['a', ';'], 'char-mode', {
             w: '~', e: '`', r: '^', t: '$',  y: '#', u: '*', i:   '[', o:   ']',
             s: '"', d: "'", f: '|', g: '\\', h: '%', j: '-', k:   '(', l:   ')',
             x: '+', c: '=', v: '!', b: '@',  n: '&', m: '_', ',': '{', '.': '}'
         } as const, (k, v) => map(k).to(resolveChar(v))),
 
+        // numbers
         fullSimlayer('z', 'number-mode', {
             u: 7, i: 8, o: 9,
             j: 4, k: 5, l: 4,
             n: 0, m: 1, ',': 2, '.': 3,
         } as const, (k, i) => map(k).to(`keypad_${i as 0}`)),
 
+        // gui
+        fullSimlayer<FromKeyParam, ToEvent>('/', 'gui-mode', {
+                          w: tk('⌘_0'), e: setWin('0,0_1x1'), r: setWin('next_screen'), t: setWin('1,0_1x1'),
+            a: tk('⌘_='), s: tk('⌘_-'), d: setWin('0,0_1x2'), f: setWin('0,0_2x2'),     g: setWin('1,0_1x2'),
+            z: tk('⌘_['), x: tk('⌘_]'), c: setWin('0,1_1x1'), v: setWin('prev_screen'), b: setWin('1,1_1x1'),
+        } as const, (k, v) => map(k).to(v)),
     ],
     {
        'basic.to_if_alone_timeout_milliseconds': 300,
@@ -74,3 +87,4 @@ writeToProfile('karabiner.ts',
        'basic.simultaneous_threshold_milliseconds': 30,
     }
 );
+
