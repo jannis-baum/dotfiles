@@ -1,6 +1,7 @@
 import {
   Modifier, ModifierParam, modifierKeyAliases, ToKeyParam,
   ifVar,
+  toKey,
 } from 'karabiner.ts';
 
 // kindaVim
@@ -33,12 +34,12 @@ export type ShortTo = `${'' | `${_MultipleModifiers}_`}${ToKeyParam}`;
 // helper type
 export type ToArgs = [ToKeyParam, ModifierParam?];
 // helper to convert to `.to` arguments
-export function to(short: ShortTo): ToArgs {
-    const split = short.split('_')
-    if (split.length == 1) return [split[0] as ToKeyParam, undefined]
-    const modifiers = Array.from(split[0]).map((m) => modifierKeyAliasesExt[m]) as Array<Modifier>
-    const toParam = split.splice(1).join('_') as ToKeyParam
-    return [toParam, modifiers]
+export function to(short: ShortTo): ReturnType<typeof toKey> {
+    const split = short.split('_');
+    if (split.length == 1) return toKey(split[0] as ToKeyParam);
+    const modifiers = Array.from(split[0]).map((m) => modifierKeyAliasesExt[m]) as Array<Modifier>;
+    const toParam = split.splice(1).join('_') as ToKeyParam;
+    return toKey(toParam, modifiers);
 }
 
 

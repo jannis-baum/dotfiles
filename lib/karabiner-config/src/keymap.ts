@@ -58,7 +58,7 @@ writeToProfile('karabiner.ts',
             w: '~', e: '`', r: '^', t: '$',  y: '#', u: '*', i:   '[', o:   ']',
             s: '"', d: "'", f: '|', g: '\\', h: '%', j: '-', k:   '(', l:   ')',
             x: '+', c: '=', v: '!', b: '@',  n: '&', m: '_', ',': '{', '.': '}'
-        } as const, (k, v) => map(k).to(...to(resolveChar(v)))),
+        } as const, (k, v) => map(k).to(to(resolveChar(v)))),
 
         fullSimlayer('z', 'number-mode', {
             u: 7, i: 8, o: 9,
