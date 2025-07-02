@@ -1,4 +1,4 @@
-import { writeToProfile, rule, map, toApp, ifApp, ToEvent, FromKeyParam, ToKeyParam } from 'karabiner.ts'
+import { writeToProfile, rule, map, toApp, ifApp, ToEvent, FromKeyParam, ToKeyParam, withMapper } from 'karabiner.ts'
 import { combi } from './combis';
 import { ifLang, mapLangChars, mapLangSet } from './languages';
 import { fullSimlayer, uniformSimlayer } from './layers';
@@ -85,20 +85,14 @@ writeToProfile('karabiner.ts',
         // LANGUAGES -----------------------------------------------------------
         // spanish
         rule('spanish characters', ifLang('spanish')).manipulators([
-            map('n').to(tk('⌥_n')).to('n').toUnsetVar('lang'),
-            mapLangChars('a', '⌥_e'),
-            mapLangChars('e', '⌥_e'),
-            mapLangChars('i', '⌥_e'),
-            mapLangChars('o', '⌥_e'),
-            mapLangChars('u', '⌥_e'),
+            mapLangChars('n', '⌥_n'),
+            withMapper(['a', 'e', 'i', 'o', 'u'])((k) => mapLangChars(k, '⌥_e')),
         ]),
 
         // german
         rule('german characters', ifLang('german')).manipulators([
             map('s').to(tk('⌥_s')).toUnsetVar('lang'),
-            mapLangChars('a', '⌥_u'),
-            mapLangChars('o', '⌥_u'),
-            mapLangChars('u', '⌥_u'),
+            withMapper(['a', 'o', 'u'])((k) => mapLangChars(k, '⌥_u')),
         ]),
 
         // kindaVim ------------------------------------------------------------
