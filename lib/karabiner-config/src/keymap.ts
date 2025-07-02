@@ -76,7 +76,9 @@ writeToProfile('karabiner.ts',
         } as const, (k, v) => map(k).to(v)),
 
         // control
-        uniformSimlayer(['q', 'p'], 'control-mode', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`)))
+        // doubled up so we can also press ctrl-q and ctrl-p
+        uniformSimlayer('q', 'control-mode-q', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`))),
+        uniformSimlayer('p', 'control-mode-p', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`)))
     ],
     {
        'basic.to_if_alone_timeout_milliseconds': 300,
