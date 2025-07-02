@@ -14,7 +14,7 @@ writeToProfile('karabiner.ts',
             map('␣', 'optionalAny').to('left⇧').toIfAlone('␣'),
             map('left⌘').to('left⌘').toIfAlone(tk('⌘f_f7')),
             map('right⌘').to('right⌘').toIfAlone(toApp('kitty')).condition(ifApp('kitty').unless()),
-            map('right⌘').to('right⌘').toIfAlone(tk('⌘_h')).condition(ifApp('kitty'))
+            map('right⌘').to('right⌘').toIfAlone(tk('⌘_u')).condition(ifApp('kitty'))
         ]),
 
 
