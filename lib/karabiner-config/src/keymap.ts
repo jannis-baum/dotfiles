@@ -3,22 +3,27 @@ import {
   ToEvent, FromKeyParam, ToKeyParam,
 } from 'karabiner.ts'
 import { combi } from './combis';
+import { ifLang, mapLangChars, mapLangSet } from './languages';
 import { fullSimlayer, uniformSimlayer } from './layers';
 import { tk, resolveChar } from './shared';
 import { kVnnoremap, setWin } from './apps';
 
 writeToProfile('karabiner.ts',
     [
-        // thumb keys
+        // THUMB KEYS ----------------------------------------------------------
         rule('thumb keys').manipulators([
             map('␣', 'optionalAny').to('left⇧').toIfAlone('␣'),
+
             map('left⌘').to('left⌘').toIfAlone(tk('⌘f_f7')),
             map('right⌘').to('right⌘').toIfAlone(toApp('kitty')).condition(ifApp('kitty').unless()),
-            map('right⌘').to('right⌘').toIfAlone(tk('⌘_u')).condition(ifApp('kitty'))
+            map('right⌘').to('right⌘').toIfAlone(tk('⌘_u')).condition(ifApp('kitty')),
+
+            mapLangSet('left⌥', 'spanish'),
+            mapLangSet('right⌥', 'german'),
         ]),
 
 
-        // combi keys
+        // COMBI KEYS ----------------------------------------------------------
         rule('upper row combos').manipulators([
             // UPPER ROW
             combi('we').to('↑'),
@@ -53,7 +58,7 @@ writeToProfile('karabiner.ts',
         ]),
 
 
-        // layers
+        // LAYERS --------------------------------------------------------------
         // chars
         fullSimlayer(['a', ';'], 'char-mode', {
             w: '~', e: '`', r: '^', t: '$',  y: '#', u: '*', i:   '[', o:   ']',
@@ -78,12 +83,36 @@ writeToProfile('karabiner.ts',
         // control
         // doubled up so we can also press ctrl-q and ctrl-p
         uniformSimlayer('q', 'control-mode-q', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`))),
-        uniformSimlayer('p', 'control-mode-p', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`)))
+        uniformSimlayer('p', 'control-mode-p', (k) => map(k).to(tk(`⌃_${k as ToKeyParam}`))),
+
+        // LANGUAGES -----------------------------------------------------------
+        // spanish
+        rule('spanish characters', ifLang('spanish')).manipulators([
+            map('n').to(tk('⌥_n')).to('n').toUnsetVar('lang'),
+            mapLangChars('a', '⌥_e'),
+            mapLangChars('e', '⌥_e'),
+            mapLangChars('i', '⌥_e'),
+            mapLangChars('o', '⌥_e'),
+            mapLangChars('u', '⌥_e'),
+        ]),
+
+        // german
+        rule('german characters', ifLang('german')).manipulators([
+            map('s').to(tk('⌥_s')).toUnsetVar('lang'),
+            mapLangChars('a', '⌥_u'),
+            mapLangChars('o', '⌥_u'),
+            mapLangChars('u', '⌥_u'),
+        ]),
+
+        // MISC ----------------------------------------------------------------
+        rule('disable caps').manipulators([
+            map('caps_lock').toNone()
+        ]),
     ],
     {
        'basic.to_if_alone_timeout_milliseconds': 300,
        'basic.to_if_held_down_threshold_milliseconds': 50,
-       'basic.to_delayed_action_delay_milliseconds': 0,
+       'basic.to_delayed_action_delay_milliseconds': 500,
        'basic.simultaneous_threshold_milliseconds': 20,
     }
 );
