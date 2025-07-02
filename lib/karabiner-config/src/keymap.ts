@@ -1,12 +1,9 @@
-import {
-  writeToProfile, rule, map, toApp, ifApp,
-  ToEvent, FromKeyParam, ToKeyParam,
-} from 'karabiner.ts'
+import { writeToProfile, rule, map, toApp, ifApp, ToEvent, FromKeyParam, ToKeyParam } from 'karabiner.ts'
 import { combi } from './combis';
 import { ifLang, mapLangChars, mapLangSet } from './languages';
 import { fullSimlayer, uniformSimlayer } from './layers';
 import { tk, resolveChar } from './shared';
-import { kVnnoremap, setWin, toHideKitty, toScrolla, toSynapse, toWooshy } from './apps';
+import { kVnnoremap, kVonoremap, setWin, toHideKitty, toScrolla, toSynapse, toWooshy } from './apps';
 
 writeToProfile('karabiner.ts',
     [
@@ -102,6 +99,16 @@ writeToProfile('karabiner.ts',
             mapLangChars('a', '⌥_u'),
             mapLangChars('o', '⌥_u'),
             mapLangChars('u', '⌥_u'),
+        ]),
+
+        // kindaVim ------------------------------------------------------------
+        rule('kV onoremap', kVonoremap()).manipulators([
+            map('d').to(resolveChar("'")),
+            map('s').to(resolveChar('"')),
+            map('e').to(resolveChar('`')),
+            map('o').to(resolveChar('[')),
+            map('l').to(resolveChar('(')),
+            map('.').to(resolveChar('{')),
         ]),
 
         // MISC ----------------------------------------------------------------

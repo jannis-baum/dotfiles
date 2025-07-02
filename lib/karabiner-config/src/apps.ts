@@ -4,6 +4,7 @@ import { tk } from "./shared";
 
 // kindaVim
 export const kVnnoremap = () => ifVar('kVnnoremap', true);
+export const kVonoremap = () => ifVar('kVonoremap', true);
 
 // open/activate apps with hotkeys
 export const toSynapse = () => tk('⌘f_f7')
