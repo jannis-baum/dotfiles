@@ -29,8 +29,8 @@ writeToProfile('karabiner.ts',
             combi('we').to('↑'),
             combi('er').to('→'),
             combi('rt').to$('~/.config/kitty/viclip-tab.zsh'),
-            combi('yu').to(tk('⌘f_f9')),
-            // in kitty
+            combi('yu').to(tk('⌘f_f9')), // scrolla
+            combi('ui').condition(ifApp('kitty').unless()).to(tk('⌘f_f8')), // wooshy
             combi('ui').condition(ifApp('kitty')).to(tk('⌃_u')),
             combi('io').condition(ifApp('kitty')).to(tk('⌃_o')),
 
