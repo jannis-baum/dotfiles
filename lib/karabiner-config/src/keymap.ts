@@ -52,6 +52,8 @@ writeToProfile('karabiner.ts',
             combi(',.').condition(ifApp('Xcode').unless(), kVnnoremap()).to('a').to(tk('⌃_⇥')).to('⎋'),
             combi(',.').condition(ifApp('Xcode'), kVnnoremap().unless()).to(tk('⌘⇧_]')),
             combi(',.').condition(ifApp('Xcode'), kVnnoremap()).to('a').to(tk('⌘⇧_]')).to('⎋'),
+            // directory prefix
+            combi('./').condition(ifApp('kitty')).to(resolveChar('~')).to('/').to(resolveChar('_')).to('/')
         ]),
 
 
@@ -110,7 +112,7 @@ writeToProfile('karabiner.ts',
 
         // MISC ----------------------------------------------------------------
         rule('disable caps').manipulators([
-            map('caps_lock').toNone()
+            map('caps_lock', 'optionalAny').toNone()
         ]),
     ],
     {
