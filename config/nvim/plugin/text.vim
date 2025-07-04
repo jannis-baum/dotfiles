@@ -10,4 +10,4 @@ set autoindent                " .
 set smartindent               " .
 set wrap                      " text wrapping
 set linebreak                 " .
-
+set virtualedit=block         " move cursor beyond line end in visual block
