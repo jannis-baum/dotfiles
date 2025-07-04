@@ -1,7 +1,7 @@
 -- TODO:
 -- - multi line function definitions, e.g. with @attributes in Swift or Python
 
-local ansi = require('ansi_highlight')
+local ansi = require('highlight2ansi')
 
 local relevant_symbols = {
     -- relevant symbols & examples for languages that use them

@@ -75,7 +75,7 @@ vim.diagnostic.config({
 })
 
 -- fzf picker
-local ansi = require('ansi_highlight')
+local ansi = require('highlight2ansi')
 local path_ansi = ansi.hl_to_ansi('Comment')
 local diagnostic_ansi = {
     [vim.diagnostic.severity.ERROR] = ansi.hl_to_ansi('DiagnosticError'),

@@ -67,3 +67,6 @@
 [submodule "lib/drag"]
 	path = lib/drag
 	url = https://github.com/jannis-baum/drag.git
+[submodule "config/nvim/pack/plugins/opt/highlight2ansi.nvim"]
+	path = config/nvim/pack/plugins/opt/highlight2ansi.nvim
+	url = https://github.com/jannis-baum/highlight2ansi.nvim.git
