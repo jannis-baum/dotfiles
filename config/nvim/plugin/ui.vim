@@ -84,7 +84,7 @@ function! SLContent()
     let l:spacer_width = winwidth(0) - strwidth(l:right)
     " count only "proper" editor windows which are on the current tab
     let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) && tabpagenr() == tabpagenr()'))
-    let l:spacer = repeat(l:win_count > 1 ? '―' : ' ', l:spacer_width)
+    let l:spacer = repeat(l:win_count > 1 ? '─' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
 
@@ -112,7 +112,7 @@ function! TLContent()
     endfor
     " after the last tab fill with TabLineFill and reset tab page nr
     let l:right ..= '%#TabLineFill#%T'
-    let l:spacer = repeat('―', l:spacer_width)
+    let l:spacer = repeat('─', l:spacer_width)
     return '%#TabLine#' . l:spacer . l:right
 endfunction
 
