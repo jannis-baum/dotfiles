@@ -1,9 +1,8 @@
 " setup
 setlocal spell
 setlocal spelllang=en_us,de
-set textwidth=80
-set tabstop=2 softtabstop=2
-set shiftwidth=2
+setlocal tabstop=2 softtabstop=2
+setlocal shiftwidth=2
 
 " do stuff between $$
 nnoremap da$ F$df$
