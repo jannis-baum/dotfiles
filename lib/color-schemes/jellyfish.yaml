@@ -108,6 +108,9 @@ vim:
     - set: [Comment]
       fg: Gray6
       deco: italic
+    - set: [NonText]
+      fg: Gray3
+      deco: italic
     - set: [Ignore]
       fg: { dark: '#a8', light: '#a8' }
     - set: [Todo]
