@@ -12,6 +12,19 @@ if !exists('g:reload_config_defined')
     command! ReloadConfig call s:ReloadConfig()
 endif
 
+" open empty vsp to get earlier soft line breaks
+function! s:VspEmpty()
+    let l:win = win_getid()
+    vsp
+    enew
+    " locally disable fillchar EOB
+    let &l:fillchars = join(map(split(&fillchars, ','),
+        \{_, v -> v =~# '^eob:' ? 'eob: ' : v}),
+    \',')
+    call win_gotoid(l:win)
+endfunction
+command! VspEmpty call s:VspEmpty()
+
 " close all but current buffer
 function! s:CloseOthers()
     let l:thisbuf = bufnr()
