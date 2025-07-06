@@ -14,20 +14,60 @@ endif
 
 " open empty vsp to get earlier soft line breaks
 function! s:VspEmpty()
+    if exists('b:has_vsp_empty')
+        return
+    endif
+
+    function! s:VspEmptySetFillchar(option, value)
+        " remove existing entry for the given option
+        let l:parts = filter(split(&fillchars, ','), 'v:val !~ "^' . a:option . ':"')
+        let &l:fillchars = join(l:parts, ',')
+        " escape value if it's a space
+        let l:escaped_value = a:value ==# ' ' ? '\ ' : a:value
+        " append the new option
+        execute 'setlocal fillchars+=' . a:option . ':' . l:escaped_value
+    endfunction
+
+    function! s:VspEmptyNewsplit(orig_win, cols)
+        " create new split with empty buffer
+        vnew
+        exec 'vertical resize ' .. a:cols
+        " locally disable fillchar EOB, vert & status line
+        call s:VspEmptySetFillchar('vert', ' ')
+        call s:VspEmptySetFillchar('eob', ' ')
+        setlocal statusline=\ 
+        " autocmd to automatically delete empty buffer when leaving original
+        let l:on_leave = 'autocmd BufLeave <buffer> ++once exec "bdelete ' .. bufnr() .. '"'
+        " go back & register autocmd
+        call win_gotoid(a:orig_win)
+        return l:on_leave
+    endfunction
+
+    " get current win ID and options
     let l:win = win_getid()
-    " create new split with empty buffer
-    vsp
-    enew
-    " locally disable fillchar EOB & status line
-    let &l:fillchars = join(map(split(&fillchars, ','),
-        \{_, v -> v =~# '^eob:' ? 'eob: ' : v}),
-    \',')
-    setlocal statusline=\ 
-    " autocmd to automatically delete empty buffer when leaving original
-    let l:on_leave = 'autocmd BufLeave <buffer> ++once exec "bdelete ' .. bufnr() .. '"'
-    " go back & register autocmd
-    call win_gotoid(l:win)
-    exec l:on_leave
+    let l:orig_splitright = &splitright
+    let l:restore_fillchars = 'autocmd BufLeave <buffer> ++once let &l:fillchars="' .. &l:fillchars .. '"'
+    " disable nvim-focus/focus.nvim
+    let l:orig_focus = exists('g:focus_disable') ? g:focus_disable : v:false
+
+    " how big the spacer splits are
+    let l:spacer_cols = &columns / 6
+
+    " open splits & set options
+    let g:focus_disable = v:true
+    let l:close_first = s:VspEmptyNewsplit(l:win, l:spacer_cols)
+    let &l:splitright = !l:orig_splitright
+    let l:close_second = s:VspEmptyNewsplit(l:win, l:spacer_cols)
+    let g:focus_disable = l:orig_focus
+    let &l:splitright = l:orig_splitright
+    call s:VspEmptySetFillchar('vert', ' ')
+
+    " cleanup after leaving buffer
+    exec l:close_first
+    exec l:close_second
+    exec l:restore_fillchars
+    autocmd BufLeave <buffer> ++once unlet b:has_vsp_empty
+    let b:has_vsp_empty = 1
 endfunction
 command! VspEmpty call s:VspEmpty()
 nnoremap <silent> <leader>v :VspEmpty<CR>
