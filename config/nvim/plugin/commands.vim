@@ -15,15 +15,22 @@ endif
 " open empty vsp to get earlier soft line breaks
 function! s:VspEmpty()
     let l:win = win_getid()
+    " create new split with empty buffer
     vsp
     enew
-    " locally disable fillchar EOB
+    " locally disable fillchar EOB & status line
     let &l:fillchars = join(map(split(&fillchars, ','),
         \{_, v -> v =~# '^eob:' ? 'eob: ' : v}),
     \',')
+    setlocal statusline=\ 
+    " autocmd to automatically delete empty buffer when leaving original
+    let l:on_leave = 'autocmd BufLeave <buffer> ++once exec "bdelete ' .. bufnr() .. '"'
+    " go back & register autocmd
     call win_gotoid(l:win)
+    exec l:on_leave
 endfunction
 command! VspEmpty call s:VspEmpty()
+nnoremap <silent> <leader>v :VspEmpty<CR>
 
 " close all but current buffer
 function! s:CloseOthers()
