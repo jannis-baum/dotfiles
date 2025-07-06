@@ -82,9 +82,10 @@ endfunction
 function! SLContent()
     let l:right = ' ' . s:lsp_statusline() . @% . s:modified_marker('%') . ' '
     let l:spacer_width = winwidth(0) - strwidth(l:right)
-    " count only "proper" editor windows which are on the current tab
-    let l:win_count = len(filter(range(1, winnr('$')), 's:win_is_editor(v:val) && tabpagenr() == tabpagenr()'))
-    let l:spacer = repeat(l:win_count > 1 ? '─' : ' ', l:spacer_width)
+    " check if there is any horizontal splitting, then we need the separator
+    " char in the bottom
+    let l:has_horizontal = stridx(string(winlayout(tabpagenr())), 'col') != -1
+    let l:spacer = repeat(l:has_horizontal ? '─' : ' ', l:spacer_width)
     return l:spacer . l:right
 endfunction
 
