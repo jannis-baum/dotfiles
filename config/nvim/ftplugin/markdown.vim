@@ -90,3 +90,18 @@ function! s:WriteMode()
 endfunction
 command! WriteMode call s:WriteMode()
 nnoremap <silent> <leader>v :WriteMode<CR>
+
+function! s:AutoWriteMode(timer)
+    if &filetype != 'markdown' || winnr('$') != 1
+        return
+    endif
+    call  s:WriteMode()
+endfunction
+
+augroup AutoWriteMode
+    autocmd!
+    " have to use timer to run this when back in main event loop (with delay
+    " 0), otherwise vim complains it can't open splits while closing another
+    " window
+    autocmd BufEnter,VimEnter,VimResume * call timer_start(0, 's:AutoWriteMode')
+augroup END
