@@ -18,7 +18,7 @@ set linebreak
 
 " whitespace characters
 set showbreak=↪\ 
-set listchars=trail:·
+set listchars=tab:⇥\ ,trail:·
 set list
 
 " misc
