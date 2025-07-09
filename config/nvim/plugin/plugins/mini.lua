@@ -60,4 +60,12 @@ require('mini.surround').setup({
     }
 })
 
+require('mini.operators').setup({
+    evaluate = { prefix = '' },
+    exchange = { prefix = '' },
+    multiply = { prefix = 'gm' },
+    replace = { prefix = 'gp' },
+    sort = { prefix = '' },
+})
+
 require('mini.pairs').setup()
