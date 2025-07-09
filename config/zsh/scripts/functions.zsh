@@ -16,27 +16,9 @@ function ql() {
         echo "\"$1\": No such file or directory"
         return 1
     fi
+    qlmanage -p "$1" >& /dev/null
+}
 
-    case "$1" in
-        *.ipynb)
-            if ! which jupyter >/dev/null; then
-                echo "jupyter not found"
-                return 1
-            fi
-            local TMP=$(mktemp).html
-            jupyter nbconvert --to html --stdout "$1" > $TMP
-            ql $TMP
-            trm $TMP
-            ;;
-        *)
-            qlmanage -p "$1" >& /dev/null
-            ;;
-    esac
-}
-# pip installed version for requirements.txt
-function pipf() {
-    pip3 freeze | rg "$1" | sed 's/==/>=/' | pbcopy
-}
 # reload color schemes
 function rcols() {
     make -C ~/_/dev/dotfiles/lib/color-schemes load
@@ -65,14 +47,6 @@ function rmd() {
 
     R -e "library(rmarkdown); render('$f', output_file = '$out')"
     [[ -z "$2" ]] && open "$out"
-}
-
-function mda() {
-    [[ "$#" != "1" ]] && echo "Markdown file required" && return 1
-    local export_f="$(mktemp)"
-    mdanki --config ~/.mdanki/settings.json "$1" "$export_f"
-    curl localhost:8765 -X POST -d \
-        '{ "action": "importPackage", "version": 6, "params": { "path": "'"$export_f"'" } }'
 }
 
 # apple photos orders photos by the file modification datetime at import...
