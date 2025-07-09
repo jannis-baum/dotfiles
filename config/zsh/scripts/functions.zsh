@@ -38,8 +38,8 @@ function gclo() {
 # 2 args: knit to $2
 function rmd() {
     if ! test -f "$1"; then
-        echo "File required"
-        exit 1
+        echo "File required" >&2
+        return 1
     fi
 
     local f="$(realpath "$1")"
