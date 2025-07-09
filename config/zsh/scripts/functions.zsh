@@ -49,6 +49,30 @@ function rmd() {
     [[ -z "$2" ]] && open "$out"
 }
 
+function pynew() {
+    if test -e "$1"; then
+        echo "File exists" >&2
+        return 1
+    fi
+    mkdir -p "$(dirname "$1")"
+    cat <<EOF > "$1"
+#!/usr/bin/env python3
+
+import argparse
+
+def main(args):
+    pass
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+
+    args = parser.parse_args()
+    main(args)
+EOF
+    chmod +x "$1"
+    $EDITOR "$1"
+}
+
 # apple photos orders photos by the file modification datetime at import...
 # so photos exported by lightroom are always messed up when imported into apple
 # photos because the modification (export) datetime is not the capture datetime.
