@@ -22,6 +22,8 @@ bind '"\e[B": history-search-forward'
 bind -m vi-command '"k": history-search-backward'
 bind -m vi-command '"j": history-search-forward'
 
+export PATH="$HOME/_/repo/tools/bin:$PATH"
+
 # theme
 export LS_COLORS="fi=1;38;5;242:di=3;38;5;246:ex=4;38;5;182"
 PS1="\[\e[38;5;210m\]\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\[\e[0m\] \h:\w » "
@@ -148,7 +150,7 @@ EOF
             echo ""
             echo "Run the following to set up the SSH tunnel:"
             echo ""
-            echo "ssh $USER@$node.$cluster_addr -N -L 8000:localhost:8000"
+            echo "ssh $USER@$node.$cluster_addr -N -L 31623:localhost:31623"
             break
         fi
     done
