@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+printf "%s" "$(kitty @ get-text --extent last_cmd_output --match recent:0)" \
+    | pbcopy
