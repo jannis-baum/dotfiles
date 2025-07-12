@@ -1,4 +1,10 @@
 #!/bin/zsh
 
-printf "%s" "$(kitty @ get-text --extent last_cmd_output --match recent:0)" \
-    | pbcopy
+output="$(kitten @ get-text --extent last_cmd_output --match recent:0)"
+
+printf "%s" "$output" | pbcopy
+
+kitten @ kitten notify \
+    --expire=1s \
+    --sound=silent \
+    "copied output" "$(printf "%s" "$output" | head -c 100)"
