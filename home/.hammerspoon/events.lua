@@ -62,7 +62,7 @@ end)
 
 -- dark/light mode -------------------------------------------------------------
 e.setupDNWatcher('AppleInterfaceThemeChangedNotification', function()
-    os.execute(os.getenv('HOME') .. '/.config/kitty/sync-theme')
+    os.execute(os.getenv('HOME') .. '/.config/kitty/scripts/sync-theme')
 end)
 
 return e

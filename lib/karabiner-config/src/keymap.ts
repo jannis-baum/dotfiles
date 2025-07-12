@@ -25,7 +25,7 @@ writeToProfile('karabiner.ts',
             // UPPER ROW
             combi('we').to('↑'),
             combi('er').to('→'),
-            combi('rt').to$('~/.config/kitty/viclip-tab.zsh'),
+            combi('rt').to$('~/.config/kitty/scripts/viclip-tab'),
             combi('yu').to(toScrolla()),
             combi('ui').condition(ifApp('kitty').unless()).to(toWooshy()),
             combi('ui').condition(ifApp('kitty')).to(tk('⌃_u')),
