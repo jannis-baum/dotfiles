@@ -28,3 +28,6 @@ for d in $ZDOTDIR/scripts $ZDOTDIR/plugins $HOME/.config/zv; do
 done
 
 source $ZDOTDIR/plugins-other/plugins.zsh
+
+# pick directory if shell is start in in home dir
+[[ "$(pwd)" == "$HOME" ]] && df
