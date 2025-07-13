@@ -2,3 +2,26 @@
     text-align: left;
     padding-left: 2em;
 }
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --syntax-text: var(--text-primary);
+        --syntax-keyword: #3487db;
+        --syntax-entity: #55a3b5;
+        --syntax-constant: #bf4c85;
+        --syntax-string: #bf4c85;
+        --syntax-symbol: var(--syntax-constant);
+        --syntax-comment: #6a6a6a;
+        --syntax-entity-tag: #994399;
+        --syntax-storage-modifier-import: var(--syntax-text);
+
+        --syntax-markup-heading: var(--syntax-text);
+        --syntax-markup-list: var(--syntax-text);
+        --syntax-markup-italic: var(--syntax-text);
+        --syntax-markup-bold: var(--syntax-text);
+        --syntax-markup-inserted-fg: #aff5b4;
+        --syntax-markup-inserted-bg: #033a16;
+        --syntax-markup-deleted-fg: #ffdcd7;
+        --syntax-markup-deleted-bg: #67060c;
+    }
+}
