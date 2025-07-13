@@ -4,8 +4,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 bar=(
     position=top
     height=32
-    blur_radius=30
-    color=0xbb000000
+    color=0xff000000
     # as close to edge as possible
     padding_left=-9999
     padding_right=-9999
