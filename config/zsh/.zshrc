@@ -14,11 +14,6 @@ export PATH=$(tr -d ' ' <<<"\
     :$PATH
 ")
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 for d in $ZDOTDIR/scripts $ZDOTDIR/plugins $HOME/.config/zv; do
     if $(test -d $d); then
         for script in $(find $d -name '*.zsh'); do
