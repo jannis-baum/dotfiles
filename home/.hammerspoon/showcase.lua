@@ -1,3 +1,5 @@
+-- typing ----------------------------------------------------------------------
+--
 local shift_keys = {
     -- number row
     ["~"] = "`", ["!"] = "1", ["@"] = "2", ["#"] = "3", ["$"] = "4",
@@ -18,8 +20,12 @@ local named_keys = {
     [" "] = "space"
 }
 
-function Type(input)
-    if #input == 0 then return end
+local function type(input, next)
+    if #input == 0 then
+        next()
+        return
+    end
+
     local char = input:sub(1, 1)
     local mods = {}
     if shift_keys[char] ~= nil then
@@ -31,6 +37,46 @@ function Type(input)
     end
     hs.eventtap.keyStroke(mods, char, 0)
     hs.timer.doAfter(0.03, function()
-        Type(input:sub(2))
+        type(input:sub(2), next)
     end)
+end
+
+-- commands & input file processing --------------------------------------------
+--
+local commands = {
+    ["type"] = type
+}
+
+local function process_lines(lines)
+    local line = lines[1]
+    if line == nil then
+        return
+    end
+    table.remove(lines, 1)
+    next = function() process_lines(lines) end
+
+    if line:sub(1, 1) == "#" then
+        next()
+        return
+    end
+
+    local command, arguments = line:match("^(%w[%w%-_]*):%s(.+)$")
+    if command == nil then
+        hs.printf("Incorrect format: " .. line)
+        return
+    end
+    if commands[command] ~= nil then
+        commands[command](arguments, next)
+    else
+        hs.printf("Unknown command: " .. command)
+        return
+    end
+end
+
+function RunShowcase(showcase_file)
+    local lines = {}
+    for line in io.lines(showcase_file) do
+        table.insert(lines, line)
+    end
+    process_lines(lines)
 end
