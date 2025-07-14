@@ -33,7 +33,8 @@ setlocal foldlevel=1
 
 " open empty vsps to get earlier soft line breaks
 function! s:WriteMode()
-    if exists('b:has_write_mode')
+    let l:ideal_width = 100
+    if exists('b:has_write_mode') || l:ideal_width >= &columns
         return
     endif
 
@@ -70,7 +71,7 @@ function! s:WriteMode()
     let l:orig_focus = exists('g:focus_disable') ? g:focus_disable : v:false
 
     " how big the spacer splits are
-    let l:spacer_cols = &columns / 6
+    let l:spacer_cols = (&columns - l:ideal_width) / 2
 
     " open splits & set options
     let g:focus_disable = v:true
