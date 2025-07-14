@@ -91,7 +91,7 @@ local function process_lines(lines)
     table.remove(lines, 1)
     next = function() process_lines(lines) end
 
-    if line:sub(1, 1) == "#" then
+    if #line == 0 or line:sub(1, 1) == "#" then
         next()
         return
     end
