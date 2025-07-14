@@ -68,7 +68,7 @@ writeToProfile('karabiner.ts',
         // numbers
         fullSimlayer('z', 'number-mode', {
                   u: 7,  i:  8,  o:  9,
-                  j: 4,  k:  5,  l:  4,
+                  j: 4,  k:  5,  l:  6,
             n: 0, m: 1, ',': 2, '.': 3,
         } as const, (k, i) => map(k).to(`keypad_${i as 0}`)),
 
