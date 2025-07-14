@@ -41,10 +41,18 @@ local function type(input, next)
     end)
 end
 
+
+-- delays ----------------------------------------------------------------------
+--
+local function delay(input, next)
+    hs.timer.doAfter(tonumber(input), next)
+end
+
 -- commands & input file processing --------------------------------------------
 --
 local commands = {
-    ["type"] = type
+    ["type"] = type,
+    ["delay"] = delay,
 }
 
 local function process_lines(lines)
