@@ -20,7 +20,7 @@ local named_keys = {
     [" "] = "space"
 }
 
-local function type(input, next)
+local function type_text(input, next)
     if #input == 0 then
         next()
         return
@@ -37,7 +37,7 @@ local function type(input, next)
     end
     hs.eventtap.keyStroke(mods, char, 0)
     hs.timer.doAfter(0.03, function()
-        type(input:sub(2), next)
+        type_text(input:sub(2), next)
     end)
 end
 
@@ -48,11 +48,30 @@ local function delay(input, next)
     hs.timer.doAfter(tonumber(input), next)
 end
 
+
+-- keys with modifiers ---------------------------------------------------------
+--
+local function hit_key(input, next)
+    local mod_str, key = string.match(input, "([%a%-]+) (%S+)")
+    if mod_str ~= nil and key ~= nil then
+        local mods = {}
+        for mod in string.gmatch(mod_str, "[^%-]+") do
+            table.insert(mods, mod)
+        end
+        hs.eventtap.keyStroke(mods, key, 0)
+    else
+        hs.eventtap.keyStroke({}, input, 0)
+    end
+    next()
+end
+
+
 -- commands & input file processing --------------------------------------------
 --
 local commands = {
-    ["type"] = type,
+    ["type"] = type_text,
     ["delay"] = delay,
+    ["key"] = hit_key,
 }
 
 local function process_lines(lines)
