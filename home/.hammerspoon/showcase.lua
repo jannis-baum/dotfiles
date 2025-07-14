@@ -18,9 +18,8 @@ local named_keys = {
     [" "] = "space"
 }
 
-function Type(input, delay)
+function Type(input)
     if #input == 0 then return end
-    if delay == nil then delay = 30 end
     local char = input:sub(1, 1)
     local mods = {}
     if shift_keys[char] ~= nil then
@@ -31,7 +30,7 @@ function Type(input, delay)
         char = named_keys[char]
     end
     hs.eventtap.keyStroke(mods, char, 0)
-    hs.timer.doAfter(delay / 1000, function()
-        Type(input:sub(2), delay)
+    hs.timer.doAfter(0.03, function()
+        Type(input:sub(2))
     end)
 end
