@@ -66,12 +66,21 @@ local function hit_key(input, next)
 end
 
 
+-- execute code ----------------------------------------------------------------
+--
+local function execute_code(input, next)
+    load(input)()
+    next()
+end
+
+
 -- commands & input file processing --------------------------------------------
 --
 local commands = {
     ["type"] = type_text,
     ["delay"] = delay,
     ["key"] = hit_key,
+    ["execute"] = execute_code,
 }
 
 local function process_lines(lines)
