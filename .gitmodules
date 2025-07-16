@@ -70,3 +70,6 @@
 [submodule "config/nvim/pack/plugins/opt/highlight2ansi.nvim"]
 	path = config/nvim/pack/plugins/opt/highlight2ansi.nvim
 	url = https://github.com/jannis-baum/highlight2ansi.nvim.git
+[submodule "home/.hammerspoon/spoons/showcase.spoon"]
+	path = home/.hammerspoon/spoons/showcase.spoon
+	url = https://github.com/jannis-baum/showcase.spoon.git
