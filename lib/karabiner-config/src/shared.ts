@@ -1,6 +1,8 @@
 import {
   Modifier, ModifierParam, modifierKeyAliases, ToKeyParam,
   toKey,
+  ToVariable,
+  to$,
 } from 'karabiner.ts';
 
 
@@ -48,4 +50,11 @@ const charMap = {
 export function resolveChar(arg: keyof typeof charMap | ShortTo): ReturnType<typeof tk> {
     if (arg in charMap) return tk(charMap[arg]);
     return tk(arg as ShortTo);
+}
+
+
+// set var but unconditionally (no if_invoked, if_cancelled)
+export function toDelayedSetVar(name: string, value: ToVariable["value"], delay: number = 0.5) {
+    const v = JSON.stringify(value)
+    return to$(`sleep ${delay}; /opt/homebrew/bin/karabiner_cli --set-variables '{"${name}":${v}}'`)
 }
