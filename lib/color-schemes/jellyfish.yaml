@@ -105,6 +105,8 @@ vim:
   highlight:
     # syntax -------------------------------------------------------------------
     # gray
+    - set: [Normal]
+      fg: Text
     - set: [Comment]
       fg: Gray6
       deco: italic
