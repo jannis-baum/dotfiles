@@ -86,3 +86,38 @@ function fix-photo-timstamps() {
         touch -t "$capture_date" "$file"
     done
 }
+
+function make-gif() {
+    if ! test -f "$1" || [[ "$1" != *.* ]]; then
+        echo "usage: make-gif video.extension" >&2
+        return 1
+    fi
+
+    local input="$1"
+    local name="$(rev <<<"$input" | cut -d. -f2- | rev)"
+    local ext="$(rev <<<"$input" | cut -d. -f1  | rev)"
+    local temp="$name.temp.gif"
+    local output="$name.gif"
+
+    if test -f "$temp" || test -f "$output"; then
+        echo "file \"$temp\" or \"$output\" already exists" >&2
+        return 1
+    fi
+
+    ffmpeg \
+        -i "$input" \
+        -vf "fps=30,scale=1000:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+        -loop 0 "$temp"
+
+    gifsicle \
+        --optimize=3 \
+        --threads=$(sysctl -n hw.ncpu) \
+        "$temp" \
+        -o "$output"
+
+    rm "$temp"
+
+    echo "Done! File sizes:"
+    echo "- original: $(du -sh "$input")"
+    echo "- GIF: $(du -sh "$output")"
+}
