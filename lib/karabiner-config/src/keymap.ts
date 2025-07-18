@@ -1,8 +1,14 @@
-import { writeToProfile, rule, map, toApp, ifApp, ToEvent, FromKeyParam, ToKeyParam, withMapper } from 'karabiner.ts'
+import {
+    writeToProfile,
+    rule, map, withMapper,
+    FromKeyParam,
+    toApp, ToEvent, ToKeyParam,
+    ifApp, ifVar,
+} from 'karabiner.ts'
 import { combi } from './combis';
 import { ifLang, mapLangChars, mapLangSet } from './languages';
 import { fullSimlayer, uniformSimlayer } from './layers';
-import { tk, resolveChar } from './shared';
+import { tk, resolveChar, toDelayedSetVar } from './shared';
 import { kVnnoremap, kVonoremap, setWin, toHideKitty, toScrolla, toSynapse, toWooshy } from './apps';
 
 writeToProfile('karabiner.ts',
@@ -53,7 +59,13 @@ writeToProfile('karabiner.ts',
             combi(',.').condition(ifApp('Xcode'), kVnnoremap().unless()).to(tk('⌘⇧_]')),
             combi(',.').condition(ifApp('Xcode'), kVnnoremap()).to('a').to(tk('⌘⇧_]')).to('⎋'),
             // directory prefix
-            combi('./').condition(ifApp('kitty')).to(resolveChar('~')).to('/').to(resolveChar('_')).to('/')
+            combi('./').condition(ifApp('kitty')).to(resolveChar('~')).to('/')
+                .condition(ifVar('path-prefix').unless())
+                .toVar('path-prefix', true)
+                .to(toDelayedSetVar('path-prefix', false)),
+            map('/').condition(ifApp('kitty')).condition(ifVar('path-prefix', true))
+                .to(resolveChar('_')).to('/')
+                .toVar('path-prefix', false)
         ]),
 
 
