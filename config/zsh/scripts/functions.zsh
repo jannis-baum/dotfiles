@@ -89,7 +89,7 @@ function fix-photo-timstamps() {
 
 function make-gif() {
     if ! test -f "$1" || [[ "$1" != *.* ]]; then
-        echo "usage: make-gif video.extension" >&2
+        echo "usage: make-gif video.extension [frame-rate]" >&2
         return 1
     fi
 
@@ -99,6 +99,9 @@ function make-gif() {
     local temp="$name.temp.gif"
     local output="$name.gif"
 
+    local framerate="$2"
+    [[ -z "$framerate" ]] && framerate=15
+
     if test -f "$temp" || test -f "$output"; then
         echo "file \"$temp\" or \"$output\" already exists" >&2
         return 1
@@ -106,7 +109,7 @@ function make-gif() {
 
     ffmpeg \
         -i "$input" \
-        -vf "fps=30,scale=1000:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+        -vf "fps=$framerate,scale=1000:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
         -loop 0 "$temp"
 
     gifsicle \
