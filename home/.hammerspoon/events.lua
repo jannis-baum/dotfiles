@@ -11,6 +11,13 @@ e.appWatcher = hs.application.watcher.new(function(name, eventType, app)
         out, status = hs.execute('~/.local/bin/cookie-cleaner ~/.config/safari/cookie-whitelist.txt')
     end
     if name == 'kitty' and eventType == hs.application.watcher.deactivated then
+        for _, window in ipairs(app:visibleWindows()) do
+            local screen = window:screen()
+            local frame = window:frame()
+            if frame ~= screen:frame() then
+                return
+            end
+        end
         app:hide()
     end
 end)
