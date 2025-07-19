@@ -2,11 +2,12 @@
 
 # edit clipboard in nvim
 
-temp_file=$(mktemp).md
+temp_file="$(mktemp)"
+pbpaste > "$temp_file"
 
+# try to auto-detect filetype, if not fall back to markdown
 /opt/homebrew/bin/nvim "$temp_file" \
-    -c "normal p" \
-    -c "write" \
+    -c "if &filetype == '' | set filetype=markdown | endif"
     -c "normal G" \
     -c "startinsert!"
 
