@@ -1,0 +1,2 @@
+    --container-image="ghcr.io#soedinglab/mmseqs2" \
+    --container-name=mmseq2 \

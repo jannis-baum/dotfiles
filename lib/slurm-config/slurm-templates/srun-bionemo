@@ -1,4 +1,2 @@
-    --container-writable \
+    --container-image="nvcr.io#nvidia/clara/bionemo-framework:2.6" \
     --container-name=bionemo \
-    --container-mount-home \
-    --container-workdir=$HOME \

@@ -1,0 +1,5 @@
+# MARK: uncomment if using any container
+# #SBATCH --container-writable
+# #SBATCH --container-mount-home
+# #SBATCH --container-mounts=/sc/projects/sci-renard/igem2025/:/sc/projects/sci-renard/igem2025/
+# #SBATCH --container-workdir="$HOME"

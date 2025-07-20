@@ -1,5 +1,3 @@
-
 # MARK: uncomment for bionemo
-# #SBATCH --container-writable
+# #SBATCH --container-image="nvcr.io#nvidia/clara/bionemo-framework:2.6"
 # #SBATCH --container-name=bionemo
-# #SBATCH --container-mount-home

@@ -80,6 +80,7 @@ function gpu() {
     {
         cat "$_template_dir/srun-header"
         cat "$_template_dir/srun-bionemo"
+        cat "$_template_dir/srun-container"
         cat <<EOF
     --partition=gpu-interactive \\
     --cpus-per-task=40 \\
@@ -94,6 +95,8 @@ EOF
 function cpu() {
     {
         cat "$_template_dir/srun-header"
+        cat "$_template_dir/srun-mmseq2"
+        cat "$_template_dir/srun-container"
         cat <<EOF
     --partition=cpu-interactive \\
     --cpus-per-task=40 \\
@@ -110,8 +113,11 @@ function sb() {
 #SBATCH --job-name=generic
 #SBATCH --output=/dev/null
 #SBATCH --error=/dev/null
+
 EOF
         cat "$_template_dir/sbatch-bionemo"
+        cat "$_template_dir/sbatch-mmseq2"
+        cat "$_template_dir/sbatch-container"
         cat "$_template_dir/sbatch-resources"
     } | _prepare_template sbatch
 }
@@ -130,8 +136,11 @@ function sjupyviv() {
 #SBATCH --job-name=jupyviv
 #SBATCH --output=$logs_dir/%j
 #SBATCH --error=$logs_dir/%j
+
 EOF
         cat "$_template_dir/sbatch-bionemo"
+        cat "$_template_dir/sbatch-mmseq2"
+        cat "$_template_dir/sbatch-container"
         cat "$_template_dir/sbatch-resources"
         cat <<EOF
 

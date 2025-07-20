@@ -1,0 +1,3 @@
+# MARK: uncomment for MMSeq2
+# #SBATCH --container-image="ghcr.io#soedinglab/mmseqs2"
+# #SBATCH --container-name=mmseq2
