@@ -23,6 +23,7 @@ bind -m vi-command '"k": history-search-backward'
 bind -m vi-command '"j": history-search-forward'
 
 export PATH="$HOME/_/repo/tools/bin:$PATH"
+export EDITOR=vim
 
 # theme
 export LS_COLORS="fi=1;38;5;242:di=3;38;5;246:ex=4;38;5;182"
