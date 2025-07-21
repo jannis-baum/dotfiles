@@ -105,16 +105,8 @@ def _refresh_widgets(boss: Boss) -> None:
         def is_active(tab) -> bool:
             return active_id == tab.id
 
-        def get_remote_title(tab) -> str:
-            try:
-                return next((
-                    arg
-                    for proc in tab.active_window.child.foreground_processes
-                    for arg in proc['cmdline']
-                    if '@' in arg
-                )).split('@')[-1].split(':')[0]
-            except:
-                return 'ssh'
+        def get_remote_title(_) -> str:
+            return 'ssh'
 
         def get_local_title(tab) -> str:
             title = tab.get_cwd_of_active_window() or '??'
