@@ -124,10 +124,6 @@ EOF
 }
 
 function sjupyviv() {
-    if ! uv run jupyviv --help &>/dev/null; then
-        echo "Jupyviv not found" 1>&2
-        return 1
-    fi
     local logs_dir="$HOME/.cache/jupyviv/logs"
     mkdir -p "$logs_dir"
 
