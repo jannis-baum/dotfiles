@@ -120,6 +120,10 @@ EOF
         cat "$_template_dir/sbatch-mmseq2"
         cat "$_template_dir/sbatch-container"
         cat "$_template_dir/sbatch-resources"
+        cat <<EOF
+
+cd $(pwd -P)
+EOF
     } | _prepare_template sbatch
 }
 
@@ -141,6 +145,7 @@ EOF
         cat "$_template_dir/sbatch-resources"
         cat <<EOF
 
+cd $(pwd -P)
 uv run jupyviv --log INFO agent python
 EOF
     } | _prepare_template sbatch)"
