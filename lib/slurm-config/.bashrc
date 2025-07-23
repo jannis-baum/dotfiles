@@ -36,8 +36,43 @@ slurm_account="sci-renard-student"
 alias sme="squeue --me"
 
 function stop() {
-    local job="$1"
-    if [[ -z "$job" ]]; then
+    # arg parsing
+    local arg_help arg_smi job_id
+    while (( $# )); do
+        _echo_error() {
+            echo "$1" >&2
+            arg_help=1; break
+        }
+        local arg="$1"; shift
+
+        case "$arg" in
+            "-h" | "--help") arg_help=1; continue;;
+            "-s" | "--smi") arg_smi=1; continue;;
+        esac
+
+        [[ "$arg" == "-"* ]] && _echo_error "Unknown option: $arg"
+        [[ -n "$job_id" ]] && _echo_error "Too many positional arguments"
+        job_id="$arg"
+    done
+    which _echo_error >/dev/null && unfunction _echo_error
+
+    if [[ -n "$arg_help" ]]; then
+        cat <<EOF
+usage: stop [job] [-s, --smi]
+
+Watch research usage of given job or only running job.
+
+optional positional arugments:
+  job                    Job ID
+
+options:
+  -h, --help             Show this help message and exit.
+  -s, --smi              Watch nvidia-smi instead of top
+EOF
+        return
+    fi
+
+    if [[ -z "$job_id" ]]; then
         local user_jobs="$(squeue --noheader --user $USER --states=running --format %A)"
         if [[ -z "$user_jobs" ]]; then
             echo "No job running" >&2
@@ -48,13 +83,18 @@ function stop() {
             sme
             return 1
         fi
-        job="$user_jobs"
+        job_id="$user_jobs"
     fi
-    # c to preserve stuff before top
-    c
-    srun --jobid="$job" --pty -- top -u $USER
-    # actual clear to remove stop leftovers
-    clear
+
+    if [[ -n "$arg_smi" ]]; then
+        srun --jobid="$job_id" -- watch --interval 1 nvidia-smi
+    else
+        # c to preserve stuff before top
+        c
+        srun --jobid="$job_id" --pty -- top -u $USER
+        # actual clear to remove stop leftovers
+        clear
+    fi
 }
 
 function _prepare_template() {
