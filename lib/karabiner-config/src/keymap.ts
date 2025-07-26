@@ -9,7 +9,7 @@ import { combi } from './combis';
 import { ifLang, mapLangChars, mapLangSet } from './languages';
 import { fullSimlayer, uniformSimlayer } from './layers';
 import { tk, resolveChar, toDelayedSetVar } from './shared';
-import { kVnnoremap, kVonoremap, setWin, toHideKitty, toScrolla, toSynapse, toWooshy } from './apps';
+import { kVmapTextObjects, kVnnoremap, kVonoremap, setWin, toHideKitty, toScrolla, toSynapse, toWooshy } from './apps';
 
 writeToProfile('karabiner.ts',
     [
@@ -113,13 +113,11 @@ writeToProfile('karabiner.ts',
         rule('kV nnoremap', kVnnoremap()).manipulators([
             map('y', '⇧').to('y').to(resolveChar('$')),
         ]),
-        rule('kV onoremap', kVonoremap()).manipulators([
-            map('d').to(resolveChar("'")),
-            map('s').to(resolveChar('"')),
-            map('e').to(resolveChar('`')),
-            map('o').to(resolveChar('[')),
-            map('l').to(resolveChar('(')),
-            map('.').to(resolveChar('{')),
+        rule('kV text objects').manipulators([
+            kVmapTextObjects({
+                d: resolveChar("'"), s: resolveChar('"'), e: resolveChar('`'),
+                l: resolveChar('('), o: resolveChar(']'), '.': resolveChar('}'),
+            })
         ]),
 
         // MISC ----------------------------------------------------------------
