@@ -6,6 +6,23 @@ local function assert_non_nil(value)
     end
 end
 
+local luv = require("luv")
+local function run_and_wait(path, args)
+    local handle
+    local exit_code = nil
+    handle = luv.spawn(path, { args = args, stdio = {} }, function(code)
+        handle:close()
+        exit_code = code
+        luv.stop()
+    end)
+    luv.run() -- blocks until luv.stop() is called
+    return exit_code
+end
+
+local function list_extend(l1, l2)
+    table.move(l2, 1, #l2, #l1 + 1, l1)
+end
+
 local function get_current_app()
     local osascript = io.popen('osascript -l JavaScript -e \'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName\'')
     if osascript == nil then return nil end
@@ -56,7 +73,7 @@ local function main()
     local current_app = get_current_app()
     if current_app == nil then return end
 
-    local sketchy_cmd = 'sketchybar --remove "/APP-' .. tab_app .. '\\d*/"'
+    local sketchy_args = {'--remove', '/APP-' .. tab_app .. '\\d*/'}
     local drawing = arg[1] == current_app and 'on' or 'off'
 
     local lines = io.read('*a')
@@ -85,30 +102,33 @@ local function main()
         end
         label = ellipse_string(label, math.floor(max_title_w / widths['char']))
 
-        sketchy_cmd = sketchy_cmd
-            .. ' --add item "' .. item_name .. '" left'
-            .. ' --set "' .. item_name .. '"'
-                .. ' script=~/.config/sketchybar/plugins/sketchytab.zsh'
-                .. ' drawing=' .. drawing
-                .. ' label="' .. label .. '"'
-                .. ' label.font=Menlo:Bold:14'
-                .. ' label.color=' .. label_color
-            .. ' --subscribe "' .. item_name .. '" front_app_switched'
+        list_extend(sketchy_args, {
+            '--add', 'item', item_name, 'left',
+            '--set', item_name,
+                'script=~/.config/sketchybar/plugins/sketchytab.zsh',
+                'drawing=' .. drawing,
+                'label=' .. label,
+                'label.font=Menlo:Bold:14',
+                'label.color=' .. label_color,
+            '--subscribe', item_name, 'front_app_switched'
+        })
 
         if image ~= '' then
-            sketchy_cmd = sketchy_cmd .. ' --set "' .. item_name .. '"'
-                .. ' background.drawing=on background.image.drawing=on'
-                .. ' icon.padding_left=8'
-                .. ' background.padding_left=8'
-                .. ' background.image.string="' .. image .. '"'
-                .. ' background.image.scale=0.5'
+            list_extend(sketchy_args, {
+                '--set', item_name,
+                    'background.drawing=on',
+                    'background.image.drawing=on',
+                    'icon.padding_left=8',
+                    'background.padding_left=8',
+                    'background.image.string=' .. image,
+                    'background.image.scale=0.5',
+            })
         end
 
         line_num = line_num + 1
     end
 
-    local _, _, code = os.execute(sketchy_cmd)
-    return code
+    return run_and_wait("sketchybar", sketchy_args)
 end
 
 return main()
