@@ -86,9 +86,9 @@ writeToProfile('karabiner.ts',
 
         // gui
         fullSimlayer<FromKeyParam, ToEvent>('/', 'gui-mode', {
-                          w: tk('⌘_0'), e: setWin('0,0_1x1'), r: setWin('next_screen'), t: setWin('1,0_1x1'),
+                          w: tk('⌘_0'), e: setWin('0,0_1x1'), r: setWin('next_screen'), t: setWin('1,0_1x1'), y: setWin('0,0_2x1'),
             a: tk('⌘_='), s: tk('⌘_-'), d: setWin('0,0_1x2'), f: setWin('0,0_2x2'),     g: setWin('1,0_1x2'),
-            z: tk('⌘_['), x: tk('⌘_]'), c: setWin('0,1_1x1'), v: setWin('prev_screen'), b: setWin('1,1_1x1'),
+            z: tk('⌘_['), x: tk('⌘_]'), c: setWin('0,1_1x1'), v: setWin('prev_screen'), b: setWin('1,1_1x1'), n: setWin('0,1_2x1'),
         } as const, (k, v) => map(k).to(v)),
 
         // control
