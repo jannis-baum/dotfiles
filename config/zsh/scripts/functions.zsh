@@ -87,9 +87,9 @@ function fix-photo-timstamps() {
     done
 }
 
-function make-gif() {
+function gif-from-video() {
     if ! test -f "$1" || [[ "$1" != *.* ]]; then
-        echo "usage: make-gif video.extension [frame-rate]" >&2
+        echo "usage: gif-from-video video.extension [frame-rate]" >&2
         return 1
     fi
 
@@ -123,4 +123,34 @@ function make-gif() {
     echo "Done! File sizes:"
     echo "- original: $(du -sh "$input")"
     echo "- GIF: $(du -sh "$output")"
+}
+
+function gif-from-images() {
+    if [[ $# -lt 3 ]]; then
+        echo "usage: gif-from-images name.gif time_per_image image1 [image2 ...]" >&2
+        return 1
+    fi
+
+    local output="$1"
+    local time_per_image="$2"
+    shift 2
+
+    for input in "$@"; do
+        if ! test -f "$input"; then
+            echo "file \"$input\" doesn't exist" >&2
+            return 1
+        fi
+    done
+
+    local temp_dir="$(mktemp --directory)"
+    local frames_file="$temp_dir/frames.txt"
+    for input in "$@"; do
+        echo "file '$(realpath "$input")'" >> "$frames_file"
+        echo "duration $time_per_image" >> "$frames_file"
+    done
+
+    local palette_file="$temp_dir/palette.png"
+    ffmpeg -f concat -safe 0 -i "$frames_file" -vf palettegen "$palette_file"
+
+    ffmpeg -f concat -safe 0 -i "$frames_file" -i "$palette_file" -lavfi "fps=30 [x]; [x][1:v] paletteuse" -loop 0 "$output"
 }
