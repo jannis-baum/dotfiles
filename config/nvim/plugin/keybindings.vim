@@ -56,6 +56,23 @@ inoremap <c-w> <c-g>u<c-w>
 " forward delete (e.g. to undo auto-pair)
 inoremap <left> <esc>ls
 
+" MORE COMPLEX MAPPINGS --------------------------------------------------------
+" <bs> to extract text object into variable
+noremap <silent> <bs> <cmd>call <sid>setupChangeVar()<cr>c
+
+function! s:setupChangeVar()
+  augroup ChangeVarHandler
+    autocmd!
+    autocmd InsertLeave * ++once call <sid>changeVarModifyRegister()
+  augroup END
+endfunction
+
+function! s:changeVarModifyRegister()
+  let l:inserted_text = getreg('.')
+  let l:changed_text = getreg('+')
+  call setreg('+', l:inserted_text . ' = ' . l:changed_text)
+endfunction
+
 " SPECIAL CHARACTERS -----------------------------------------------------------
 "   spanish tildes
 lnoremap <f1> <Nop>
