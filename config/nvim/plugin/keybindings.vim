@@ -1,8 +1,6 @@
 " GENERAL ----------------------------------------------------------------------
 " leader
 map <space> <leader>
-" fix vim randomly starting in R mode
-nnoremap <esc>^[ <esc>^[
 " close all and suspend with <leader>z, suspend with ctrl-u
 nnoremap <leader>z :bufdo bw<CR>:sus<CR>
 nnoremap <C-u> :sus<CR>
