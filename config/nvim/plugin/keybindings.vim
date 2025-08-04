@@ -1,9 +1,16 @@
 " GENERAL ----------------------------------------------------------------------
 " leader
 map <space> <leader>
-" close all and suspend with <leader>z, suspend with ctrl-u
-nnoremap <leader>z :bufdo bw<CR>:sus<CR>
-nnoremap <C-u> :sus<CR>
+" close/suspend depending on si_vim
+if exists('$SIVIM_RESUME_SOURCE')
+    " write all, close all and suspend with <leader>z, suspend with ctrl-u
+    nnoremap <leader>z <cmd>wa \| bufdo bw \| suspend<cr>
+    nnoremap <C-u> <cmd>suspend<cr>
+else
+    " without si_vim just write and close
+    nnoremap <leader>z <cmd>wqa<cr>
+    nnoremap <C-u> <cmd>wqa<cr>
+endif
 " tab navigation
 nnoremap <leader>, gT
 nnoremap <leader>. gt
