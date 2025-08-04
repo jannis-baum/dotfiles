@@ -3,12 +3,16 @@
 map <space> <leader>
 " close/suspend depending on si_vim
 if exists('$SIVIM_RESUME_SOURCE')
-    " write all, close all and suspend with <leader>z, suspend with ctrl-u
+    " write all, close all and suspend with <leader>z 
     nnoremap <leader>z <cmd>wa \| bufdo bw \| suspend<cr>
+    " close this buffer with <leader>x
+    nnoremap <leader>x <cmd>bw<cr>
+    " suspend with ctrl-u
     nnoremap <c-u> <cmd>suspend<cr>
 else
-    " without si_vim just write and close
+    " si_vim same but with closing instead of suspending
     nnoremap <leader>z <cmd>wqa<cr>
+    nnoremap <leader>x <cmd>q<cr>
     nnoremap <c-u> <cmd>wqa<cr>
 endif
 " tab navigation
