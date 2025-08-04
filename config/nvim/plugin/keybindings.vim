@@ -55,6 +55,9 @@ inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 " forward delete (e.g. to undo auto-pair)
 inoremap <left> <esc>ls
+" better visual indenting
+xnoremap > >gv
+xnoremap < <gv
 
 " MORE COMPLEX MAPPINGS --------------------------------------------------------
 " <bs> to extract text object into variable
