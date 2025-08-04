@@ -3,9 +3,8 @@
 map <space> <leader>
 " fix vim randomly starting in R mode
 nnoremap <esc>^[ <esc>^[
-" close all with ZZ, one with ZX, suspend with ctrl-u
-nnoremap <S-z><S-z> :bufdo bw<CR>:sus<CR>
-nnoremap <S-z><S-x> :bw<CR>
+" close all and suspend with <leader>z, suspend with ctrl-u
+nnoremap <leader>z :bufdo bw<CR>:sus<CR>
 nnoremap <C-u> :sus<CR>
 " tab navigation
 nnoremap <leader>, gT
@@ -21,6 +20,9 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
+" beg/end
+noremap M ^
+noremap m $
 " splits
 nnoremap <Down> <C-w><C-j>
 nnoremap <Up> <C-w><C-k>
@@ -29,6 +31,8 @@ nnoremap <Left> <C-w><C-h>
 " scrolling
 nnoremap <silent> <C-f> :execute 'normal! ' winheight(0) / 3 . 'j'<CR>
 nnoremap <silent> <C-b> :execute 'normal! ' winheight(0) / 3 . 'k'<CR>
+" free z for sneak
+nnoremap , z
 
 " TEXT EDITING -----------------------------------------------------------------
 " x & s delete without copy
