@@ -3,10 +3,16 @@ if !exists('g:reload_config_defined')
     let g:reload_config_defined = 1
     function! s:ReloadConfig()
         for f in glob($HOME . '/.config/nvim/plugin/**/*.vim', 0, 1)
-            execute 'source ' . f
+            try
+                execute 'source ' . f
+            catch
+            endtry
         endfor
         for f in glob($HOME . '/.config/nvim/plugin/**/*.lua', 0, 1)
-            execute 'luafile ' . f
+            try
+                execute 'luafile ' . f
+            catch
+            endtry
         endfor
     endfunction
     command! ReloadConfig call s:ReloadConfig()
