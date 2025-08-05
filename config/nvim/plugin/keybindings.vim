@@ -3,7 +3,7 @@
 map <space> <leader>
 " close/suspend depending on si_vim
 if exists('$SIVIM_RESUME_SOURCE')
-    " write all, close all and suspend with <leader>z 
+    " write all, close all and suspend with <leader>z
     nnoremap <leader>z <cmd>wa \| bufdo bw \| suspend<cr>
     " close this buffer with <leader>x
     nnoremap <leader>x <cmd>bw<cr>
