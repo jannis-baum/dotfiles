@@ -30,8 +30,10 @@ noremap k gk
 noremap gj j
 noremap gk k
 " beg/end
-noremap M ^
-noremap m $
+noremap H ^
+noremap L $
+noremap <leader>j L
+noremap <leader>k H
 " splits
 nnoremap <down> <c-w><c-j>
 nnoremap <up> <c-w><c-k>
