@@ -80,3 +80,16 @@ require('mini.diff').setup({
         goto_next = 'm',
     }
 })
+
+local splitjoin = require('mini.splitjoin')
+splitjoin.setup({
+    mappings = {
+        toggle = 'gs'
+    },
+    join = {
+        hooks_post = {
+            -- add spaces inside of curly braces when joining
+            splitjoin.gen_hook.pad_brackets({ brackets = { '%b{}' } })
+        }
+    }
+})

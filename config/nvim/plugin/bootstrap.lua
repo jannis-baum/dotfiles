@@ -26,6 +26,7 @@ bootstrap_paq {
     -- editing
     { 'echasnovski/mini.pairs', branch = 'main' }, -- we use main here because stable still overwrites user <cr> mappings
     'tpope/vim-commentary',
+    { 'echasnovski/mini.splitjoin', branch = 'stable' },
     -- moves
     'justinmk/vim-sneak',
     { 'echasnovski/mini.ai', branch = 'stable' },
