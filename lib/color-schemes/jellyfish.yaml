@@ -158,7 +158,7 @@ vim:
       deco: undercurl
       ul: Hint
     # ui -----------------------------------------------------------------------
-    - set: [SignColumn, GitGutterAdd, GitGutterChange, GitGutterDelete]
+    - set: [SignColumn, MiniDiffSignAdd, MiniDiffSignChange, MiniDiffSignDelete]
       fg: Gray5
     - set: [StatusLineNC, StatusLineTermNC]
       fg: Gray3

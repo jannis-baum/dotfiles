@@ -69,3 +69,14 @@ require('mini.operators').setup({
 })
 
 require('mini.pairs').setup()
+
+require('mini.diff').setup({
+    view = {
+        signs = { add = '+', change = '~', delete = '-' },
+        priority = 5
+    },
+    mappings = {
+        goto_prev = 'M',
+        goto_next = 'm',
+    }
+})

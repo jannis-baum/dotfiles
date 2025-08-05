@@ -31,11 +31,11 @@ bootstrap_paq {
     { 'echasnovski/mini.ai', branch = 'stable' },
     { 'echasnovski/mini.surround', branch = 'stable' },
     { 'echasnovski/mini.operators', branch = 'stable' },
+    { 'echasnovski/mini.diff', branch = 'stable' },
     -- ui
     'nvim-focus/focus.nvim',
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     { 'echasnovski/mini.notify', branch = 'stable' },
-    'airblade/vim-gitgutter',
     -- misc
     'neovim/nvim-lspconfig',
     'tpope/vim-fugitive',
