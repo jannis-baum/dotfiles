@@ -1,6 +1,6 @@
 augroup RuffOnWrite
     autocmd!
-    autocmd BufWritePost *.py call s:RunRuffFixAndFormat(expand('%:p'))
+    autocmd BufWritePost * if &filetype == 'python' | call s:RunRuffFixAndFormat(expand('%:p')) | endif
 augroup END
 
 function! s:RunRuffFixAndFormat(filepath) abort
