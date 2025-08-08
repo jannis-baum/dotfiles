@@ -127,7 +127,7 @@ function gpu() {
     --cpus-per-task=40 \\
     --mem=80G \\
     --gpus=1 \\
-    --nodelist=gx \\
+    --constraint=ARCH:X86 \\
     --pty bash
 EOF
     } | _prepare_template --tty source
