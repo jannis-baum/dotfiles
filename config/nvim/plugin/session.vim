@@ -16,3 +16,14 @@ set directory=~/.cache/nvim/swap
 if !isdirectory($HOME."/.cache/nvim/swap")
   call mkdir($HOME."/.cache/nvim/swap", "p")
 endif
+
+" auto-write from @justinmk
+augroup AutoWrite
+    autocmd!
+    " normal & readable buffer, without modifying marks, update (write if
+    " changes), `++p` creates directory of file like mkdir -p
+    autocmd BufHidden,FocusLost,WinLeave,CursorHold *
+        \ if &buftype == '' && filereadable(expand('%:p')) |
+            \ silent lockmarks update ++p |
+        \ endif
+augroup END
