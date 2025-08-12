@@ -11,8 +11,8 @@ set nowritebackup
 
 " swap
 set updatetime=1000           " cursor hold, e.g. write to swap, clear cmd line
-set directory=~/.vim/swap//
+set directory=~/.cache/nvim/swap
 " create swap dir if it doesn't exist
-if !isdirectory($HOME."/.vim/swap")
-  call mkdir($HOME."/.vim/swap", "p")
+if !isdirectory($HOME."/.cache/nvim/swap")
+  call mkdir($HOME."/.cache/nvim/swap", "p")
 endif
