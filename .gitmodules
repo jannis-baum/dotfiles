@@ -73,3 +73,6 @@
 [submodule "home/.hammerspoon/spoons/showcase.spoon"]
 	path = home/.hammerspoon/spoons/showcase.spoon
 	url = https://github.com/jannis-baum/showcase.spoon.git
+[submodule "lib/keyboard"]
+	path = lib/keyboard
+	url = https://github.com/jannis-baum/keyboard

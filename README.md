@@ -4,7 +4,7 @@ Here is where I try to keep all configuration of all the tools I use. This is
 not intended to be used by anyone else in its entirety, but is nice to look at
 for reference.
 
-## [:sparkles: Reusable parts :sparkles:](https://github.com/stars/jannis-baum/lists/my-dotfiles)
+## [Reusable parts](https://github.com/stars/jannis-baum/lists/my-dotfiles)
 
 I try to keep all parts of my dotfiles that I think may be useful for others in
 their own repositories that you can find in [my dotfiles
@@ -30,9 +30,8 @@ dotfiles.
   dotfiles](https://github.com/jannis-baum/git.zsh-dotfiles.git)**.
 - [Karabiner Elements](https://karabiner-elements.pqrs.org) with
   [karabiner.ts](https://github.com/evan-liu/karabiner.ts) to remap my keyboard.
-  See **[keymaps.ts](lib/karabiner-config/src/keymap.ts)** for the easily
-  readable definitions and to get a rough idea of how I use my five column aka
-  "tiny" [Corne keyboard](https://github.com/foostan/crkbd).
+  See **[my keyboard repo](https://github.com/jannis-baum/keyboard)** for the easily
+  readable definitions and to get a rough idea of how I use my 36 key [Chocofi keyboard](https://github.com/pashutk/chocofi).
 - [kindaVim](https://kindavim.app) for vi-bindings **everywhere** in macOS
 - [Wooshy](https://wooshy.app) so I (almost) never need to use a mouse
 
