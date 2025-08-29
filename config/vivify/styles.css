@@ -25,3 +25,7 @@
         --syntax-markup-deleted-bg: #67060c;
     }
 }
+
+h2 {
+    break-before: page;
+}
