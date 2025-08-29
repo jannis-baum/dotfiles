@@ -10,5 +10,5 @@
 
 --context-separator=...
 
---pre=~/.config/rg/pre-pdf.sh
+--pre=/Users/jannisbaum/.config/rg/pre-pdf.sh
 --pre-glob=*.pdf

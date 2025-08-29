@@ -1,3 +1,3 @@
 #!/bin/sh
 
-pdftotext "$1" -
+exec pdftotext "$1" -
