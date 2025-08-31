@@ -29,7 +29,7 @@ function rcols() {
 function gclo() {
     [[ "$#" != "1" ]] && echo "Repo URL required" && return 1
     cd ~/_/dev/clones || return 1
-    git clone "$1"
+    git clone --recursive "$1"
     cd $(basename "$_" .git)
 }
 
