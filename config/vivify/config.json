@@ -4,5 +4,6 @@
     "dirListIgnore": ["~/.config/git/ignore-global", "ignore.txt"],
     "tocOptions": {
         "includeLevel": [2, 3]
-    }
+    },
+    "renderHTML": true
 }
