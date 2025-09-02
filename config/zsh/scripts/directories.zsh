@@ -29,6 +29,19 @@ alias ts="s --long --no-user --no-permissions --no-time --tree --group-directori
 alias ta="eza --long --no-user --no-permissions --no-filesize --no-time --git --tree --all --ignore-glob='.git|node_modules|.DS_Store' --group-directories-first"
 alias t="ta --git-ignore --level=5"
 
+# downloads
+function dl() {
+    eza \
+        --long --no-permissions --no-user \
+        --all --ignore-glob='.DS_Store' \
+        --time-style=relative --sort=time --reverse \
+        --color=always \
+        ~/Downloads \
+    | fzf \
+        --ansi \
+    | awk '{print substr($0, index($0, $4))}'
+}
+
 # make and change to directory
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
