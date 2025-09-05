@@ -36,6 +36,14 @@ sketchybar --add item cpu_busy right \
                label.color=0xfffc897e \
            --subscribe cpu_busy mouse.entered mouse.exited
 
+# left app indicator if no tabs
+sketchybar --add event tabs_updated
+sketchybar --add item front_app left \
+           --set front_app \
+                script="$PLUGIN_DIR/front_app.zsh" \
+                label.font=Menlo:Bold:14 \
+           --subscribe front_app front_app_switched tabs_updated
+
 # update all items
 sketchybar --update
 

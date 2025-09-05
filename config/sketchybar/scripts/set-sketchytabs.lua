@@ -127,6 +127,9 @@ local function main()
 
         line_num = line_num + 1
     end
+    list_extend(sketchy_args, {
+        '--trigger', 'tabs_updated', 'TAB_APP=' .. tab_app, 'N_TABS=' .. line_num - 1
+    })
 
     return run_and_wait("sketchybar", sketchy_args)
 end
