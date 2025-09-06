@@ -16,7 +16,7 @@ modules:
   - switcher:
       name: ""
       envOptions:
-        IGNORED_APPS: "net.kovidgoyal.kitty,tracesOf.Uebersicht"
+        IGNORED_APPS: "net.kovidgoyal.kitty,tracesOf.Uebersicht,com.apple.finder"
   - app-search:
       maxResults: 3
 
