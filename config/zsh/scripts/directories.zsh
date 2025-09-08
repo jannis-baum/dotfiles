@@ -46,17 +46,3 @@ function dl() {
 function mcd() {
     test -d "$1" || mkdir "$1" && cd "$1"
 }
-# list newest files with absolute paths for piping
-function sna() {
-    local count=1
-    local dir="."
-    [[ $# -eq 1 ]] && dir="$1"
-    [[ $# -eq 2 ]] && count="$1" && dir="$2"
-
-    echo "$(\
-        SI_VIM_DISABLED=1
-        cd "$dir"; \
-        entries=$(eza --sort=oldest | head -n "$count"); \
-        echo ${(F)${(f)entries}:P})"
-}
-alias downl="sna ~/Downloads"
