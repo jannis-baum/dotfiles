@@ -1,4 +1,4 @@
-_sio_papers_path="$(realpath "$HOME/_/icloud/papers")"
+_sio_papers_dir="$(realpath "$HOME/_/icloud/papers")"
 _sio_app_path="/Applications/sioyek.app/Contents/MacOS/sioyek"
 
 function _sio_running() {
@@ -18,13 +18,37 @@ function sioyek() {
 }
 
 function sio() {
+    # get
     if [[ "$1" == "--get" ]]; then
         _sio_running || return 1
         local state="$(sioyek --execute-command get_state_json --wait-for-response --nofocus | tail -1)"
-        local fp="$(jq --raw-output '.[0].document_path' <<< "$state" | sed "s|^$_sio_papers_path/||")"
+        local fp="$(jq --raw-output '.[0].document_path' <<< "$state" | sed "s|^$_sio_papers_dir/||")"
         local page="$(jq --raw-output '.[0].page_number' <<< "$state")"
         local ruler="$(jq --raw-output '.[0].ruler_index' <<< "$state")"
         echo "$fp $page $ruler"
         return 0
     fi
+
+    # set
+    local fp state
+
+    # no args, pick with fzf fzf
+    [[ "$#" == 0 ]] && \
+        fp="$(fd --type file --base-directory "$_sio_papers_dir" '.*\.pdf' --color=always \
+            | fzf --ansi)"
+    # file, page & ruler
+    [[ "$#" -ge 1 ]] && fp="$1"
+    [[ "$#" -eq 2 ]] && state="'{\"page_number\":$2}'"
+    [[ "$#" -eq 3 ]] && state="'{\"page_number\":$2\,\"ruler_index\":$3}'"
+    # too many args
+    if [[ "$#" -ge 4 ]]; then
+        echo "usage: $0 [file [page_index [line_index]]]" >&2
+        exit 1
+    fi
+
+    # open file
+    [[ -n "$fp" ]] && sioyek "$_sio_papers_dir/$fp" &>/dev/null
+    # set state
+    [[ -n "$state" ]] && \
+        sioyek --execute-command set_state_json --execute-command-data "$state" &>/dev/null
 }
