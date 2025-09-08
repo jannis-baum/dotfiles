@@ -11,12 +11,14 @@ alias drag=~/Applications/drag.app/Contents/MacOS/drag
 # lazily launch sioyek PDF viewer
 function sioyek() {
     local sioyek_path="/Applications/sioyek.app/Contents/MacOS/sioyek"
-    local procs="$(ps aux)"
-    if [[ -n "$(grep "$sioyek_path" <<< "$procs")" ]]; then
-        "$sioyek_path" "$@"
-        return $?
-    fi
-    zsh -c "nohup \"$sioyek_path\" $@ &>/dev/null &"
+    while [[ -z "$(grep "$sioyek_path" <<< "$(ps aux)")" ]]; do;
+        if [[ -z "$_launched_sioyek" ]]; then
+            open -a sioyek
+            local _launched_sioyek=1
+        fi
+    done
+    "$sioyek_path" "$@"
+    return $?
 }
 
 function ej() {
