@@ -31,7 +31,7 @@ alias t="ta --git-ignore --level=5"
 
 # downloads
 function dl() {
-    eza \
+    local pick="$(eza \
         --long --no-permissions --no-user \
         --all --ignore-glob='.DS_Store' \
         --time-style=relative --sort=time --reverse \
@@ -39,7 +39,13 @@ function dl() {
         ~/Downloads \
     | fzf \
         --ansi \
-    | awk '{print substr($0, index($0, $4))}'
+        --multi \
+    | awk '{print substr($0, index($0, $4))}')"
+    if [[ -n "$pick" ]]; then
+        sed "s|^|$HOME/Downloads/|" <<< "$pick" \
+            | tr '\n' ' ' \
+            | sed 's/ $/\n/'
+    fi
 }
 
 # make and change to directory
