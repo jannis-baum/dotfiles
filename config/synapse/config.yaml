@@ -44,7 +44,7 @@ modules:
       sink:
         program:
           exec: zsh
-          args: ["-c", "open {{ caption }}; printf closePanel"]
+          args: ["-c", "open \"{{ caption }}\"; printf closePanel"]
   - pkill
   - timer
   - /inline/date-copy:
