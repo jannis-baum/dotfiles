@@ -18,6 +18,7 @@ modules:
       envOptions:
         IGNORED_APPS: "net.kovidgoyal.kitty,tracesOf.Uebersicht,com.apple.finder"
   - app-search:
+      trigger: (^..+)
       maxResults: 3
 
   - /native/controller:
@@ -35,7 +36,7 @@ modules:
   - safari-histmarks
   - /inline/zen-sketchytabs:
       name: Zen Tabs
-      trigger: (.+)
+      trigger: (^..+)
       source:
         program:
           exec: zsh
