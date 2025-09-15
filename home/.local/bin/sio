@@ -20,36 +20,68 @@ function sioyek() {
     return $?
 }
 
-# get
-if [[ "$1" == "--get" ]]; then
+function sio_help() {
+    cat <<EOF
+usage: sio [FILE [PAGE [LINE]]]
+
+Open given reference in Sioyek, pick with fzf if no reference is provided
+
+options:
+    -h, --help                print this help message and exit
+    -g, --get                 get the reference to the current position
+EOF
+}
+
+function sio_error() {
+    [[ -n "$1" ]] && echo "$1" >&2
+    sio_help
+    exit 1
+}
+
+function sio_get() {
+    [[ "$#" == "0" ]] || sio_error "Too many arguments"
     _sio_running || return 1
+
     local state="$(sioyek --execute-command get_state_json --wait-for-response --nofocus | tail -1)"
     local fp="$(jq --raw-output '.[0].document_path' <<< "$state" | sed "s|^$_sio_papers_dir/||")"
     local page="$(jq --raw-output '.[0].page_number' <<< "$state")"
     local ruler="$(jq --raw-output '.[0].ruler_index' <<< "$state")"
     echo "$fp $page $ruler"
     return 0
-fi
+}
 
-# set
-local fp state
+function sio_set() {
+    local fp state
 
-# no args, pick with fzf fzf
-[[ "$#" == 0 ]] && \
-    fp="$(fd --type file --base-directory "$_sio_papers_dir" '.*\.pdf' --color=always \
-        | fzf --ansi)"
-# file, page & ruler
-[[ "$#" -ge 1 ]] && fp="$1"
-[[ "$#" -eq 2 ]] && state="'{\"page_number\":$2}'"
-[[ "$#" -eq 3 ]] && state="'{\"page_number\":$2\,\"ruler_index\":$3}'"
-# too many args
-if [[ "$#" -ge 4 ]]; then
-    echo "usage: $0 [file [page_index [line_index]]]" >&2
-    exit 1
-fi
+    # no args, pick with fzf fzf
+    [[ "$#" == 0 ]] && \
+        fp="$(fd --type file --base-directory "$_sio_papers_dir" '.*\.pdf' --color=always \
+            | fzf --ansi)"
+    # file, page & ruler
+    [[ "$#" -ge 1 ]] && fp="$1"
+    [[ "$#" -eq 2 ]] && state="'{\"page_number\":$2}'"
+    [[ "$#" -eq 3 ]] && state="'{\"page_number\":$2\,\"ruler_index\":$3}'"
+    # too many args
+    [[ "$#" -ge 4 ]] && sio_error "Too many arguments"
 
-# open file
-[[ -n "$fp" ]] && sioyek "$_sio_papers_dir/$fp" &>/dev/null
-# set state
-[[ -n "$state" ]] && \
-    sioyek --execute-command set_state_json --execute-command-data "$state" &>/dev/null
+    # no file picked
+    [[ -z "$fp" ]] && return 1
+    # file doesn't exist
+    [[ -f "$_sio_papers_dir/$fp" ]] || sio_error "File \"$fp\" doesn't exist"
+    # open file
+    sioyek "$_sio_papers_dir/$fp" &>/dev/null
+    # set state
+    [[ -n "$state" ]] && \
+        sioyek --execute-command set_state_json --execute-command-data "$state" &>/dev/null
+}
+
+func=""
+case "$1" in
+    "-h" | "--help") func=sio_help;;
+    "-g" | "--get") func=sio_get;;
+    "-"*) func=sio_error
+esac
+
+[[ -z "$func" ]] && func=sio_set || shift
+"$func" $@
+exit $?
