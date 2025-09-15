@@ -19,15 +19,9 @@
 [submodule ".synapse/modules/safari-histmarks"]
 	path = config/synapse/modules/safari-histmarks
 	url = https://github.com/jannis-baum/synapse-safari-histmarks.git
-[submodule ".synapse/modules/safari-tabs"]
-	path = config/synapse/modules/safari-tabs
-	url = https://github.com/jannis-baum/synapse-safari-tabs.git
 [submodule ".synapse/modules/timer"]
 	path = config/synapse/modules/timer
 	url = https://github.com/jannis-baum/synapse-timer.git
-[submodule ".lib/markup-export"]
-	path = home/.lib/markup-export
-	url = https://github.com/jannis-baum/markup-export.git
 [submodule ".lib/nosync/Synapse"]
 	path = lib/Synapse
 	url = https://github.com/jannis-baum/synapse.git
