@@ -76,3 +76,6 @@
 [submodule "lib/keyboard"]
 	path = lib/keyboard
 	url = https://github.com/jannis-baum/keyboard
+[submodule "lib/masipalavi"]
+	path = lib/masipalavi
+	url = https://github.com/jannis-baum/masipalavi.git
