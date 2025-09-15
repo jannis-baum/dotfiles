@@ -43,3 +43,17 @@ vim.keymap.set('n', 'gx', function()
         original_gx()
     end
 end, { noremap = true, silent = true })
+
+-- insert sioyek ref
+vim.keymap.set('i', '<c-u>', function()
+    local ref = vim.system({ 'sio', '--get' }):wait().stdout:gsub('\n', '')
+    if ref == '' then return end
+
+    local text_to_insert = '[' .. ref .. ']'
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local line = vim.api.nvim_get_current_line()
+    local new_line = line:sub(1, col + 1) .. text_to_insert .. line:sub(col + 2)
+
+    vim.api.nvim_set_current_line(new_line)
+    vim.api.nvim_win_set_cursor(0, { row, col + #text_to_insert })
+end, { noremap = true, silent = true })
