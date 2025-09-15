@@ -8,19 +8,6 @@ alias stitch-jpegs="cat *.jpeg | ffmpeg -f image2pipe -vcodec mjpeg -i - -vcodec
 alias screenshot='screencapture -i'
 alias drag=~/Applications/drag.app/Contents/MacOS/drag
 
-# lazily launch sioyek PDF viewer
-function sioyek() {
-    local sioyek_path="/Applications/sioyek.app/Contents/MacOS/sioyek"
-    while [[ -z "$(grep "$sioyek_path" <<< "$(ps aux)")" ]]; do;
-        if [[ -z "$_launched_sioyek" ]]; then
-            open -a sioyek
-            local _launched_sioyek=1
-        fi
-    done
-    "$sioyek_path" "$@"
-    return $?
-}
-
 function ej() {
     while true; do
         local disk="$(ls /Volumes | grep LaCie | head -1)"
