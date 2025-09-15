@@ -27,13 +27,16 @@ usage: sio [FILE [PAGE [LINE]]]
 Open given reference in Sioyek, pick with fzf if no reference is provided
 
 options:
-    -h, --help                print this help message and exit
-    -g, --get                 get the reference to the current position
+    -h, --help         Print this help message and exit.
+    -g, --get          Get the reference to the current position.
+    -p, --process INPUT OUT_MD OUT_BIB
+                       Process the references in the given Markdown file and
+                       output Markdown with \\cite and .bib file.
 EOF
 }
 
 function sio_error() {
-    [[ -n "$1" ]] && echo "$1" >&2
+    [[ -n "$1" ]] && echo "$1\n" >&2
     sio_help
     exit 1
 }
@@ -75,10 +78,17 @@ function sio_set() {
         sioyek --execute-command set_state_json --execute-command-data "$state" &>/dev/null
 }
 
+function sio_process() {
+    [[ "$#" == "3" ]] || sio_error "Incorrect number of arguments"
+
+    sio_error "Not yet implemented"
+}
+
 func=""
 case "$1" in
     "-h" | "--help") func=sio_help;;
     "-g" | "--get") func=sio_get;;
+    "-p" | "--process") func=sio_process;;
     "-"*) func=sio_error
 esac
 
