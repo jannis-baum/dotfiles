@@ -30,6 +30,8 @@ endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=GetMarkdownFold(v:lnum)
 setlocal foldlevel=1
+" so i can write e.g. ref:fig-something and have it auto complete as a keyword
+setlocal iskeyword+=:,-
 
 " open empty vsps to get earlier soft line breaks
 function! s:WriteMode()
