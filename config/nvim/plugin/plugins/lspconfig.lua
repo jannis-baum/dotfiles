@@ -54,6 +54,8 @@ vim.lsp.enable('html')
 vim.lsp.enable('cssls')
 vim.lsp.enable('tailwindcss')
 
+vim.lsp.enable('marksman')
+
 -- below are language servers not installed because there is no brew package for
 -- them.
 --
