@@ -21,10 +21,19 @@ vim.keymap.set('i', '<down>', function()
     end
     -- else open pum without `noselect` so we already select the first match
     vim.opt.completeopt:remove('noselect')
-    -- reset to `noselect` after this completion
+    -- after completion has responded
     vim.api.nvim_create_autocmd('CompleteDone', {
         once = true,
-        callback = function() vim.opt.completeopt:append('noselect') end
+        callback = function()
+            local info = vim.fn.complete_info()
+            if info.items == nil or #info.items == 0 then
+                -- no results from LSP, fallback to keyword completion
+                local key = vim.api.nvim_replace_termcodes('<C-x><C-i>', true, false, true)
+                vim.api.nvim_feedkeys(key, 'n', false)
+            end
+            -- reset to `noselect`
+            vim.opt.completeopt:append('noselect')
+        end
     })
     -- open completion menu
     return '<C-x><C-o>'
