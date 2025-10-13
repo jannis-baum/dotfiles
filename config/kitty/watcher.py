@@ -116,7 +116,8 @@ def _refresh_widgets(boss: Boss) -> None:
             return f'{title}{suffix}' if is_active(tab) else title
 
         def get_line(tab) -> str:
-            if tab.get_exe_of_active_window().split('/')[-1] == 'ssh':
+            exe = tab.get_exe_of_active_window()
+            if exe and exe.split('/')[-1] == 'ssh':
                 title = get_remote_title(tab)
             else:
                 title = get_local_title(tab)
@@ -135,12 +136,5 @@ def _refresh_widgets(boss: Boss) -> None:
     p.stdin.write(result.encode())
     p.stdin.close()
 
-
-def on_cmd_startstop(boss: Boss, window: Window, data: dict[str, Any]) -> None:
-    _refresh_widgets(boss)
-
-def on_focus_change(boss: Boss, window: Window, data: dict[str, Any]) -> None:
-    _refresh_widgets(boss)
-
-def on_title_change(boss: Boss, window: Window, data: dict[str, Any]) -> None:
+def on_tab_bar_dirty(boss: Boss, window: Window, data: dict[str, Any]) -> None:
     _refresh_widgets(boss)
