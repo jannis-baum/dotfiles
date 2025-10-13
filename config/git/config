@@ -1,7 +1,7 @@
 [user]
 	name = Jannis Baum
-	email = jannis.baum@gmail.com
-	signingkey = 8246BB1321CDE045
+	email = plant.lull_1o@icloud.com
+	signingkey = 63EAFE70F851F60712090D5EE050024149BA1D64
 
 [core]
 	excludesfile = ~/.config/git/ignore-global
