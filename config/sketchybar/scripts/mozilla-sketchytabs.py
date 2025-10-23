@@ -12,6 +12,7 @@ import struct
 import subprocess
 import sys
 from urllib.parse import unquote
+from typing import Optional
 
 browser_name = 'Zen'
 
@@ -34,7 +35,7 @@ def reset_sketchytabs_dir():
     os.mkdir(sketchytabs_dir)
 
 # need index because tab['index'] is not consistent
-def write_image(tab, index) -> str | None:
+def write_image(tab, index) -> Optional[str]:
     if 'favIconUrl' not in tab: return
     try:
         header, encoded = tab['favIconUrl'].split(',')
