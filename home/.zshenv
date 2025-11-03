@@ -10,6 +10,7 @@ export FZF_DEFAULT_OPTS="
     --preview-window='right,60%,wrap,hidden,border-block'
     --prompt=' ╰➤ '
     --pointer='→'
+    --gutter=' '
     --bind 'right:toggle-preview'"
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
