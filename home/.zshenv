@@ -11,7 +11,11 @@ export FZF_DEFAULT_OPTS="
     --prompt=' ╰➤ '
     --pointer='→'
     --gutter=' '
-    --bind 'right:toggle-preview'"
+    --gutter-raw=' '
+    --bind 'right:toggle-preview'
+    --bind 'down:down-match'
+    --bind 'up:up-match'
+"
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 
