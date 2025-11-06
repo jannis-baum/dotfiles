@@ -12,6 +12,7 @@ export FZF_DEFAULT_OPTS="
     --pointer='→'
     --gutter=' '
     --gutter-raw=' '
+    --wrap-sign='↪'
     --bind 'right:toggle-preview'
     --bind 'down:down-match'
     --bind 'up:up-match'
