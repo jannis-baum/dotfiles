@@ -7,4 +7,4 @@ for f in glob($HOME . '/.config/zv/**/*.vim', 0, 1)
 endfor
 
 set runtimepath+=/opt/homebrew/opt/fzf
-set runtimepath+=~/.local/lib/masipalavi
+set runtimepath+=~/.local/lib/masipalavi/nvim

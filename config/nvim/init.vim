@@ -1,5 +1,4 @@
 set runtimepath^=~/.config/nvim
-set runtimepath+=/opt/homebrew/opt/fzf
 let &packpath = &runtimepath
 
 set clipboard=unnamed
