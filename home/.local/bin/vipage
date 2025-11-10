@@ -11,3 +11,5 @@ exec /opt/homebrew/bin/nvim \
     -R -M \
     -c "autocmd TermClose * call cursor($cur_pos)" \
     -c "silent! term cat $temp_file"
+
+rm "$temp_file"
