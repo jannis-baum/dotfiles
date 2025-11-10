@@ -3,7 +3,7 @@
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
 # helper to re-read history file to get shared commands from other sessions
-up-line-or-history-reread() {
+function up-line-or-history-reread() {
         [[ -z $BUFFER ]] && fc -R $HISTFILE
         zle up-line-or-beginning-search
 }
@@ -12,7 +12,7 @@ bindkey  -M vicmd k up-line-or-history-reread
 # down
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
-down-line-or-history-reread() {
+function down-line-or-history-reread() {
         [[ -z $BUFFER ]] && fc -R $HISTFILE
         zle down-line-or-beginning-search
 }

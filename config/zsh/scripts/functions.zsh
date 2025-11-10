@@ -10,6 +10,7 @@ function passn() {
             | pbcopy
 	done
 }
+
 # quick look
 function ql() {
     if ! test -e "$1"; then
@@ -19,12 +20,22 @@ function ql() {
     qlmanage -p "$1" >& /dev/null
 }
 
+# eject disks
+function ej() {
+    while true; do
+        local disk="$(ls /Volumes | grep LaCie | head -1)"
+        [[ -z "$disk" ]] && break
+        diskutil eject "$disk"
+    done
+}
+
 # reload color schemes
 function rcols() {
     make -C ~/_/dev/dotfiles/lib/color-schemes load
     source $ZDOTDIR/.zshrc
     _si_vim_isrunning && _si_vim_cmd ReloadConfig
 }
+
 # clone repo in clones dir & cd there
 function gclo() {
     [[ "$#" != "1" ]] && echo "Repo URL required" && return 1
@@ -49,6 +60,7 @@ function rmd() {
     [[ -z "$2" ]] && open "$out"
 }
 
+# new python executable
 function pynew() {
     if test -e "$1"; then
         echo "File exists" >&2
