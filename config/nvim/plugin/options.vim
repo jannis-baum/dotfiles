@@ -21,6 +21,18 @@ set showbreak=↪\
 set listchars=tab:⇥\ ,trail:·
 set list
 
+" wildmenu (commandline)
+set wildoptions+=fuzzy
+set wildignorecase
+cnoremap <Up> <C-p>
+cnoremap <Down> <C-n>
+
 " misc
 " move cursor beyond line end in visual block
 set virtualedit=block
+" system clipboard
+set clipboard=unnamed
+" timeout for ANSI sequences to complete
+set ttimeoutlen=5
+" consider other tabs when switching to existing buffer
+set switchbuf=usetab
