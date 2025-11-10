@@ -234,9 +234,10 @@ custom:
         export LS_COLORS="fi=1;38;5;{{ Text }}:di=3;38;5;{{ Comment.fg }}:ex=4;38;5;{{ Special.fg }}"
         export EZA_COLORS="sn=38;5;{{ Main }}:sb=1;38;5;{{ Main.fg }}:da=38;5;{{ Statement.fg }}:lp=3;38;5;{{ Comment.fg }}"
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
-            --color='fg+:{{ Text }}:underline,bg+:-1'
+            --color='fg+:{{ Text }},bg+:{{ Pmenu.bg }}'
             --color='hl:{{ Statement.fg }},hl+:{{ Main }}'
             --color='prompt:{{ Main }}:bold,query:regular:italic'
             --color='marker:{{ Main }},pointer:{{ Main }},spinner:{{ Main }},info:{{ Statement.fg }}'
+            --color='border:{{ VertSplit.fg }}'
             --color='preview-bg:{{ NormalFloat.bg }},preview-border:{{ NormalFloat.bg }}'
         "

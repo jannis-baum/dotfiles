@@ -6,16 +6,20 @@ export MANPAGER="col -b | nvim -c 'set ft=man nomod nolist ignorecase' -"
 
 # fzf
 export FZF_DEFAULT_OPTS="
-    --height 60% --reverse --no-info --cycle
+    --height=60%
+    --reverse
+    --no-info
+    --cycle
+    --highlight-line
     --preview-window='right,60%,wrap,hidden,border-block'
     --prompt=' ╰➤ '
-    --pointer='→'
+    --pointer=''
     --gutter=' '
     --gutter-raw=' '
     --wrap-sign='↪'
-    --bind 'right:toggle-preview'
-    --bind 'down:down-match'
-    --bind 'up:up-match'
+    --bind='right:toggle-preview'
+    --bind='down:down-match'
+    --bind='up:up-match'
 "
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"

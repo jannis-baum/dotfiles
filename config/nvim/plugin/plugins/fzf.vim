@@ -4,7 +4,6 @@ let g:fzf_layout = { 'window': {
 \} }
 let g:fzf_colors = {
     \ 'bg': ['bg', 'NormalFloat'],
-    \ 'bg+': ['bg', 'NormalFloat'],
     \ 'gutter': ['bg', 'NormalFloat'],
 \}
 
