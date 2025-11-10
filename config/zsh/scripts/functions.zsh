@@ -32,8 +32,9 @@ function ej() {
 # reload color schemes
 function rcols() {
     make -C ~/_/dev/dotfiles/lib/color-schemes load
+    source $HOME/.zshenv
     source $ZDOTDIR/.zshrc
-    _si_vim_isrunning && _si_vim_cmd ReloadConfig
+    _si_vim_cmd ReloadConfig
 }
 
 # clone repo in clones dir & cd there
