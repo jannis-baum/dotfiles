@@ -241,3 +241,115 @@ custom:
             --color='border:{{ VertSplit.fg }}'
             --color='preview-bg:{{ NormalFloat.bg }},preview-border:{{ NormalFloat.bg }}'
         "
+    - destination: '~/.config/git/_colors'
+      # default git colors taken from: https://gist.github.com/jannis-baum/b01c9ea9c06fd2415780114de9a21c2a
+      # on those colors I run:
+      #
+      # ```
+      # cat _git-default-colors.ini  \
+      #   | sed -n -E 's/^.*= ([a-z ]+)$/\1/p' \
+      #   | sed -E -e 's/ ?bold ?//' -e 's/ ?dim ?//' -e 's/ ?normal ?//' -e 's/ ?italic ?//' -e 's/ ?reverse ?//' \
+      #   | sort -u
+      # ```
+      #
+      # which gives me all the colors used in the default config:
+      #
+      # ```
+      # blue
+      # cyan
+      # green
+      # magenta
+      # red
+      # yellow
+      # ```
+      #
+      # I then assign new colors to replace them, keeping the structure the
+      # same as the default, and use that as the color scheme:
+      #
+      # ```
+      # s/blue/{{ Type.fg }}/g
+      # s/cyan/{{ Constant.fg }}/g
+      # s/green/{{ Statement.fg }}/g
+      # s/magenta/{{ Function.fg }}/g
+      # s/red/{{ String.fg }}/g
+      # s/yellow/{{ Main }}/g
+      # ```
+      content: |
+        [color.advice]
+            # Color for advice/hint messages
+            hint = {{ Main }}
+        [color.branch]
+            # Colors for git branch output
+            current = {{ Statement.fg }}
+            local = normal
+            remote = {{ String.fg }}
+            upstream = {{ Type.fg }}
+            plain = normal
+            worktree = {{ Constant.fg }}
+        [color.decorate]
+            # Colors for ref decorations in git log
+            branch = bold {{ Statement.fg }}
+            remoteBranch = bold {{ String.fg }}
+            tag = bold {{ Main }}
+            stash = bold {{ Function.fg }}
+            HEAD = bold {{ Constant.fg }}
+            grafted = bold {{ Type.fg }}
+        [color.diff]
+            # Colors for git diff output
+            context = normal
+            meta = bold
+            frag = {{ Constant.fg }}
+            func = normal
+            old = {{ String.fg }}
+            new = {{ Statement.fg }}
+            commit = {{ Main }}
+            whitespace = {{ String.fg }} reverse
+            # Colors for moved line detection
+            oldMoved = bold {{ Function.fg }}
+            oldMovedAlternative = bold {{ Type.fg }}
+            oldMovedDimmed = dim
+            oldMovedAlternativeDimmed = dim italic
+            newMoved = bold {{ Constant.fg }}
+            newMovedAlternative = bold {{ Main }}
+            newMovedDimmed = dim
+            newMovedAlternativeDimmed = dim italic
+            # Dimmed variants
+            contextDimmed = dim
+            oldDimmed = dim {{ String.fg }}
+            newDimmed = dim {{ Statement.fg }}
+            # Bold variants
+            contextBold = bold
+            oldBold = bold {{ String.fg }}
+            newBold = bold {{ Statement.fg }}
+        [color.grep]
+            # Colors for git grep output
+            context =
+            filename = {{ Function.fg }}
+            function =
+            lineNumber = {{ Statement.fg }}
+            match = bold {{ String.fg }}
+            matchContext = bold {{ String.fg }}
+            matchSelected = bold {{ String.fg }}
+            selected =
+            separator = {{ Constant.fg }}
+        [color.interactive]
+            # Colors for interactive commands (git add -i, git clean -i)
+            prompt = bold {{ Type.fg }}
+            header = bold
+            help = bold {{ String.fg }}
+            error = bold {{ String.fg }}
+        [color.push]
+            # Colors for git push output
+            error = {{ String.fg }}
+        [color.status]
+            # Colors for git status output
+            header = normal
+            added = {{ Statement.fg }}
+            updated = {{ Statement.fg }}
+            changed = {{ String.fg }}
+            untracked = {{ String.fg }}
+            noBranch = {{ String.fg }}
+            unmerged = {{ String.fg }}
+            localBranch = {{ Statement.fg }}
+            remoteBranch = {{ String.fg }}
+            branch =

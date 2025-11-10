@@ -1,3 +1,6 @@
+[include]
+    path = ./_colors
+
 [user]
 	name = Jannis Baum
 	email = plant.lull_1o@icloud.com
