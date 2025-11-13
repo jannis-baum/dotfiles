@@ -7,3 +7,4 @@ alias stitch-jpegs="cat *.jpeg | ffmpeg -f image2pipe -vcodec mjpeg -i - -vcodec
 alias screenshot='screencapture -i'
 alias drag=~/Applications/drag.app/Contents/MacOS/drag
 alias q="cd; c"
+alias todos="rgi '"'^\s*- \[ \]'"'"
