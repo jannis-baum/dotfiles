@@ -2,8 +2,15 @@
 
 case "$SENDER" in
     front_app_switched)
-        front_app="$([[ "$INFO" == "Finder" ]] && echo "" || echo "$INFO")"
-        if sketchybar --query "APP-$front_app-1" &>/dev/null; then
+        case "$INFO" in
+            Finder)
+                front_app="";;
+            sioyek)
+                front_app="$(~/.local/bin/masi --get | cut -d' ' -f1)";;
+            *)
+                front_app="$INFO";;
+        esac
+        if sketchybar --query "APP-$INFO-1" &>/dev/null; then
             sketchybar --set "$NAME" drawing=off
         else
             sketchybar --set "$NAME" drawing=on label="$front_app"
