@@ -3,6 +3,7 @@ hotkey: cmd+f7
 
 PATH:
   - /opt/homebrew/bin
+  - ~/.local/bin
 
 panel:
   keepCentered: true
@@ -67,4 +68,26 @@ modules:
             - -c
             - |
               printf {{ title }} | pbcopy && printf closePanel
+      defaultSymbol: 􀉉 
+  - /inline/viclip:
+      name: ""
+      trigger: "^cp (.*)"
+      suppressOthers: true
+      isSearchDisabled: true
+      reloadsOnChange: false
+      source:
+        program:
+          exec: zsh
+          args:
+            - -c
+            - |
+              echo '[{ "title": "Edit clipboard" }]'
+      sink:
+        program:
+          exec: zsh
+          args:
+            - -c
+            - |
+              viclip-tab
+              printf closePanel
       defaultSymbol: 􀉃
