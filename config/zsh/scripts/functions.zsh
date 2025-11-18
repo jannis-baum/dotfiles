@@ -167,3 +167,12 @@ function gif-from-images() {
 
     ffmpeg -f concat -safe 0 -i "$frames_file" -i "$palette_file" -lavfi "fps=30 [x]; [x][1:v] paletteuse" -loop 0 "$output"
 }
+
+function cop() {
+    local tmp_dir="$(mktemp --directory)"
+    [[ $# -gt 0 ]] && cp $@ "$tmp_dir"
+    cd "$tmp_dir"
+    copilot
+    cd -1
+    rm -r "$tmp_dir"
+}
