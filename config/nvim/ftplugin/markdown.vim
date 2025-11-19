@@ -35,7 +35,7 @@ setlocal iskeyword+=:,-
 
 " open empty vsps to get earlier soft line breaks
 function! s:WriteMode()
-    let l:ideal_width = 100
+    let l:ideal_width = 120
     if exists('b:has_write_mode') || l:ideal_width >= &columns
         return
     endif
