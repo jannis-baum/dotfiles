@@ -1,6 +1,7 @@
 {
     "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd"],
     "styles": "styles.css",
+    "scripts": "script.js",
     "dirListIgnore": ["~/.config/git/ignore-global", "ignore.txt"],
     "tocOptions": {
         "includeLevel": [2, 3]
