@@ -1,4 +1,3 @@
     --container-writable \
     --container-mount-home \
-    --container-mounts=/sc/projects/sci-renard/igem2025/:/sc/projects/sci-renard/igem2025/ \
     --container-workdir="$(pwd)" \

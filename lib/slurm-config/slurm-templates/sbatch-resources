@@ -1,8 +1,7 @@
 
 # MARK: resources
-#SBATCH --partition=cpu
+#SBATCH --partition=cpu-batch
 # #SBATCH --constraint=ARCH:X86
-# #SBATCH --nodelist=
 # #SBATCH --gpus=
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=128G
