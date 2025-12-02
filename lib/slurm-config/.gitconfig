@@ -1,0 +1,8 @@
+[pull]
+	rebase = true
+[user]
+	email = plant.lull_1o@icloud.com
+
+# convert HTTPS to SSH, e.g. for git submodules
+[url "git@github.com:"]
+	insteadOf = https://github.com/
