@@ -8,7 +8,7 @@ export PATH=$(tr -d ' ' <<<"\
     $HOME/.local/bin\
     :/opt/homebrew/bin\
     :/Library/TeX/texbin\
-    :/Applications/Postgres.app/Contents/Versions/latest/bin\
+    :/opt/homebrew/opt/postgresql@17/bin\
     :$HOME/.flutter/bin\
     :$HOME/.pub-cache/bin\
     :$PATH
