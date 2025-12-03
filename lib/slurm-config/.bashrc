@@ -124,8 +124,8 @@ function gpu() {
         cat "$_template_dir/srun-container"
         cat <<EOF
     --partition=gpu-interactive \\
-    --cpus-per-task=40 \\
-    --mem=80G \\
+    --cpus-per-task=32 \\
+    --mem=128G \\
     --gpus=1 \\
     --constraint=ARCH:X86 \\
     --pty bash
@@ -140,8 +140,8 @@ function cpu() {
         cat "$_template_dir/srun-container"
         cat <<EOF
     --partition=cpu-interactive \\
-    --cpus-per-task=40 \\
-    --mem=80G \\
+    --cpus-per-task=4 \\
+    --mem=8G \\
     --pty bash
 EOF
     } | _prepare_template --tty source
