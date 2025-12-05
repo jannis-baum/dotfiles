@@ -78,6 +78,12 @@ function SelectSymbol()
             '--delimiter', ':',
             '--with-nth', '3..',
             '--ansi',
+            '--raw',
+            -- (n)vim doesn't suppport dimmed colors
+            --   https://github.com/vim/vim/issues/8269
+            --   https://github.com/junegunn/fzf/issues/4623
+            -- so we strip ANSI and set to gray instead
+            '--color=nomatch:strip:gray',
         },
         sink = fzf_sink
     })
