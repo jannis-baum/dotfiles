@@ -125,6 +125,10 @@ vim:
       fg: { dark: '#fc897e', light: '#ea493a' }
     - set: [Number]
       fg: { dark: '#ffac8f', light: '#ce7e61' }
+      # set to text explicitly to overwrite base color in python string
+      # interpolation
+    - set: [Variable, '@variable', Operator, Delimiter]
+      fg: Text
     # language
     - set: [Statement, Preproc, Keyword]
       fg: { dark: '#afd7ff', light: '#3487db' }
@@ -216,8 +220,12 @@ text-mate:
       from: String
     - set: [constant.numeric]
       from: Number
-    - set: [constant.language, constant.other, support.constant, variable, variable.parameter, support.other.variable]
+    - set: [constant.language, constant.other, support.constant]
       from: Constant
+    - set: [variable, variable.parameter, support.other.variable]
+      from: Variable
+    - set: [operator]
+      from: Operator
     - set: [keyword]
       from: Statement
     - set: [storage.type, storage, support.type]
