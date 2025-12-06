@@ -127,6 +127,8 @@ vim.keymap.set('n', '<leader>d', function()
             '--delimiter', ':',
             '--with-nth', '4..',
             '--ansi',
+            '--wrap',
+            '--wrap-sign=  ',
         },
         sink = function(line)
             local bufnr, row, column = string.match(line, '([^:]+):([^:]+):([^:]+)')
