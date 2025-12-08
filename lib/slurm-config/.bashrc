@@ -30,14 +30,14 @@ export LS_COLORS="fi=1;38;5;242:di=3;38;5;246:ex=4;38;5;182"
 PS1="\e[2m\h:\w\e[22m\n\[\e[38;5;210m\]\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\[\e[0m\] » "
 
 # auto add ssh key
-function setup_ssh_key() {
-    local ssh_key="$HOME/.ssh/id_ed25519_github"
-    if ! ssh-add "$ssh_key"; then
-        eval "$(ssh-agent -s)" && ssh-add "$ssh_key"
+function _setup_ssh_key() {
+    if [[ -z "$SSH_AGENT_PID" ]] || ! ps -p $SSH_AGENT_PID; then
+        eval "$(ssh-agent -s)"
     fi
+    ssh-add "$HOME/.ssh/id_ed25519_github"
 }
-setup_ssh_key &>/dev/null
-unset -f setup_ssh_key
+_setup_ssh_key &>/dev/null
+unset -f _setup_ssh_key
 
 # SLURM-related things
 cluster_addr="hpc.sci.hpi.de"
