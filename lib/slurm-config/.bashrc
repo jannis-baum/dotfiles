@@ -172,6 +172,7 @@ EOF
         cat "$_template_dir/sbatch-resources"
         cat <<EOF
 
+export PYTHONUNBUFFERED=1
 cd $(pwd -P)
 EOF
     } | _prepare_template sbatch
@@ -195,6 +196,7 @@ EOF
         cat "$_template_dir/sbatch-resources"
         cat <<EOF
 
+export PYTHONUNBUFFERED=1
 cd $(pwd -P)
 uv run jupyviv --log INFO agent python
 EOF
