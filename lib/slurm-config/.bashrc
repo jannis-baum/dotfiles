@@ -162,8 +162,8 @@ function sb() {
         cat "$_template_dir/sbatch-header"
         cat <<EOF
 #SBATCH --job-name=generic
-#SBATCH --output=/dev/null
-#SBATCH --error=/dev/null
+#SBATCH --output=$HOME/.cache/generic-logs/%j
+#SBATCH --error=$HOME/.cache/generic-logs/%j
 
 EOF
         cat "$_template_dir/sbatch-bionemo"
