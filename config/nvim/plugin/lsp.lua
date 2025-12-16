@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- sensible menu config
-vim.cmd('set completeopt+=menuone,noselect,popup,fuzzy')
+vim.cmd('set completeopt+=menuone,noselect,popup')
 
 -- open completion with <down> key if not open, else select next
 vim.keymap.set('i', '<down>', function()
