@@ -21,7 +21,7 @@ actions=( \
     ['^config/nvim/']="_si_vim_cmd ReloadConfig" \
     ['^config/zv/']="_si_vim_cmd ReloadConfig && source $ZDOTDIR/.zshrc" \
     ['^config/synapse']="_restart_synapse" \
-    ['^config/synapse/modules/control-center$']="open -g hammerspoon://reloadConfig" \
-    ['^home/\.hammerspoon/']="open -g hammerspoon://reloadConfig" \
+    ['^config/synapse/modules/control-center$']="open -g hammerspoon://reload-config" \
+    ['^home/\.hammerspoon/']="open -g hammerspoon://reload-config" \
     ['^config/sketchybar/']="pkill sketchybar" \
 )

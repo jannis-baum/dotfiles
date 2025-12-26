@@ -52,7 +52,7 @@ local function set_pos(window, target)
     end
 end
 
-hs.urlevent.bind('moveWindow', function(eventName, params)
+hs.urlevent.bind('move-window', function(eventName, params)
     local window = hs.window.focusedWindow()
     if window == nil then return end
     ax_enhanced_workaround(window:application(), function()

@@ -1,7 +1,7 @@
 local e = {}
 
 -- reload config ---------------------------------------------------------------
-hs.urlevent.bind("reloadConfig", function(eventName, params)
+hs.urlevent.bind("reload-config", function(eventName, params)
     hs.reload()
 end)
 
@@ -46,7 +46,7 @@ e.setupKarabinerDNs('WooshyInputDidAppear', 'WooshyInputDidDisappear', 'inWooshy
 e.setupKarabinerDNs('ScrollaDidEngage', 'ScrollaDidDisengage', 'inScrolla')
 
 -- wooshy ----------------------------------------------------------------------
-hs.urlevent.bind('showMenubar', function()
+hs.urlevent.bind('show-menubar', function()
     pos = hs.mouse.absolutePosition()
     event = hs.eventtap.event.newEvent()
     event:setType(hs.eventtap.event.types.mouseMoved)
@@ -54,7 +54,7 @@ hs.urlevent.bind('showMenubar', function()
     event:post()
 end)
 
-hs.urlevent.bind('hideMenubar', function()
+hs.urlevent.bind('hide-menubar', function()
     pos = hs.mouse.absolutePosition()
     if pos.y > 24 then return end
 
