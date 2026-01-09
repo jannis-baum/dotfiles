@@ -20,6 +20,14 @@ function ql() {
     qlmanage -p "$1" >& /dev/null
 }
 
+function trm() {
+    if [[ "$#" = 0 ]]; then
+        open ~/.Trash
+        return 0
+    fi
+    trash $@
+}
+
 # eject disks
 function ej() {
     while true; do
