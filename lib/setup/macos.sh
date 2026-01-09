@@ -44,8 +44,8 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 # don't show dashboard as a space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-# remove the auto-hiding dock delay
-defaults write com.apple.dock autohide-delay -float 0
+# make dock take long enough to auto-unhide to basically disable it
+defaults write com.apple.dock autohide-delay -float 9999
 # remove the animation when hiding/showing the dock
 defaults write com.apple.dock autohide-time-modifier -float 0
 # automatically hide and show the dock
