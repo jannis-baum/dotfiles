@@ -53,8 +53,8 @@ defaults write com.apple.dock autohide -bool true
 # don’t show recent applications in dock
 defaults write com.apple.dock show-recents -bool false
 
-# automatically hide and show the menu bar
-defaults write NSGlobalDomain _HIHideMenuBar -bool true
+# automatically hide and show the menu bar (disabled because sketchybar covers it anyways)
+# defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
 # disable shadow in window screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
