@@ -1,4 +1,5 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
+SCRIPT_DIR="$CONFIG_DIR/scripts"
 
 # bar appearance
 bar=(
@@ -28,10 +29,11 @@ sketchybar --default "${default[@]}"
 sketchybar --add item clock right \
            --set clock update_freq=1 script="$PLUGIN_DIR/clock.zsh" \
            --subscribe clock mouse.entered mouse.exited \
-           --set clock click_script="$SCRIPT_DIR/hide-briefly.zsh"
+           --set clock click_script="$SCRIPT_DIR/show-control-center.zsh"
 sketchybar --add item battery right \
            --set battery update_freq=10 script="$PLUGIN_DIR/battery.zsh" \
-           --subscribe battery mouse.entered mouse.exited power_source_change
+           --subscribe battery mouse.entered mouse.exited power_source_change \
+           --set battery click_script="$SCRIPT_DIR/hide-briefly.zsh"
 sketchybar --add item cpu_busy right \
            --set cpu_busy update_freq=1 script="$PLUGIN_DIR/cpu-busy.zsh" \
                label.color=0xfffc897e \
@@ -49,4 +51,4 @@ sketchybar --add item front_app left \
 sketchybar --update
 
 # init sketchytabs
-$CONFIG_DIR/scripts/init-sketchytabs.zsh
+$SCRIPT_DIR/init-sketchytabs.zsh
