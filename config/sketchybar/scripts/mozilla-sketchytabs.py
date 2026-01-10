@@ -17,13 +17,23 @@ from typing import Optional
 browser_name = 'Zen'
 
 # read a message from stdin and decode it.
-def getMessage():
-    rawLength = sys.stdin.buffer.read(4)
-    if len(rawLength) == 0:
+def get_message():
+    raw_length = sys.stdin.buffer.read(4)
+    if len(raw_length) == 0:
         sys.exit(0)
-    messageLength = struct.unpack('@I', rawLength)[0]
-    message = sys.stdin.buffer.read(messageLength).decode('utf-8')
+    message_length = struct.unpack('@I', raw_length)[0]
+    message = sys.stdin.buffer.read(message_length).decode('utf-8')
     return json.loads(message)
+
+# send an encoded message to stdout
+def send_message(content):
+    # specify separators (',', ':') to eliminate whitespace and get most
+    # compact representation because browser rejects messages > 1 MB
+    message = json.dumps(content, separators=(',', ':')).encode('utf-8')
+    length = struct.pack('@I', len(message))
+    sys.stdout.buffer.write(length)
+    sys.stdout.buffer.write(message)
+    sys.stdout.buffer.flush()
 
 def get_line(tab, image_path):
     return f'{"1" if tab["active"] else ""}:{image_path}:{tab["title"]}'
@@ -58,7 +68,7 @@ def write_image(tab, index) -> Optional[str]:
         pass
 
 if __name__ == '__main__':
-    tabs = getMessage()
+    tabs = get_message()
     reset_sketchytabs_dir()
     icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
     lines = [get_line(tab, icon_path) for (tab, icon_path) in zip(tabs, icon_paths)]
