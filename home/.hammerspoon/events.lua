@@ -20,6 +20,23 @@ e.appWatcher = hs.application.watcher.new(function(name, eventType, app)
 end)
 e.appWatcher:start()
 
+-- synapse hot corner ----------------------------------------------------------
+local corner_active = false
+local corner_area = 8
+e.mouseWatcher = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, function(event)
+    local screen_size = hs.mouse.getCurrentScreen():fullFrame()
+    local location = event:location()
+    if location.x >= screen_size.w - corner_area and location.y >= screen_size.h - corner_area then
+        if not corner_active then
+            corner_active = true
+            hs.execute([[open -g "synapse://openPanel"]])
+        end
+    else
+        corner_active = false
+    end
+end)
+e.mouseWatcher:start()
+
 -- distributed notifications ---------------------------------------------------
 e.dnWatchers = {}
 function e.setupDNWatcher(dn, callback)
