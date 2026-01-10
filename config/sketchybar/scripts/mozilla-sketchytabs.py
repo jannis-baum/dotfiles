@@ -68,22 +68,23 @@ def write_image(tab, index) -> Optional[str]:
         pass
 
 if __name__ == '__main__':
-    tabs = get_message()
-    reset_sketchytabs_dir()
-    icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
-    lines = [get_line(tab, icon_path) for (tab, icon_path) in zip(tabs, icon_paths)]
+    while True:
+        tabs = get_message()
+        reset_sketchytabs_dir()
+        icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
+        lines = [get_line(tab, icon_path) for (tab, icon_path) in zip(tabs, icon_paths)]
 
-    # tab info for Synapse
-    with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
-        json.dump([{
-            'title': tab['title'], 'caption': tab['url'], 'iconPath': icon_paths[index]
-        } for index, tab in enumerate(tabs)], fp)
+        # tab info for Synapse
+        with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
+            json.dump([{
+                'title': tab['title'], 'caption': tab['url'], 'iconPath': icon_paths[index]
+            } for index, tab in enumerate(tabs)], fp)
 
-    fixed_env = os.environ.copy()
-    fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
-    subprocess.run(
-        ['/opt/homebrew/bin/luajit', os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.lua'), browser_name],
-        input='\n'.join(lines) + '\n',
-        text=True,
-        env=fixed_env
-    )
+        fixed_env = os.environ.copy()
+        fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
+        subprocess.run(
+            ['/opt/homebrew/bin/luajit', os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.lua'), browser_name],
+            input='\n'.join(lines) + '\n',
+            text=True,
+            env=fixed_env
+        )
