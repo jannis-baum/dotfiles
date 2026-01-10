@@ -4,17 +4,21 @@
 # rather than text, mode.
 
 import base64
+import http.server
 import json
 import mimetypes
 import os
 import shutil
+import socketserver
 import struct
 import subprocess
 import sys
-from urllib.parse import unquote
+import threading
 from typing import Optional
+from urllib.parse import unquote, urlparse, parse_qs
 
 browser_name = 'Zen'
+port = 11912
 
 # read a message from stdin and decode it.
 def get_message():
@@ -35,39 +39,39 @@ def send_message(content):
     sys.stdout.buffer.write(message)
     sys.stdout.buffer.flush()
 
-def get_line(tab, image_path):
-    return f'{"1" if tab["active"] else ""}:{image_path}:{tab["title"]}'
+def listen_to_updates():
+    def get_line(tab, image_path):
+        return f'{"1" if tab["active"] else ""}:{image_path}:{tab["title"]}'
 
-sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
-def reset_sketchytabs_dir():
-    if os.path.exists(sketchytabs_dir):
-        shutil.rmtree(sketchytabs_dir)
-    os.mkdir(sketchytabs_dir)
+    sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
+    def reset_sketchytabs_dir():
+        if os.path.exists(sketchytabs_dir):
+            shutil.rmtree(sketchytabs_dir)
+        os.mkdir(sketchytabs_dir)
 
-# need index because tab['index'] is not consistent
-def write_image(tab, index) -> Optional[str]:
-    if 'favIconUrl' not in tab: return
-    try:
-        header, encoded = tab['favIconUrl'].split(',')
-        # header is e.g. "data:image/svg+xml;base64"
-        split_header = header.split(';')
-        mime_type = split_header[0].split(':')[1]
-        extension = mimetypes.guess_extension(mime_type)
-        path = os.path.join(sketchytabs_dir, f'{index + 1}{extension}')
+    # need index because tab['index'] is not consistent
+    def write_image(tab, index) -> Optional[str]:
+        if 'favIconUrl' not in tab: return
+        try:
+            header, encoded = tab['favIconUrl'].split(',')
+            # header is e.g. "data:image/svg+xml;base64"
+            split_header = header.split(';')
+            mime_type = split_header[0].split(':')[1]
+            extension = mimetypes.guess_extension(mime_type)
+            path = os.path.join(sketchytabs_dir, f'{index + 1}{extension}')
 
-        if len(split_header) == 2 and split_header[1] == 'base64':
-            data = base64.b64decode(encoded)
-        elif len(split_header) == 1:
-            data = unquote(encoded).encode('utf-8')
-        else: return
+            if len(split_header) == 2 and split_header[1] == 'base64':
+                data = base64.b64decode(encoded)
+            elif len(split_header) == 1:
+                data = unquote(encoded).encode('utf-8')
+            else: return
 
-        with open(path, 'wb') as fp:
-            fp.write(data)
-            return path
-    except:
-        pass
+            with open(path, 'wb') as fp:
+                fp.write(data)
+                return path
+        except:
+            pass
 
-if __name__ == '__main__':
     while True:
         tabs = get_message()
         reset_sketchytabs_dir()
@@ -77,7 +81,8 @@ if __name__ == '__main__':
         # tab info for Synapse
         with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
             json.dump([{
-                'title': tab['title'], 'caption': tab['url'], 'iconPath': icon_paths[index]
+                'title': tab['title'], 'caption': tab['url'], 'iconPath': icon_paths[index],
+                'id': tab['id'],
             } for index, tab in enumerate(tabs)], fp)
 
         fixed_env = os.environ.copy()
@@ -88,3 +93,25 @@ if __name__ == '__main__':
             text=True,
             env=fixed_env
         )
+
+class TabSwitchServer(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        parsed_url = urlparse(self.path)
+        query_params = parse_qs(parsed_url.query)
+        target_tab = query_params.get("tab", [None])[0]
+
+        if target_tab:
+            try:
+                send_message({ "switchTo": int(target_tab) })
+            except: pass
+
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain')
+        self.end_headers()
+
+if __name__ == '__main__':
+    listener = threading.Thread(target=listen_to_updates, daemon=True)
+    listener.start()
+
+    with socketserver.TCPServer(("", port), TabSwitchServer) as httpd:
+        httpd.serve_forever()
