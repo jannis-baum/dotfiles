@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 if [[ "$SENDER" = "volume_change" ]]; then
+    drawing=on
     case "$INFO" in
       [6-9][0-9]|100) label="􀊨"
       ;;
@@ -8,8 +9,8 @@ if [[ "$SENDER" = "volume_change" ]]; then
       ;;
       [1-9]|[1-2][0-9]) label="􀊤"
       ;;
-      *) label=""
+      *) drawing=off; label=""
     esac
 
-    sketchybar --set "$NAME" label="$label"
+    sketchybar --set "$NAME" label="$label" drawing=$drawing
 fi
