@@ -39,6 +39,12 @@ sketchybar --add item battery right \
                click_script="$SCRIPT_DIR/hide-briefly.zsh" \
            --subscribe battery mouse.entered mouse.exited power_source_change \
 # right items (visible if important information)
+sketchybar --add item volume right \
+           --set volume \
+               label.font="SF Compact:Thin:14" \
+               script="$PLUGIN_DIR/volume.zsh" \
+               click_script"$SCRIPT_DIR/mute.zsh" \
+           --subscribe volume volume_change
 sketchybar --add item tunnelblick right \
            --set tunnelblick \
                update_freq=1 \
