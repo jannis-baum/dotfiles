@@ -27,24 +27,30 @@ sketchybar --default "${default[@]}"
 
 # right items (always visible)
 sketchybar --add item clock right \
-           --set clock update_freq=1 script="$PLUGIN_DIR/clock.zsh" \
+           --set clock \
+               update_freq=1 \
+               script="$PLUGIN_DIR/clock.zsh" \
+               click_script="$SCRIPT_DIR/show-control-center.zsh" \
            --subscribe clock mouse.entered mouse.exited \
-           --set clock click_script="$SCRIPT_DIR/show-control-center.zsh"
 sketchybar --add item battery right \
-           --set battery update_freq=10 script="$PLUGIN_DIR/battery.zsh" \
+           --set battery \
+               update_freq=10 \
+               script="$PLUGIN_DIR/battery.zsh" \
+               click_script="$SCRIPT_DIR/hide-briefly.zsh" \
            --subscribe battery mouse.entered mouse.exited power_source_change \
-           --set battery click_script="$SCRIPT_DIR/hide-briefly.zsh"
 # right items (visible if important information)
-sketchybar --add item cpu_busy right \
-           --set cpu_busy update_freq=1 script="$PLUGIN_DIR/cpu-busy.zsh" \
-               label.color=0xfffc897e \
-           --subscribe cpu_busy mouse.entered mouse.exited
 sketchybar --add item tunnelblick right \
            --set tunnelblick \
                update_freq=1 \
                label.font="SF Compact:Thin:14" \
                script="$PLUGIN_DIR/tunnelblick.zsh" \
                click_script="$SCRIPT_DIR/show-tunnelblick-menu.zsh"
+sketchybar --add item cpu_busy right \
+           --set cpu_busy \
+               update_freq=1 \
+               label.color=0xfffc897e \
+               script="$PLUGIN_DIR/cpu-busy.zsh" \
+           --subscribe cpu_busy mouse.entered mouse.exited
 
 # left app indicator if no tabs
 sketchybar --add event tabs_updated
