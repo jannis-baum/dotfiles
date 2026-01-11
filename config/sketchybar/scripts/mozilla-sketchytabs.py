@@ -77,7 +77,7 @@ def listen_to_updates():
         try:
             path = os.path.join(sketchytabs_dir, f'{index + 1}.zsh')
             with open(path, 'w') as fp:
-                fp.write(f"#!/bin/zsh\ncurl 'http://localhost:{port}/?tab={tab['id']}'")
+                fp.write(f"#!/bin/zsh\ncurl '{TabSwitchServer.get_url_switchto(tab)}'")
             os.chmod(path, 0o755)
             return path
         except:
@@ -97,7 +97,7 @@ def listen_to_updates():
         with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:
             json.dump([{
                 'title': tab['title'], 'caption': tab['url'], 'iconPath': icon_paths[index],
-                'id': tab['id'],
+                'userInfo': TabSwitchServer.get_url_switchto(tab),
             } for index, tab in enumerate(tabs)], fp)
 
         fixed_env = os.environ.copy()
@@ -110,6 +110,10 @@ def listen_to_updates():
         )
 
 class TabSwitchServer(http.server.BaseHTTPRequestHandler):
+    @staticmethod
+    def get_url_switchto(tab) -> str:
+        return f'http://localhost:{port}/?tab={tab['id']}'
+
     def do_GET(self):
         parsed_url = urlparse(self.path)
         query_params = parse_qs(parsed_url.query)
