@@ -42,6 +42,7 @@ sketchybar --add item battery right \
 sketchybar --add item volume right \
            --set volume \
                label.font="SF Compact:Thin:14" \
+               label.color=0xfffc897e \
                script="$PLUGIN_DIR/volume.zsh" \
                click_script"$SCRIPT_DIR/mute.zsh" \
            --subscribe volume volume_change
@@ -49,6 +50,7 @@ sketchybar --add item tunnelblick right \
            --set tunnelblick \
                update_freq=1 \
                label.font="SF Compact:Thin:14" \
+               label.color=0xfffc897e \
                script="$PLUGIN_DIR/tunnelblick.zsh" \
                click_script="$SCRIPT_DIR/show-tunnelblick-menu.zsh"
 sketchybar --add item cpu_busy right \
