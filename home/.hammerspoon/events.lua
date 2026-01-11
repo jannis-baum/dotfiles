@@ -37,6 +37,22 @@ e.mouseWatcher = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, functio
 end)
 e.mouseWatcher:start()
 
+-- hide sketchybar to show vanilla menu bar until mouse is moved down ----------
+hs.urlevent.bind("sketchy-menubar", function()
+    if e.sketchyMenubarWatcher ~= nil then return end
+
+    hs.execute([[sketchybar --bar hidden=on]])
+    e.sketchyMenubarWatcher = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, function(event)
+        hs.printf("mouse moved")
+        if event:location().y >= 40 then
+            hs.execute([[sketchybar --bar hidden=off]])
+            e.sketchyMenubarWatcher:stop()
+            e.sketchyMenubarWatcher = nil
+        end
+    end)
+    e.sketchyMenubarWatcher:start()
+end)
+
 -- distributed notifications ---------------------------------------------------
 e.dnWatchers = {}
 function e.setupDNWatcher(dn, callback)
