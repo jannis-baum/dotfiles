@@ -68,7 +68,18 @@ def listen_to_updates():
 
             with open(path, 'wb') as fp:
                 fp.write(data)
-                return path
+            return path
+        except:
+            pass
+
+    # need index because tab['index'] is not consistent
+    def write_switchto(tab, index) -> Optional[str]:
+        try:
+            path = os.path.join(sketchytabs_dir, f'{index + 1}.zsh')
+            with open(path, 'w') as fp:
+                fp.write(f"#!/bin/zsh\ncurl 'http://localhost:{port}/?tab={tab['id']}'")
+            os.chmod(path, 0o755)
+            return path
         except:
             pass
 
@@ -76,6 +87,7 @@ def listen_to_updates():
         tabs = get_message()
         reset_sketchytabs_dir()
         icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
+        switchto_paths = [write_switchto(tab, index) for index, tab in enumerate(tabs)]
         lines = [get_line(tab, icon_path) for (tab, icon_path) in zip(tabs, icon_paths)]
 
         # tab info for Synapse
