@@ -26,7 +26,7 @@ echo "base=0\nchar=0\nimage=0" > "$output_file"
 long_title_len=50
 long_title="$(cat /dev/urandom | base64 | head -c $long_title_len)"
 
-echo "::a\n::$long_title\n:$sketchy_dir/media/placeholder-icon.png:a" | set_tabs
+echo ":::a\n:::$long_title\n:$sketchy_dir/media/placeholder-icon.png::a" | set_tabs
 item_1_w=$(get_width 1)
 item_2_w=$(get_width 2)
 item_3_w=$(get_width 3)

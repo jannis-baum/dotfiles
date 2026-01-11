@@ -40,8 +40,8 @@ def send_message(content):
     sys.stdout.buffer.flush()
 
 def listen_to_updates():
-    def get_line(tab, image_path):
-        return f'{"1" if tab["active"] else ""}:{image_path}:{tab["title"]}'
+    def get_line(tab, image_path, switchto_path):
+        return f'{"1" if tab["active"] else ""}:{image_path or ""}:{switchto_path or ""}:{tab["title"]}'
 
     sketchytabs_dir = os.path.join('/Volumes', 'sketchytabs', browser_name)
     def reset_sketchytabs_dir():
@@ -88,7 +88,10 @@ def listen_to_updates():
         reset_sketchytabs_dir()
         icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
         switchto_paths = [write_switchto(tab, index) for index, tab in enumerate(tabs)]
-        lines = [get_line(tab, icon_path) for (tab, icon_path) in zip(tabs, icon_paths)]
+        lines = [
+            get_line(tab, icon_path, switchto_path)
+            for (tab, icon_path, switchto_path) in zip(tabs, icon_paths, switchto_paths)
+        ]
 
         # tab info for Synapse
         with open(os.path.join(sketchytabs_dir, 'tabs.json'), 'w') as fp:

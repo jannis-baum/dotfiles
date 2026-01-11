@@ -1,7 +1,7 @@
 local function assert_non_nil(value)
     if value == nil then
         print('usage: ' .. arg[0] .. ' APP')
-        print('Tabs are read from stdin as `[active]:[image-path]:tab title`')
+        print('Tabs are read from stdin as `[active]:[image-path]:[switchto-path]:tab title`')
         os.exit(1)
     end
 end
@@ -82,9 +82,10 @@ local function main()
 
     local line_num = 1
     for line in lines:gmatch('[^\n]+') do
-        local is_active, image, label = line:match('([^:]*):([^:]*):(.*)')
+        local is_active, image, switchto, label = line:match('([^:]*):([^:]*):([^:]*):(.*)')
         assert_non_nil(is_active)
         assert_non_nil(image)
+        assert_non_nil(switchto)
         assert_non_nil(label)
 
         -- only allow alphanumeric (%w), punctuation (%p) and spaces (%s)
@@ -122,6 +123,12 @@ local function main()
                     'background.padding_left=8',
                     'background.image.string=' .. image,
                     'background.image.scale=0.5',
+            })
+        end
+        if switchto ~= '' then
+            list_extend(sketchy_args, {
+                '--set', item_name,
+                    'click_script=' .. switchto
             })
         end
 
