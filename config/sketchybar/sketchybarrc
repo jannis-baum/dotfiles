@@ -25,6 +25,10 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
+# reused props
+label_color_alert="label.color=0xfffc897e"
+label_font_symbol="label.font=SF Compact:Thin:14"
+
 # right items (always visible)
 sketchybar --add item clock right \
            --set clock \
@@ -41,22 +45,21 @@ sketchybar --add item battery right \
 # right items (visible if important information)
 sketchybar --add item volume right \
            --set volume \
-               label.font="SF Compact:Thin:14" \
-               label.color=0xfffc897e \
+               "$label_font_symbol" \
                script="$PLUGIN_DIR/volume.zsh" \
                click_script"$SCRIPT_DIR/mute.zsh" \
            --subscribe volume volume_change
 sketchybar --add item tunnelblick right \
            --set tunnelblick \
                update_freq=1 \
-               label.font="SF Compact:Thin:14" \
-               label.color=0xfffc897e \
+               "$label_font_symbol" \
+               "$label_color_alert" \
                script="$PLUGIN_DIR/tunnelblick.zsh" \
                click_script="$SCRIPT_DIR/show-tunnelblick-menu.zsh"
 sketchybar --add item cpu_busy right \
            --set cpu_busy \
                update_freq=1 \
-               label.color=0xfffc897e \
+               "$label_color_alert" \
                script="$PLUGIN_DIR/cpu-busy.zsh" \
            --subscribe cpu_busy mouse.entered mouse.exited
 
