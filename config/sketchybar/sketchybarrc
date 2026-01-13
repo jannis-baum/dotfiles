@@ -47,7 +47,7 @@ sketchybar --add item volume right \
            --set volume \
                "$label_font_symbol" \
                script="$PLUGIN_DIR/volume.zsh" \
-               click_script"$SCRIPT_DIR/mute.zsh" \
+               click_script="$SCRIPT_DIR/mute.zsh" \
            --subscribe volume volume_change
 sketchybar --add item tunnelblick right \
            --set tunnelblick \
