@@ -5,6 +5,7 @@ SCRIPT_DIR="$CONFIG_DIR/scripts"
 bar=(
     position=top
     height=32
+    notch_display_height=34
     color=0xff000000
     # as close to edge as possible
     padding_left=-9999
