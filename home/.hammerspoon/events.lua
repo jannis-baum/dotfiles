@@ -24,10 +24,10 @@ e.appWatcher:start()
 hs.urlevent.bind("sketchy-menubar", function()
     if e.sketchyMenubarWatcher ~= nil then return end
 
-    hs.execute([[sketchybar --bar hidden=on]])
+    hs.execute([[/opt/homebrew/bin/sketchybar --bar hidden=on]])
     e.sketchyMenubarWatcher = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, function(event)
         if event:location().y >= 40 then
-            hs.execute([[sketchybar --bar hidden=off]])
+            hs.execute([[/opt/homebrew/bin/sketchybar --bar hidden=off]])
             e.sketchyMenubarWatcher:stop()
             e.sketchyMenubarWatcher = nil
         end
