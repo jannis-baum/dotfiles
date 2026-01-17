@@ -26,7 +26,6 @@ hs.urlevent.bind("sketchy-menubar", function()
 
     hs.execute([[sketchybar --bar hidden=on]])
     e.sketchyMenubarWatcher = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, function(event)
-        hs.printf("mouse moved")
         if event:location().y >= 40 then
             hs.execute([[sketchybar --bar hidden=off]])
             e.sketchyMenubarWatcher:stop()
