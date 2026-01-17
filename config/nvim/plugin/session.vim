@@ -1,8 +1,12 @@
-" open file at last pos
-augroup LastPos
+" open files at last position from `:h restore-cursor`
+" (not for commit messages, interactive rebase, etc.)
+augroup RestoreCursor
     autocmd!
-    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-        \| exe "normal! g'\"" | endif
+    autocmd BufReadPre * autocmd FileType <buffer> ++once
+      \ let s:line = line("'\"")
+     \| if s:line >= 1 && s:line <= line("$") && &filetype !~# 'commit' && index(['xxd', 'gitrebase'], &filetype) == -1
+     \|     execute "normal! g`\""
+     \| endif
 augroup END
 
 " backups
