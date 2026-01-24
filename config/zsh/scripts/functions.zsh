@@ -207,3 +207,14 @@ function cop() {
     cd -1
     rm -r "$tmp_dir"
 }
+
+function hpc-mount() {
+    sshfs \
+        -o allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
+        hpc:/sc/home/jannis.baum \
+        $HOME/_/hpi/hpc-mount
+}
+
+function hpc-unmount() {
+    umount $HOME/_/hpi/hpc-mount
+}
