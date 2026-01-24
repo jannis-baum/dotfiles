@@ -16,7 +16,7 @@ function rem() {
         case "$arg" in
             "-h" | "--help") arg_help=1; continue;;
             "-m" | "--mount") func="_rem_mount"; continue;;
-            "-md" | "--mount-cd") func="_rem_mount_cd"; continue;;
+            "-d" | "--mount-cd") func="_rem_mount_cd"; continue;;
             "-u" | "--unmount") func="_rem_unmount"; continue;;
         esac
 
@@ -34,7 +34,7 @@ SSHFS-focussed remote workflow, acts like \`ssh $_rem_remote\` without options
 
 options
   -m, --mount        mount remote home
-  -md, --mount-cd    mount remote home and change to mount directory
+  -d, --mount-cd     mount remote home and change to mount directory
   -u, --unmount      unmount remote home
 EOF
         return
