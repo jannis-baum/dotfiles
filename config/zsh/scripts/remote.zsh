@@ -78,12 +78,18 @@ function _rem_unmount() {
 }
 
 function _rem_ssh() {
+    local cwd="$(realpath .)"
+    local rem_cwd='$HOME'
+    if [[ "$(realpath .)" = "$_rem_mnt_path"* ]]; then
+        rem_cwd="$(sed "s|^$_rem_mnt_path|\$HOME|" <<< "$cwd")"
+    fi
+
     if [[ "$#" -eq 0 ]]; then
-        ssh "$_rem_remote"
+        kitten ssh --kitten cwd="$rem_cwd" "$_rem_remote"
         return 0
     fi
 
-    local cmd="cd; source ~/.bashrc; "
+    local cmd="cd $rem_cwd; source ~/.bashrc; "
     local parg
     for parg ("$@"); do
         cmd+="$parg; "
