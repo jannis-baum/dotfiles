@@ -1,11 +1,27 @@
 # pyright: reportMissingImports=false
 
+import os
 from typing import Any
 
 from kitty.boss import Boss
 from kitty.window import Window
 
 import subprocess, atexit, os
+
+
+def _get_cwd(boss) -> str | None:
+    tm = boss.active_tab_manager
+    if tm is None: return
+    w = tm.active_window
+    if w is None: return
+    return w.cwd_of_child
+
+def _get_mount(path: str) -> str | None:
+    while path != "/":
+        if os.path.ismount(path):
+            return path
+        path = os.path.dirname(path)
+    return None
 
 # copied & modified from
 # https://github.com/kovidgoyal/watcher/blob/master/watcher/gitstatusd.py
@@ -69,16 +85,10 @@ class _GitStatusD:
             'head_first_para': fields[28],
         }
 
-def _get_git_info(boss: Boss):
+def _get_git_info(boss: Boss, cwd: str) -> str | None:
     # forgive the horrible hack
     if not hasattr(boss, 'gitstatusd'):
         boss.gitstatusd = _GitStatusD()
-
-    tm = boss.active_tab_manager
-    if tm is None: return
-    w = tm.active_window
-    if w is None: return
-    cwd = w.cwd_of_child
 
     try:
         git_info = boss.gitstatusd.get(cwd)
@@ -91,13 +101,24 @@ def _get_git_info(boss: Boss):
             git_info['num_conflicted_changes'] + \
             git_info['num_untracked_files']
         git_status = '✻ ' if dirty > 0 else ''
-    except: return
+    except: return None
     return f'{git_status}{git_branch}'
+
+def _get_info(boss: Boss) -> str | None:
+    cwd = _get_cwd(boss)
+    if cwd is None:
+        return None
+
+    mount = _get_mount(cwd)
+    if mount is not None:
+        return os.path.basename(mount)
+
+    # only use gitstatusd when not in mounted directory because it gets super
+    # slow via sshfs
+    return _get_git_info(boss, cwd)
 
 def _refresh_widgets(boss: Boss) -> None:
     result = ''
-
-    git_info = _get_git_info(boss) or ''
 
     tab_manager = boss.active_tab_manager
     if tab_manager is not None:
@@ -112,7 +133,8 @@ def _refresh_widgets(boss: Boss) -> None:
             title = tab.get_cwd_of_active_window() or '??'
             title = title.replace(os.path.expanduser('~'), 'home')
             title = title.split('/')[-1]
-            suffix = '' if git_info == '' else f': {git_info}'
+            info = _get_info(boss)
+            suffix = '' if info is None else f': {info}'
             return f'{title}{suffix}' if is_active(tab) else title
 
         def get_line(tab) -> str:
