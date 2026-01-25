@@ -3,6 +3,16 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# explicitely expand aliases so they also work in non-interactive sessions that
+# source this file. note that this option only takes effect from the next
+# **line**, i.e. doing
+#
+#     source ~/.bashrc; shopt -s expand_aliases; <alias>
+#
+# doesn't work so it makes sense to just have it here.
+# (https://stackoverflow.com/questions/1615877/why-aliases-in-a-non-interactive-bash-shell-do-not-work#comment65785947_1615973)
+shopt -s expand_aliases
+
 # generic aliases
 alias s="ls --almost-all --color=always --group-directories-first"
 alias l="s -l"
