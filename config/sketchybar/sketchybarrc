@@ -50,13 +50,13 @@ sketchybar --add item volume right \
                script="$PLUGIN_DIR/volume.zsh" \
                click_script="$SCRIPT_DIR/mute.zsh" \
            --subscribe volume volume_change
-sketchybar --add item tunnelblick right \
-           --set tunnelblick \
+sketchybar --add item remote right \
+           --set remote \
                update_freq=1 \
                "$label_font_symbol" \
                "$label_color_alert" \
-               script="$PLUGIN_DIR/tunnelblick.zsh" \
-               click_script="$SCRIPT_DIR/show-tunnelblick-menu.zsh"
+               script="$PLUGIN_DIR/remote.zsh" \
+               click_script="$SCRIPT_DIR/disconnect-remote.zsh"
 sketchybar --add item cpu_busy right \
            --set cpu_busy \
                update_freq=1 \
