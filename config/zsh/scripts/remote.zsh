@@ -114,6 +114,7 @@ function _rem_unmount() {
 }
 
 function _rem_disconnect() {
+    _rem_unmount &> /dev/null
     osascript -e 'tell application "Tunnelblick" to disconnect all' &> /dev/null
     _rem_wait_connection 1
 }
