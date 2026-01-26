@@ -1,10 +1,12 @@
 _rem_remote="hpc"
 _rem_mnt_path="$HOME/_/hpi/hpc"
 
+# MARK: main function ----------------------------------------------------------
+
 function rem() {
-    # MARK: ARUGMENT PARSING ---------------------------------------------------
-    # from https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
-    local arg_help arg_unmount arg_mount arg_cd positional=()
+    # arugment parsing from
+    # https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
+    local arg_help arg_status arg_unmount arg_mount arg_cd positional=()
 
     while (( $# )); do
         _echo_error() {
@@ -18,24 +20,25 @@ function rem() {
                 for opt in ${(s::)arg[2,-1]}; do
                     case "$opt" in
                         "h") arg_help=1;;
-                        "m") arg_mount=1;;
                         "u") arg_unmount=1;;
+                        "m") arg_mount=1;;
                         "d") arg_cd=1;;
+                        "s") arg_status=1;;
                         *) _echo_error "Unknown option: -$opt";;
                     esac
                 done
                 continue;;
             "--help") arg_help=1; continue;;
-            "--mount") arg_mount=1; continue;;
             "--unmount") arg_unmount=1; continue;;
+            "--mount") arg_mount=1; continue;;
             "--cd") arg_cd=1; continue;;
+            "--status") arg_status=1; continue;;
             "--"*) _echo_error "Unknown option: $arg";;
         esac
 
         positional+=("$arg")
     done
     which _echo_error >/dev/null && unfunction _echo_error
-    # MARK: ARUGMENT PARSING done ----------------------------------------------
 
     if [[ -n "$arg_help" ]]; then
         cat <<EOF
@@ -43,10 +46,15 @@ usage: rem [command [args]]
 
 SSHFS-focussed remote workflow, acts like \`ssh $_rem_remote\`
 
-options (short options can be combined, e.g. -md)
-  -m, --mount        mount remote home
+options ():
+  -h, --help         print this message and exit
   -u, --unmount      unmount remote home
+  -m, --mount        mount remote home
   -d, --cd           change to mount directory
+  -s, --status       get mount information
+
+short options can be combined, e.g. \`-mds\`, and will be executed in the order
+above. execution stops if one option returns non-zero
 EOF
         return
     fi
@@ -55,10 +63,19 @@ EOF
     [[ -n "$arg_mount" ]] &&  {_rem_mount || return 1}
     [[ -n "$arg_cd" ]] && {_rem_cd || return 1}
     [[ -n "$positional" ]] && {_rem_ssh $positional || return 1}
+    [[ -n "$arg_status" ]] && {_rem_status || return 1}
 }
+
+# MARK: helpers ----------------------------------------------------------------
 
 function _rem_is_mounted() {
     mount | grep -e fuse-t -e "$_rem_mnt_path" &>/dev/null
+}
+
+# MARK: functions called by main -----------------------------------------------
+
+function _rem_unmount() {
+    umount "$_rem_mnt_path"
 }
 
 function _rem_mount() {
@@ -72,10 +89,6 @@ function _rem_mount() {
 
 function _rem_mount_cd() {
     cd "$_rem_mnt_path"
-}
-
-function _rem_unmount() {
-    umount "$_rem_mnt_path"
 }
 
 function _rem_ssh() {
@@ -97,4 +110,9 @@ function _rem_ssh() {
     done
 
     ssh "$_rem_remote" "$cmd"
+}
+
+function _rem_status() {
+    printf "mount: "
+    _rem_is_mounted && echo "mounted" || echo "not mounted"
 }
