@@ -72,8 +72,16 @@ EOF
     [[ -n "$arg_connect" ]] && {_rem_connect || return 1}
     [[ -n "$arg_mount" ]] &&  {_rem_mount || return 1}
     [[ -n "$arg_cd" ]] && {_rem_cd || return 1}
-    [[ -n "$positional" ]] && {_rem_ssh $positional || return 1}
     [[ -n "$arg_status" ]] && {_rem_status || return 1}
+
+    [[ (
+        -z "$arg_unmount" && \
+        -z "$arg_disconnect" && \
+        -z "$arg_connect" && \
+        -z "$arg_mount" && \
+        -z "$arg_cd" && \
+        -z "$arg_status" \
+    ) || -n "$positional" ]] && {_rem_ssh $positional || return 1}
 }
 
 # MARK: helpers ----------------------------------------------------------------
