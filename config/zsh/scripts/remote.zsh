@@ -4,7 +4,7 @@ _rem_mnt_path="$HOME/_/hpi/hpc"
 function rem() {
     # MARK: ARUGMENT PARSING ---------------------------------------------------
     # from https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
-    local arg_help="" func="_rem_ssh" positional=()
+    local arg_help arg_unmount arg_mount arg_cd positional=()
 
     while (( $# )); do
         _echo_error() {
@@ -14,13 +14,24 @@ function rem() {
         local arg="$1"; shift
 
         case "$arg" in
-            "-h" | "--help") arg_help=1; continue;;
-            "-m" | "--mount") func="_rem_mount"; continue;;
-            "-d" | "--mount-cd") func="_rem_mount_cd"; continue;;
-            "-u" | "--unmount") func="_rem_unmount"; continue;;
+            -[^-]*)
+                for opt in ${(s::)arg[2,-1]}; do
+                    case "$opt" in
+                        "h") arg_help=1;;
+                        "m") arg_mount=1;;
+                        "u") arg_unmount=1;;
+                        "d") arg_cd=1;;
+                        *) _echo_error "Unknown option: -$opt";;
+                    esac
+                done
+                continue;;
+            "--help") arg_help=1; continue;;
+            "--mount") arg_mount=1; continue;;
+            "--unmount") arg_unmount=1; continue;;
+            "--cd") arg_cd=1; continue;;
+            "--"*) _echo_error "Unknown option: $arg";;
         esac
 
-        [[ "$arg" == "-"* ]] && _echo_error "Unknown option: $arg"
         positional+=("$arg")
     done
     which _echo_error >/dev/null && unfunction _echo_error
@@ -30,17 +41,20 @@ function rem() {
         cat <<EOF
 usage: rem [command [args]]
 
-SSHFS-focussed remote workflow, acts like \`ssh $_rem_remote\` without options
+SSHFS-focussed remote workflow, acts like \`ssh $_rem_remote\`
 
-options
+options (short options can be combined, e.g. -md)
   -m, --mount        mount remote home
-  -d, --mount-cd     mount remote home and change to mount directory
   -u, --unmount      unmount remote home
+  -d, --cd           change to mount directory
 EOF
         return
     fi
 
-    $func $positional
+    [[ -n "$arg_unmount" ]] && {_rem_unmount || return 1}
+    [[ -n "$arg_mount" ]] &&  {_rem_mount || return 1}
+    [[ -n "$arg_cd" ]] && {_rem_cd || return 1}
+    [[ -n "$positional" ]] && {_rem_ssh $positional || return 1}
 }
 
 function _rem_is_mounted() {
@@ -48,10 +62,6 @@ function _rem_is_mounted() {
 }
 
 function _rem_mount() {
-    if [[ "$#" -ne 0 ]]; then
-        echo "Too many arguments, expected 0"
-        return 1
-    fi
     _rem_is_mounted && return 0
     mkdir -p "$_rem_mnt_path"
     sshfs \
@@ -61,19 +71,10 @@ function _rem_mount() {
 }
 
 function _rem_mount_cd() {
-    if [[ "$#" -ne 0 ]]; then
-        echo "Too many arguments, expected 0"
-        return 1
-    fi
-    _rem_mount
     cd "$_rem_mnt_path"
 }
 
 function _rem_unmount() {
-    if [[ "$#" -ne 0 ]]; then
-        echo "Too many arguments, expected 0"
-        return 1
-    fi
     umount "$_rem_mnt_path"
 }
 
