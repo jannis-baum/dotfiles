@@ -7,7 +7,7 @@ _rem_openvpn_config="SC_User"
 function rem() {
     # arugment parsing from
     # https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
-    local arg_help arg_unmount arg_disconnect arg_connect arg_mount arg_cd arg_status positional=()
+    local arg_help arg_unmount arg_disconnect arg_connect arg_mount arg_cd arg_status parsing_args=1 positional=()
 
     while (( $# )); do
         _echo_error() {
@@ -16,30 +16,33 @@ function rem() {
         }
         local arg="$1"; shift
 
-        case "$arg" in
-            -[^-]*)
-                for opt in ${(s::)arg[2,-1]}; do
-                    case "$opt" in
-                        "h") arg_help=1;;
-                        "u") arg_unmount=1;;
-                        "d") arg_disconnect=1;;
-                        "c") arg_connect=1;;
-                        "m") arg_mount=1;;
-                        "w") arg_cd=1;;
-                        "s") arg_status=1;;
-                        *) _echo_error "Unknown option: -$opt";;
-                    esac
-                done
-                continue;;
-            "--help") arg_help=1; continue;;
-            "--unmount") arg_unmount=1; continue;;
-            "--disconnect") arg_disconnect=1; continue;;
-            "--connect") arg_connect=1; continue;;
-            "--mount") arg_mount=1; continue;;
-            "--cd") arg_cd=1; continue;;
-            "--status") arg_status=1; continue;;
-            "--"*) _echo_error "Unknown option: $arg";;
-        esac
+        if [[ "$parsing_args" -eq 1 ]]; then
+            case "$arg" in
+                -[^-]*)
+                    for opt in ${(s::)arg[2,-1]}; do
+                        case "$opt" in
+                            "h") arg_help=1;;
+                            "u") arg_unmount=1;;
+                            "d") arg_disconnect=1;;
+                            "c") arg_connect=1;;
+                            "m") arg_mount=1;;
+                            "w") arg_cd=1;;
+                            "s") arg_status=1;;
+                            *) _echo_error "Unknown option: -$opt";;
+                        esac
+                    done
+                    continue;;
+                "-" | "--") parsing_args=0; continue;;
+                "--help") arg_help=1; continue;;
+                "--unmount") arg_unmount=1; continue;;
+                "--disconnect") arg_disconnect=1; continue;;
+                "--connect") arg_connect=1; continue;;
+                "--mount") arg_mount=1; continue;;
+                "--cd") arg_cd=1; continue;;
+                "--status") arg_status=1; continue;;
+                "--"*) _echo_error "Unknown option: $arg";;
+            esac
+        fi
 
         positional+=("$arg")
     done
@@ -54,6 +57,8 @@ like ssh. if in mount directory, ssh directory is translated to remote.
 
 options ():
   -h, --help         print this message and exit
+  -, --              stop parsing following arguments so they can be used as
+                     positional arguments for ssh
   -u, --unmount      unmount remote home
   -d, --disconnect   disconnect VPN
   -c, --connect      connect VPN
