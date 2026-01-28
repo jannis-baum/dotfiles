@@ -141,7 +141,7 @@ function _rem_cd() {
 
 function _rem_ssh() {
     local cwd="$(realpath .)"
-    local rem_cwd='$HOME'
+    local rem_cwd='~'
     if [[ "$(realpath .)" = "$_rem_mnt_path"* ]]; then
         rem_cwd="$(sed "s|^$_rem_mnt_path|\$HOME|" <<< "$cwd")"
     fi
@@ -151,13 +151,13 @@ function _rem_ssh() {
         return 0
     fi
 
-    local cmd="cd $rem_cwd; source ~/.bashrc; "
+    local cmd=(cd "$rem_cwd" ';' source '~/.bashrc' ';')
     local parg
     for parg ("$@"); do
-        cmd+="$parg; "
+        cmd+=("${(q)parg}")
     done
 
-    ssh "$_rem_remote" "$cmd"
+    ssh "$_rem_remote" "${cmd[@]}"
 }
 
 function _rem_status() {
