@@ -77,8 +77,7 @@ EOF
     if ! test -f "pyproject.toml"; then
         uv init "${uv_args[@]}" || return
     fi
-    local project_name="$(uv version --output-format=json | jq -r '.package_name')"
-    uv venv --prompt "uvz:$project_name"
+    uv venv --prompt "uvz"
     # trigger lazy package install
     uv run python -c ''
 
