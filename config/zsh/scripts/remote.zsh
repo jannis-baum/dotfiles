@@ -44,6 +44,9 @@ function rem() {
             esac
         fi
 
+        # stop parsing args after first positional argument to make ssh
+        # commands easier to write
+        parsing_args=0
         positional+=("$arg")
     done
     which _echo_error >/dev/null && unfunction _echo_error
@@ -58,7 +61,8 @@ like ssh. if in mount directory, ssh directory is translated to remote.
 options ():
   -h, --help         print this message and exit
   -, --              stop parsing following arguments so they can be used as
-                     positional arguments for ssh
+                     positional arguments for ssh. also happens automatically
+                     after the first positional argument
   -u, --unmount      unmount remote home
   -d, --disconnect   disconnect VPN
   -c, --connect      connect VPN
