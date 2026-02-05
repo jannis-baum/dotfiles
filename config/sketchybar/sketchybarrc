@@ -30,6 +30,12 @@ sketchybar --default "${default[@]}"
 label_color_alert="label.color=0xfffc897e"
 label_font_symbol="label.font=SF Compact:Thin:14"
 
+# invisible button that covers all empty space to hide briefly and show vanilla
+# menubar (added first to be in background)
+sketchybar --add item hide-button right \
+           --set hide-button \
+               width=9999 \
+               click_script="$SCRIPT_DIR/hide-briefly.zsh"
 # right items (always visible)
 sketchybar --add item clock right \
            --set clock \
@@ -41,7 +47,6 @@ sketchybar --add item battery right \
            --set battery \
                update_freq=10 \
                script="$PLUGIN_DIR/battery.zsh" \
-               click_script="$SCRIPT_DIR/hide-briefly.zsh" \
            --subscribe battery mouse.entered mouse.exited power_source_change \
 # right items (visible if important information)
 sketchybar --add item volume right \
