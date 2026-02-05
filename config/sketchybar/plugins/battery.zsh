@@ -18,10 +18,11 @@ time="$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
     || color=0xfffc897e
 
 $HOVERING \
-    && label="$charging$percentage%" \
-    || label="$charging$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')"
+    && draw_popup=on \
+    || draw_popup=off
 
 sketchybar --set "$NAME" \
-    label="$label" \
+    label="$charging$(grep -o '\d\+:\d\+' <<< $batt_output || echo '···')" \
     label.color="$color" \
-    drawing="$drawing"
+    drawing="$drawing" \
+    popup.drawing="$draw_popup"

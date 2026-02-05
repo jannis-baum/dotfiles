@@ -21,9 +21,16 @@ default=(
 
   label.padding_left=12
   label.padding_right=12
-  label.font="Poiret One:Bold:18"
   label.font=Menlo:Bold:14
   label.color=0xffbbbbbb
+
+  popup.align=right
+  popup.height=20
+  popup.blur_radius=12
+  popup.background.color=0x33000000
+  popup.background.corner_radius=8
+  #popup.background.border_color=0x33dddddd
+  #popup.background.border_width=1
 )
 sketchybar --default "${default[@]}"
 
@@ -38,7 +45,9 @@ sketchybar --add item hide-button right \
            --set hide-button \
                width=9999 \
                click_script="$SCRIPT_DIR/hide-briefly.zsh"
+
 # right items (always visible)
+# clock
 sketchybar --add item clock right \
            --set clock \
                "$label_font_numbers" \
@@ -46,12 +55,26 @@ sketchybar --add item clock right \
                script="$PLUGIN_DIR/clock.zsh" \
                click_script="$SCRIPT_DIR/show-control-center.zsh" \
            --subscribe clock mouse.entered mouse.exited \
+sketchybar --add item clock-date popup.clock \
+           --set clock-date \
+               update_freq=60 \
+               script='sketchybar --set $NAME label="$(date "+%a, %b %d" | xargs)"'
+sketchybar --add item clock-seconds popup.clock \
+           --set clock-seconds \
+               update_freq=1 \
+               script='sketchybar --set $NAME label="$(date +%H:%M:%S | xargs)"'
+# battery
 sketchybar --add item battery right \
            --set battery \
                "$label_font_numbers" \
                update_freq=10 \
                script="$PLUGIN_DIR/battery.zsh" \
            --subscribe battery mouse.entered mouse.exited power_source_change \
+sketchybar --add item battery-percentage popup.battery \
+           --set battery-percentage \
+               update_freq=10 \
+               script="sketchybar --set \$NAME label=\"$(pmset -g batt | grep -o '\d\+%' | tr -d '%')%\""
+
 # right items (visible if important information)
 sketchybar --add item volume right \
            --set volume \

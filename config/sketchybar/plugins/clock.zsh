@@ -2,9 +2,8 @@
 
 source "$CONFIG_DIR/helpers/hover.zsh"
 
-# | xargs trims whitespace
 $HOVERING \
-    && label=$(date +%m/%d | xargs | tr -d '\n'; printf "  "; date +%l:%M:%S | xargs) \
-    || label=$(date +%l:%M | xargs)
+    && draw_popup=on \
+    || draw_popup=off
 
-sketchybar --set "$NAME" label="$label"
+sketchybar --set "$NAME" label="$(date +%l:%M | xargs)" popup.drawing=$draw_popup
