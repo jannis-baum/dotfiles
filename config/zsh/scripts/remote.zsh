@@ -150,7 +150,7 @@ function _rem_cd() {
 
 function _rem_ssh() {
     local cwd="$(realpath .)"
-    local rem_cwd='~'
+    local rem_cwd='$HOME'
     if [[ "$(realpath .)" = "$_rem_mnt_path"* ]]; then
         rem_cwd="$(sed "s|^$_rem_mnt_path|\$HOME|" <<< "$cwd")"
     fi
