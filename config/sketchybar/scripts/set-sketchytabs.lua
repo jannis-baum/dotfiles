@@ -109,7 +109,6 @@ local function main()
                 'script=~/.config/sketchybar/plugins/sketchytab.zsh',
                 'drawing=' .. drawing,
                 'label=' .. label,
-                'label.font=Menlo:Bold:14',
                 'label.color=' .. label_color,
             '--subscribe', item_name, 'front_app_switched'
         })

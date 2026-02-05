@@ -22,6 +22,7 @@ default=(
   label.padding_left=12
   label.padding_right=12
   label.font="Poiret One:Bold:18"
+  label.font=Menlo:Bold:14
   label.color=0xffbbbbbb
 )
 sketchybar --default "${default[@]}"
@@ -29,6 +30,7 @@ sketchybar --default "${default[@]}"
 # reused props
 label_color_alert="label.color=0xfffc897e"
 label_font_symbol="label.font=SF Compact:Thin:14"
+label_font_numbers="label.font=Poiret One:Bold:18"
 
 # invisible button that covers all empty space to hide briefly and show vanilla
 # menubar (added first to be in background)
@@ -39,12 +41,14 @@ sketchybar --add item hide-button right \
 # right items (always visible)
 sketchybar --add item clock right \
            --set clock \
+               "$label_font_numbers" \
                update_freq=1 \
                script="$PLUGIN_DIR/clock.zsh" \
                click_script="$SCRIPT_DIR/show-control-center.zsh" \
            --subscribe clock mouse.entered mouse.exited \
 sketchybar --add item battery right \
            --set battery \
+               "$label_font_numbers" \
                update_freq=10 \
                script="$PLUGIN_DIR/battery.zsh" \
            --subscribe battery mouse.entered mouse.exited power_source_change \
@@ -64,8 +68,9 @@ sketchybar --add item remote right \
                click_script="$SCRIPT_DIR/disconnect-remote.zsh"
 sketchybar --add item cpu_busy right \
            --set cpu_busy \
-               update_freq=1 \
+               "$label_font_numbers" \
                "$label_color_alert" \
+               update_freq=1 \
                script="$PLUGIN_DIR/cpu-busy.zsh" \
            --subscribe cpu_busy mouse.entered mouse.exited
 
@@ -74,7 +79,6 @@ sketchybar --add event tabs_updated
 sketchybar --add item front_app left \
            --set front_app \
                 script="$PLUGIN_DIR/front_app.zsh" \
-                label.font=Menlo:Bold:14 \
            --subscribe front_app front_app_switched tabs_updated
 
 # update all items
