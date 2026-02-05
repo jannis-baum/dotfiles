@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function hl_print() {
-    printf "🔬🧪 \\033[1m$1\\033[0m\n"
+    printf "\\033[1m$1\\033[0m\n"
 }
 
 function brew_() {
@@ -17,19 +17,17 @@ if [[ "$1" == "-u" ]] || [[ "$1" == "--upgrade" ]]; then
     brew_ upgrade
 fi
 
-dir=$(dirname $(realpath $0))
-
 hl_print "checking installed packages"
 installed=$(brew leaves && brew list --cask | sed 's/^/--cask /')
 packages=()
 while IFS= read -r line; do
     # trim whitespace & ignore comments
     package=$(echo "$line" | sed -e 's/#.*//g' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-    # add packages that aren't installed
+    # add packages that aren't installed (ignore --HEAD flag)
     [[ -n "$package" ]] \
-        && ! [[ "$installed" == *"$package"* ]] \
+        && ! [[ "$installed" == *"$(sed 's/--HEAD //' <<<"$package")"* ]] \
         && packages+=("$package")
-done < $dir/brew-packages.conf
+done < "$(dirname $(realpath $0))/brew-packages.conf"
 
 count=$#packages
 for (( i = 1; i <= $count; i++ )); do
