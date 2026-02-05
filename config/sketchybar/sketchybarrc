@@ -58,22 +58,24 @@ sketchybar --add item clock right \
 sketchybar --add item clock-date popup.clock \
            --set clock-date \
                update_freq=60 \
-               script='sketchybar --set $NAME label="$(date "+%a, %b %d" | xargs)"'
+               script='sketchybar --set $NAME label="􀉉 $(date "+%a, %b %d" | xargs)"'
 sketchybar --add item clock-seconds popup.clock \
            --set clock-seconds \
                update_freq=1 \
-               script='sketchybar --set $NAME label="$(date +%H:%M:%S | xargs)"'
+               script='sketchybar --set $NAME label="􀐫 $(date +%H:%M:%S | xargs)"'
+
 # battery
 sketchybar --add item battery right \
            --set battery \
                "$label_font_numbers" \
                update_freq=10 \
                script="$PLUGIN_DIR/battery.zsh" \
-           --subscribe battery mouse.entered mouse.exited power_source_change \
+           --subscribe battery mouse.entered mouse.exited power_source_change
 sketchybar --add item battery-percentage popup.battery \
            --set battery-percentage \
                update_freq=10 \
-               script="sketchybar --set \$NAME label=\"$(pmset -g batt | grep -o '\d\+%' | tr -d '%')%\""
+               script="$PLUGIN_DIR/battery-percent.zsh" \
+           --subscribe battery-percentage power_source_change
 
 # right items (visible if important information)
 sketchybar --add item volume right \
