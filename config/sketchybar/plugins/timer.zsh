@@ -15,7 +15,14 @@ source "$data_fp"
 time_left="$(echo "$deadline - $(date +%s)" | bc)"
 
 if [[ "$time_left" -gt 0 ]]; then
-    sketchybar --set "$NAME" label="􀐱 $title: ${time_left}s"
+    if [[ "$time_left" -ge 3600 ]]; then
+        time_left="$(gdate -u -d "@$time_left" "+%-H:%Mh")"
+    elif [[ "$time_left" -ge 60 ]]; then
+        time_left="$(gdate -u -d "@$time_left" "+%-M:%Smin")"
+    else
+        time_left="${time_left}s"
+    fi
+    sketchybar --set "$NAME" label="􀐱 $title: $time_left"
 else
     sketchybar --set "$NAME" label="􁙜 $title" label.color=0xfffc897e
 fi
