@@ -7,3 +7,4 @@ alias screenshot='screencapture -i'
 alias drag=~/Applications/drag.app/Contents/MacOS/drag
 alias q="cd; c"
 alias td=todos
+alias timer="~/.config/sketchybar/scripts/set-timer.zsh"
