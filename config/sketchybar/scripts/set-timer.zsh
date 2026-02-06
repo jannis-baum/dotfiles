@@ -9,14 +9,25 @@ duration="$1"
 shift
 title="$@"
 
-seconds="$(sed -nE \
-    -e 's/^([[:digit:]]+)s?$/\1/p' \
-    -e 's/^([[:digit:]]+)m$/\1 * 60/p' \
-    -e 's/^([[:digit:]]+)(m|:)([[:digit:]]+)s?$/\1 * 60 + \3/p' \
-    -e 's/^([[:digit:]]+)h$/\1 * 3600/p' \
-    -e 's/^([[:digit:]]+)h([[:digit:]]+)m$/\1 * 3600 + \2 * 60/p' \
-    -e 's/^([[:digit:]]+)(h|:)([[:digit:]]+)(m|:)?([[:digit:]]+)s?$/\1 * 3600 + \3 * 60 + \5/p' \
-    <<< "$duration")"
+digits="([[:digit:]]+)"
+sed_args=(
+    # no printing by default & extended regex
+    -nE
+    # just seconds/minutes/hours
+    -e "s/^${digits}s?$/\\1/p"
+    -e "s/^${digits}(m|min)$/\\1 * 60/p"
+    -e "s/^${digits}h$/\\1 * 3600/p"
+    # minutes and seconds 2:30(m|min)? or 2(m|min)30s
+    -e "s/^${digits}:${digits}(m|min)?$/\\1 * 60 + \\2/p"
+    -e "s/^${digits}(m|min)${digits}s$/\\1 * 60 + \\3/p"
+    # hours and minutes 2:30h or 2h30(m|min)
+    -e "s/^${digits}:${digits}h$/\\1 * 3600 + \\2 * 60/p"
+    -e "s/^${digits}h${digits}(m|min)$/\\1 * 3600 + \\2 * 60/p"
+    # hours, minutes and seconds 2:30:40h or 2h30(m|min)40s
+    -e "s/^${digits}:${digits}:${digits}h$/\\1 * 3600 + \\2 * 60 + \\3/p"
+    -e "s/^${digits}h${digits}(m|min)${digits}s$/\\1 * 3600 + \\2 * 60 + \\4/p"
+)
+seconds="$(sed "${sed_args[@]}" <<< "$duration")"
 
 if [[ -z "$seconds" ]]; then
     echo "duration not understood \"$duration\"" >&2
