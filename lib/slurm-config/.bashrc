@@ -237,3 +237,13 @@ function ensure-jupyviv() {
         && python -m ensurepip \
         && python -m pip install git+https://github.com/jannis-baum/Jupyviv.git ipykernel
 }
+
+function share-permissions() {
+    local target_dir="$1"
+    [[ -z "$target_dir" ]] && target_dir="."
+
+    # files: everyone reads, owner writes
+    find "$target_dir" -type f -exec chmod 644 {} \;
+    # directories: everyone reads and executes, owner writes
+    find "$target_dir" -type d -exec chmod 755 {} \;
+}
