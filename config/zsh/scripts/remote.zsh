@@ -90,7 +90,7 @@ EOF
         -z "$arg_mount" && \
         -z "$arg_cd" && \
         -z "$arg_status" \
-    ) || -n "$positional" ]] && {_rem_ssh $positional || return 1}
+    ) || -n "$positional" || "$parsing_args" -eq 0 ]] && {_rem_ssh $positional || return 1}
 }
 
 # MARK: helpers ----------------------------------------------------------------
