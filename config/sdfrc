@@ -23,5 +23,5 @@ actions=( \
     ['^config/synapse']="_restart_synapse" \
     ['^config/synapse/modules/control-center$']="open -g hammerspoon://reload-config" \
     ['^home/\.hammerspoon/']="open -g hammerspoon://reload-config" \
-    ['^config/sketchybar/']="pkill sketchybar" \
+    ['^config/sketchybar/']="sketchybar --reload" \
 )
