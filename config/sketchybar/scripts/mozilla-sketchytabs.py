@@ -102,16 +102,22 @@ def listen_to_updates():
 class TabSwitchServer(http.server.BaseHTTPRequestHandler):
     @staticmethod
     def get_url_switchto(tab) -> str:
-        return f'http://localhost:{port}/?tab={tab['id']}'
+        return f'http://localhost:{port}/?switchto={tab['id']}'
 
     def do_GET(self):
         parsed_url = urlparse(self.path)
         query_params = parse_qs(parsed_url.query)
-        target_tab = query_params.get("tab", [None])[0]
+        switchto = query_params.get("switchto", [None])[0]
+        close = query_params.get("close", [None])[0]
 
-        if target_tab:
+        if switchto:
             try:
-                send_message({ "switchTo": int(target_tab) })
+                send_message({ "switchTo": int(switchto) })
+            except: pass
+
+        if close:
+            try:
+                send_message({ "close": int(close) })
             except: pass
 
         self.send_response(200)

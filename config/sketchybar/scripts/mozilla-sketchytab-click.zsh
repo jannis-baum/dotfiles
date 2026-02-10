@@ -2,4 +2,7 @@
 
 [[ -n "$TAB_ID" ]] || exit
 
-curl "http://localhost:11912/?tab=$TAB_ID"
+[[ "$BUTTON" = left ]] && action="switchto"
+[[ "$BUTTON" = right ]] && action="close"
+
+curl "http://localhost:11912/?$action=$TAB_ID"
