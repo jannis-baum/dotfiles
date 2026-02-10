@@ -93,11 +93,10 @@ sketchybar --add item remote right \
                click_script="$SCRIPT_DIR/disconnect-remote.zsh"
 sketchybar --add item cpu_busy right \
            --set cpu_busy \
-               "$label_font_numbers" \
                "$label_color_alert" \
                update_freq=1 \
                script="$PLUGIN_DIR/cpu-busy.zsh" \
-           --subscribe cpu_busy mouse.entered mouse.exited
+           --subscribe cpu_busy
 
 # left app indicator if no tabs
 sketchybar --add event tabs_updated

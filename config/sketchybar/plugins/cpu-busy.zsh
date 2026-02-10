@@ -3,8 +3,6 @@
 # appear when CPU usage goes above threshold, mostly to detect stuck busy
 # processes
 
-source "$CONFIG_DIR/helpers/hover.zsh"
-
 # ps:
 #   -A for all user processes
 #   -r to sort by CPU
@@ -20,10 +18,7 @@ if [[ "$cpu" -lt 90 ]]; then
     exit 0
 fi
 
-sketchybar --set "$NAME" drawing=on
+# get process executable name at end of path
+proc="$(cut -w -f2- <<< "$ps_out" | sed -E 's|.*/([^/]*)$|\1|')"
 
-$HOVERING \
-    && label="$(cut -w -f2- <<<"$ps_out")" \
-    || label="$cpu%"
-
-sketchybar --set "$NAME" label="$label"
+sketchybar --set "$NAME" drawing=on label="$proc"
