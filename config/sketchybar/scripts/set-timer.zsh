@@ -52,5 +52,5 @@ sketchybar --add item "$name" right \
            --set "$name" \
                update_freq=1 \
                script="~/.config/sketchybar/plugins/timer.zsh" \
-               click_script="sketchybar --remove $name; rm $data_fp" \
+               click_script="[[ \"\$BUTTON\" = right ]] || exit; sketchybar --remove $name; rm $data_fp" \
            --update
