@@ -19,6 +19,7 @@ from urllib.parse import unquote, urlparse, parse_qs
 
 browser_name = 'Zen'
 port = 11912
+script_dir = os.path.expanduser("~/.config/sketchybar/scripts")
 
 # read a message from stdin and decode it.
 def get_message():
@@ -72,25 +73,14 @@ def listen_to_updates():
         except:
             pass
 
-    # need index because tab['index'] is not consistent
-    def write_switchto(tab, index) -> Optional[str]:
-        try:
-            path = os.path.join(sketchytabs_dir, f'{index + 1}.zsh')
-            with open(path, 'w') as fp:
-                fp.write(f"#!/bin/zsh\ncurl '{TabSwitchServer.get_url_switchto(tab)}'")
-            os.chmod(path, 0o755)
-            return path
-        except:
-            pass
-
     while True:
         tabs = get_message()
         reset_sketchytabs_dir()
         icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
-        switchto_paths = [write_switchto(tab, index) for index, tab in enumerate(tabs)]
+        switchto_cmds = [f"TAB_ID={tab['id']} {os.path.join(script_dir, 'mozilla-sketchytab-click.zsh')}" for tab in tabs]
         lines = [
-            get_line(tab, icon_path, switchto_path)
-            for (tab, icon_path, switchto_path) in zip(tabs, icon_paths, switchto_paths)
+            get_line(tab, icon_path, switchto_cmd)
+            for (tab, icon_path, switchto_cmd) in zip(tabs, icon_paths, switchto_cmds)
         ]
 
         # tab info for Synapse
@@ -103,7 +93,7 @@ def listen_to_updates():
         fixed_env = os.environ.copy()
         fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
         subprocess.run(
-            ['/opt/homebrew/bin/luajit', os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.lua'), browser_name],
+            ['/opt/homebrew/bin/luajit', os.path.join(script_dir, 'set-sketchytabs.lua'), browser_name],
             input='\n'.join(lines) + '\n',
             text=True,
             env=fixed_env
