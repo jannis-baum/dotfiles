@@ -2,14 +2,18 @@
 
 # edit clipboard in nvim
 
-temp_file="$(mktemp)"
+temp_dir="$(mktemp --directory)"
+temp_file="$temp_dir/clipboard"
 pbpaste > "$temp_file"
 
-# try to auto-detect filetype, if not fall back to markdown
+# - go to directory so we get only "clipboard" as file name in statusline
+# - try to auto-detect filetype, if not fall back to markdown
+# - go to end and insert mode
 /opt/homebrew/bin/nvim "$temp_file" \
-    -c "if &filetype == '' | set filetype=markdown | endif"
+    -c "cd $temp_dir" \
+    -c "if &filetype == '' | set filetype=markdown | endif" \
     -c "normal G" \
     -c "startinsert!"
 
 printf "%s" "$(cat "$temp_file")" | pbcopy
-rm "$temp_file"
+rm -r "$temp_dir"
