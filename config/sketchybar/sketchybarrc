@@ -111,7 +111,5 @@ sketchybar --add item front_app left \
 # update all items
 sketchybar --update
 
-# clear timer data
-rm ~/.local/state/sketchybar/timers/*
 # init sketchytabs
 $SCRIPT_DIR/init-sketchytabs.zsh

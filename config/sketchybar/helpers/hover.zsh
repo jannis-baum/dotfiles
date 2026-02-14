@@ -1,14 +1,12 @@
-name_orig="$(echo "$NAME" | sed 's/_HOVER_//')"
-name_new="$NAME"
+state_file="$HOME/.local/state/sketchybar/hover/$NAME"
+mkdir -p "$(dirname "$state_file")"
 
 case "$SENDER" in
-  "mouse.entered") name_new="${name_orig}_HOVER_";;
-  "mouse.exited") name_new="$name_orig";;
+  "mouse.entered") echo "true" > "$state_file";;
+  "mouse.exited") echo "false" > "$state_file";;
 esac
-[[ "$NAME" != "$name_new" ]] && sketchybar --rename "$NAME" "$name_new"
 
-NAME="$name_new"
-
-[[ "$NAME" = *_HOVER_* ]] \
+state="$(cat "$state_file")"
+[[ "$state" == "true" ]] \
     && HOVERING=true \
     || HOVERING=false

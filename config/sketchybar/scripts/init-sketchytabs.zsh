@@ -1,9 +1,14 @@
 #!/bin/zsh
 
-# set up dimensions for font ---------------------------------------------------
 sketchy_dir="$HOME/.config/sketchybar"
-output_file="$HOME/.local/state/sketchybar/widths.txt"
-mkdir -p "$(dirname "$output_file")"
+
+# set up state dir -------------------------------------------------------------
+state_dir="$HOME/.local/state/sketchybar"
+rm -rf "$state_dir"
+mkdir -p "$state_dir"
+
+# set up dimensions for font ---------------------------------------------------
+output_file="$state_dir/widths.txt"
 
 app="$(osascript -l JavaScript -e 'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName')"
 
