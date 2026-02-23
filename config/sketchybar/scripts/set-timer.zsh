@@ -73,4 +73,40 @@ function cli() {
     set_timer "$seconds" "$title"
 }
 
-cli $@
+function cli_tomato() {
+    # <-> matches integers
+    [[ "$1" == <-> ]] \
+        && local phase="$1" \
+        || local phase="0"
+
+    # 8 phases: [work, short break] * 3 + [work, long break]
+    local mod_phase="$(( "$phase" % 8 ))"
+
+    case "$mod_phase" in
+        # work
+        0 | 2 | 4 | 6)
+            local title="tomato $(( "$phase" / 2 + 1))"
+            local seconds="1500"
+            ;;
+        # short break
+        1 | 3 | 5)
+            local title="break"
+            local seconds="300"
+            ;;
+        # long break
+        7)
+            local title="break"
+            local seconds="1800"
+            ;;
+    esac
+
+    echo '#!/bin/zsh'"\n$script_path --tomato $(( "$phase" + 1 ))" \
+        | set_timer "$seconds" "$title"
+}
+
+if [[ "$1" == "--tomato" || "$1" == "-t" ]]; then
+    shift
+    cli_tomato $@
+else
+    cli $@
+fi
