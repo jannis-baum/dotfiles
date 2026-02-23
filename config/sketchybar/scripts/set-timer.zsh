@@ -18,12 +18,20 @@ deadline="$deadline"
 title="$title"
 EOF
 
+    # if stdin is not a terminal read script to run after time is done (and
+    # then dismissed) from there
+    if ! [[ -t 0 ]]; then
+        local after_done="$data_fp.after_done"
+        cat > "$after_done"
+        chmod +x "$after_done"
+    fi
+
     local name="TIMER_$id"
     sketchybar --add item "$name" right \
                --set "$name" \
                    update_freq=1 \
                    script="~/.config/sketchybar/plugins/timer.zsh" \
-                   click_script="[[ \"\$BUTTON\" = right ]] || exit; sketchybar --remove $name; rm $data_fp" \
+               --subscribe "$name" mouse.clicked \
                --update
 }
 
