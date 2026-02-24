@@ -31,6 +31,8 @@ case "$SENDER" in
             # time formatting
             if [[ "$time_left" -ge 3600 ]]; then
                 time_left="$(gdate -u -d "@$time_left" "+%-H:%Mh")"
+            elif [[ "$time_left" -ge 600 ]]; then
+                time_left="$(gdate -u -d "@$time_left" "+%-Mmin")"
             elif [[ "$time_left" -ge 60 ]]; then
                 time_left="$(gdate -u -d "@$time_left" "+%-M:%Smin")"
             else
