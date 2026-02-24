@@ -21,12 +21,14 @@ if ! [[ -f "$data_fp" ]]; then
     exit 1
 fi
 source "$data_fp"
-time_left="$(echo "$deadline - $(date +%s)" | bc)"
+# time left is difference between deadline and now or pausing timestamp
+time_left="$(( $deadline - $( [[ -v paused ]] && printf "$paused" || date +%s) ))"
 
 case "$SENDER" in
     # scheduled script
     "routine" | "forced")
         if [[ "$time_left" -gt 0 ]]; then
+            # time formatting
             if [[ "$time_left" -ge 3600 ]]; then
                 time_left="$(gdate -u -d "@$time_left" "+%-H:%Mh")"
             elif [[ "$time_left" -ge 60 ]]; then
@@ -34,7 +36,9 @@ case "$SENDER" in
             else
                 time_left="${time_left}s"
             fi
-            sketchybar --set "$NAME" label="􀐱 $title: $time_left"
+            # paused color
+            [[ -v paused ]] && label_color="0xff808080" || label_color="0xffbbbbbb"
+            sketchybar --set "$NAME" label="􀐱 $title: $time_left" label.color="$label_color"
         else
             sketchybar --set "$NAME" label="􁙜 $title" label.color=0xfffc897e
         fi
@@ -42,9 +46,23 @@ case "$SENDER" in
 
     # click script
     "mouse.clicked")
-        [[ "$BUTTON" == right ]] || exit
-        [[ "$time_left" -le 0 && -x "$after_done" ]] && "$after_done"
-        remove_self
-        exit
+        case "$BUTTON" in
+            "left")
+                if [[ -v paused ]]; then
+                    # clear pausing data & shift deadline by time timer was paused
+                    updated_data="$(cat "$data_fp" | grep -ve paused -e deadline)"
+                    new_deadline="$(( $(date +%s) - $paused + $deadline ))"
+                    echo "$updated_data\ndeadline=$new_deadline" > "$data_fp"
+                else
+                    echo "paused=$(date +%s)" >> "$data_fp"
+                fi
+                ;;
+            "right")
+                [[ "$time_left" -le 0 && -x "$after_done" ]] && "$after_done"
+                remove_self
+                exit
+                ;;
+        esac
+        sketchybar --update
         ;;
 esac
