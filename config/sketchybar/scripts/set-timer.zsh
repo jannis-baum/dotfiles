@@ -87,19 +87,23 @@ function cli_tomato() {
         0 | 2 | 4 | 6)
             local title="tomato $(( "$phase" / 2 + 1))"
             local seconds="1500"
+            local do_not_disturb="on"
             ;;
         # short break
         1 | 3 | 5)
             local title="break"
             local seconds="300"
+            local do_not_disturb="off"
             ;;
         # long break
         7)
             local title="break"
             local seconds="1800"
+            local do_not_disturb="off"
             ;;
     esac
 
+    printf "$do_not_disturb" | shortcuts run "set do not disturb"
     echo '#!/bin/zsh'"\n$script_path --tomato $(( "$phase" + 1 ))" \
         | set_timer "$seconds" "$title"
 }
