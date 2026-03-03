@@ -1,23 +1,14 @@
-# recent commands matching prefix
-# up
-autoload -U up-line-or-beginning-search
-zle -N up-line-or-beginning-search
-# helper to re-read history file to get shared commands from other sessions
-function up-line-or-history-reread() {
+# pick from command history
+function history-wrapper() {
+        # re-read history file to get shared commands from other sessions
         [[ -z $BUFFER ]] && fc -R $HISTFILE
-        zle up-line-or-beginning-search
+        zle _fzf_history
+        # go to insert
+        zle vi-insert
 }
-zle -N up-line-or-history-reread
-bindkey  -M vicmd k up-line-or-history-reread
-# down
-autoload -U down-line-or-beginning-search
-zle -N down-line-or-beginning-search
-function down-line-or-history-reread() {
-        [[ -z $BUFFER ]] && fc -R $HISTFILE
-        zle down-line-or-beginning-search
-}
-zle -N down-line-or-history-reread
-bindkey  -M vicmd j down-line-or-history-reread
+zle -N history-wrapper
+bindkey  -M vicmd k history-wrapper
+bindkey  -M vicmd j history-wrapper
 
 # shift+tab to go back in completion
 bindkey -M viins "${terminfo[kcbt]}" reverse-menu-complete
