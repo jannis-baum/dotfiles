@@ -7,6 +7,8 @@ function history-wrapper() {
         zle vi-insert
 }
 zle -N history-wrapper
+bindkey  "^[[A" history-wrapper
+bindkey  "^[[B" history-wrapper
 bindkey  -M vicmd k history-wrapper
 bindkey  -M vicmd j history-wrapper
 
