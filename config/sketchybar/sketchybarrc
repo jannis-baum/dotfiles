@@ -42,16 +42,10 @@ label_color_alert="label.color=0xfffc897e"
 label_font_symbol="label.font=SF Compact:Thin:14"
 label_font_numbers="label.font=Poiret One:Bold:18"
 
-source "$ITEMS_DIR/hide-button/init.zsh"
-
-# right items (always visible)
-source "$ITEMS_DIR/clock/init.zsh"
-source "$ITEMS_DIR/battery/init.zsh"
-
-# right items (visible if important information)
-source "$ITEMS_DIR/volume/init.zsh"
-source "$ITEMS_DIR/remote/init.zsh"
-source "$ITEMS_DIR/cpu-busy/init.zsh"
+# add items (order matters)
+for item in hide-button clock battery volume remote cpu-busy; do
+    source "$ITEMS_DIR/$item/init.zsh"
+done
 
 # left app indicator if no tabs
 sketchybar --add event tabs_updated
