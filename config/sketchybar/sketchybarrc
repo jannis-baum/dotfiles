@@ -50,13 +50,7 @@ source "$ITEMS_DIR/battery/init.zsh"
 
 # right items (visible if important information)
 source "$ITEMS_DIR/volume/init.zsh"
-sketchybar --add item remote right \
-           --set remote \
-               update_freq=1 \
-               "$label_font_symbol" \
-               "$label_color_alert" \
-               script="$PLUGIN_DIR/remote.zsh" \
-               click_script="$SCRIPT_DIR/disconnect-remote.zsh"
+source "$ITEMS_DIR/remote/init.zsh"
 source "$ITEMS_DIR/cpu-busy/init.zsh"
 
 # left app indicator if no tabs
