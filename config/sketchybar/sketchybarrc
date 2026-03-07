@@ -50,20 +50,8 @@ sketchybar --add item hide-button right \
                click_script="$SCRIPT_DIR/hide-briefly.zsh"
 
 # right items (always visible)
-source "$ITEMS_DIR/clock/init"
-
-# battery
-sketchybar --add item battery right \
-           --set battery \
-               "$label_font_numbers" \
-               update_freq=10 \
-               script="$PLUGIN_DIR/battery.zsh" \
-           --subscribe battery mouse.entered mouse.exited power_source_change
-sketchybar --add item battery-percentage popup.battery \
-           --set battery-percentage \
-               update_freq=10 \
-               script="$PLUGIN_DIR/battery-percent.zsh" \
-           --subscribe battery-percentage power_source_change
+source "$ITEMS_DIR/clock/init.zsh"
+source "$ITEMS_DIR/battery/init.zsh"
 
 # right items (visible if important information)
 sketchybar --add item volume right \
