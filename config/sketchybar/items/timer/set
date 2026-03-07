@@ -30,7 +30,7 @@ EOF
     sketchybar --add item "$name" right \
                --set "$name" \
                    update_freq=1 \
-                   script="~/.config/sketchybar/plugins/timer.zsh" \
+                   script="~/.config/sketchybar/items/timer/script" \
                --subscribe "$name" mouse.clicked \
                --update
 }
