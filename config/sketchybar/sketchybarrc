@@ -42,12 +42,7 @@ label_color_alert="label.color=0xfffc897e"
 label_font_symbol="label.font=SF Compact:Thin:14"
 label_font_numbers="label.font=Poiret One:Bold:18"
 
-# invisible button that covers all empty space to hide briefly and show vanilla
-# menubar (added first to be in background)
-sketchybar --add item hide-button right \
-           --set hide-button \
-               width=9999 \
-               click_script="$SCRIPT_DIR/hide-briefly.zsh"
+source "$ITEMS_DIR/hide-button/init.zsh"
 
 # right items (always visible)
 source "$ITEMS_DIR/clock/init.zsh"
