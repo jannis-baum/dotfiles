@@ -1,5 +1,8 @@
+#!/bin/zsh
+
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 SCRIPT_DIR="$CONFIG_DIR/scripts"
+ITEMS_DIR="$CONFIG_DIR/items"
 
 # bar appearance
 bar=(
@@ -47,22 +50,7 @@ sketchybar --add item hide-button right \
                click_script="$SCRIPT_DIR/hide-briefly.zsh"
 
 # right items (always visible)
-# clock
-sketchybar --add item clock right \
-           --set clock \
-               "$label_font_numbers" \
-               update_freq=1 \
-               script="$PLUGIN_DIR/clock.zsh" \
-               click_script="$SCRIPT_DIR/show-control-center.zsh" \
-           --subscribe clock mouse.entered mouse.exited \
-sketchybar --add item clock-date popup.clock \
-           --set clock-date \
-               update_freq=60 \
-               script='sketchybar --set $NAME label="􀉉 $(date "+%a, %b %d" | xargs)"'
-sketchybar --add item clock-seconds popup.clock \
-           --set clock-seconds \
-               update_freq=1 \
-               script='sketchybar --set $NAME label="􀐫 $(date +%H:%M:%S | xargs)"'
+source "$ITEMS_DIR/clock/init"
 
 # battery
 sketchybar --add item battery right \
