@@ -49,12 +49,7 @@ source "$ITEMS_DIR/clock/init.zsh"
 source "$ITEMS_DIR/battery/init.zsh"
 
 # right items (visible if important information)
-sketchybar --add item volume right \
-           --set volume \
-               "$label_font_symbol" \
-               script="$PLUGIN_DIR/volume.zsh" \
-               click_script="$SCRIPT_DIR/mute.zsh" \
-           --subscribe volume volume_change
+source "$ITEMS_DIR/volume/init.zsh"
 sketchybar --add item remote right \
            --set remote \
                update_freq=1 \
