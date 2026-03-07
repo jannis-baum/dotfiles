@@ -106,7 +106,7 @@ local function main()
         list_extend(sketchy_args, {
             '--add', 'item', item_name, 'left',
             '--set', item_name,
-                'script=~/.config/sketchybar/plugins/sketchytab.zsh',
+                'script=~/.config/sketchybar/items/sketchytab/script',
                 'drawing=' .. drawing,
                 'label=' .. label,
                 'label.color=' .. label_color,

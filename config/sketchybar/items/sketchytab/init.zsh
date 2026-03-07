@@ -1,6 +1,6 @@
-#!/bin/zsh
+item_dir="${0:a:h}"
 
-sketchy_dir="$HOME/.config/sketchybar"
+sketchybar --update
 
 # set up state dir -------------------------------------------------------------
 state_dir="$HOME/.local/state/sketchybar"
@@ -13,7 +13,7 @@ output_file="$state_dir/widths.txt"
 app="$(osascript -l JavaScript -e 'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName')"
 
 function set_tabs() {
-    luajit "$sketchy_dir/scripts/set-sketchytabs.lua" "$app"
+    luajit "$item_dir/set.lua" "$app"
 }
 
 function get_width() {
@@ -31,7 +31,7 @@ echo "base=0\nchar=0\nimage=0" > "$output_file"
 long_title_len=50
 long_title="$(cat /dev/urandom | base64 | head -c $long_title_len)"
 
-echo ":::a\n:::$long_title\n:$sketchy_dir/media/placeholder-icon.png::a" | set_tabs
+echo ":::a\n:::$long_title\n:$item_dir/placeholder-icon.png::a" | set_tabs
 item_1_w=$(get_width 1)
 item_2_w=$(get_width 2)
 item_3_w=$(get_width 3)
@@ -53,3 +53,6 @@ test -d /Volumes/sketchytabs && exit 0
 
 # create ram disk with given number of 512byte blocks (i.e. 256MB)
 diskutil erasevolume APFS "sketchytabs" $(hdiutil attach -nomount ram://524288)
+
+# set up update event ----------------------------------------------------------
+sketchybar --add event tabs_updated

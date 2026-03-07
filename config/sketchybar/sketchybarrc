@@ -16,7 +16,7 @@ bar=(
     topmost=on
 )
 sketchybar --bar "${bar[@]}"
-sketchybar --load-font "$CONFIG_DIR/media/PoiretOne-With-Lightning.ttf"
+sketchybar --load-font "$CONFIG_DIR/fonts/PoiretOne-With-Lightning.ttf"
 
 # item defaults
 default=(
@@ -43,12 +43,11 @@ label_font_symbol="label.font=SF Compact:Thin:14"
 label_font_numbers="label.font=Poiret One:Bold:18"
 
 # add items (order matters)
-for item in hide-button clock battery volume remote cpu-busy; do
+for item in hide-button clock battery volume remote cpu-busy sketchytab; do
     source "$ITEMS_DIR/$item/init.zsh"
 done
 
 # left app indicator if no tabs
-sketchybar --add event tabs_updated
 sketchybar --add item front_app left \
            --set front_app \
                 script="$PLUGIN_DIR/front-app.zsh" \
@@ -56,6 +55,3 @@ sketchybar --add item front_app left \
 
 # update all items
 sketchybar --update
-
-# init sketchytabs
-$SCRIPT_DIR/init-sketchytabs.zsh

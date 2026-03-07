@@ -151,7 +151,7 @@ def _refresh_widgets(boss: Boss) -> None:
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     p = subprocess.Popen(
-        ['luajit', os.path.expanduser('~/.config/sketchybar/scripts/set-sketchytabs.lua'), 'kitty'],
+        ['luajit', os.path.expanduser('~/.config/sketchybar/items/sketchytab/set.lua'), 'kitty'],
         stdin=subprocess.PIPE,
         env=fixed_env
     )
