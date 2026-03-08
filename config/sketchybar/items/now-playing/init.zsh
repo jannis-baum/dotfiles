@@ -42,7 +42,8 @@ function _watch_media() {
 
 sketchybar --add item now-playing right \
            --set now-playing \
-               drawing=off
+               drawing=off \
+               click_script="$item_dir/click"
 
 _watch_media &!
 _monitor_sketchybar $! &!

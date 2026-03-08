@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+[[ "$BUTTON" = left ]] && action="toggle-play-pause"
+[[ "$BUTTON" = right ]] && action="next-track"
+
+media-control $action
