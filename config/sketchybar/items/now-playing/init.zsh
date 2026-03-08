@@ -12,6 +12,13 @@ function _monitor_sketchybar() {
     done
 }
 
+function _ellipsize() {
+  local max=$1
+  local s=$2
+  (( ${#s} > max )) && s="${s[1,max-1]}…"
+  print -r -- "$s"
+}
+
 function _update() {
     while IFS= read -r line; do
         local playing="$(jq -r .payload.playing <<< "$line")"
@@ -24,7 +31,7 @@ function _update() {
             "false") local label_color="0xff808080";;
         esac
 
-        local label="$(jq -r '"\(.payload.title) - \(.payload.artist)"' <<< "$line")"
+        local label="$(_ellipsize 24 "$(jq -r '"\(.payload.title) - \(.payload.artist)"' <<< "$line")")"
         sketchybar --set now-playing drawing=on label="$label" label.color="$label_color"
     done
 }
