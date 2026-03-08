@@ -31,8 +31,16 @@ function _update() {
             "false") local label_color="0xff808080";;
         esac
 
-        local label="$(_ellipsize 24 "$(jq -r '"\(.payload.title) - \(.payload.artist)"' <<< "$line")")"
-        sketchybar --set now-playing drawing=on label="$label" label.color="$label_color"
+        local title="$(jq -r .payload.title <<< "$line")"
+        local artist="$(jq -r .payload.artist <<< "$line")"
+        local app="$(jq -r .payload.bundleIdentifier <<< "$line")"
+        sketchybar --set now-playing \
+                        drawing=on \
+                        label="$(_ellipsize 24 "$title - $artist")" \
+                        label.color="$label_color" \
+                  --set now-playing-title label="􀋷 $title" \
+                  --set now-playing-artist label="􂃓 $artist" \
+                  --set now-playing-app label="􀑋 $app"
     done
 }
 
@@ -43,7 +51,12 @@ function _watch_media() {
 sketchybar --add item now-playing right \
            --set now-playing \
                drawing=off \
-               click_script="$item_dir/click"
+               script="$item_dir/script" \
+               click_script="$item_dir/click" \
+           --subscribe now-playing mouse.entered mouse.exited \
+           --add item now-playing-title popup.now-playing \
+           --add item now-playing-artist popup.now-playing \
+           --add item now-playing-app popup.now-playing
 
 _watch_media &!
 _monitor_sketchybar $! &!
