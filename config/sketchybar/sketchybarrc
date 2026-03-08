@@ -52,6 +52,7 @@ items=(
     volume
     remote
     cpu-busy
+    now-playing
     # left side
     sketchytab # before front-app because defines event
     front-app
