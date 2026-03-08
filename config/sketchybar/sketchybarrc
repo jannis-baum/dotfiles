@@ -43,9 +43,19 @@ label_font_symbol="label.font=SF Compact:Thin:14"
 label_font_numbers="label.font=Poiret One:Bold:18"
 
 # add items (order matters)
-for item in hide-button clock battery volume remote cpu-busy sketchytab front-app; do
-    source "$ITEMS_DIR/$item/init.zsh"
-done
-
+items=(
+    # takes up all empty space
+    hide-button
+    # right side
+    clock
+    battery
+    volume
+    remote
+    cpu-busy
+    # left side
+    sketchytab # before front-app because defines event
+    front-app
+)
+for item in $items; do; source "$ITEMS_DIR/$item/init.zsh"; done
 # update all items
 sketchybar --update
