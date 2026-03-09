@@ -44,11 +44,15 @@ echo "base=$base_w\nchar=$char_w\nimage=$image_w" > "$output_file"
 
 # set up icon RAM disk ---------------------------------------------------------
 
-# exit if volume is already there
-test -d /Volumes/sketchytabs && return 0
+function setup_ram_disk() {
+    # exit if volume is already there
+    test -d /Volumes/sketchytabs && return 0
 
-# create ram disk with given number of 512byte blocks (i.e. 256MB)
-diskutil erasevolume APFS "sketchytabs" $(hdiutil attach -nomount ram://524288)
+    # create ram disk with given number of 512byte blocks (i.e. 256MB)
+    diskutil erasevolume APFS "sketchytabs" $(hdiutil attach -nomount ram://524288)
+}
+
+setup_ram_disk
 
 # set up update event ----------------------------------------------------------
 sketchybar --add event tabs_updated
