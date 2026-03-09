@@ -41,6 +41,8 @@ sketchybar --default "${default[@]}"
 label_color_alert="label.color=0xfffc897e"
 label_font_symbol="label.font=SF Compact:Thin:14"
 label_font_numbers="label.font=Poiret One:Bold:18"
+state_dir="$HOME/.local/state/sketchybar"
+mkdir -p "$state_dir"
 
 # add items (order matters)
 items=(

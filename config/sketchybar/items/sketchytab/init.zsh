@@ -2,12 +2,8 @@ item_dir="${0:a:h}"
 
 sketchybar --update
 
-# set up state dir -------------------------------------------------------------
-state_dir="$HOME/.local/state/sketchybar"
-rm -rf "$state_dir"
-mkdir -p "$state_dir"
-
 # set up dimensions for font ---------------------------------------------------
+rm -rf "$state_dir/widths.txt"
 output_file="$state_dir/widths.txt"
 
 app="$(osascript -l JavaScript -e 'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName')"
