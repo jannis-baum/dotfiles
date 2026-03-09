@@ -247,3 +247,42 @@ function share-permissions() {
     # directories: everyone reads and executes, owner writes
     find "$target_dir" -type d -exec chmod 755 {} \;
 }
+
+function storage() {
+    function _usage() {
+        echo "usage: storage [-u | --update] [-d | --date]" >&2
+        unset -f _usage
+        return 1
+    }
+    [[ "$#" -gt 1 ]] && _usage
+
+    local ncdu_output="$HOME/.cache/ncdu_output.json"
+
+    case "$1" in
+        "-u" | "--update")
+        sbatch <<EOF
+#!/bin/bash -ex
+
+#SBATCH --account=sci-renard-student
+#SBATCH --time=24:00:00
+#SBATCH --job-name=ncdu-storage-map
+#SBATCH --output=/dev/null
+#SBATCH --error=/dev/null
+
+# MARK: resources
+#SBATCH --partition=cpu-batch
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=2G
+
+cd
+ncdu -1xo $ncdu_output
+EOF
+            ;;
+        "-d" | "--date") stat --format=%y "$ncdu_output";;
+        "")
+            read -p "latest storage map from $(stat --format=%y "$ncdu_output"). press return to view"
+            ncdu -f "$ncdu_output"
+            ;;
+        *) _usage;;
+    esac
+}
