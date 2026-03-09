@@ -49,7 +49,7 @@ echo "base=$base_w\nchar=$char_w\nimage=$image_w" > "$output_file"
 # set up icon RAM disk ---------------------------------------------------------
 
 # exit if volume is already there
-test -d /Volumes/sketchytabs && exit 0
+test -d /Volumes/sketchytabs && return 0
 
 # create ram disk with given number of 512byte blocks (i.e. 256MB)
 diskutil erasevolume APFS "sketchytabs" $(hdiutil attach -nomount ram://524288)
