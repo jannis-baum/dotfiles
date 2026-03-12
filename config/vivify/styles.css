@@ -27,5 +27,5 @@
 }
 
 h2 {
-    break-before: page;
+    /* break-before: page; */
 }
