@@ -74,37 +74,40 @@ function cli() {
 }
 
 function cli_tomato() {
-    # <-> matches integers
-    [[ "$1" == <-> ]] \
-        && local phase="$1" \
-        || local phase="0"
+    # if arg is integer use parameter, else fall back to default
+    [[ "$1" == <-> ]] && local t_tomato=$1 || local t_tomato=3000
+    [[ "$2" == <-> ]] && local t_break_short=$2 || local t_break_short=600
+    [[ "$3" == <-> ]] && local t_break_long=$3 || local t_break_long=1800
+    [[ "$4" == <-> ]] && local n_tomatoes=$4 || local n_tomatoes=3
+    [[ "$5" == <-> ]] && local phase=$5 || local phase=0
 
-    # 8 phases: [work, short break] * 3 + [work, long break]
-    local mod_phase="$(( "$phase" % 8 ))"
+    cat <<EOF
+starting tomato timer at phase $phase:
+- ${t_tomato}s tomatoes
+- ${t_break_short}s short breaks
+- ${t_break_long}s long breaks
+- $n_tomatoes tomatoes between long breaks
+EOF
 
-    case "$mod_phase" in
-        # work
-        0 | 2 | 4 | 6)
+    local mod_phase=$(( $phase % ($n_tomatoes * 2) ))
+    if [[ $mod_phase -eq $(( $n_tomatoes * 2 - 1 )) ]]; then
+        local title="break"
+        local seconds="$t_break_long"
+        local do_not_disturb="off"
+    else
+        if [[ $(( $mod_phase % 2 )) -eq 0 ]]; then
             local title="tomato $(( "$phase" / 2 + 1))"
-            local seconds="1500"
+            local seconds="$t_tomato"
             local do_not_disturb="on"
-            ;;
-        # short break
-        1 | 3 | 5)
+        else
             local title="break"
-            local seconds="300"
+            local seconds="$t_break_short"
             local do_not_disturb="off"
-            ;;
-        # long break
-        7)
-            local title="break"
-            local seconds="1800"
-            local do_not_disturb="off"
-            ;;
-    esac
+        fi
+    fi
 
     printf "$do_not_disturb" | shortcuts run "set do not disturb"
-    echo '#!/bin/zsh'"\n$script_path --tomato $(( "$phase" + 1 ))" \
+    echo '#!/bin/zsh'"\n$script_path --tomato $t_tomato $t_break_short $t_break_long $n_tomatoes $(( "$phase" + 1 ))" \
         | set_timer "$seconds" "$title"
 }
 
