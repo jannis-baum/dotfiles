@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+[[ -n "$TAB_ID" ]] || exit
+
+kitty_sockets=(/tmp/kitty-*(=N))
+socket="$kitty_sockets[1]"
+[[ -n "$socket" ]] || exit
+
+[[ "$BUTTON" = left ]] && action="focus-tab"
+[[ "$BUTTON" = right ]] && action="close-tab"
+
+kitty @ --to unix:"$socket" $action --match id:$TAB_ID

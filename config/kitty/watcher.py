@@ -118,6 +118,7 @@ def _get_info(boss: Boss) -> str | None:
     return _get_git_info(boss, cwd)
 
 def _refresh_widgets(boss: Boss) -> None:
+    sketchytab_dir = os.path.expanduser('~/.config/sketchybar/items/sketchytab')
     result = ''
 
     tab_manager = boss.active_tab_manager
@@ -143,7 +144,8 @@ def _refresh_widgets(boss: Boss) -> None:
                 title = get_remote_title(tab)
             else:
                 title = get_local_title(tab)
-            return f'{"1" if is_active(tab) else ""}:::{title}'
+            switchto_cmd = f"TAB_ID={tab.id} {os.path.join(sketchytab_dir, "kitty", "click")}"
+            return f'{"1" if is_active(tab) else ""}::{switchto_cmd}:{title}'
 
         tab_lines = [get_line(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_lines) + '\n'
@@ -151,7 +153,7 @@ def _refresh_widgets(boss: Boss) -> None:
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
     p = subprocess.Popen(
-        ['luajit', os.path.expanduser('~/.config/sketchybar/items/sketchytab/set.lua'), 'kitty'],
+        ['luajit', os.path.join(sketchytab_dir, 'set.lua'), 'kitty'],
         stdin=subprocess.PIPE,
         env=fixed_env
     )
