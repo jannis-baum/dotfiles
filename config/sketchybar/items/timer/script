@@ -60,7 +60,7 @@ case "$SENDER" in
                 fi
                 ;;
             "right")
-                [[ "$time_left" -le 0 && -x "$after_done" ]] && "$after_done"
+                [[ ("$time_left" -le 0 || -v paused) && -x "$after_done" ]] && "$after_done"
                 remove_self
                 exit
                 ;;
