@@ -38,7 +38,7 @@ vim.lsp.enable('bashls')
 
 vim.lsp.enable('sourcekit')
 
-vim.lsp.enable('pyright')
+vim.lsp.enable('ty')
 
 vim.lsp.enable('clangd')
 vim.lsp.enable('cmake')
