@@ -32,7 +32,13 @@ bind '"\e[B": history-search-forward'
 bind -m vi-command '"k": history-search-backward'
 bind -m vi-command '"j": history-search-forward'
 
-export PATH="$HOME/meme/bin:$HOME/meme/libexec/meme-5.5.9:$PATH"
+export PATH=\
+"$HOME/.local/lib/kraken2:"\
+"$HOME/.local/lib/ncbi-blast-2.17.0+/bin/:"\
+"$HOME/.local/lib/meme/bin:"\
+"$HOME/.local/lib/meme/libexec/meme-5.5.9:"\
+"$PATH"
+
 export EDITOR=vim
 
 # theme
