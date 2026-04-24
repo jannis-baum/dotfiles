@@ -162,9 +162,10 @@ function _get_template() {
 }
 
 function gpu() {
-    {
-        cat <<EOF
-_srun_args=(
+    local tmpfile="$(mktemp)"
+    echo "_srun_args=(" > "$tmpfile"
+    cat <<EOF | _prepare_template cat >> "$tmpfile"
+# srun args
 $(_get_template header srun)
 $(_get_template bionemo srun)
 $(_get_template container srun)
@@ -174,17 +175,26 @@ $(_get_template container srun)
 --gpus=1
 --constraint=ARCH:X86
 --pty bash
+EOF
+    if [[ $? -ne 0 ]]; then
+        return 1
+        rm "$tmpfile"
+    fi
+    cat <<EOF >> "$tmpfile"
 )
 srun "\${_srun_args[@]}"
 unset _srun_args
 EOF
-    } | _prepare_template --tty source
+
+    source "$tmpfile"
+    rm "$tmpfile"
 }
 
 function cpu() {
-    {
-        cat <<EOF
-_srun_args=(
+    local tmpfile="$(mktemp)"
+    echo "_srun_args=(" > "$tmpfile"
+    cat <<EOF | _prepare_template cat >> "$tmpfile"
+# srun args
 $(_get_template header srun)
 $(_get_template mmseq2 srun)
 $(_get_template container srun)
@@ -192,11 +202,19 @@ $(_get_template container srun)
 --cpus-per-task=4
 --mem=8G
 --pty bash
+EOF
+    if [[ $? -ne 0 ]]; then
+        return 1
+        rm "$tmpfile"
+    fi
+    cat <<EOF >> "$tmpfile"
 )
 srun "\${_srun_args[@]}"
 unset _srun_args
 EOF
-    } | _prepare_template --tty source
+
+    source "$tmpfile"
+    rm "$tmpfile"
 }
 
 function sb() {
