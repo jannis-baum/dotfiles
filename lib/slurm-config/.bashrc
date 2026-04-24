@@ -118,12 +118,15 @@ EOF
         job_id="$user_jobs"
     fi
 
+    # srun --overlap allows it to share resources with running steps (necessary
+    # if job was started with srun where it's just one step rather than
+    # sbatch/salloc)
     if [[ -n "$arg_smi" ]]; then
-        srun --jobid="$job_id" -- watch --interval 1 nvidia-smi
+        srun --overlap --jobid="$job_id" -- watch --interval 1 nvidia-smi
     else
         # c to preserve stuff before top
         c
-        srun --jobid="$job_id" --pty -- top -u $USER
+        srun --overlap --jobid="$job_id" --pty -- top -u $USER
         # actual clear to remove stop leftovers
         clear
     fi
