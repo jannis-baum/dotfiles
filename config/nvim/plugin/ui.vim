@@ -1,3 +1,5 @@
+lua require('vim._core.ui2').enable({})
+
 " OPTIONS -------------------------------------------------------------
 " colors
 set notermguicolors             " 256 instead of true color for chameleon hacks
