@@ -61,7 +61,11 @@ unset -f _setup_ssh_key
 cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
-alias sme="squeue --me"
+function sme() {
+    local output="$(\squeue --format "%.8i %.9P %.20j %.10M %.2t %4C %5m %.20R %.16b" --me)"
+    echo -e "\e[1;4m$(head -1 <<< "$output" | sed -e "s/TRES_PER_NODE/    RESOURCES/" -e "s/MIN_M/MEM  /")\e[0m"
+    tail -n +2 <<< "$output"
+}
 
 function stop() {
     # arg parsing
