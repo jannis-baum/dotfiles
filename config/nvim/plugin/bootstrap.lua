@@ -1,47 +1,23 @@
 -- PACK & PLUGINS -----------------------------------------------------
-local function clone_paq()
-    local path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
-    local is_installed = vim.fn.empty(vim.fn.glob(path)) == 0
-    if not is_installed then
-        vim.notify('Cloning paq')
-        vim.fn.system { 'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', path }
-        return true
-    end
-end
-
-local function bootstrap_paq(packages)
-    local first_install = clone_paq()
-    vim.cmd.packadd('paq-nvim')
-    local paq = require('paq')
-    if first_install then
-        vim.notify('Installing plugins... If prompted, hit Enter to continue.')
-    end
-
-    paq(packages)
-    paq.install()
-end
-
-bootstrap_paq {
-    'savq/paq-nvim',
+vim.pack.add({
     -- editing
-    { 'echasnovski/mini.pairs', branch = 'main' }, -- we use main here because stable still overwrites user <cr> mappings
-    'tpope/vim-commentary',
-    { 'echasnovski/mini.splitjoin', branch = 'stable' },
+    { src = 'https://github.com/echasnovski/mini.pairs', version = 'main' }, -- we use main here because stable still overwrites user <cr> mappings
+    'https://github.com/tpope/vim-commentary',
+    { src = 'https://github.com/echasnovski/mini.splitjoin', version = 'stable' },
     -- moves
-    'justinmk/vim-sneak',
-    { 'echasnovski/mini.ai', branch = 'stable' },
-    { 'echasnovski/mini.surround', branch = 'stable' },
-    { 'echasnovski/mini.operators', branch = 'stable' },
-    { 'echasnovski/mini.diff', branch = 'stable' },
+    'https://github.com/justinmk/vim-sneak',
+    { src = 'https://github.com/echasnovski/mini.ai', version = 'stable' },
+    { src = 'https://github.com/echasnovski/mini.surround', version = 'stable' },
+    { src = 'https://github.com/echasnovski/mini.operators', version = 'stable' },
+    { src = 'https://github.com/echasnovski/mini.diff', version = 'stable' },
     -- ui
-    'nvim-focus/focus.nvim',
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-    { 'echasnovski/mini.notify', branch = 'stable' },
+    'https://github.com/nvim-focus/focus.nvim',
+    { src = 'https://github.com/echasnovski/mini.notify', version = 'stable' },
     -- misc
-    'neovim/nvim-lspconfig',
-    'tpope/vim-fugitive',
-    'hat0uma/csvview.nvim',
-}
+    'https://github.com/neovim/nvim-lspconfig',
+    'https://github.com/tpope/vim-fugitive',
+    'https://github.com/hat0uma/csvview.nvim',
+})
 
 -- PYTHON -------------------------------------------------------------
 local python_env_name = 'py3nvim'
