@@ -147,52 +147,71 @@ function _prepare_template() {
     fi
     rm "$temp_job"
 }
-_template_dir="$HOME/slurm-templates"
+function _get_template() {
+    local template_path="$HOME/slurm-templates/$1"
+    if ! test -f "$template_path"; then
+        echo "file not found: $template_path" >&2
+        return 1
+    fi
+
+    if [[ "$2" == "srun" ]]; then
+        cat "$template_path" | sed "s/#SBATCH //"
+    else
+        cat "$template_path"
+    fi
+}
 
 function gpu() {
     {
-        cat "$_template_dir/srun-header"
-        cat "$_template_dir/srun-bionemo"
-        cat "$_template_dir/srun-container"
         cat <<EOF
-    --partition=gpu-interactive \\
-    --cpus-per-task=32 \\
-    --mem=128G \\
-    --gpus=1 \\
-    --constraint=ARCH:X86 \\
-    --pty bash
+_srun_args=(
+$(_get_template header srun)
+$(_get_template bionemo srun)
+$(_get_template container srun)
+--partition=gpu-interactive
+--cpus-per-task=32
+--mem=128G
+--gpus=1
+--constraint=ARCH:X86
+--pty bash
+)
+srun "\${_srun_args[@]}"
+unset _srun_args
 EOF
     } | _prepare_template --tty source
 }
 
 function cpu() {
     {
-        cat "$_template_dir/srun-header"
-        cat "$_template_dir/srun-mmseq2"
-        cat "$_template_dir/srun-container"
         cat <<EOF
-    --partition=cpu-interactive \\
-    --cpus-per-task=4 \\
-    --mem=8G \\
-    --pty bash
+_srun_args=(
+$(_get_template header srun)
+$(_get_template mmseq2 srun)
+$(_get_template container srun)
+--partition=cpu-interactive
+--cpus-per-task=4
+--mem=8G
+--pty bash
+)
+srun "\${_srun_args[@]}"
+unset _srun_args
 EOF
     } | _prepare_template --tty source
 }
 
 function sb() {
     {
-        cat "$_template_dir/sbatch-header"
         cat <<EOF
+#!/bin/bash -ex
+$(_get_template header)
 #SBATCH --job-name=generic
 #SBATCH --output=$HOME/.cache/generic-logs/%j
 #SBATCH --error=$HOME/.cache/generic-logs/%j
 
-EOF
-        cat "$_template_dir/sbatch-bionemo"
-        cat "$_template_dir/sbatch-mmseq2"
-        cat "$_template_dir/sbatch-container"
-        cat "$_template_dir/sbatch-resources"
-        cat <<EOF
+$(_get_template bionemo)
+$(_get_template mmseq2)
+$(_get_template container)
+$(_get_template resources)
 
 export PYTHONUNBUFFERED=1
 cd $(pwd -P)
@@ -205,18 +224,17 @@ function sjupyviv() {
     mkdir -p "$logs_dir"
 
     local output="$({
-        cat "$_template_dir/sbatch-header"
         cat <<EOF
+#!/bin/bash -ex
+$(_get_template header)
 #SBATCH --job-name=jupyviv
 #SBATCH --output=$logs_dir/%j
 #SBATCH --error=$logs_dir/%j
 
-EOF
-        cat "$_template_dir/sbatch-bionemo"
-        cat "$_template_dir/sbatch-mmseq2"
-        cat "$_template_dir/sbatch-container"
-        cat "$_template_dir/sbatch-resources"
-        cat <<EOF
+$(_get_template bionemo)
+$(_get_template mmseq2)
+$(_get_template container)
+$(_get_template resources)
 
 export PYTHONUNBUFFERED=1
 cd $(pwd -P)

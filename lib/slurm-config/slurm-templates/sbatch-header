@@ -1,4 +1,0 @@
-#!/bin/bash -ex
-
-#SBATCH --account=sci-renard-student
-#SBATCH --time=24:00:00

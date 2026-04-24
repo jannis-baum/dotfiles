@@ -1,3 +1,0 @@
-    --container-writable \
-    --container-mount-home \
-    --container-workdir="$(pwd)" \

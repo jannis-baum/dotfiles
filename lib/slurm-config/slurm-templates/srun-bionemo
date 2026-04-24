@@ -1,2 +1,0 @@
-    --container-image="nvcr.io#nvidia/clara/bionemo-framework:2.7.1" \
-    --container-name=bionemo_x2_7_1 \
