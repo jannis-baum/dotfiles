@@ -17,6 +17,7 @@ vim.pack.add({
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/tpope/vim-fugitive',
     'https://github.com/hat0uma/csvview.nvim',
+    'https://github.com/nvim-treesitter/nvim-treesitter.git'
 })
 
 -- PYTHON -------------------------------------------------------------
