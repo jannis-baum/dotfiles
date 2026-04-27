@@ -61,12 +61,25 @@ unset -f _setup_ssh_key
 cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
-function sme() {
-    local output="$(\squeue --format "%.8i %.9P %.20j %.10M %.2t %4C %5m %.20R %.16b" --me)"
+function sq() {
+    local format="%.8i %.9P %.20j %.10M %.2t %4C %5m %.20R %.16b"
+    [[ -n "$@" && "$@" == *"--me"* ]] || format="%.16u $format"
+
+    local output="$(\squeue --format "$format" $@)"
     [[ "$(wc -l <<< "$output")" -le 1 ]] && return
+
     echo -e "\e[1;4m$(head -1 <<< "$output" | sed -e "s/TRES_PER_NODE/    RESOURCES/" -e "s/MIN_M/MEM  /")\e[0m"
     tail -n +2 <<< "$output"
 }
+function sqg() {
+    local output="$(sq)"
+    [[ "$(wc -l <<< "$output")" -eq 0 ]] && return
+    local filtered="$(tail -n +2 <<< "$output" | grep $@)"
+    [[ "$(wc -l <<< "$filtered")" -eq 0 ]] && return
+    head -1 <<< "$output"
+    echo "$filtered"
+}
+alias sqm="sq --me"
 
 function stop() {
     # arg parsing
