@@ -63,6 +63,7 @@ slurm_account="sci-renard-student"
 
 function sme() {
     local output="$(\squeue --format "%.8i %.9P %.20j %.10M %.2t %4C %5m %.20R %.16b" --me)"
+    [[ "$(wc -l <<< "$output")" -le 1 ]] && return
     echo -e "\e[1;4m$(head -1 <<< "$output" | sed -e "s/TRES_PER_NODE/    RESOURCES/" -e "s/MIN_M/MEM  /")\e[0m"
     tail -n +2 <<< "$output"
 }
