@@ -52,9 +52,9 @@ items=(
     clock
     battery
     volume
+    now-playing
     remote
     cpu-busy
-    now-playing
     timer
     # left side
     sketchytab # before front-app because defines event
