@@ -126,7 +126,7 @@ EOF
         fi
         if [[ $(wc -l <<<"$user_jobs") -gt 1 ]]; then
             echo "Multiple jobs running, please specify one" >&2
-            sme
+            sqm
             return 1
         fi
         job_id="$user_jobs"
