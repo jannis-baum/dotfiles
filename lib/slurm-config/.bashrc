@@ -62,14 +62,69 @@ cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
 function sq() {
-    local format="%.8i %.9P %.20j %.10M %.2t %4C %5m %.20R %.16b"
-    [[ -n "$@" && "$@" == *"--me"* ]] || format="%.16u $format"
+    local field_names="JOBID\tPARTITION\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
+    local jq_fields='
+      .job_id,
+      .partition,
+      (if .job_state[0] == "RUNNING" then .nodes else .state_reason end),
+      .name,
+      (if .start_time.number > 0 and .start_time.number <= $now then
+        ($now - .start_time.number) as $elapsed |
+        ($elapsed | strftime("%H:%M:%S"))
+      else
+        "-"
+      end),
+      (if .job_state[0] == "BOOT_FAIL" then "BF"
+       elif .job_state[0] == "CANCELLED" then "CA"
+       elif .job_state[0] == "COMPLETED" then "CD"
+       elif .job_state[0] == "CONFIGURING" then "CF"
+       elif .job_state[0] == "COMPLETING" then "CG"
+       elif .job_state[0] == "DEADLINE" then "DL"
+       elif .job_state[0] == "FAILED" then "F"
+       elif .job_state[0] == "NODE_FAIL" then "NF"
+       elif .job_state[0] == "OUT_OF_MEMORY" then "OOM"
+       elif .job_state[0] == "PENDING" then "PD"
+       elif .job_state[0] == "PREEMPTED" then "PR"
+       elif .job_state[0] == "RUNNING" then "R"
+       elif .job_state[0] == "RESV_DEL_HOLD" then "RD"
+       elif .job_state[0] == "REQUEUE_FED" then "RF"
+       elif .job_state[0] == "REQUEUE_HOLD" then "RH"
+       elif .job_state[0] == "REQUEUED" then "RQ"
+       elif .job_state[0] == "RESIZING" then "RS"
+       elif .job_state[0] == "REVOKED" then "RV"
+       elif .job_state[0] == "SIGNALING" then "SI"
+       elif .job_state[0] == "SPECIAL_EXIT" then "SE"
+       elif .job_state[0] == "STAGE_OUT" then "SO"
+       elif .job_state[0] == "STOPPED" then "ST"
+       elif .job_state[0] == "SUSPENDED" then "S"
+       elif .job_state[0] == "TIMEOUT" then "TO"
+       else .job_state[0] end),
+      .cpus.number,
+      (if .memory_per_node.number > 1024 then
+        "\(.memory_per_node.number / 1024 | round)G"
+       else
+        "\(.memory_per_node.number)M"
+       end),
+      (
+        (if .tres_alloc_str != "" then .tres_alloc_str else .tres_req_str end) as $tres |
+        ($tres | split(",") | map(select(length > 0 and startswith("gres/gpu"))) |
+         (map(select(startswith("gres/gpu:")) | split(":")[1] | gsub("="; ":")) | .[0]) //
+         (map(select(startswith("gres/gpu=")) | split("=")[1] | gsub("="; ":")) | .[0]) //
+         "-")
+      )
+    '
 
-    local output="$(\squeue --format "$format" $@)"
-    [[ "$(wc -l <<< "$output")" -le 1 ]] && return
+    if [[ -z "$@" || "$@" != *"--me"* ]]; then
+        field_names="USER\t$field_names"
+        jq_fields=".user_name, $jq_fields"
+    fi
 
-    echo -e "\e[1;4m$(head -1 <<< "$output" | sed -e "s/TRES_PER_NODE/    RESOURCES/" -e "s/MIN_M/MEM  /")\e[0m"
-    tail -n +2 <<< "$output"
+    \squeue --json $@ \
+        | jq -r '(.last_update.number // (now | floor)) as $now | .jobs[] | ['"$jq_fields"'] | @tsv' \
+        | {
+          echo -e "\e[1;4m$field_names\e[0m"
+          cat
+        } | column -t -s $'\t'
 }
 function sqg() {
     local output="$(sq)"
