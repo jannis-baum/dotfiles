@@ -207,3 +207,11 @@ function cop() {
     cd -1
     rm -r "$tmp_dir"
 }
+
+function tsv() {
+    column -t -s $'\t' $@
+}
+
+function csv() {
+    column -t -s , $@
+}

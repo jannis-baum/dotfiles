@@ -57,6 +57,14 @@ function _setup_ssh_key() {
 _setup_ssh_key &>/dev/null
 unset -f _setup_ssh_key
 
+function tsv() {
+    column -t -s $'\t' $@
+}
+
+function csv() {
+    column -t -s , $@
+}
+
 # SLURM-related things
 cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
