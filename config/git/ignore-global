@@ -13,3 +13,5 @@ ignoreme*
 
 *.jupyviv.py
 *.jupyviv.ipynb
+
+.claude
