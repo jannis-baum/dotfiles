@@ -199,11 +199,11 @@ function set-desktop-background() {
     osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$background_out\""
 }
 
-function cop() {
+function claudetemp() {
     local tmp_dir="$(mktemp --directory)"
     [[ $# -gt 0 ]] && cp $@ "$tmp_dir"
     cd "$tmp_dir"
-    copilot
+    claude
     cd -1
     rm -r "$tmp_dir"
 }
