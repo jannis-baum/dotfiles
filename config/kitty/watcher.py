@@ -117,6 +117,17 @@ def _get_info(boss: Boss) -> str | None:
     # slow via sshfs
     return _get_git_info(boss, cwd)
 
+# programs where we still want to just show current CWD & branch in the tab bar
+# instead of the program name
+cwd_progs = {
+    "", # window has no exe, i.e. we show normal CWD title
+    "zsh", "-zsh",
+    "cat", "realpath", "sort", "cut", "sed", "awk",
+    "rg", "fd", "fzf",
+    "git", "git-remote-https", "gh" ,
+    "nvim", "vim",
+}
+
 def _refresh_widgets(boss: Boss) -> None:
     sketchytab_dir = os.path.expanduser('~/.config/sketchybar/items/sketchytab')
     result = ''
@@ -127,10 +138,7 @@ def _refresh_widgets(boss: Boss) -> None:
         def is_active(tab) -> bool:
             return active_id == tab.id
 
-        def get_remote_title(_) -> str:
-            return 'ssh'
-
-        def get_local_title(tab) -> str:
+        def get_cwd_title(tab) -> str:
             title = tab.get_cwd_of_active_window() or '??'
             title = title.replace(os.path.expanduser('~'), 'home')
             title = title.split('/')[-1]
@@ -139,11 +147,11 @@ def _refresh_widgets(boss: Boss) -> None:
             return f'{title}{suffix}' if is_active(tab) else title
 
         def get_line(tab) -> str:
-            exe = tab.get_exe_of_active_window()
-            if exe and exe.split('/')[-1] == 'ssh':
-                title = get_remote_title(tab)
+            exe = (tab.get_exe_of_active_window() or "").split("/")[-1]
+            if exe in cwd_progs:
+                title = get_cwd_title(tab)
             else:
-                title = get_local_title(tab)
+                title = exe
             switchto_cmd = f"TAB_ID={tab.id} {os.path.join(sketchytab_dir, "kitty", "click")}"
             return f'{"1" if is_active(tab) else ""}::{switchto_cmd}:{title}'
 
