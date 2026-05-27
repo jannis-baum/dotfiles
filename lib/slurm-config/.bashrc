@@ -121,10 +121,13 @@ function sq() {
          "-")
       )
     '
+    # column that can be truncated
+    local name_col=4
 
     if [[ -z "$@" || "$@" != *"--me"* ]]; then
         field_names="USER\t$field_names"
         jq_fields=".user_name, $jq_fields"
+        name_col=5
     fi
 
     \squeue --json $@ \
@@ -132,7 +135,7 @@ function sq() {
         | {
           echo -e "\e[1;4m$field_names\e[0m"
           cat
-        } | column -t -s $'\t'
+        } | column --table --separator $'\t' --table-truncate $name_col
 }
 function sqg() {
     local output="$(sq)"
