@@ -132,7 +132,7 @@ def _get_info(boss: Boss) -> str | None:
 cwd_progs = {
     "", # window has no exe, i.e. we show normal CWD title
     "zsh", "-zsh",
-    "cat", "realpath", "sort", "cut", "sed", "awk",
+    "cat", "realpath", "sort", "cut", "sed", "awk", "nl",
     "rg", "fd", "fzf",
     "git", "git-remote-https", "gh" ,
     "nvim", "vim",
