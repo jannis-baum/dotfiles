@@ -47,15 +47,14 @@ PS1="\[\e[2m\]\h:\w\[\e[22m\]\n\
 \[\e[38;5;210m\]\[\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\
 \[\e[0m\] » "
 
-# auto add ssh key
-function _setup_ssh_key() {
-    if [[ -z "$SSH_AGENT_PID" ]] || ! ps -p $SSH_AGENT_PID; then
-        eval "$(ssh-agent -s)"
-    fi
-    ssh-add "$HOME/.ssh/id_ed25519_github"
-}
-_setup_ssh_key &>/dev/null
-unset -f _setup_ssh_key
+# auto add ssh key - share one agent across sessions via env file
+_ssh_env="$HOME/.ssh/agent.env"
+if ! { source "$_ssh_env" && kill -0 "$SSH_AGENT_PID"; } &>/dev/null; then
+    ssh-agent > "$_ssh_env"
+    source "$_ssh_env" &>/dev/null
+fi
+ssh-add "$HOME/.ssh/id_ed25519_github" &>/dev/null
+unset _ssh_env
 
 function tsv() {
     column -t -s $'\t' $@
