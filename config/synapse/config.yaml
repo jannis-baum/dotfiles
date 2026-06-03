@@ -49,10 +49,9 @@ modules:
   - pkill
   - timer
   - /inline/date-copy:
-      name: "Today's Date"
+      name: "Dates"
       trigger: "^date (.*)"
       suppressOthers: true
-      isSearchDisabled: true
       reloadsOnChange: false
       source:
         program:
@@ -60,14 +59,23 @@ modules:
           args:
             - -c
             - |
-              echo "[{ \"title\": \"$(date +%y-%m-%d)\" }]"
+              jq -n '
+                def fmt(n): (now + n * 86400) | strftime("%y-%m-%d");
+                def day(n): (now + n * 86400) | strftime("%A");
+                [
+                  { "title": "Today (\(day(0)))", "caption": fmt(0) },
+                  { "title": "Tomorrow (\(day(1)))", "caption": fmt(1) },
+                  (range(2; 7) | {"title": day(.), "caption": fmt(.) }),
+                  { "title": "Next week", "caption": fmt(7) }
+                ]
+              '
       sink:
         program:
           exec: zsh
           args:
             - -c
             - |
-              printf {{ title }} | pbcopy && printf closePanel
+              printf {{ caption }} | pbcopy && printf closePanel
       defaultSymbol: 􀉉 
   - /inline/viclip:
       name: ""
