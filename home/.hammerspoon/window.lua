@@ -19,7 +19,7 @@ local function ax_enhanced_workaround(app, action)
 end
 
 -- fit window below sketchybar on external displays
-local sketchybar_height = 32
+local sketchybar_height = 2
 local function fit_win_below_sketchybar(window)
     local screen = window:screen()
     -- ignore built-in display, fits because of notch
