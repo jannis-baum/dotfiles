@@ -57,6 +57,16 @@ require('mini.surround').setup({
         ['d'] = { input = { "'.-'", '^.().*().$' }, output = { left = "'", right = "'" } },
         ['s'] = { input = { '".-"', '^.().*().$' }, output = { left = '"', right = '"' } },
         ['e'] = { input = { '`.-`', '^.().*().$' }, output = { left = '`', right = '`' } },
+        -- latex function (from https://github.com/nvim-mini/mini.nvim/issues/6#issuecomment-1102890681)
+        -- TODO: auto-map surround f to latex function for markdown/latex filetype
+        L = {
+            input = { [[\%w+%b{}]], '^.-{().*()}$' },
+            output = function()
+                local cmd_name = require('mini.surround').user_input('Latex command name')
+                if cmd_name == nil then return nil end
+                return { left = ([[\%s{]]):format(cmd_name), right = '}' }
+            end,
+        },
     }
 })
 
