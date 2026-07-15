@@ -4,6 +4,7 @@ import sys
 import subprocess
 
 debug_out = open(subprocess.getoutput("~/.local/bin/_log-file kitty-watcher"), "w")
+debug_out.reconfigure(line_buffering=True)
 sys.stderr = debug_out
 sys.stdout = debug_out
 
