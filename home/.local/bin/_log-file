@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+if [[ -z "$1" ]]; then
+    echo "usage: $0 process-name" >&2
+    exit 1
+fi
+
+log_dir="$HOME/.cache/logs"
+mkdir -p "$log_dir"
+
+echo "$log_dir/$1""_$(date +%y-%m-%d_%H-%M-%S)"
