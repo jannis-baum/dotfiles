@@ -8,4 +8,8 @@ fi
 log_dir="$HOME/.cache/logs"
 mkdir -p "$log_dir"
 
-echo "$log_dir/$1""_$(date +%y-%m-%d_%H-%M-%S)"
+log_name="$log_dir/$1"
+# only keep newest 16 log files
+ls -1t "$log_name"* | tail -n +17 | xargs rm --
+
+echo "$log_name""_$(date +%y-%m-%d_%H-%M-%S)"
