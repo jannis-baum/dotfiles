@@ -1,17 +1,14 @@
 # pyright: reportMissingImports=false
 
 import sys
-import os
-from datetime import datetime
+import subprocess
 
-timestamp = datetime.now().strftime("%y-%m-%d_%H-%M-%S")
-debug_dir = os.path.expanduser(f"~/.cache/logs")
-os.makedirs(debug_dir, exist_ok=True)
-debug_out = open(os.path.join(debug_dir, f"kitty-watcher_{timestamp}"), "w")
+debug_out = open(subprocess.getoutput("~/.local/bin/_log-file kitty-watcher"), "w")
 sys.stderr = debug_out
 sys.stdout = debug_out
 
 import atexit
+import os
 import subprocess
 from typing import Any
 
