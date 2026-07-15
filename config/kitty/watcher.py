@@ -108,9 +108,9 @@ def _get_git_info(boss: Boss, cwd: str) -> str | None:
             git_info['num_unstaged_changes'] + \
             git_info['num_conflicted_changes'] + \
             git_info['num_untracked_files']
-        git_status = '✻ ' if dirty > 0 else ''
+        git_status = ' *' if dirty > 0 else ''
     except: return None
-    return f'{git_status}{git_branch}'
+    return f'{git_branch}{git_status}'
 
 def _get_info(boss: Boss) -> str | None:
     cwd = _get_cwd(boss)
