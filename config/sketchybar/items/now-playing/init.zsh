@@ -51,7 +51,15 @@ function _update() {
 }
 
 function _watch_media() {
-    media-control stream --no-diff | _update
+    # output stderr to log file
+    local log_file="$(~/.local/bin/_log-file now-playing)"
+    exec 2>"$log_file"
+    while true; do
+        print -u2 -- "[$(date '+%y-%m-%d %H:%M:%S')] starting media-control stream"
+        media-control stream --no-diff | _update
+        print -u2 -- "[$(date '+%y-%m-%d %H:%M:%S')] stream exited (status=$?), restarting in 2s"
+        sleep 2
+    done
 }
 
 sketchybar --add item now-playing right \
