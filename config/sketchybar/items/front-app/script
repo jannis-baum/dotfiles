@@ -6,7 +6,9 @@ case "$SENDER" in
             Finder)
                 front_app="";;
             sioyek)
-                front_app="$(~/.local/bin/masi --get | cut -d' ' -f1)";;
+                # first space-separated field is reference name or file path,
+                # we show last path component
+                front_app="$(~/.local/bin/masi --get | cut -d' ' -f1 | rev | cut -d'/' -f1 | rev)";;
             *)
                 front_app="$INFO";;
         esac
