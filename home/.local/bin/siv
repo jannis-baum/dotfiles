@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# fallback for running $EDITOR outside of shell since $EDITOR is set to zsh
+# function `siv` that fg's si-vim which won't work when a child process tries
+# to run it.
+
+exec nvim "$@"
