@@ -24,3 +24,6 @@ function node() {
     _lazy_load_nvm
     node $@
 }
+
+# masipalavi
+source "$HOME/.local/lib/masipalavi/zsh/"*.zsh
