@@ -68,7 +68,8 @@ function csv() {
 cluster_addr="hpc.sci.hpi.de"
 slurm_account="sci-renard-student"
 
-function sq() {
+# squeue helpers
+function _sq_tsv() {
     local field_names="JOBID\tPARTITION\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
     local jq_fields='
       .job_id,
@@ -121,28 +122,33 @@ function sq() {
       )
     '
     # column that can be truncated
-    local name_col=4
+    _sq_name_col=4
 
     if [[ -z "$@" || "$@" != *"--me"* ]]; then
         field_names="USER\t$field_names"
         jq_fields=".user_name, $jq_fields"
-        name_col=5
+        _sq_name_col=5
     fi
 
+    echo -e "\e[1;4m$field_names\e[0m"
     \squeue --json $@ \
-        | jq -r '(.last_update.number // (now | floor)) as $now | .jobs[] | ['"$jq_fields"'] | @tsv' \
-        | {
-          echo -e "\e[1;4m$field_names\e[0m"
-          cat
-        } | column --table --separator $'\t' --table-truncate $name_col
+        | jq -r '(.last_update.number // (now | floor)) as $now | .jobs[] | ['"$jq_fields"'] | @tsv'
+}
+function _sq_col() {
+    column --table --separator $'\t' --table-truncate "$_sq_name_col"
+    unset _sq_name_col
+}
+
+# squeue commands
+function sq() {
+    _sq_tsv "$@" | _sq_col
 }
 function sqg() {
-    local output="$(sq)"
-    [[ "$(wc -l <<< "$output")" -eq 0 ]] && return
-    local filtered="$(tail -n +2 <<< "$output" | grep $@)"
-    [[ "$(wc -l <<< "$filtered")" -eq 0 ]] && return
-    head -1 <<< "$output"
-    echo "$filtered"
+    local raw="$(_sq_tsv)"
+    local header="$(head -1 <<< "$raw")"
+    local matches="$(tail -n +2 <<< "$raw" | grep -- "$@")"
+    [[ -z "$matches" ]] && return
+    { echo "$header"; echo "$matches"; } | _sq_col
 }
 alias sqm="sq --me"
 
