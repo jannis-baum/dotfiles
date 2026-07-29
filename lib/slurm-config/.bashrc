@@ -420,3 +420,31 @@ EOF
         *) _usage;;
     esac
 }
+
+# as bash function rather than executables so we can use functions & aliases
+function watch() {
+    local heading="every 2s: $@"
+    while :; do
+        clear
+        local timestamp="$(date +%H:%M:%S)"
+        # print heading and timestamp on one line if it fits, otherwise on two lines
+        if (( $COLUMNS < "${#heading} + ${#timestamp}")); then
+            echo "$heading"
+            printf '%*s\n' "$COLUMNS" "$timestamp"
+        else
+            printf '%s%*s\n' \
+                "$heading" \
+                "$(( COLUMNS - ${#heading} ))" \
+                "$timestamp"
+        fi
+        # print horizontal line
+        printf "\e[2m"
+        # sed because version of tr doesn't support UTF-8 horizontal bar character
+        printf '%*s\n' "$COLUMNS" "" | sed "y/ /―/"
+        printf "\e[0m"
+        # run command with eval to expand aliases
+        eval "$*"
+        sleep 2
+        date
+    done
+}
