@@ -70,15 +70,17 @@ slurm_account="sci-renard-student"
 
 # squeue helpers
 function _sq_tsv() {
-    local field_names="JOBID\tPARTITION\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
+    local field_names="JOBID\tARRAY\tPARTITION\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
     local jq_fields='
       .job_id,
+      .array_task_string,
       .partition,
       (if .job_state[0] == "RUNNING" then .nodes else .state_reason end),
       .name,
-      (if .start_time.number > 0 and .start_time.number <= $now then
+      (if .start_time.number > 0 then
         ($now - .start_time.number) as $elapsed |
-        ($elapsed | strftime("%H:%M:%S"))
+        (if $elapsed < 0 then "-" else "" end) +
+        ((if $elapsed < 0 then -$elapsed else $elapsed end) | strftime("%H:%M:%S"))
       else
         "-"
       end),
@@ -122,17 +124,17 @@ function _sq_tsv() {
       )
     '
     # column that can be truncated
-    _sq_name_col=4
+    _sq_name_col=5
 
     if [[ -z "$@" || "$@" != *"--me"* ]]; then
         field_names="USER\t$field_names"
         jq_fields=".user_name, $jq_fields"
-        _sq_name_col=5
+        _sq_name_col=6
     fi
 
     echo -e "\e[1;4m$field_names\e[0m"
     \squeue --json $@ \
-        | jq -r '(.last_update.number // (now | floor)) as $now | .jobs[] | ['"$jq_fields"'] | @tsv'
+        | jq -r '(.last_update.number // (now | floor)) as $now | .jobs | sort_by(if .start_time.number > 0 then .start_time.number else infinite end) | .[] | ['"$jq_fields"'] | @tsv'
 }
 function _sq_col() {
     column --table --separator $'\t' --table-truncate "$_sq_name_col"
