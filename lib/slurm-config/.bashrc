@@ -137,7 +137,10 @@ function _sq_tsv() {
         | jq -r '(.last_update.number // (now | floor)) as $now | .jobs | sort_by(if .start_time.number > 0 then .start_time.number else infinite end) | .[] | ['"$jq_fields"'] | @tsv'
 }
 function _sq_col() {
-    column --table --separator $'\t' --table-truncate "$_sq_name_col"
+    local hl="$(printf '\e[48;5;229;38;5;235m')"
+    local reset="$(printf '\e[0m')"
+    column --table --separator $'\t' --table-truncate "$_sq_name_col" \
+        | sed "/\b$USER\b/ s/.*/$hl&$reset/"
     unset _sq_name_col
 }
 
