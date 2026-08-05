@@ -70,12 +70,12 @@ slurm_account="sci-renard-student"
 
 # squeue helpers
 function _sq_tsv() {
-    local field_names="JOBID\tARRAY\tPARTITION\tQOS\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
+    local field_names="JOBID\tARRAY\tPARTITION\tQ\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
     local jq_fields='
       .job_id,
       (.array_task_string | trunc(8)),
       (.partition | trunc(16)),
-      (.qos | trunc(3)),
+      (.qos | trunc(1)),
       ((if .job_state[0] == "RUNNING" then .nodes else .state_reason end) | trunc(16)),
       (.name | trunc(28)),
       (if .start_time.number > 0 then
@@ -132,7 +132,11 @@ function _sq_tsv() {
     echo -e "\e[1;4m$field_names\e[0m"
     \squeue --json $@ \
         | jq -r '
-            def trunc($n): if length > $n then .[:$n-1] + "…" else . end;
+            def trunc($n):
+                if $n == 1 then .[:1] else
+                    (if length > $n then .[:$n-1] + "…" else . end)
+                end
+            ;
 
             (.last_update.number // (now | floor)) as $now
                 | .jobs
