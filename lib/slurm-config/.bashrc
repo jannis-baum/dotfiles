@@ -70,11 +70,12 @@ slurm_account="sci-renard-student"
 
 # squeue helpers
 function _sq_tsv() {
-    local field_names="JOBID\tARRAY\tPARTITION\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
+    local field_names="JOBID\tARRAY\tPARTITION\tQOS\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
     local jq_fields='
       .job_id,
       .array_task_string,
       .partition,
+      .qos,
       (if .job_state[0] == "RUNNING" then .nodes else .state_reason end),
       .name,
       (if .start_time.number > 0 then
@@ -124,12 +125,12 @@ function _sq_tsv() {
       )
     '
     # column that can be truncated
-    _sq_name_col=5
+    _sq_trunc_col=6
 
     if [[ -z "$@" || "$@" != *"--me"* ]]; then
         field_names="USER\t$field_names"
         jq_fields=".user_name, $jq_fields"
-        _sq_name_col=6
+        _sq_trunc_col=7
     fi
 
     echo -e "\e[1;4m$field_names\e[0m"
@@ -141,7 +142,7 @@ function _sq_col() {
     local reset="$(printf '\e[0m')"
     column --table --separator $'\t' --table-truncate "$_sq_name_col" \
         | sed "/\b$USER\b/ s/.*/$hl&$reset/"
-    unset _sq_name_col
+    unset _sq_trunc_col
 }
 
 # squeue commands
