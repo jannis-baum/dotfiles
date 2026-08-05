@@ -73,11 +73,11 @@ function _sq_tsv() {
     local field_names="JOBID\tARRAY\tPARTITION\tQOS\tNODES/REASON\tNAME\tTIME\tST\tCPU\tMEM\tGPU"
     local jq_fields='
       .job_id,
-      .array_task_string,
-      .partition,
-      .qos,
-      (if .job_state[0] == "RUNNING" then .nodes else .state_reason end),
-      .name,
+      (.array_task_string | trunc(8)),
+      (.partition | trunc(16)),
+      (.qos | trunc(3)),
+      ((if .job_state[0] == "RUNNING" then .nodes else .state_reason end) | trunc(16)),
+      (.name | trunc(28)),
       (if .start_time.number > 0 then
         ($now - .start_time.number) as $elapsed |
         (if $elapsed < 0 then "-" else "" end) +
@@ -124,25 +124,28 @@ function _sq_tsv() {
          "-")
       )
     '
-    # column that can be truncated
-    _sq_trunc_col=6
-
     if [[ -z "$@" || "$@" != *"--me"* ]]; then
         field_names="USER\t$field_names"
         jq_fields=".user_name, $jq_fields"
-        _sq_trunc_col=7
     fi
 
     echo -e "\e[1;4m$field_names\e[0m"
     \squeue --json $@ \
-        | jq -r '(.last_update.number // (now | floor)) as $now | .jobs | sort_by(if .start_time.number > 0 then .start_time.number else infinite end) | .[] | ['"$jq_fields"'] | @tsv'
+        | jq -r '
+            def trunc($n): if length > $n then .[:$n-1] + "…" else . end;
+
+            (.last_update.number // (now | floor)) as $now
+                | .jobs
+                | sort_by(if .start_time.number > 0 then .start_time.number else infinite end)
+                | .[]
+                | ['"$jq_fields"']
+                | @tsv'
 }
 function _sq_col() {
     local hl="$(printf '\e[48;5;229;38;5;235m')"
     local reset="$(printf '\e[0m')"
-    column --table --separator $'\t' --table-truncate "$_sq_name_col" \
+    column --table --separator $'\t' \
         | sed "/\b$USER\b/ s/.*/$hl&$reset/"
-    unset _sq_trunc_col
 }
 
 # squeue commands
