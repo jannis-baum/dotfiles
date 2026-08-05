@@ -80,8 +80,12 @@ function _sq_tsv() {
       (.name | trunc(28)),
       (if .start_time.number > 0 then
         ($now - .start_time.number) as $elapsed |
-        (if $elapsed < 0 then "-" else "" end) +
-        ((if $elapsed < 0 then -$elapsed else $elapsed end) | strftime("%H:%M:%S"))
+        (if $elapsed < 0 then -$elapsed else $elapsed end) as $abs |
+        ($abs % 86400 | strftime("%H:%M:%S")) as $hms |
+        ($abs / 86400 | floor) as $days |
+        (if $elapsed < 0 then "-" else "" end)
+          + (if $days > 0 then "\($days)-" else "" end)
+          + $hms
       else
         "-"
       end),
