@@ -442,26 +442,27 @@ EOF
 function watch() {
     local heading="every 2s: $@"
     while :; do
-        clear
+        # precompute whole frame to avoid flashing
+        # move cursor to home/origin and clear screen
+        local frame=$'\e[H\e[2J'
         local timestamp="$(date +%H:%M:%S)"
         # print heading and timestamp on one line if it fits, otherwise on two lines
         if (( $COLUMNS < "${#heading} + ${#timestamp}")); then
-            echo "$heading"
-            printf '%*s\n' "$COLUMNS" "$timestamp"
+            frame+="$heading"$'\n'"$(printf '%*s\n' "$COLUMNS" "$timestamp")"
         else
-            printf '%s%*s\n' \
-                "$heading" \
-                "$(( COLUMNS - ${#heading} ))" \
-                "$timestamp"
+            frame+="$heading$(printf '%*s\n' "$(( COLUMNS - ${#heading} ))" "$timestamp")"
         fi
         # print horizontal line
-        printf "\e[2m"
+        frame+=$'\e[2m'
         # sed because version of tr doesn't support UTF-8 horizontal bar character
-        printf '%*s\n' "$COLUMNS" "" | sed "y/ /―/"
-        printf "\e[0m"
+        frame+="$(printf '%*s\n' "$COLUMNS" "" | sed "y/ /―/")"
+        frame+=$'\e[0m'
         # run command with eval to expand aliases
-        eval "$*"
+        frame+="$(eval "$*")"
+        # move cursor to next line so that cancelling leaves next prompt at comfortable position
+        frame+=$'\n'
+        # print entire frame
+        printf '%s' "$frame"
         sleep 2
-        date
     done
 }
