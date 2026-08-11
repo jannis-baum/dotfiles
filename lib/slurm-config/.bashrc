@@ -25,6 +25,20 @@ alias ......='cd ../../../../..'
 alias c="printf '\n%.0s' {2..$LINES} && clear"
 alias g="git status"
 
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# https://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 # options & key bindings
 set -o vi
 bind '"\e[A": history-search-backward'
@@ -55,14 +69,6 @@ if ! { source "$_ssh_env" && kill -0 "$SSH_AGENT_PID"; } &>/dev/null; then
 fi
 ssh-add "$HOME/.ssh/id_ed25519_github" &>/dev/null
 unset _ssh_env
-
-function tsv() {
-    column -t -s $'\t' $@
-}
-
-function csv() {
-    column -t -s , $@
-}
 
 # SLURM-related things
 cluster_addr="hpc.sci.hpi.de"
@@ -465,4 +471,12 @@ function watch() {
         printf '%s' "$frame"
         sleep 2
     done
+}
+
+function tsv() {
+    column -t -s $'\t' $@
+}
+
+function csv() {
+    column -t -s , $@
 }
