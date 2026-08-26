@@ -28,3 +28,9 @@ vim.api.nvim_create_autocmd('TextChangedI', {
     end
   end,
 })
+
+vim.api.nvim_buf_create_user_command(0, "CopyRTF", function()
+  vim.cmd("write")
+  local file = vim.fn.shellescape(vim.fn.expand("%:p"))
+  vim.fn.system("pandoc -t rtf -s " .. file .. " | pbcopy -pboard general -Prefer rtf")
+end, { desc = "Write buffer and copy as RTF" })
