@@ -81,7 +81,7 @@ modules:
       name: ""
       trigger: "^cp (.*)"
       suppressOthers: true
-      isSearchDisabled: true
+      isSearchDisabled: false
       reloadsOnChange: false
       source:
         program:
@@ -89,13 +89,13 @@ modules:
           args:
             - -c
             - |
-              echo '[{ "title": "Edit clipboard" }]'
+              echo '[{ "title": "Edit clipboard", "userInfo": "" }, {"title": "New clipboard", "userInfo": "--new"}]'
       sink:
         program:
           exec: zsh
           args:
             - -c
             - |
-              viclip-tab
+              viclip-tab {{ userInfo }}
               printf closePanel
       defaultSymbol: 􀉃

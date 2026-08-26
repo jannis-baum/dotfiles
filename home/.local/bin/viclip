@@ -1,10 +1,15 @@
-#!/bin/sh
+#!/bin/zsh
 
 # edit clipboard in nvim
 
 temp_dir="$(mktemp --directory)"
 temp_file="$temp_dir/clipboard"
-pbpaste > "$temp_file"
+
+if [[ "$1" != "--new" && "$1" != "-n" ]]; then
+    pbpaste > "$temp_file"
+else
+    touch "$temp_file"
+fi
 
 # - go to directory so we get only "clipboard" as file name in statusline
 # - try to auto-detect filetype, if not fall back to markdown
