@@ -60,7 +60,8 @@ function! s:MaxWMode()
     " cleanup after leaving buffer
     let l:cleanup += ["unlet g:disable_maxw_mode", "call setbufvar(" . bufnr() . ", 'is_maxw_mode', 0)"]
     let g:disable_maxw_mode = join(l:cleanup, " | ")
-    exec 'autocmd BufWinLeave <buffer> ++once if exists("g:disable_maxw_mode") | exec g:disable_maxw_mode | endif'
+    autocmd BufWinLeave <buffer> ++once if exists("g:disable_maxw_mode") | exec g:disable_maxw_mode | endif
+    autocmd QuitPre <buffer> ++once if exists("g:disable_maxw_mode") | exec g:disable_maxw_mode | endif
 endfunction
 
 function! s:AutoMaxWMode(timer)
