@@ -1,6 +1,11 @@
+let s:ft_ideal_width = {
+    \ "markdown": 120
+    \ }
+let s:fallback_width = 160
+
 " open empty vsps to limit max width, e.g. for wider monitors
 function! s:MaxWMode()
-    let l:ideal_width = 160
+    let l:ideal_width = get(s:ft_ideal_width, &filetype, s:fallback_width)
     if exists('g:disable_maxw_mode') || l:ideal_width >= &columns
         return
     endif
