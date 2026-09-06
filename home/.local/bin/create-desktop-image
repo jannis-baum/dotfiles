@@ -30,7 +30,7 @@ magick "$source_image" \
     \( \
         -size "$res_px" xc:black \
         -fill white \
-        -draw "roundrectangle 0,$bar_h_px $px_w,$px_h $corner_radius_px,$corner_radius_px" \
+        -draw "roundrectangle 0,$bar_h_px $(( $px_w - 1 )),$(( $px_h - 1 )) $corner_radius_px,$corner_radius_px" \
     \) \
     -alpha off -compose copy_opacity -composite \
     -background black -alpha remove \
