@@ -176,27 +176,12 @@ function gif-from-images() {
     ffmpeg -f concat -safe 0 -i "$frames_file" -i "$palette_file" -lavfi "fps=30 [x]; [x][1:v] paletteuse" -loop 0 "$output"
 }
 
-function set-desktop-background() {
-    if [[ $# -ne 1 || ! -f "$1" ]]; then
-        echo "usage: set-desktop-background image" >&2
-        return 1
+function update-desktop-background() {
+    if [[ -f "$1" ]]; then
+        rm -f ~/_/backgrounds/background.*
+        cp "$1" ~/_/backgrounds/background."${1:e}"
     fi
-    local background_original="$1"
-    local background_out="$HOME/_/background.png"
-
-    magick "$background_original" \
-        -resize 2560x1664^ \
-        -gravity center -extent 2560x1664 \
-        \( \
-            -size 2560x1664 xc:black \
-            -fill white \
-            -draw "roundrectangle 0,56 2559,1663 48,48" \
-        \) \
-        -alpha off -compose copy_opacity -composite \
-        -background black -alpha remove \
-        "$background_out"
-
-    osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$background_out\""
+    open -g hammerspoon://update-desktop-backgrounds
 }
 
 function claudetemp() {
