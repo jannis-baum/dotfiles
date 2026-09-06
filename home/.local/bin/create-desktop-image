@@ -1,0 +1,37 @@
+#!/bin/zsh -eux
+
+function _error() {
+    echo "$1" >&2
+    exit 1
+}
+
+[[ "$#" != 5 ]] && _error "usage: $0 source-image resolution-pt-w resolutn-pt-h resolution-scale output-image"
+
+output_image="$5"
+source_image="$1"
+[[ -f "$source_image" ]] || _error "source image \"$source_image\" does not exist"
+
+pt_w="$2"
+pt_h="$3"
+scale="$4"
+
+px_w="$(( "$pt_w" * "$scale "))"
+px_h="$(( "$pt_h" * "$scale "))"
+res_px="$px_w"x"$px_h"
+
+bar_h_pt=32
+corner_radius_pt=24
+bar_h_px="$(( "$bar_h_pt" * "$scale" ))"
+corner_radius_px="$(( "$corner_radius_pt" * "$scale" ))"
+
+magick "$source_image" \
+    -resize "$res_px"^ \
+    -gravity center -extent "$res_px" \
+    \( \
+        -size "$res_px" xc:black \
+        -fill white \
+        -draw "roundrectangle 0,$bar_h_px $px_w,$px_h $corner_radius_px,$corner_radius_px" \
+    \) \
+    -alpha off -compose copy_opacity -composite \
+    -background black -alpha remove \
+    "$output_image"
