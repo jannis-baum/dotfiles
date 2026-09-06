@@ -27,3 +27,14 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/rg/ripgreprc"
 export CHROME_EXECUTABLE=/Applications/Chromium.app/Contents/MacOS/Chromium
 
 export TITR_DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/titr-data"
+
+# PATH
+export PATH=$(tr -d ' ' <<<"\
+    $HOME/.local/bin\
+    :/opt/homebrew/bin\
+    :/Library/TeX/texbin\
+    :/opt/homebrew/opt/postgresql@17/bin\
+    :$HOME/.flutter/bin\
+    :$HOME/.pub-cache/bin\
+    :$PATH
+")
