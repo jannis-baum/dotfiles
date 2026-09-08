@@ -473,10 +473,42 @@ function watch() {
     done
 }
 
-function tsv() {
-    column -t -s $'\t' $@
+function csv() {
+    # format if output is to a terminal, otherwise keep CSV
+    [[ -t 1 ]] && column -t -s , $@ || cat $@
 }
 
-function csv() {
-    column -t -s , $@
+function csvsort() {
+    # print first line (header) as is, sort the rest
+    {
+        local header
+        IFS= read -r header || return
+        printf '%s\n' "$header"
+        sort -t',' "$@"
+    } | csv
+}
+
+function csvselect() {
+    cut -d, -f"$@" | csv
+}
+
+function tsv() {
+    # format if output is to a terminal, otherwise keep TSV
+    [[ -t 1 ]] && column -t -s $'\t' $@ || cat $@
+}
+
+function tsvsort() {
+    # format if output is to a terminal, otherwise keep TSV
+    [[ -t 1 ]] && local output="tsv" || local output="cat"
+    # print first line (header) as is, sort the rest
+    {
+        local header
+        IFS= read -r header || return
+        printf '%s\n' "$header"
+        sort -t$'\t' "$@"
+    } | "$output"
+}
+
+function tsvselect() {
+    cut -d$'\t' -f"$@" | tsv
 }
