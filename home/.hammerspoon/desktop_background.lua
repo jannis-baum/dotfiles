@@ -15,7 +15,7 @@ hs.urlevent.bind('update-desktop-backgrounds', function(eventName, params)
         local dest_image = string.format("%s_%sx%ss%s_%s.png", base_image, info["w"], info["h"], info["scale"], hs.host.uuid())
 
         hs.execute(string.format(
-            "~/.local/bin/create-desktop-image %s %s %s %s %s 2>/Users/jannisbaum/Desktop/debug.txt",
+            "~/.local/bin/create-desktop-image %s %s %s %s %s",
             source_image, info["w"], info["h"], info["scale"], dest_image
         ))
         -- set actual background
