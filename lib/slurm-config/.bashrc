@@ -51,6 +51,7 @@ export PATH=\
 "$HOME/.local/lib/ncbi-blast-2.17.0+/bin/:"\
 "$HOME/.local/lib/meme/bin:"\
 "$HOME/.local/lib/meme/libexec/meme-5.5.9:"\
+"$HOME/.local/share/kitty-ssh-kitten/kitty/bin:"\
 "$PATH"
 
 export EDITOR=vim
