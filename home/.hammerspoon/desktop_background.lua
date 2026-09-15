@@ -10,9 +10,7 @@ hs.urlevent.bind('update-desktop-backgrounds', function(eventName, params)
 
     for _, screen in ipairs(hs.screen.allScreens()) do
         local info = screen:currentMode()
-        -- add UUID to image name so that the OS realizes it's a different file
-        -- than before
-        local dest_image = string.format("%s_%sx%ss%s_%s.png", base_image, info["w"], info["h"], info["scale"], hs.host.uuid())
+        local dest_image = string.format("%s_%sx%ss%s.png", base_image, info["w"], info["h"], info["scale"])
 
         hs.execute(string.format(
             "~/.local/bin/create-desktop-image %s %s %s %s %s",
