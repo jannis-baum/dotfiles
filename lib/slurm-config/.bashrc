@@ -24,6 +24,7 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias c="printf '\n%.0s' {2..$LINES} && clear"
 alias g="git status"
+alias tf="tail -n +1 -f"
 
 # Eternal bash history.
 # ---------------------
