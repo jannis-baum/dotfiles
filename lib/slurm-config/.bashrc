@@ -53,6 +53,7 @@ export PATH=\
 "$HOME/.local/lib/meme/bin:"\
 "$HOME/.local/lib/meme/libexec/meme-5.5.9:"\
 "$HOME/.local/share/kitty-ssh-kitten/kitty/bin:"\
+"$HOME/.pixi/bin:"\
 "$PATH"
 
 export EDITOR=vim
