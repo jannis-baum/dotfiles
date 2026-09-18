@@ -200,3 +200,14 @@ function tsv() {
 function csv() {
     column -t -s , $@
 }
+
+# download PDFs and PNGs from remote dir
+function fetch-media() {
+    # -a  archive (recursive, preserve timestamps/perms)
+    # -v  verbose (list what gets copied)
+    # -m  prune empty directories from the transfer
+    # --include='*/'          descend into every subdirectory
+    # --include='*.pdf' etc.  keep matching files (case variants included)
+    # --exclude='*'           drop everything else
+    rsync -avm --include='*/' --include='*.pdf' --include='*.png' --exclude='*' "$1/" "${2:-.}"
+}
