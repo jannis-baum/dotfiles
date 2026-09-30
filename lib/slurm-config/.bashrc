@@ -515,3 +515,37 @@ function tsvsort() {
 function tsvselect() {
     cut -d$'\t' -f"$@" | tsv
 }
+
+function fastastats() {
+    awk '
+        # Header line: finalize the previous sequence, start counting a new one
+        /^>/ {
+            if (seq_seen) {
+                total += len
+                if (len < min || min == "") min = len
+                if (len > max)              max = len
+            }
+            n++
+            len = 0
+            seq_seen = 1
+            next
+        }
+        # Sequence line: accumulate length (strips trailing whitespace/CR)
+        {
+            gsub(/[[:space:]\r]/, "")
+            len += length($0)
+        }
+        END {
+            # Flush the last sequence
+            if (seq_seen) {
+                total += len
+                if (len < min || min == "") min = len
+                if (len > max)              max = len
+            }
+            printf "sequences:    %d\n", n
+            printf "total length: %d\n", total
+            printf "shortest:     %d\n", (n ? min : 0)
+            printf "longest:      %d\n", (n ? max : 0)
+        }
+    ' "$1"
+}
