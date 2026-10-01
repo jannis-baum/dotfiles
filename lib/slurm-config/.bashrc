@@ -60,6 +60,8 @@ export EDITOR=vim
 
 # theme
 export LS_COLORS="fi=1;38;5;242:di=3;38;5;246:ex=4;38;5;182"
+# bash completion colored matching prefix
+export LS_COLORS="${LS_COLORS}:*readline-colored-completion-prefix=0;38;5;75"
 PS1="\[\e[2m\]\h:\w\[\e[22m\]\n\
 \[\e[38;5;210m\]\[\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\
 \[\e[0m\] » "
