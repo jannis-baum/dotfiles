@@ -283,7 +283,7 @@ function gpu() {
 $(_get_template header srun)
 $(_get_template bionemo srun)
 $(_get_template container srun)
---partition=gpu-interactive
+--partition=pot-hpi-gpu-interactive
 --cpus-per-task=32
 --mem=128G
 --gpus=1
@@ -312,7 +312,7 @@ function cpu() {
 $(_get_template header srun)
 $(_get_template mmseq2 srun)
 $(_get_template container srun)
---partition=cpu-interactive
+--partition=pot-hpi-cpu-interactive
 --cpus-per-task=4
 --mem=8G
 --pty bash
@@ -430,7 +430,7 @@ function storage() {
 #SBATCH --error=/dev/null
 
 # MARK: resources
-#SBATCH --partition=cpu-batch
+#SBATCH --partition=pot-hpi-cpu-batch
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=2G
 
