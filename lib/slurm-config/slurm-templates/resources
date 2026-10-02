@@ -1,6 +1,6 @@
 
 # MARK: resources
-#SBATCH --partition=cpu-batch
+#SBATCH --partition=pot-hpi-cpu-batch
 # #SBATCH --constraint=ARCH:X86
 # #SBATCH --gpus=
 #SBATCH --cpus-per-task=32
