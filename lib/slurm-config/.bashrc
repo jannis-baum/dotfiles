@@ -85,7 +85,7 @@ function _sq_tsv() {
     local jq_fields='
       .job_id,
       (.array_task_string | trunc(8)),
-      (.partition | trunc(16)),
+      (.partition | sub("^pot-hpi-"; "…") | trunc(16)),
       (.qos | trunc(1)),
       ((if .job_state[0] == "RUNNING" then .nodes else .state_reason end) | trunc(16)),
       (.name | trunc(28)),
