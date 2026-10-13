@@ -29,8 +29,12 @@ function! s:MaxWMode()
         call s:MaxWModeSetFillchar('eob', ' ')
         setlocal statusline=\ 
         let b:is_maxw_mode = 1
+        " jump back to original window when entering spacer, deferred so e.g.
+        " mouse clicks finish in the spacer instead of moving the cursor
+        exec 'autocmd WinEnter <buffer> call timer_start(0, {-> win_gotoid(' .. a:orig_win .. ')})'
         " autocmd to automatically delete empty buffer when leaving original
-        let l:cleanup = 'exec "bdelete ' .. bufnr() .. '"'
+        " (wipe so the buffer-local autocmd above is removed too)
+        let l:cleanup = 'exec "bwipeout ' .. bufnr() .. '"'
         " go back & register autocmd
         call win_gotoid(a:orig_win)
         return l:cleanup
