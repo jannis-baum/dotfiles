@@ -11,7 +11,6 @@ vim.pack.add({
     { src = 'https://github.com/echasnovski/mini.operators', version = 'stable' },
     { src = 'https://github.com/echasnovski/mini.diff', version = 'stable' },
     -- ui
-    'https://github.com/nvim-focus/focus.nvim',
     { src = 'https://github.com/echasnovski/mini.notify', version = 'stable' },
     -- misc
     'https://github.com/neovim/nvim-lspconfig',

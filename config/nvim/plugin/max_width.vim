@@ -40,18 +40,14 @@ function! s:MaxWMode()
     let l:win = win_getid()
     let l:orig_splitright = &splitright
     let l:cleanup = ['let &l:fillchars="' .. &l:fillchars .. '"']
-    " disable nvim-focus/focus.nvim
-    let l:orig_focus = exists('g:focus_disable') ? g:focus_disable : v:false
 
     " how big the spacer splits are
     let l:spacer_cols = (&columns - l:ideal_width) / 2
 
     " open splits & set options
-    let g:focus_disable = v:true
     let l:cleanup += [s:MaxWModeNewSplit(l:win, l:spacer_cols)]
     let &l:splitright = !l:orig_splitright
     let l:cleanup += [s:MaxWModeNewSplit(l:win, l:spacer_cols)]
-    let g:focus_disable = l:orig_focus
     let &l:splitright = l:orig_splitright
     call s:MaxWModeSetFillchar('vert', ' ')
 
