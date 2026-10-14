@@ -467,10 +467,31 @@ function watch() {
         frame+=$'\e[2m'
         # sed because version of tr doesn't support UTF-8 horizontal bar character
         frame+="$(printf '%*s\n' "$COLUMNS" "" | sed "y/ /―/")"
-        frame+=$'\e[0m'
+        frame+=$'\e[0m\n'
         # run command with eval to expand aliases
-        frame+="$(eval "$*")"
-        # move cursor to next line so that cancelling leaves next prompt at comfortable position
+        local eval_out="$(eval "$*")"
+        # count lines
+        local n_header="$(wc -l <<< "$frame")"
+        local n_body="$(wc -l <<< "$eval_out")"
+        # truncate body if necessary
+        if (( "$n_header" + "$n_body" > "$LINES" )); then
+            # half the space the body can occupy, we need 3 lines for "...",
+            # line count and line break to move cursor down so the next prompt
+            # renders better after cancellation
+            local body_part_space="$(( ("$LINES" - "$n_header" - 3) / 2 ))"
+            # at least 1 line
+            body_part_space="$(( "$body_part_space" > 1 ? "$body_part_space" : 1 ))"
+
+            # head of eval result, vertical ellipses, tail, line count
+            frame+="$(head -n "$body_part_space" <<< "$eval_out")"
+            frame+=$'\n  ⋮\n'
+            frame+="$(tail -n "$body_part_space" <<< "$eval_out")"
+            frame+=$'\n\e[2m'"($n_body) lines total)"$'\e[0m'
+        else
+            frame+="$eval_out"
+        fi
+        # add line break to move cursor to start of next line so next prompt
+        # renders properly after cancellation
         frame+=$'\n'
         # print entire frame
         printf '%s' "$frame"
