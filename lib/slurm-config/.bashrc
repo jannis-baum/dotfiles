@@ -286,7 +286,7 @@ $(_get_template header srun)
 $(_get_template bionemo srun)
 $(_get_template container srun)
 --partition=pot-hpi-gpu-interactive
---cpus-per-task=32
+--cpus-per-task=8
 --mem=128G
 --gpus=1
 --constraint=ARCH:X86
@@ -315,7 +315,7 @@ $(_get_template header srun)
 $(_get_template mmseq2 srun)
 $(_get_template container srun)
 --partition=pot-hpi-cpu-interactive
---cpus-per-task=4
+--cpus-per-task=2
 --mem=8G
 --pty bash
 EOF
