@@ -451,7 +451,17 @@ EOF
 
 # as bash function rather than executables so we can use functions & aliases
 function watch() {
-    local heading="every 2s: $@"
+    local delay="2"
+    if [[ "$1" == "-t" || "$1" == "--time" ]]; then
+        delay="$2"
+        if [[ ! "$delay" =~ ^-?[0-9]+$ ]]; then
+            echo "invalid delay \"$delay\"" >&2
+            return 1
+        fi
+        shift 2
+    fi
+
+    local heading="every ${delay}s: $@"
     while :; do
         # precompute whole frame to avoid flashing
         # move cursor to home/origin and clear screen
@@ -495,7 +505,7 @@ function watch() {
         frame+=$'\n'
         # print entire frame
         printf '%s' "$frame"
-        sleep 2
+        sleep "$delay"
     done
 }
 
