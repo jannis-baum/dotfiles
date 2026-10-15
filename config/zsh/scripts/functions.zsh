@@ -209,5 +209,5 @@ function fetch-media() {
     # --include='*/'          descend into every subdirectory
     # --include='*.pdf' etc.  keep matching files (case variants included)
     # --exclude='*'           drop everything else
-    rsync -avm --include='*/' --include='*.pdf' --include='*.png' --exclude='*' "$1/" "${2:-.}"
+    rsync -avm --include='*/' --include='*.pdf' --include='*.png' --include='**figures*/**.csv' --exclude='*' "$1/" "${2:-.}"
 }
