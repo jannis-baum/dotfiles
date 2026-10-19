@@ -1,0 +1,23 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "zsh \"$HOME/.config/claude/statusline.zsh\""
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "theme": "custom:jellyfish",
+  "editorMode": "vim",
+  "skipWorkflowUsageWarning": true,
+  "switchModelsOnFlag": true
+}
