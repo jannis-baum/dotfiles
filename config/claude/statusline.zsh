@@ -5,17 +5,24 @@ function ponytail() {
 
     mode=$(head -n1 "$flag" | tr -d '[:space:]')
 
-    # ultra is the high-intensity mode; flag it amber so it stands out from the
-    # default green at a glance. The level is still in the text, so color is a
-    # redundant cue, not the only one.
-    color=108
-    [[ "$mode" = "ultra" ]] && color=173
-
     if [[ -z "$mode" || "$mode" = "full" ]]; then
-        printf '\033[38;5;%sm[PONYTAIL]\033[0m' "$color"
+        printf '[ponytail]'
     else
-        printf '\033[38;5;%sm[PONYTAIL:%s]\033[0m' "$color" "$(printf '%s' "$mode" | tr '[:lower:]' '[:upper:]')"
+        printf "[ponytail:$mode]"
     fi
 }
 
-ponytail
+# rate_limits only exists on Pro/Max after the first API response; missing fields are skipped
+# one line per value; (@f) splits them into separate array elements
+parts=("$(ponytail)" "${(@f)$(jq -r '
+    # one block, 8 levels (12.5% each), clamped; ANSI 141 above 70%
+    def bar: . as $p | ["▁","▂","▃","▄","▅","▆","▇","█"][[[($p * 0.08 | floor), 7] | min, 0] | max]
+        | if $p > 70 then "\u001b[38;5;141m\(.)\u001b[0m" end;
+    def show($label): "\($label) \(bar) \(floor)%";
+    (.rate_limits.five_hour.used_percentage // empty | show("5h")),
+    (.rate_limits.seven_day.used_percentage // empty | show("7d")),
+    (.context_window.used_percentage // empty | show("ctx"))
+')}")
+# -r: raw (no escape sequences)
+# -n: no new line
+print -rn -- ${(j: · :)parts:#}
