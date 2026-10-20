@@ -17,7 +17,6 @@
     }
   },
   "theme": "custom:jellyfish",
-  "editorMode": "vim",
   "skipWorkflowUsageWarning": true,
   "switchModelsOnFlag": true,
   "env": {
