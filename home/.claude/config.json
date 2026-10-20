@@ -1,7 +1,7 @@
 {
   "statusLine": {
     "type": "command",
-    "command": "zsh \"$HOME/.config/claude/statusline.zsh\""
+    "command": "zsh \"$HOME/.claude/statusline.zsh\""
   },
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
@@ -22,5 +22,5 @@
   "switchModelsOnFlag": true,
   "env": {
     "DISABLE_AUTOUPDATER": "1"
-    }
+  }
 }
