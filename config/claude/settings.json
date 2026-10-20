@@ -19,5 +19,8 @@
   "theme": "custom:jellyfish",
   "editorMode": "vim",
   "skipWorkflowUsageWarning": true,
-  "switchModelsOnFlag": true
+  "switchModelsOnFlag": true,
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+    }
 }
