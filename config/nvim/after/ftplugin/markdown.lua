@@ -34,3 +34,6 @@ vim.api.nvim_buf_create_user_command(0, "CopyRTF", function()
   local file = vim.fn.shellescape(vim.fn.expand("%:p"))
   vim.fn.system("pandoc -t rtf -s " .. file .. " | pbcopy -pboard general -Prefer rtf")
 end, { desc = "Write buffer and copy as RTF" })
+
+-- formatting, e.g. for tables
+vim.bo.formatprg = "prettier --parser markdown"
