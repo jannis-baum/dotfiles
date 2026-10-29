@@ -1,5 +1,5 @@
 _rem_remote="hpc"
-_rem_mnt_path="$HOME/_/hpi/hpc"
+_rem_mnt_path="$HOME/_/hpi/hpc-mount"
 _rem_openvpn_config="SC_User"
 
 # MARK: main function ----------------------------------------------------------
@@ -7,7 +7,7 @@ _rem_openvpn_config="SC_User"
 function rem() {
     # arugment parsing from
     # https://gist.github.com/jannis-baum/d3e5744466057f4e61614744a2397fdd
-    local arg_help arg_unmount arg_disconnect arg_connect arg_mount arg_cd arg_status parsing_args=1 positional=()
+    local arg_help arg_unmount arg_disconnect arg_connect arg_mount arg_mount_target arg_cd arg_status parsing_args=1 positional=()
 
     while (( $# )); do
         _echo_error() {
@@ -25,7 +25,7 @@ function rem() {
                             "u") arg_unmount=1;;
                             "d") arg_disconnect=1;;
                             "c") arg_connect=1;;
-                            "m") arg_mount=1;;
+                            "m") arg_mount=1; arg_mount_target="$1"; shift &>/dev/null;;
                             "w") arg_cd=1;;
                             "s") arg_status=1;;
                             *) _echo_error "Unknown option: -$opt";;
@@ -37,7 +37,7 @@ function rem() {
                 "--unmount") arg_unmount=1; continue;;
                 "--disconnect") arg_disconnect=1; continue;;
                 "--connect") arg_connect=1; continue;;
-                "--mount") arg_mount=1; continue;;
+                "--mount") arg_mount=1; arg_mount_target="$1"; shift &>/dev/null; continue;;
                 "--cd") arg_cd=1; continue;;
                 "--status") arg_status=1; continue;;
                 "--"*) _echo_error "Unknown option: $arg";;
@@ -66,7 +66,9 @@ options ():
   -u, --unmount      unmount remote home
   -d, --disconnect   disconnect VPN
   -c, --connect      connect VPN
-  -m, --mount        mount remote home
+  -m, --mount DIR    mount given remote directory DIR to fixed path at
+                     $_rem_mnt_path
+                     DIR can be left empty to mount the home directory.
   -w, --cd           change to mount directory (set [w]orking directory)
   -s, --status       get mount information
 
@@ -79,7 +81,7 @@ EOF
     [[ -n "$arg_unmount" ]] && {_rem_unmount || return 1}
     [[ -n "$arg_disconnect" ]] && {_rem_disconnect || return 1}
     [[ -n "$arg_connect" ]] && {_rem_connect || return 1}
-    [[ -n "$arg_mount" ]] &&  {_rem_mount || return 1}
+    [[ -n "$arg_mount" ]] &&  {_rem_mount "$arg_mount_target" || return 1}
     [[ -n "$arg_cd" ]] && {_rem_cd || return 1}
     [[ -n "$arg_status" ]] && {_rem_status || return 1}
 
@@ -136,11 +138,15 @@ function _rem_connect() {
 }
 
 function _rem_mount() {
-    _rem_is_mounted && return 0
+    local target="$1"
+    if _rem_is_mounted; then
+        echo "A directory is already mounted" >&2
+        return 1
+    fi
     mkdir -p "$_rem_mnt_path"
     sshfs \
         -o allow_other,default_permissions,compression=yes,cache=yes,auto_cache,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
-        "$_rem_remote:" \
+        "$_rem_remote:$target" \
         "$_rem_mnt_path"
 }
 
