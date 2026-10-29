@@ -23,11 +23,15 @@ local function list_extend(l1, l2)
     table.move(l2, 1, #l2, #l1 + 1, l1)
 end
 
-local function get_current_app()
-    local osascript = io.popen('osascript -l JavaScript -e \'ObjC.import("AppKit");$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName\'')
+local function get_current_app_and_bar_w()
+    local osascript = io.popen([[osascript -l JavaScript -e 'ObjC.import("AppKit"); const s = $.NSScreen.mainScreen; `${s.safeAreaInsets.top > 0 ? "notch" : "nonotch"} ${s.frame.size.width} ${$.NSWorkspace.sharedWorkspace.frontmostApplication.localizedName.js}`']])
     if osascript == nil then return nil end
-    local app, _ = osascript:read('*a'):gsub('%s+', '')
-    return app
+    local notch, screen_w, app = osascript:read('*a'):match('^(%S+) (%S+) (.*)$')
+    if app == nil then return nil end
+    app, _ = app:gsub('%s+', '')
+    -- with notch: check with screenshot tool cmd+shift+4, subtract 1 for rounding errors
+    local bar_w = notch == 'notch' and 647 or math.floor(tonumber(screen_w) / 2)
+    return app, bar_w
 end
 
 local function ellipse_string(s, max_length)
@@ -45,8 +49,7 @@ local function ellipse_string(s, max_length)
     return result
 end
 
-local function get_widths(tab_count)
-    local bar_w = 647 -- check with screenshot tool cmd+shift+4, subtract 1 for rounding errors
+local function get_widths(tab_count, bar_w)
     -- read dimension data
     local widths = {}
     for line in io.lines(os.getenv('HOME') .. '/.local/state/sketchybar/widths.txt') do
@@ -70,7 +73,7 @@ local function main()
     local tab_app = arg[1]
     assert_non_nil(tab_app)
 
-    local current_app = get_current_app()
+    local current_app, bar_w = get_current_app_and_bar_w()
     if current_app == nil then return end
 
     local sketchy_args = {'--remove', '/APP-' .. tab_app .. '\\d*/'}
@@ -78,7 +81,7 @@ local function main()
 
     local lines = io.read('*a')
     local _, tab_count = lines:gsub('\n', '')
-    local widths = get_widths(tab_count)
+    local widths = get_widths(tab_count, bar_w)
 
     local line_num = 1
     for line in lines:gmatch('[^\n]+') do
@@ -110,6 +113,7 @@ local function main()
                 'drawing=' .. drawing,
                 'label=' .. label,
                 'label.color=' .. label_color,
+                'display=active',
             '--subscribe', item_name, 'front_app_switched'
         })
 
