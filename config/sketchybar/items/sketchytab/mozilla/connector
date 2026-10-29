@@ -78,8 +78,16 @@ def listen_to_updates():
         except:
             pass
 
+    last_key = None
     while True:
         tabs = get_message()
+        # extension sends many updates that change nothing we show, skip those
+        # to avoid redrawing (favIconUrl because icon paths don't change)
+        key = [(t['active'], t['title'], t['id'], t['url'], t.get('favIconUrl')) for t in tabs]
+        if key == last_key:
+            continue
+        last_key = key
+
         reset_sketchytabs_dir()
         icon_paths = [write_image(tab, index) for index, tab in enumerate(tabs)]
         switchto_cmds = [f"TAB_ID={tab['id']} {os.path.join(item_dir, 'click')}" for tab in tabs]
