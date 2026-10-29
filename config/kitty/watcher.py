@@ -131,7 +131,7 @@ cwd_progs = {
     "", # window has no exe, i.e. we show normal CWD title
     "zsh", "-zsh",
     "cat", "realpath", "sort", "cut", "sed", "awk", "nl",
-    "rg", "fd", "fzf",
+    "rg", "fd", "fzf", "eza"
     "git", "git-remote-https", "gh" ,
     "nvim", "vim",
 }
