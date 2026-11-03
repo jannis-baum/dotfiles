@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# wrapper so every caller (not just interactive zsh as it would be with an
+# alias/function) gets the config.json
+
+exec /opt/homebrew/bin/claude --settings "$HOME/.claude/config.json" "$@"

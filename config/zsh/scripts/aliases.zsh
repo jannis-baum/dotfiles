@@ -8,4 +8,3 @@ alias drag=~/Applications/drag.app/Contents/MacOS/drag
 alias q="cd; c"
 alias td=todos
 alias timer="~/.config/sketchybar/items/timer/set"
-alias claude="claude --settings ~/.claude/config.json"
