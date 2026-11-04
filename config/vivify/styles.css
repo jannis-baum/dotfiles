@@ -29,3 +29,11 @@
 h2 {
     /* break-before: page; */
 }
+
+/* heading of collapsible section in Claude Code replies */
+details.reply > summary {
+    font-weight: bold;
+    border-top: 1px solid var(--border-regular);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+}
