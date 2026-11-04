@@ -3,7 +3,7 @@
 input=$(cat)
 
 dir=$(jq -r '.scratchpad_dir // empty' <<< "$input")
-file="${dir:-$HOME/.cache}/reply.md"
+file="${dir:-$HOME/.cache}/replies.md"
 msg=$(jq -r '.last_assistant_message // empty' <<< "$input")
 # true when Claude continues after this hook blocked, its message is then only a follow up to the real reply
 active=$(jq -r '.stop_hook_active // false' <<< "$input")
