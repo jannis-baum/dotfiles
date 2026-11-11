@@ -136,6 +136,8 @@ cwd_progs = {
     "nvim", "vim",
 }
 
+_set_proc: subprocess.Popen | None = None
+
 def _refresh_widgets(boss: Boss) -> None:
     sketchytab_dir = os.path.expanduser('~/.config/sketchybar/items/sketchytab')
     result = ''
@@ -166,9 +168,16 @@ def _refresh_widgets(boss: Boss) -> None:
         tab_lines = [get_line(tab) for tab in tab_manager.tabs]
         result += '\n'.join(tab_lines) + '\n'
 
+    # a still running older update could otherwise finish last and overwrite
+    # this newer one
+    global _set_proc
+    if _set_proc is not None and _set_proc.poll() is None:
+        _set_proc.kill()
+        _set_proc.wait()
+
     fixed_env = os.environ.copy()
     fixed_env['PATH'] = f'/opt/homebrew/bin:{fixed_env["PATH"]}'
-    p = subprocess.Popen(
+    p = _set_proc = subprocess.Popen(
         ['luajit', os.path.join(sketchytab_dir, 'set.lua'), 'kitty'],
         stdin=subprocess.PIPE,
         env=fixed_env
