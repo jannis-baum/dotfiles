@@ -66,9 +66,13 @@ PS1="\[\e[2m\]\h:\w\[\e[22m\]\n\
 \[\e[38;5;210m\]\[\e[38;5;240;48;5;210m\]✻\[\e[0;38;5;210m\]\
 \[\e[0m\] » "
 
-# auto add ssh key - share one agent across sessions via env file
-_ssh_env="$HOME/.ssh/agent.env"
-if ! { source "$_ssh_env" && kill -0 "$SSH_AGENT_PID"; } &>/dev/null; then
+# auto add ssh key - share one agent across sessions via env file. one file per
+# host because $HOME is shared across login & compute nodes but the agent isn't
+_ssh_env="$HOME/.ssh/agent-$(hostname).env"
+# ssh-add -l exits with 2 if it can't reach the agent
+source "$_ssh_env" &>/dev/null
+ssh-add -l &>/dev/null
+if [[ $? -eq 2 ]]; then
     ssh-agent > "$_ssh_env"
     source "$_ssh_env" &>/dev/null
 fi
