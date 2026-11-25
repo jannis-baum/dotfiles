@@ -15,6 +15,9 @@ local relevant_symbols = {
     'friend_declaration',   -- C++
     'lexical_declaration',  -- TypeScript
     'atx_heading',          -- Markdown
+    'section',              -- LaTeX
+    'subsection',           -- LaTeX
+    'subsubsection',        -- LaTeX
 }
 local blacklist_symbols = {
     'comment',               -- everything
@@ -26,7 +29,8 @@ local blacklist_symbols = {
 
 local function inspect_node(node, depth, storage)
     local type = node:type()
-    if (depth == 1 and not vim.list_contains(blacklist_symbols, type)) or vim.list_contains(relevant_symbols, type) then
+    local top_level = depth == 1 and vim.bo.filetype ~= 'tex'
+    if (top_level and not vim.list_contains(blacklist_symbols, type)) or vim.list_contains(relevant_symbols, type) then
         table.insert(storage, { depth = depth, node = node })
     end
     for _, child in ipairs(node:named_children()) do

@@ -12,6 +12,7 @@ require('nvim-treesitter').install({
 
     'markdown',
     'markdown_inline',
+    'latex',
 
     'javascript',
     'typescript',
