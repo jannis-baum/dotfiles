@@ -1,5 +1,5 @@
 {
-    "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd"],
+    "mdExtensions": ["markdown", "md", "mdown", "mdwn", "mkd", "mkdn", "Rmd", "rmd", "tex"],
     "styles": "styles.css",
     "scripts": "script.js",
     "dirListIgnore": ["~/.config/git/ignore-global", "ignore.txt"],
