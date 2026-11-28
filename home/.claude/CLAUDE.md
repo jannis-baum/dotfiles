@@ -3,7 +3,6 @@
 ## Files
 
 - Never write files directly to `/tmp/` or other system temp directories. Put temporary files in the session scratchpad directory named in the system prompt. The scratchpad itself may live under e.g. `/private/tmp/`, and writing there is fine.
-- You should find any referenced papers (as `[@<reference>]` in Markdown, as e.g. `\cite{<reference>}` in LaTeX, or in messages just as `<reference>`) in `~/_/icloud/masipalavi/<reference>.pdf`.
 
 ## Prefer asking additional questions over making assumptions
 
@@ -22,7 +21,3 @@
 - Whenever you explain something where a human would create a supporting sketch on a whiteboard you should also create a sketch by writing and referencing an SVG graphic. Use this to help support the brevity, clarity and simplicity of your explanations.
   - The files for these SVGs should go into the top-level of your scratchpad with a descriptive name and be referenced in your Markdown reply as images with paths **relative to your scratchpad**, e.g. `![architecture sketch](architecture.svg)` for a file that is in `<your scratchpad>/architecture.svg`. 
   - Always verify the SVG looks correct after generating it and iterate on it if necessary.
-
-## Scientific code
-
-- Never implement a cited method yourself. Always use the published packages as a dependency.
